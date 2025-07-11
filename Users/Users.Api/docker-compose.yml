@@ -1,0 +1,22 @@
+﻿services:
+  api:
+    build: .
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__UsersDbContext: "Server=postgres;Port=5432;Database=UsersSystem;User Id=postgres;Password=123;"
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: UsersSystem_Postgres
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123"
+      POSTGRES_DB: "UsersSystem"
+    ports:
+      - "5432:5432"
+
+

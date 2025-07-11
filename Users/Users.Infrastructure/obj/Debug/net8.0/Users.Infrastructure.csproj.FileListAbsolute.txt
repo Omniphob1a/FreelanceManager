@@ -1,0 +1,6 @@
+C:\Users\volod\source\repos\FreelanceManager\Users\Users.Infrastructure\obj\Debug\net8.0\Users.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\Users\Users.Infrastructure\obj\Debug\net8.0\Users.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Users\Users.Infrastructure\obj\Debug\net8.0\Users.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Users\Users.Infrastructure\obj\Debug\net8.0\Users.Infrastructure.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Users\Users.Infrastructure\obj\Debug\net8.0\Users.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Users\Users.Infrastructure\obj\Debug\net8.0\Users.Infrastructure.MvcApplicationPartsAssemblyInfo.cache

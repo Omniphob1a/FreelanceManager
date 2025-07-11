@@ -1,0 +1,1 @@
+C:\Users\volod\source\repos\FreelanceManager\Users\Users.Domain\obj\Debug\net8.0\staticwebassets.build.json

@@ -1,0 +1,1404 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\registeruser\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\data\\usersdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\data\\usersdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\registeruser\\registerusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\authenticateuser\\authenticateuserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\authenticateuser\\authenticateuserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\mappings\\usermappingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\mappings\\usermappingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\apiextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\apiextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\auth\\jwttokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\auth\\jwttokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\users.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\users.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\users.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\users.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\auth\\permissionrequirment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\auth\\permissionrequirment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\auth\\permissionpolicyprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\auth\\permissionpolicyprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\auth\\permissionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\auth\\permissionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\auth\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\auth\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\auth\\authorizepermissionattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\auth\\authorizepermissionattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\restoreuser\\restoreusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\restoreuser\\restoreusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\contracts\\updateuserrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\contracts\\updateuserrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\updateuser\\updateusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\updateuser\\updateusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\deleteuser\\deleteusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\deleteuser\\deleteusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getusersbyage\\getusersbyagequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getusersbyage\\getusersbyagequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getusersbyage\\getusersbyagequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getusersbyage\\getusersbyagequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbylogin\\getusersbyloginqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbylogin\\getusersbyloginqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbylogin\\getuserbyloginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbylogin\\getuserbyloginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\repositories\\permissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\repositories\\permissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\models\\userroleentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\models\\userroleentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\models\\userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\models\\userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\models\\rolepermissionentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\models\\rolepermissionentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\models\\permissionentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\models\\permissionentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\migrations\\20250517081230_adminseeded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\migrations\\20250517081230_adminseeded.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\migrations\\usersdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\migrations\\usersdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\interfaces\\repositories\\ipermissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\interfaces\\repositories\\ipermissionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\interfaces\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\interfaces\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\interfaces\\repositories\\irolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\interfaces\\repositories\\irolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getallactiveusers\\getallactiveusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getallactiveusers\\getallactiveusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\restoreuser\\restoreusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\restoreuser\\restoreusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\changeuserpassword\\changeuserpasswordcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\changeuserpassword\\changeuserpasswordcommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\changeuserpassword\\changeuserpasswordcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\changeuserpassword\\changeuserpasswordcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\changeuserpassword\\changeuserpasswordcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\changeuserpassword\\changeuserpasswordcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\contracts\\changeuserloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\contracts\\changeuserloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\contracts\\changeuserpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\contracts\\changeuserpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\configurations\\userroleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\configurations\\userroleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\configurations\\userconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\configurations\\rolepermissionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\configurations\\rolepermissionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\configurations\\roleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\configurations\\roleconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\configurations\\permissionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\configurations\\permissionconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\mappings\\rolemappingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\mappings\\rolemappingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\dotnet||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\dotnet||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\models\\roleentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\models\\roleentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\authenticateuser\\authenticateuserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\authenticateuser\\authenticateuserqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\interfaces\\ijwttokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\interfaces\\ijwttokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\valueobjects\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\valueobjects\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\updateuser\\updateusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\updateuser\\updateusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\changeuserlogin\\changeuserlogincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\changeuserlogin\\changeuserlogincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\changeuserlogin\\changeuserlogincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\changeuserlogin\\changeuserlogincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\deleteuser\\deleteusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\deleteuser\\deleteusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\responses\\authenticationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\responses\\authenticationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\updateuser\\updateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\updateuser\\updateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\changeuserlogin\\changeuserlogincommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\changeuserlogin\\changeuserlogincommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\valueobjects\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\valueobjects\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getallactiveusers\\getallactiveusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getallactiveusers\\getallactiveusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\restoreuser\\restoreusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\restoreuser\\restoreusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\deleteuser\\deleteusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\deleteuser\\deleteusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\users.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\users.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\users.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\users.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\users.infrastructure.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\users.infrastructure.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Users.Infrastructure\\Users.Infrastructure.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Users.Domain.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Users.Domain\\Users.Domain.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Users.Application\\Users.Application.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Users.Api\\Users.Api.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Users.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\appsettings.json",
+              "RelativeToolTip": "Users.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-15T00:28:28.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Users.Api\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Users.Api\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABEAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:44:05.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Users.Api\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Users.Api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwBcAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T00:36:45.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RegisterUserCommand.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T21:16:23.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegisterUserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAxwCEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T21:19:08.268Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RegisterUserCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:30:34.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UsersDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAQwEsAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T18:53:26.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwBkAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T18:49:33.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthenticateUserQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:39:03.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Users.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Program.cs",
+              "RelativeToolTip": "Users.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T21:40:28.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Users.Api\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Users.Api\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAUwDMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-15T21:39:20.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserMappingConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Mappings\\UserMappingConfiguration.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Mappings\\UserMappingConfiguration.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Mappings\\UserMappingConfiguration.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Mappings\\UserMappingConfiguration.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAEMAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T23:03:27.647Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "PermissionHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionHandler.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\PermissionHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionHandler.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Auth\\PermissionHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T06:55:49.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "JwtTokenGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\JwtTokenGenerator.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\JwtTokenGenerator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\JwtTokenGenerator.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Auth\\JwtTokenGenerator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T21:20:23.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ApiExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\ApiExtensions.cs",
+              "RelativeDocumentMoniker": "Users.Api\\ApiExtensions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\ApiExtensions.cs",
+              "RelativeToolTip": "Users.Api\\ApiExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T23:15:57.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ApplicationExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\ApplicationExtensions.cs",
+              "RelativeDocumentMoniker": "Users.Application\\ApplicationExtensions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\ApplicationExtensions.cs",
+              "RelativeToolTip": "Users.Application\\ApplicationExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T20:46:31.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "InfrastructureExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\InfrastructureExtensions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeToolTip": "Users.Infrastructure\\InfrastructureExtensions.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T00:29:24.278Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Users.Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Users.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj",
+              "RelativeToolTip": "Users.Infrastructure\\Users.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-21T14:09:02.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Users.Api.csproj",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
+              "RelativeDocumentMoniker": "Users.Api\\Users.Api.csproj",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
+              "RelativeToolTip": "Users.Api\\Users.Api.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-07T17:41:20.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PermissionPolicyProvider.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionPolicyProvider.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\PermissionPolicyProvider.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionPolicyProvider.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Auth\\PermissionPolicyProvider.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T06:58:17.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "JwtSettings.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\JwtSettings.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\JwtSettings.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\JwtSettings.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Auth\\JwtSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T21:13:29.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AuthorizePermissionAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T07:00:10.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PermissionRequirment.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionRequirment.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\PermissionRequirment.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionRequirment.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Auth\\PermissionRequirment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T06:53:44.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\docker-compose.yml",
+              "RelativeDocumentMoniker": "Users.Api\\docker-compose.yml",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\docker-compose.yml",
+              "RelativeToolTip": "Users.Api\\docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-05-16T23:40:39.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "RestoreUserCommand.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommand.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommand.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommand.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:43:55.384Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "UpdateUserCommand.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:41:58.649Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "UpdateUserRequest.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\UpdateUserRequest.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Contracts\\UpdateUserRequest.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\UpdateUserRequest.cs",
+              "RelativeToolTip": "Users.Application\\Contracts\\UpdateUserRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T03:19:12.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DeleteUserCommand.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:43:29.996Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "GetUsersByLoginQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:26:45.388Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "GetUserByLoginQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:37:36.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "GetUsersByAgeQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQueryHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQueryHandler.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwBgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:29:54.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "GetUsersByAgeQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:41:23.205Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "RoleRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\RoleRepository.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\RoleRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\RoleRepository.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Repositories\\RoleRepository.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAwwG4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-04T17:44:20.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "PermissionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\PermissionRepository.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\PermissionRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\PermissionRepository.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Repositories\\PermissionRepository.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAqwEQAAABwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T20:52:52.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "UserRoleEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\UserRoleEntity.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\UserRoleEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\UserRoleEntity.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Models\\UserRoleEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T17:47:27.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "UserData.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\UserData.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\UserData.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\UserData.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Models\\UserData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T17:51:46.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "RolePermissionEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\RolePermissionEntity.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\RolePermissionEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\RolePermissionEntity.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Models\\RolePermissionEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T17:47:20.908Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "PermissionEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\PermissionEntity.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\PermissionEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\PermissionEntity.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Models\\PermissionEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T17:47:05.889Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "UsersDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\UsersDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Migrations\\UsersDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\UsersDbContextModelSnapshot.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Migrations\\UsersDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-12T22:29:22.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "20250517081230_AdminSeeded.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\20250517081230_AdminSeeded.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Migrations\\20250517081230_AdminSeeded.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\20250517081230_AdminSeeded.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Migrations\\20250517081230_AdminSeeded.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-12T22:29:32.982Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "IPermissionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IPermissionRepository.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Interfaces\\Repositories\\IPermissionRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IPermissionRepository.cs",
+              "RelativeToolTip": "Users.Domain\\Interfaces\\Repositories\\IPermissionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-04T17:06:44.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T18:18:48.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "IRoleRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IRoleRepository.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Interfaces\\Repositories\\IRoleRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IRoleRepository.cs",
+              "RelativeToolTip": "Users.Domain\\Interfaces\\Repositories\\IRoleRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-04T17:03:57.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "GetUserByCredentialsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQueryHandler.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBIAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T07:33:17.496Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\DTOs\\UserDto.cs",
+              "RelativeDocumentMoniker": "Users.Application\\DTOs\\UserDto.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\DTOs\\UserDto.cs",
+              "RelativeToolTip": "Users.Application\\DTOs\\UserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T00:40:37.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "GetUserByCredentialsQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T07:32:55.151Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "GetAllActiveUsersQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:35:37.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "RestoreUserCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandValidator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandValidator.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:50:57.902Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "ChangeUserPasswordCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandValidator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandValidator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandValidator.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:49:54.455Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "ChangeUserPasswordCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:11:52.015Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "ChangeUserPasswordCommand.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommand.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommand.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommand.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:42:27.495Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "ChangeUserLoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\ChangeUserLoginRequest.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Contracts\\ChangeUserLoginRequest.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\ChangeUserLoginRequest.cs",
+              "RelativeToolTip": "Users.Application\\Contracts\\ChangeUserLoginRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T03:47:03.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "ChangeUserPasswordRequest.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\ChangeUserPasswordRequest.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Contracts\\ChangeUserPasswordRequest.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\ChangeUserPasswordRequest.cs",
+              "RelativeToolTip": "Users.Application\\Contracts\\ChangeUserPasswordRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T03:47:44.104Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\User.cs",
+              "RelativeToolTip": "Users.Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAgwBEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T14:06:30.154Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\Role.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Entities\\Role.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\Role.cs",
+              "RelativeToolTip": "Users.Domain\\Entities\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T14:06:10.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "RoleConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\RoleConfiguration.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Configurations\\RoleConfiguration.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\RoleConfiguration.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Configurations\\RoleConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T19:01:23.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "PermissionConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\PermissionConfiguration.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Configurations\\PermissionConfiguration.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\PermissionConfiguration.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Configurations\\PermissionConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T19:01:22.524Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "RolePermissionConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\RolePermissionConfiguration.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Configurations\\RolePermissionConfiguration.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\RolePermissionConfiguration.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Configurations\\RolePermissionConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBJwBkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T19:02:54.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "UserRoleConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\UserRoleConfiguration.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Configurations\\UserRoleConfiguration.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\UserRoleConfiguration.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Configurations\\UserRoleConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T19:04:06.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "UserConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\UserConfiguration.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Configurations\\UserConfiguration.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Configurations\\UserConfiguration.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Configurations\\UserConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T19:00:14.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "RoleMappingConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Mappings\\RoleMappingConfiguration.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Mappings\\RoleMappingConfiguration.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Mappings\\RoleMappingConfiguration.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Mappings\\RoleMappingConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T17:13:18.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "dotnet",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\dotnet",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\dotnet",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\dotnet",
+              "RelativeToolTip": "Users.Infrastructure\\dotnet",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-17T01:25:07.092Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "RoleEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\RoleEntity.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\RoleEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\RoleEntity.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Models\\RoleEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T17:49:40.294Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "AuthenticateUserQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQueryHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBZwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:29:03.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "IJwtTokenGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Interfaces\\IJwtTokenGenerator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Interfaces\\IJwtTokenGenerator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Interfaces\\IJwtTokenGenerator.cs",
+              "RelativeToolTip": "Users.Application\\Interfaces\\IJwtTokenGenerator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T21:13:54.078Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "Permission.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\ValueObjects\\Permission.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\ValueObjects\\Permission.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\ValueObjects\\Permission.cs",
+              "RelativeToolTip": "Users.Domain\\ValueObjects\\Permission.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T14:06:05.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "UpdateUserCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:48:32.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "ChangeUserLoginCommand.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommand.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommand.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommand.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:42:53.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "ChangeUserLoginCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:12:50.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "DeleteUserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:13:28.832Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "AuthenticationResult.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Responses\\AuthenticationResult.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Responses\\AuthenticationResult.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Responses\\AuthenticationResult.cs",
+              "RelativeToolTip": "Users.Application\\Responses\\AuthenticationResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T21:17:09.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "UpdateUserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:10:22.087Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "ChangeUserLoginCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandValidator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandValidator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandValidator.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T15:01:05.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "Email.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\ValueObjects\\Email.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\ValueObjects\\Email.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\ValueObjects\\Email.cs",
+              "RelativeToolTip": "Users.Domain\\ValueObjects\\Email.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-24T15:43:17.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Dockerfile",
+              "RelativeDocumentMoniker": "Users.Api\\Dockerfile",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Dockerfile",
+              "RelativeToolTip": "Users.Api\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-05-16T23:47:11.269Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "GetAllActiveUsersQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQueryHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQueryHandler.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowDUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:22:43.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "RestoreUserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:13:54.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "DeleteUserCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandValidator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandValidator.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T15:01:27.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "Users.Domain.csproj",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Users.Domain.csproj",
+              "RelativeDocumentMoniker": "Users.Domain\\Users.Domain.csproj",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Users.Domain.csproj",
+              "RelativeToolTip": "Users.Domain\\Users.Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-07T17:41:06.994Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "Users.Api",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
+              "RelativeDocumentMoniker": "Users.Api\\Users.Api.csproj",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
+              "RelativeToolTip": "Users.Api\\Users.Api.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-15T21:39:16.796Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "Users.Application.csproj",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
+              "RelativeDocumentMoniker": "Users.Application\\Users.Application.csproj",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
+              "RelativeToolTip": "Users.Application\\Users.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-07T17:41:16.985Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "Users.Infrastructure",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Users.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj",
+              "RelativeToolTip": "Users.Infrastructure\\Users.Infrastructure.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-15T00:32:33.752Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "Users.Application.csproj.user",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj.user",
+              "RelativeDocumentMoniker": "Users.Application\\Users.Application.csproj.user",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj.user",
+              "RelativeToolTip": "Users.Application\\Users.Application.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-05-07T17:31:03.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "Users.Infrastructure.csproj.user",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj.user",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Users.Infrastructure.csproj.user",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj.user",
+              "RelativeToolTip": "Users.Infrastructure\\Users.Infrastructure.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-05-07T17:31:05.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "Users.Domain.csproj.user",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Users.Domain.csproj.user",
+              "RelativeDocumentMoniker": "Users.Domain\\Users.Domain.csproj.user",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Users.Domain.csproj.user",
+              "RelativeToolTip": "Users.Domain\\Users.Domain.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-05-07T17:31:05.183Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "Users.Api.csproj.user",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj.user",
+              "RelativeDocumentMoniker": "Users.Api\\Users.Api.csproj.user",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj.user",
+              "RelativeToolTip": "Users.Api\\Users.Api.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-05-07T17:31:02.293Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
