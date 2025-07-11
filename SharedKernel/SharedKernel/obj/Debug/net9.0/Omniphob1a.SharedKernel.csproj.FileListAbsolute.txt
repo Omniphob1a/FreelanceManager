@@ -1,0 +1,12 @@
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\Omniphob1a.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\Omniphob1a.SharedKernel.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\Omniphob1a.SharedKernel.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\Omniphob1a.SharedKernel.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\bin\Debug\net9.0\Omniphob1a.SharedKernel.deps.json
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\bin\Debug\net9.0\Omniphob1a.SharedKernel.dll
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\bin\Debug\net9.0\Omniphob1a.SharedKernel.pdb
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\Omniphob1a.SharedKernel.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\Omniphob1a.SharedKernel.dll
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\refint\Omniphob1a.SharedKernel.dll
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\Omniphob1a.SharedKernel.pdb
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\ref\Omniphob1a.SharedKernel.dll

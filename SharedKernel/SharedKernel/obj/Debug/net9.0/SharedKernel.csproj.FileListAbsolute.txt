@@ -1,0 +1,4 @@
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\SharedKernel.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\SharedKernel.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\obj\Debug\net9.0\SharedKernel.csproj.CoreCompileInputs.cache

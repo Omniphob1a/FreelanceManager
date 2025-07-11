@@ -1,0 +1,12 @@
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\bin\Debug\net9.0\Projects.Domain.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\bin\Debug\net9.0\Projects.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\bin\Debug\net9.0\Projects.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\Projects.Domain.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\Projects.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\Projects.Domain.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\Projects.Domain.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\Projects.Domain.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\Projects.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\refint\Projects.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\Projects.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Domain\obj\Debug\net9.0\ref\Projects.Domain.dll

@@ -1,0 +1,12 @@
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\bin\Debug\net9.0\Projects.Shared.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\bin\Debug\net9.0\Projects.Shared.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\bin\Debug\net9.0\Projects.Shared.pdb
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\refint\Projects.Shared.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.pdb
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\ref\Projects.Shared.dll

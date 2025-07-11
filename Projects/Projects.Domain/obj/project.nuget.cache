@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5CPQQM9Vz70=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Projects.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\volod\\.nuget\\packages\\ardalis.specification\\9.2.0\\ardalis.specification.9.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}

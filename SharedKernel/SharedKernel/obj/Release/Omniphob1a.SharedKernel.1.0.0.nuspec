@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Omniphob1a.SharedKernel</id>
+    <version>1.0.0</version>
+    <authors>Omniphob1a.SharedKernel</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net9.0">
+        <dependency id="MediatR" version="13.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\volod\source\repos\FreelanceManager\SharedKernel\SharedKernel\bin\Release\net9.0\Omniphob1a.SharedKernel.dll" target="lib\net9.0\Omniphob1a.SharedKernel.dll" />
+  </files>
+</package>
