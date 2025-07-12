@@ -32,8 +32,6 @@ namespace Projects.Persistence.Repositories
 			_logger = logger;
 		}
 
-		#region Basic CRUD Operations
-
 		public async Task<bool> ExistsAsync(Guid projectId, CancellationToken cancellationToken = default)
 		{
 			if (projectId == Guid.Empty)
@@ -107,10 +105,8 @@ namespace Projects.Persistence.Repositories
 					throw new KeyNotFoundException($"Project with ID {project.Id} not found.");
 				}
 
-				// Обновляем основные свойства
 				_mapper.Map(project, existingEntity);
 
-				// Синхронизируем связанные коллекции
 				await SyncAttachmentsAsync(existingEntity, project.Attachments, cancellationToken);
 				await SyncMilestonesAsync(existingEntity, project.Milestones, cancellationToken);
 
@@ -156,9 +152,7 @@ namespace Projects.Persistence.Repositories
 			}
 		}
 
-		#endregion
 
-		#region Optimized Update Methods
 
 		public async Task UpdateStatusAsync(Guid projectId, ProjectStatus status, CancellationToken cancellationToken = default)
 		{
@@ -320,9 +314,7 @@ namespace Projects.Persistence.Repositories
 			}
 		}
 
-		#endregion
 
-		#region Convenience Methods for Commands
 
 		public async Task ArchiveAsync(Guid projectId, CancellationToken cancellationToken = default)
 		{
@@ -339,9 +331,7 @@ namespace Projects.Persistence.Repositories
 			await UpdateStatusAsync(projectId, ProjectStatus.Completed, cancellationToken);
 		}
 
-		#endregion
 
-		#region Private Helper Methods
 
 		private async Task SyncAttachmentsAsync(ProjectEntity projectEntity, IEnumerable<ProjectAttachment> attachments,
 			CancellationToken cancellationToken)
@@ -350,14 +340,12 @@ namespace Projects.Persistence.Repositories
 			var existingDict = projectEntity.Attachments.ToDictionary(e => e.Id);
 			var newDict = attachmentsList.ToDictionary(a => a.Id);
 
-			// Удаляем отсутствующие
 			var toRemove = projectEntity.Attachments.Where(e => !newDict.ContainsKey(e.Id)).ToList();
 			foreach (var attachment in toRemove)
 			{
 				projectEntity.Attachments.Remove(attachment);
 			}
 
-			// Добавляем новые и обновляем существующие
 			foreach (var attachment in attachmentsList)
 			{
 				if (existingDict.TryGetValue(attachment.Id, out var existingEntity))
@@ -384,14 +372,12 @@ namespace Projects.Persistence.Repositories
 			var existingDict = projectEntity.Milestones.ToDictionary(e => e.Id);
 			var newDict = milestonesList.ToDictionary(m => m.Id);
 
-			// Удаляем отсутствующие
 			var toRemove = projectEntity.Milestones.Where(e => !newDict.ContainsKey(e.Id)).ToList();
 			foreach (var milestone in toRemove)
 			{
 				projectEntity.Milestones.Remove(milestone);
 			}
 
-			// Добавляем новые и обновляем существующие
 			foreach (var milestone in milestonesList)
 			{
 				if (existingDict.TryGetValue(milestone.Id, out var existingEntity))
@@ -410,7 +396,5 @@ namespace Projects.Persistence.Repositories
 				}
 			}
 		}
-
-		#endregion
 	}
 }

@@ -14,12 +14,14 @@ using Projects.Application.Projects.Commands.AddAttachment;
 using Projects.Application.Projects.Commands.AddMilestone;
 using Projects.Application.Projects.Commands.AddTag;
 using Projects.Application.Projects.Commands.ArchiveProject;
+using Projects.Application.Projects.Commands.CompleteMilestone;
 using Projects.Application.Projects.Commands.CompleteProject;
 using Projects.Application.Projects.Commands.CreateProject;
 using Projects.Application.Projects.Commands.DeleteAttachment;
 using Projects.Application.Projects.Commands.DeleteProject;
 using Projects.Application.Projects.Commands.DeleteTags;
 using Projects.Application.Projects.Commands.PublishProject;
+using Projects.Application.Projects.Commands.RescheduleMilestone;
 using Projects.Application.Projects.Commands.UpdateProject;
 using Projects.Application.Projects.Queries.GetProjectById;
 using Projects.Application.Projects.Queries.GetProjectsByFilter;
@@ -49,7 +51,7 @@ public class ProjectsController : ControllerBase
 	[Authorize]
 	[ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public async Task<IActionResult> CreateProject([FromBody] CreateProjectRequest request,	CancellationToken ct)
+	public async Task<IActionResult> CreateProject([FromBody] CreateProjectRequest request, CancellationToken ct)
 	{
 		_logger.LogInformation("Received request to create a project by user {UserId}", _currentUserService.UserId);
 
@@ -349,6 +351,79 @@ public class ProjectsController : ControllerBase
 		_logger.LogInformation("Milestone from project {ProjectId} successfully deleted", projectId);
 		return Ok();
 	}
+
+	[HttpPatch("{projectId:guid}/complete-milestone")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<IActionResult> CompleteMilestoneInProject(Guid projectId, [FromBody] CompleteMilestoneRequest request, CancellationToken ct)
+	{
+		_logger.LogInformation("Received request to complete milestone {MilestoneId} in project with ID: {ProjectId}", request.MilestoneId, projectId);
+		if (request.MilestoneId == Guid.Empty)
+		{
+			_logger.LogWarning("MilestoneId is empty in the request body");
+			return BadRequest(new { errors = new[] { "MilestoneId must be provided." } });
+		}
+		var result = await _mediator.Send(new CompleteMilestoneCommand(projectId, request.MilestoneId), ct);
+
+		if (result.IsFailed)
+		{
+			var errors = result.Errors.Select(e => e.Message).ToList();
+
+			if (errors.Any(e => e.Contains("not found", StringComparison.OrdinalIgnoreCase)))
+			{
+				_logger.LogWarning("Milestone or project not found (ProjectId: {ProjectId}, MilestoneId: {MilestoneId})", projectId, request.MilestoneId);
+				return NotFound(new { errors });
+			}
+
+			_logger.LogWarning("Failed to complete milestone {MilestoneId} in project {ProjectId}. Errors: {Errors}", request.MilestoneId, projectId, errors);
+			return BadRequest(new { errors });
+		}
+
+		_logger.LogInformation("Milestone {MilestoneId} successfully marked as completed in project {ProjectId}", request.MilestoneId, projectId);
+		return Ok();
+	}
+
+	[HttpPatch("{projectId:guid}/reschedule-milestone")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<IActionResult> RescheduleMilestoneInProject(Guid projectId, [FromBody] RescheduleMilestoneRequest request, CancellationToken ct)
+	{
+		_logger.LogInformation("Received request to reschedule milestone {MilestoneId} in project {ProjectId} to new due date {NewDueDate}", request.MilestoneId, projectId, request.NewDueDate);
+
+		if (request.MilestoneId == Guid.Empty)
+		{
+			_logger.LogWarning("MilestoneId is empty in the request body");
+			return BadRequest(new { errors = new[] { "MilestoneId must be provided." } });
+		}
+
+		if (request.NewDueDate <= DateTime.UtcNow)
+		{
+			_logger.LogWarning("New due date {NewDueDate} is not in the future", request.NewDueDate);
+			return BadRequest(new { errors = new[] { "New due date must be in the future." } });
+		}
+
+		var result = await _mediator.Send(new RescheduleMilestoneCommand(projectId, request.MilestoneId, request.NewDueDate), ct);
+
+		if (result.IsFailed)
+		{
+			var errors = result.Errors.Select(e => e.Message).ToList();
+
+			if (errors.Any(e => e.Contains("not found", StringComparison.OrdinalIgnoreCase)))
+			{
+				_logger.LogWarning("Milestone or project not found (ProjectId: {ProjectId}, MilestoneId: {MilestoneId})", projectId, request.MilestoneId);
+				return NotFound(new { errors });
+			}
+
+			_logger.LogWarning("Failed to reschedule milestone {MilestoneId} in project {ProjectId}. Errors: {Errors}", request.MilestoneId, projectId, errors);
+			return BadRequest(new { errors });
+		}
+
+		_logger.LogInformation("Milestone {MilestoneId} successfully rescheduled in project {ProjectId}", request.MilestoneId, projectId);
+		return Ok();
+	}
+
 
 	[HttpPatch("{projectId:guid}/add-tags")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
