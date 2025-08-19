@@ -1,0 +1,12 @@
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Persistence.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Persistence.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Persistence.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.sourcelink.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\refint\Tasks.Persistence.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\ref\Tasks.Persistence.dll

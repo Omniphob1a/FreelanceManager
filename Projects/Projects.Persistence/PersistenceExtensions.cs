@@ -5,18 +5,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Projects.Application.Interfaces;
+using Projects.Application.Mappings;
 using Projects.Domain.Repositories;
+using Projects.Persistence.Common;
 using Projects.Persistence.Data;
 using Projects.Persistence.Mappings;
 using Projects.Persistence.Repositories;
-using Projects.Persistence.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
 namespace Projects.Persistence
 {
@@ -34,8 +35,10 @@ namespace Projects.Persistence
 
 			var config = new TypeAdapterConfig();
 			config.Scan(Assembly.GetExecutingAssembly());
+			config.Scan(Assembly.GetAssembly(typeof(ProjectDtoMappingConfiguration)));
 			services.AddSingleton(config);
 			services.AddScoped<IMapper, ServiceMapper>();
+
 
 			services.AddScoped<IProjectRepository, ProjectRepository>();
 			services.AddScoped<IProjectQueryService, ProjectQueryService>();

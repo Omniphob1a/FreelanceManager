@@ -8,8 +8,10 @@ namespace Projects.Application.DTOs
 {
 	public class ProjectMilestoneDto
 	{
+		public Guid Id { get; set; }
 		public string Title { get; set; } = default!;
 		public DateTime DueDate { get; set; }
 		public bool IsCompleted { get; set; }
+		public bool IsEscalated { get; set; }
 	}
 }

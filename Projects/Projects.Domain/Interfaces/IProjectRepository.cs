@@ -1,5 +1,4 @@
 ﻿using Projects.Domain.Entities;
-using Projects.Domain.Entities.ProjectService.Domain.Entities;
 using Projects.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -21,10 +20,5 @@ namespace Projects.Domain.Repositories
 		Task UpdateDescriptionAsync(Guid projectId, string description, CancellationToken cancellationToken = default);
 		Task UpdateBudgetAsync(Guid projectId, decimal budgetMin, decimal budgetMax, string currencyCode, CancellationToken cancellationToken = default);
 		Task UpdateTagsAsync(Guid projectId, List<string> tags, CancellationToken cancellationToken = default);
-
-		Task ArchiveAsync(Guid projectId, CancellationToken cancellationToken = default);
-		Task PublishAsync(Guid projectId, CancellationToken cancellationToken = default);
-		Task CompleteAsync(Guid projectId, CancellationToken cancellationToken = default);
-
 	}
 }

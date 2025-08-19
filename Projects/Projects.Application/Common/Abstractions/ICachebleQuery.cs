@@ -8,7 +8,9 @@ namespace Projects.Application.Common.Abstractions
 {
 	public interface ICacheableQuery
 	{
+		bool BypassCache { get; }
 		string CacheKey { get; }
-		TimeSpan Ttl { get; }
+		int SlidingExpirationInMinutes { get; }
+		int AbsoluteExpirationInMinutes { get; }
 	}
 }

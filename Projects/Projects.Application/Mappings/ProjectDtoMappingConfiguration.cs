@@ -16,12 +16,14 @@ namespace Projects.Application.Mappings
 			config.NewConfig<Project, ProjectDto>()
 				.Map(dest => dest.BudgetMin, src => src.Budget.Min)
 				.Map(dest => dest.BudgetMax, src => src.Budget.Max)
-				.Map(dest => dest.Currency, src => src.Budget.CurrencyCode)
+				.Map(dest => dest.CurrencyCode, src => src.Budget.CurrencyCode.ToString())
 				.Map(dest => dest.Milestones, src => src.Milestones.Adapt<List<ProjectMilestoneDto>>())
 				.Map(dest => dest.Attachments, src => src.Attachments.Adapt<List<ProjectAttachmentDto>>())
 				.Map(dest => dest.Status, src => (int)src.Status)
 				.Map(dest => dest.ExpiresAt, src => src.ExpiresAt)
-				.Map(dest => dest.Tags, src => src.Tags.ToList());
+				.Map(dest => dest.CreatedAt, src => src.CreatedAt)	
+				.Map(dest => dest.Tags, src => src.Tags.ToList())
+				.Map(dest => dest.IsExpired, src => src.IsExpired());
 		}
 	}
 }

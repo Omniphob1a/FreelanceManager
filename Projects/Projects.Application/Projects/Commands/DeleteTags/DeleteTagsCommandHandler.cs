@@ -64,6 +64,7 @@ namespace Projects.Application.Projects.Commands.DeleteTags
 				}
 
 				await _projectRepository.UpdateTagsAsync(request.ProjectId, request.Tags, ct);
+				_unitOfWork.TrackEntity(project);
 				await _unitOfWork.SaveChangesAsync(ct);
 				_logger.LogInformation("Tags [{Tags}] deleted from Project {ProjectId}", string.Join(", ", tagsResult.Value), project.Id);
 

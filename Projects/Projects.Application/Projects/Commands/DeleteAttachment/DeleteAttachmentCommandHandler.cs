@@ -61,6 +61,7 @@ public class DeleteAttachmentCommandHandler : IRequestHandler<DeleteAttachmentCo
 			project.DeleteAttachment(attachment);
 
 			await _projectRepository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 			_logger.LogInformation("Attachment {AttachmentId} removed from Project {ProjectId}",
 				attachment.Id, project.Id);

@@ -1,5 +1,5 @@
 ﻿using Projects.Domain.Common;
-using Projects.Domain.Entities.ProjectService.Domain.Entities;
+using Projects.Domain.Entities;
 using Projects.Domain.Enums;
 using Projects.Domain.Events;
 using Projects.Domain.ValueObjects;
@@ -39,64 +39,53 @@ public class Project : EntityBase
 		Validate(title, description, ownerId, budget, category);
 
 		var project = new Project(
-			Guid.NewGuid(),
-			title,
-			description,
-			ownerId,
-			budget,
-			category,
-			tags?.ToList() ?? new());
+			id: Guid.NewGuid(),
+			title: title,
+			description: description,
+			ownerId: ownerId,
+			budget: budget,
+			category: category,
+			tags: tags?.ToList() ?? new(),
+			createdAt: DateTime.UtcNow);
 
-		project.AddDomainEvent(new ProjectCreatedDomainEvent(project.Id));   
-
+		project.AddDomainEvent(new ProjectCreatedDomainEvent(project.Id));
 		return project;
 	}
 
 	public static Project Restore(
-	Guid id,
-	string title,
-	string description,
-	Guid ownerId,
-	Budget budget,
-	Category category,
-	List<Tag> tags,
-	List<ProjectMilestone> milestones,
-	List<ProjectAttachment> attachments,
-	ProjectStatus status,
-	DateTime? expiresAt)
-	{
-		var project = new Project(id, title, description, ownerId, budget, category, tags);
-
-		foreach (var milestone in milestones)
-			project.AddMilestone(milestone);
-
-		foreach (var attachment in attachments)
-			project.AddAttachment(attachment);
-
-		switch (status)
-		{
-			case ProjectStatus.Completed:
-				project.Complete();
-				break;
-			case ProjectStatus.Archived:
-				project.Archive();
-				break;
-			case ProjectStatus.Active when expiresAt.HasValue:
-				project.Publish(expiresAt.Value);
-				break;
-		}
-
-		return project;
-	}
-
-	private Project(
 		Guid id,
 		string title,
 		string description,
 		Guid ownerId,
 		Budget budget,
 		Category category,
-		List<Tag> tags)
+		List<Tag> tags,
+		List<ProjectMilestone> milestones,
+		List<ProjectAttachment> attachments,
+		ProjectStatus status,
+		DateTime? expiresAt,
+		DateTime createdAt)
+	{
+		var project = new Project(id, title, description, ownerId, budget, category, tags, createdAt);
+
+		project._milestones.AddRange(milestones ?? []);
+		project._attachments.AddRange(attachments ?? []);
+
+		project.Status = status;
+		project.ExpiresAt = expiresAt;
+
+		return project;
+	}
+
+	private Project(
+	   Guid id,
+	   string title,
+	   string description,
+	   Guid ownerId,
+	   Budget budget,
+	   Category category,
+	   List<Tag> tags,
+	   DateTime createdAt) 
 	{
 		Id = id;
 		Title = title;
@@ -105,7 +94,7 @@ public class Project : EntityBase
 		Budget = budget;
 		Category = category;
 		Status = ProjectStatus.Draft;
-		CreatedAt = DateTime.UtcNow;
+		CreatedAt = createdAt; 
 		_tags = tags.Distinct().ToList();
 	}
 
@@ -129,7 +118,12 @@ public class Project : EntityBase
 		_tags.Clear();
 		_tags.AddRange(tags.Distinct());
 
-		AddDomainEvent(new ProjectUpdatedDomainEvent(Id));           
+		AddDomainEvent(new ProjectUpdatedDomainEvent(Id));
+	}
+
+	public void Delete()
+	{
+		AddDomainEvent(new ProjectDeletedDomainEvent(Id));
 	}
 
 	public void Publish(DateTime expiresAt)
@@ -143,7 +137,7 @@ public class Project : EntityBase
 		Status = ProjectStatus.Active;
 		ExpiresAt = expiresAt;
 
-		AddDomainEvent(new ProjectPublishedDomainEvent(Id, expiresAt));     
+		AddDomainEvent(new ProjectPublishedDomainEvent(Id, expiresAt));
 	}
 
 	public void Complete()
@@ -153,17 +147,17 @@ public class Project : EntityBase
 
 		Status = ProjectStatus.Completed;
 
-		AddDomainEvent(new ProjectCompletedDomainEvent(Id));               
+		AddDomainEvent(new ProjectCompletedDomainEvent(Id));
 	}
 
 	public void Archive()
 	{
+		ExpiresAt = null;
 		if (Status == ProjectStatus.Archived)
 			throw new InvalidOperationException("Project is already archived.");
 
 		Status = ProjectStatus.Archived;
-
-		AddDomainEvent(new ProjectArchivedDomainEvent(Id));                
+		AddDomainEvent(new ProjectArchivedDomainEvent(Id));
 	}
 
 	public void AddMilestone(ProjectMilestone milestone)
@@ -173,7 +167,34 @@ public class Project : EntityBase
 
 		_milestones.Add(milestone ?? throw new ArgumentNullException(nameof(milestone)));
 
-		AddDomainEvent(new MilestoneAddedDomainEvent(Id, milestone));      
+		AddDomainEvent(new MilestoneAddedDomainEvent(Id, milestone));
+	}
+
+	public void CompleteMilestone(Guid milestoneId)
+	{
+		if (Status != ProjectStatus.Active)
+			throw new InvalidOperationException("Only active projects can complete milestones.");
+
+		var milestone = _milestones.FirstOrDefault(m => m.Id == milestoneId);
+		if (milestone is null)
+			throw new ArgumentException("Milestone not found.", nameof(milestoneId));
+
+		milestone.MarkCompleted();
+		AddDomainEvent(new MilestoneCompletedDomainEvent(Id, milestone.Id));
+	}
+
+	public void CheckEscalatedMilestones()
+	{
+		foreach (var milestone in _milestones.Where(m => !m.IsCompleted))
+		{
+			if (milestone.DueDate < DateTime.UtcNow && !milestone.IsEscalated)
+			{
+				milestone.MarkEscalated();
+				Status = ProjectStatus.NeedsReview; 
+
+				AddDomainEvent(new MilestoneEscalatedDomainEvent(Id, milestone.Id));
+			}
+		}
 	}
 
 	public void DeleteMilestone(ProjectMilestone milestone)
@@ -183,21 +204,21 @@ public class Project : EntityBase
 
 		_milestones.Remove(milestone ?? throw new ArgumentNullException(nameof(milestone)));
 
-		AddDomainEvent(new MilestoneRemovedDomainEvent(Id, milestone));    
+		AddDomainEvent(new MilestoneRemovedDomainEvent(Id, milestone));
 	}
 
 	public void AddAttachment(ProjectAttachment attachment)
 	{
 		_attachments.Add(attachment ?? throw new ArgumentNullException(nameof(attachment)));
 
-		AddDomainEvent(new AttachmentAddedDomainEvent(Id, attachment));    
+		AddDomainEvent(new AttachmentAddedDomainEvent(Id, attachment));
 	}
 
 	public void DeleteAttachment(ProjectAttachment attachment)
 	{
 		_attachments.Remove(attachment ?? throw new ArgumentNullException(nameof(attachment)));
 
-		AddDomainEvent(new AttachmentRemovedDomainEvent(Id, attachment));  
+		AddDomainEvent(new AttachmentRemovedDomainEvent(Id, attachment));
 	}
 
 	public void AddTag(Tag tag)
@@ -210,7 +231,7 @@ public class Project : EntityBase
 
 		_tags.Add(tag);
 
-		AddDomainEvent(new TagsAddedDomainEvent(Id, tag));                  
+		AddDomainEvent(new TagsAddedDomainEvent(Id, tag));
 	}
 
 	public void DeleteTag(Tag tag)
@@ -243,5 +264,10 @@ public class Project : EntityBase
 
 		if (category is null)
 			throw new ArgumentNullException(nameof(category));
+	}
+
+	public bool IsExpired()
+	{
+		return ExpiresAt.HasValue && ExpiresAt.Value <= DateTime.UtcNow;
 	}
 }

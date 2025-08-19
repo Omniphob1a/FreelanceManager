@@ -18,7 +18,7 @@ namespace Projects.Domain.ValueObjects
 
 		private CurrencyCode(string code)
 		{
-			Code = code.ToUpperInvariant();
+			Code = code;
 		}
 
 		public static CurrencyCode From(string input)

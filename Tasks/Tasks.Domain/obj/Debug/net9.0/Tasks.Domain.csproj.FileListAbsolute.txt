@@ -1,0 +1,12 @@
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\bin\Debug\net9.0\Tasks.Domain.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\bin\Debug\net9.0\Tasks.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\bin\Debug\net9.0\Tasks.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\Tasks.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\Tasks.Domain.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\Tasks.Domain.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\Tasks.Domain.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\Tasks.Domain.sourcelink.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\Tasks.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\refint\Tasks.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\Tasks.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Domain\obj\Debug\net9.0\ref\Tasks.Domain.dll

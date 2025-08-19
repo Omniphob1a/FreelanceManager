@@ -48,7 +48,8 @@ public class ArchiveProjectCommandHandler : IRequestHandler<ArchiveProjectComman
 
 			project.Archive();
 
-			await _projectRepository.ArchiveAsync(request.ProjectId, ct);
+			await _projectRepository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 			_logger.LogInformation("Project {ProjectId} archived successfully", request.ProjectId);
 

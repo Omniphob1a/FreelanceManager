@@ -1,6 +1,5 @@
 ﻿using Mapster;
 using Projects.Domain.Entities;
-using Projects.Domain.Entities.ProjectService.Domain.Entities;
 using Projects.Domain.Enums;
 using Projects.Domain.ValueObjects;
 using Projects.Persistence.Models;
@@ -16,20 +15,22 @@ namespace Projects.Persistence.Mappings
 		public void Register(TypeAdapterConfig config)
 		{
 			config.NewConfig<ProjectEntity, Project>()
-				.ConstructUsing(src => MapToDomain(src, config))
-				.Ignore(dest => dest.Category);
+				.IgnoreNonMapped(true) 
+				.ShallowCopyForSameType(false)
+				.ConstructUsing(src => MapToDomain(src, config));
 
 			config.NewConfig<Project, ProjectEntity>()
 				.Map(dest => dest.Id, src => src.Id)
 				.Map(dest => dest.BudgetMin, src => src.Budget.Min)
 				.Map(dest => dest.BudgetMax, src => src.Budget.Max)
-				.Map(dest => dest.CurrencyCode, src => src.Budget.CurrencyCode.ToString())
+				.Map(dest => dest.CurrencyCode, src => src.Budget.CurrencyCode.Code)
 				.Map(dest => dest.Category, src => src.Category.ToString())
-				.Map(dest => dest.Milestones, src => src.Milestones.Adapt<List<ProjectMilestoneEntity>>(config))
-				.Map(dest => dest.Attachments, src => src.Attachments.Adapt<List<ProjectAttachmentEntity>>(config))
 				.Map(dest => dest.Status, src => (int)src.Status)
+				.Map(dest => dest.CreatedAt, src => src.CreatedAt)
 				.Map(dest => dest.ExpiresAt, src => src.ExpiresAt)
-				.Map(dest => dest.Tags, src => string.Join(",", src.Tags.Select(t => t.Value)));
+				.Map(dest => dest.Tags, src => string.Join(",", src.Tags.Select(t => t.Value)))
+				.Ignore(dest => dest.Milestones)
+				.Ignore(dest => dest.Attachments);
 		}
 
 		private static Project MapToDomain(ProjectEntity src, TypeAdapterConfig config)
@@ -56,7 +57,8 @@ namespace Projects.Persistence.Mappings
 				milestones: milestones,
 				attachments: attachments,
 				status: status,
-				expiresAt: src.ExpiresAt
+				expiresAt: src.ExpiresAt,
+				createdAt: src.CreatedAt
 			);
 
 			return project;

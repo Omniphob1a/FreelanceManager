@@ -1,4 +1,4 @@
-﻿using Projects.Domain.Entities.ProjectService.Domain.Entities;
+﻿using Projects.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,0 +1,123 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <!-- Статистика -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
+                <i class="fas fa-project-diagram text-xl"></i>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500">Total Projects</p>
+                <h3 class="text-2xl font-bold" id="totalProjects">0</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
+                <i class="fas fa-tasks text-xl"></i>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500">Active Projects</p>
+                <h3 class="text-2xl font-bold" id="activeProjects">0</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
+                <i class="fas fa-check-circle text-xl"></i>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500">Completed</p>
+                <h3 class="text-2xl font-bold" id="completedProjects">0</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
+                <i class="fas fa-clock text-xl"></i>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500">Upcoming Deadlines</p>
+                <h3 class="text-2xl font-bold" id="upcomingDeadlines">0</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Projects Section -->
+<div class="mb-8">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-semibold text-gray-900">Recent Projects</h2>
+        <a href="#projects" class="text-sm text-blue-600 hover:text-blue-800">
+            View All
+        </a>
+    </div>
+
+    <div id="dashboardProjects" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-lg shadow p-4 h-32 animate-pulse"></div>
+        <div class="bg-white rounded-lg shadow p-4 h-32 animate-pulse"></div>
+        <div class="bg-white rounded-lg shadow p-4 h-32 animate-pulse"></div>
+    </div>
+</div>
+
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Project Status Chart -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Project Status</h3>
+            <select class="text-sm border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Last 30 Days</option>
+                <option>Last 90 Days</option>
+                <option>This Year</option>
+            </select>
+        </div>
+        <div class="chart-container h-64">
+            <canvas id="statusChart"></canvas>
+        </div>
+    </div>
+    
+    <!-- Revenue Chart -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Revenue Overview</h3>
+            <select class="text-sm border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Last 30 Days</option>
+                <option>Last 90 Days</option>
+                <option>This Year</option>
+            </select>
+        </div>
+        <div class="chart-container h-64">
+            <canvas id="revenueChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+    <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+        <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
+        <button class="text-sm text-blue-600 hover:text-blue-800">View All</button>
+    </div>
+    <div id="activityList" class="divide-y divide-gray-200">
+        <div class="p-4 hover:bg-gray-50">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-check text-green-600"></i>
+                    </div>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-900">Project completed</p>
+                    <p class="text-sm text-gray-500">You marked "Website Redesign" as completed</p>
+                    <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

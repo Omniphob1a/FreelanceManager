@@ -1,0 +1,13 @@
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\bin\Debug\net9.0\Tasks.Infrastructure.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\bin\Debug\net9.0\Tasks.Infrastructure.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\bin\Debug\net9.0\Tasks.Infrastructure.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.sourcelink.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\refint\Tasks.Infrastructure.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\ref\Tasks.Infrastructure.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.csproj.AssemblyReference.cache

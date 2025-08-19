@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Projects.Application.DTOs;
 using Projects.Application.Interfaces;
 using Projects.Application.Projects.Commands.CompleteMilestone;
-using Projects.Domain.Entities.ProjectService.Domain.Entities;
+using Projects.Domain.Entities;
 using Projects.Domain.Exceptions;
 using Projects.Domain.Repositories;
 using System;
@@ -56,9 +56,10 @@ namespace Projects.Application.Projects.Commands.CompleteMilestone
 					_logger.LogWarning("Milestone {MilestoneId} not found", request.MilestoneId);
 					return Result.Fail("Milestone not found.");
 				}
-				milestone.MarkCompleted();
+				project.CompleteMilestone(milestone.Id);
 
 				await _repository.UpdateAsync(project, ct);
+				_unitOfWork.TrackEntity(project);
 				await _unitOfWork.SaveChangesAsync(ct);
 
 				_logger.LogInformation("Milestone {MilestoneId} completed in project {ProjectId}", milestone.Id, project.Id);

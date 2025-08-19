@@ -29,7 +29,8 @@ namespace Projects.Application
 			services.AddValidatorsFromAssembly(assembly);
 			services.AddScoped<ICurrentUserService, CurrentUserService>();
 			services.AddScoped<TagParserService>();
-
+			services.AddTransient(
+				typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
 			services.AddTransient(
 				typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 			return services;

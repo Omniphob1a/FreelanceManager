@@ -1,51 +1,99 @@
-﻿using FluentResults;
+﻿// Projects.Application/Common/Behaviors/CachingBehavior.cs
+using FluentResults;
 using MediatR;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Projects.Application.Common.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Projects.Application.Common.Behaviors
 {
 	public class CachingBehavior<TReq, TRes> : IPipelineBehavior<TReq, TRes>
+		where TReq : ICacheableQuery
 	{
-		private readonly ICacheService _cache;
 		private readonly ILogger<CachingBehavior<TReq, TRes>> _log;
+		private readonly IDistributedCache _cache;
+		private static readonly JsonSerializerOptions _opts = new()
+		{
+			PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+		};
 
-		public CachingBehavior(ICacheService cache, ILogger<CachingBehavior<TReq, TRes>> log)
-			=> (_cache, _log) = (cache, log);
+		public CachingBehavior(
+			ILogger<CachingBehavior<TReq, TRes>> log,
+			IDistributedCache cache)
+		{
+			_log = log;
+			_cache = cache;
+		}
 
 		public async Task<TRes> Handle(
 			TReq request,
 			RequestHandlerDelegate<TRes> next,
 			CancellationToken ct)
 		{
-			if (request is not ICacheableQuery cq)
+			if (request.BypassCache)
 				return await next();
 
-			if (await _cache.GetAsync<TRes>(cq.CacheKey, ct) is { } hit)
+			var key = request.CacheKey;
+			_log.LogInformation("Cache lookup for {Key}", key);
+
+			var json = await _cache.GetStringAsync(key, ct);
+			if (json is not null)
 			{
-				_log.LogDebug("Cache hit {Key}", cq.CacheKey);
-				return hit;
+				_log.LogInformation("  → HIT {Key}", key);
+
+				if (typeof(TRes).IsGenericType
+					&& typeof(TRes).GetGenericTypeDefinition() == typeof(Result<>))
+				{
+					var payloadType = typeof(TRes).GenericTypeArguments[0];
+					var payload = JsonSerializer.Deserialize(json, payloadType, _opts)!;
+
+					var okMethod = typeof(Result)
+						.GetMethods()
+						.First(m =>
+							m.Name == nameof(Result.Ok)
+							&& m.IsGenericMethodDefinition
+							&& m.GetParameters().Length == 1);
+
+					var okGeneric = okMethod.MakeGenericMethod(payloadType);
+					var wrapped = okGeneric.Invoke(null, new object[] { payload })!;
+
+					return (TRes)wrapped;
+				}
+
+				return JsonSerializer.Deserialize<TRes>(json, _opts)!;
 			}
+
+			_log.LogInformation("  → MISS {Key}", key);
 
 			var response = await next();
 
-			var ok = response switch            
+			string toCache;
+			if (response is IResultBase && response.GetType().GetGenericTypeDefinition() == typeof(Result<>))
 			{
-				Result r => r.IsSuccess,
-				Result<object> ro => ro.IsSuccess,
-				_ => true       
-			};
+				var payload = response.GetType()
+					.GetProperty(nameof(Result<object>.Value))!
+					.GetValue(response);
 
-			if (ok)
-				await _cache.SetAsync(cq.CacheKey, response, cq.Ttl, ct);
+				toCache = JsonSerializer.Serialize(payload, _opts);
+			}
+			else
+			{
+				toCache = JsonSerializer.Serialize(response, _opts);
+			}
+
+			var entryOpts = new DistributedCacheEntryOptions()
+				.SetSlidingExpiration(TimeSpan.FromMinutes(request.SlidingExpirationInMinutes))
+				.SetAbsoluteExpiration(TimeSpan.FromMinutes(request.AbsoluteExpirationInMinutes));
+
+			await _cache.SetStringAsync(key, toCache, entryOpts, ct);
+			_log.LogInformation("  → CACHED {Key}", key);
 
 			return response;
 		}
 	}
-
 }

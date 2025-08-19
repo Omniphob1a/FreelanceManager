@@ -118,6 +118,9 @@ namespace Projects.Persistence.Migrations
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsEscalated")
+                        .HasColumnType("boolean");
+
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
 

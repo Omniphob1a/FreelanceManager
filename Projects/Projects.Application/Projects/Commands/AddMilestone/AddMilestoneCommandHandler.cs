@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using Projects.Application.DTOs;
 using Projects.Application.Interfaces;
 using Projects.Domain.Entities;
-using Projects.Domain.Entities.ProjectService.Domain.Entities;
 using Projects.Domain.Exceptions;
 using Projects.Domain.Repositories;
 
@@ -49,6 +48,7 @@ public class AddMilestoneCommandHandler : IRequestHandler<AddMilestoneCommand, R
 			project.AddMilestone(milestone);
 
 			await _repository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 
 			_logger.LogInformation("Milestone {MilestoneId} added to Project {ProjectId}", milestone.Id, project.Id);
@@ -68,3 +68,4 @@ public class AddMilestoneCommandHandler : IRequestHandler<AddMilestoneCommand, R
 		}
 	}
 }
+ 

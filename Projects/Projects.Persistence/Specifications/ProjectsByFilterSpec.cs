@@ -15,6 +15,11 @@ namespace Projects.Persistence.Specifications
 	{
 		public ProjectsByFilterSpec(ProjectFilter filter, bool includePaging = false)
 		{
+			if (filter.IncludeMilestones)
+				Query.Include(p => p.Milestones);
+			if (filter.IncludeAttachments)
+				Query.Include(p => p.Attachments);
+
 			if (filter.Status.HasValue)
 				Query.Where(p => p.Status == (int)filter.Status);
 

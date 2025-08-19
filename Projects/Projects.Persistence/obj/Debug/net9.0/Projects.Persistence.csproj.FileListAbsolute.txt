@@ -1,8 +1,3 @@
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.csproj.AssemblyReference.cache
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.AssemblyInfoInputs.cache
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.AssemblyInfo.cs
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.csproj.CoreCompileInputs.cache
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\bin\Debug\net9.0\Projects.Persistence.deps.json
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\bin\Debug\net9.0\Projects.Persistence.runtimeconfig.json
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\bin\Debug\net9.0\Projects.Persistence.dll
@@ -13,6 +8,12 @@ C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\bin\D
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\bin\Debug\net9.0\Projects.Application.pdb
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\bin\Debug\net9.0\Projects.Domain.pdb
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\bin\Debug\net9.0\Projects.Shared.pdb
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.sourcelink.json
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.FA9D5FD3.Up2Date
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\Projects.Persistence.dll
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Persistence\obj\Debug\net9.0\refint\Projects.Persistence.dll

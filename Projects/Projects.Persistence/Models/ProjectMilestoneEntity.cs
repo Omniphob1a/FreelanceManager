@@ -13,5 +13,6 @@ namespace Projects.Persistence.Models
 		public string Title { get; set; } = default!;
 		public DateTime DueDate { get; set; }
 		public bool IsCompleted { get; set; }
+		public bool IsEscalated { get; set; }
 	}
 }

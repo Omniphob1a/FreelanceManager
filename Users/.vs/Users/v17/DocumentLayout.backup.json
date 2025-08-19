@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbylogin\\getuserbyloginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbylogin\\getuserbyloginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbylogin\\getusersbyloginqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbylogin\\getusersbyloginqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\registeruser\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\registeruser\\registerusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,16 +43,8 @@
       "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\commands\\registeruser\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\data\\usersdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\data\\usersdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\commands\\registeruser\\registerusercommandvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -123,14 +139,6 @@
       "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getusersbyage\\getusersbyagequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbylogin\\getusersbyloginqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbylogin\\getusersbyloginqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbylogin\\getuserbyloginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbylogin\\getuserbyloginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.infrastructure\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B79656E7-68FB-415D-BA46-07B51994EC97}|Users.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:users.infrastructure\\repositories\\rolerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -183,10 +191,6 @@
       "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getuserbycredentials\\getuserbycredentialsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\getallactiveusers\\getallactiveusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\getallactiveusers\\getallactiveusersquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -213,10 +217,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\contracts\\changeuserpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\contracts\\changeuserpasswordrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8CAF7570-E551-4D3A-8A9C-667337EF94AD}|Users.Domain\\Users.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.domain\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -354,102 +354,119 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\appsettings.json",
-              "RelativeDocumentMoniker": "Users.Api\\appsettings.json",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\appsettings.json",
-              "RelativeToolTip": "Users.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-15T00:28:28.334Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Users.Api\\Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Users.Api\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABEAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACIAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T16:44:05.27Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Users.Api\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Users.Api\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAqwBcAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAxwBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-15T00:36:45.605Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "RegisterUserCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
               "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-15T21:16:23.312Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "RegisterUserCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
               "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAxwCEAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAACsAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-15T21:19:08.268Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "RegisterUserCommandValidator.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
-              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
-              "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "GetUserByCredentialsQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T14:30:34.769Z",
+              "WhenOpened": "2025-05-17T07:32:55.151Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UsersDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Data\\UsersDbContext.cs",
-              "RelativeDocumentMoniker": "Users.Infrastructure\\Data\\UsersDbContext.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Data\\UsersDbContext.cs",
-              "RelativeToolTip": "Users.Infrastructure\\Data\\UsersDbContext.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAQwEsAAABmAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "GetUserByLoginQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T18:53:26.994Z",
+              "WhenOpened": "2025-05-16T14:37:36.611Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "GetUsersByLoginQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowDsAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T16:26:45.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\User.cs",
+              "RelativeToolTip": "Users.Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAkwBEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T14:06:30.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\UserRepository.cs",
@@ -457,12 +474,47 @@
               "RelativeToolTip": "Users.Infrastructure\\Repositories\\UserRepository.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAqwBkAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T18:49:33.381Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-29T18:49:33.381Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
+              "Title": "UsersDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Data\\UsersDbContext.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAQwEsAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T18:53:26.994Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RegisterUserCommandValidator.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:30:34.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Users.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\appsettings.json",
+              "RelativeToolTip": "Users.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-15T00:28:28.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "AuthenticateUserQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
@@ -470,12 +522,11 @@
               "RelativeToolTip": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T14:39:03.497Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T14:39:03.497Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Program.cs",
               "RelativeDocumentMoniker": "Users.Api\\Program.cs",
@@ -483,12 +534,11 @@
               "RelativeToolTip": "Users.Api\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T21:40:28.885Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T21:40:28.885Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Users.Api\\Properties\\launchSettings.json",
@@ -500,7 +550,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "UserMappingConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Mappings\\UserMappingConfiguration.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Mappings\\UserMappingConfiguration.cs",
@@ -512,7 +562,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "PermissionHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionHandler.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\PermissionHandler.cs",
@@ -524,7 +574,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "JwtTokenGenerator.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\JwtTokenGenerator.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\JwtTokenGenerator.cs",
@@ -536,7 +586,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "ApiExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\ApiExtensions.cs",
               "RelativeDocumentMoniker": "Users.Api\\ApiExtensions.cs",
@@ -548,7 +598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "ApplicationExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\ApplicationExtensions.cs",
               "RelativeDocumentMoniker": "Users.Application\\ApplicationExtensions.cs",
@@ -560,7 +610,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "InfrastructureExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\InfrastructureExtensions.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\InfrastructureExtensions.cs",
@@ -572,7 +622,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "Users.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Users.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Users.Infrastructure.csproj",
@@ -584,7 +634,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "Users.Api.csproj",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
               "RelativeDocumentMoniker": "Users.Api\\Users.Api.csproj",
@@ -596,7 +646,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "PermissionPolicyProvider.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionPolicyProvider.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\PermissionPolicyProvider.cs",
@@ -608,7 +658,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "JwtSettings.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\JwtSettings.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\JwtSettings.cs",
@@ -620,7 +670,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "AuthorizePermissionAttribute.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
@@ -632,7 +682,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "PermissionRequirment.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\PermissionRequirment.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\PermissionRequirment.cs",
@@ -644,7 +694,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "docker-compose.yml",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\docker-compose.yml",
               "RelativeDocumentMoniker": "Users.Api\\docker-compose.yml",
@@ -656,7 +706,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "RestoreUserCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommand.cs",
@@ -668,7 +718,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "UpdateUserCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommand.cs",
@@ -680,7 +730,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "UpdateUserRequest.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\UpdateUserRequest.cs",
               "RelativeDocumentMoniker": "Users.Application\\Contracts\\UpdateUserRequest.cs",
@@ -692,7 +742,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "DeleteUserCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommand.cs",
@@ -704,31 +754,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "GetUsersByLoginQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
-              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
-              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T16:26:45.388Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "GetUserByLoginQuery.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
-              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
-              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T14:37:36.611Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "GetUsersByAgeQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQueryHandler.cs",
@@ -740,7 +766,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "GetUsersByAgeQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUsersByAge\\GetUsersByAgeQuery.cs",
@@ -752,7 +778,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 34,
               "Title": "RoleRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\RoleRepository.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\RoleRepository.cs",
@@ -764,7 +790,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 35,
               "Title": "PermissionRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\PermissionRepository.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\PermissionRepository.cs",
@@ -776,7 +802,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 36,
               "Title": "UserRoleEntity.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\UserRoleEntity.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\UserRoleEntity.cs",
@@ -788,7 +814,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 37,
               "Title": "UserData.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\UserData.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\UserData.cs",
@@ -800,7 +826,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 38,
               "Title": "RolePermissionEntity.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\RolePermissionEntity.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\RolePermissionEntity.cs",
@@ -812,7 +838,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 39,
               "Title": "PermissionEntity.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\PermissionEntity.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\PermissionEntity.cs",
@@ -824,7 +850,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 41,
               "Title": "UsersDbContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\UsersDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Migrations\\UsersDbContextModelSnapshot.cs",
@@ -836,7 +862,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 40,
               "Title": "20250517081230_AdminSeeded.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\20250517081230_AdminSeeded.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Migrations\\20250517081230_AdminSeeded.cs",
@@ -848,7 +874,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 42,
               "Title": "IPermissionRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IPermissionRepository.cs",
               "RelativeDocumentMoniker": "Users.Domain\\Interfaces\\Repositories\\IPermissionRepository.cs",
@@ -860,7 +886,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 43,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
@@ -872,7 +898,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 44,
               "Title": "IRoleRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IRoleRepository.cs",
               "RelativeDocumentMoniker": "Users.Domain\\Interfaces\\Repositories\\IRoleRepository.cs",
@@ -884,7 +910,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 45,
               "Title": "GetUserByCredentialsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQueryHandler.cs",
@@ -896,7 +922,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 46,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\DTOs\\UserDto.cs",
               "RelativeDocumentMoniker": "Users.Application\\DTOs\\UserDto.cs",
@@ -908,19 +934,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "GetUserByCredentialsQuery.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
-              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
-              "RelativeToolTip": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-17T07:32:55.151Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 47,
               "Title": "GetAllActiveUsersQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetAllActiveUsers\\GetAllActiveUsersQuery.cs",
@@ -932,7 +946,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 48,
               "Title": "RestoreUserCommandValidator.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandValidator.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandValidator.cs",
@@ -944,7 +958,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 49,
               "Title": "ChangeUserPasswordCommandValidator.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandValidator.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandValidator.cs",
@@ -956,7 +970,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 50,
               "Title": "ChangeUserPasswordCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandHandler.cs",
@@ -968,7 +982,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 51,
               "Title": "ChangeUserPasswordCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommand.cs",
@@ -980,7 +994,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 52,
               "Title": "ChangeUserLoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\ChangeUserLoginRequest.cs",
               "RelativeDocumentMoniker": "Users.Application\\Contracts\\ChangeUserLoginRequest.cs",
@@ -992,7 +1006,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 53,
               "Title": "ChangeUserPasswordRequest.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Contracts\\ChangeUserPasswordRequest.cs",
               "RelativeDocumentMoniker": "Users.Application\\Contracts\\ChangeUserPasswordRequest.cs",
@@ -1001,18 +1015,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-17T03:47:44.104Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 53,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "Users.Domain\\Entities\\User.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\User.cs",
-              "RelativeToolTip": "Users.Domain\\Entities\\User.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAgwBEAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T14:06:30.154Z"
             },
             {
               "$type": "Document",
@@ -1395,6 +1397,10 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
               "WhenOpened": "2025-05-07T17:31:02.293Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
             }
           ]
         }

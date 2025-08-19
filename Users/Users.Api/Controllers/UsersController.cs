@@ -127,18 +127,13 @@ namespace Users.Api.Controllers
 
 		[HttpPost("get-my-profile")]
 		[Authorize]
-		public async Task<IActionResult> GetProfile([FromBody] GetUserByCredentialsQuery query)
+		public async Task<IActionResult> GetProfile()
 		{
-			var currentLogin = User.Identity?.Name;
+			var login = User.Identity?.Name;
+			if (string.IsNullOrEmpty(login)) return Unauthorized();
 
-			if (currentLogin == null || !string.Equals(currentLogin, query.Login, StringComparison.OrdinalIgnoreCase))
-			{
-				return Forbid("Access denied: can only get your own profile");
-			}
-
-			var result = await _mediator.Send(query);
-
-			return Ok(result.Value);
+			var result = await _mediator.Send(new GetUserByLoginQuery(login));
+			return Ok(result);
 		}
 
 	}

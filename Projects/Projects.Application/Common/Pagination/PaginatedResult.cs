@@ -8,8 +8,9 @@ namespace Projects.Application.Common.Pagination
 {
 	public class PaginatedResult<T>
 	{
-		public IReadOnlyList<T> Items { get; }
-		public PaginationInfo Pagination { get; }
+		public IReadOnlyList<T> Items { get; init; }
+		public PaginationInfo Pagination { get; init; }
+		public PaginatedResult() { }
 
 		public PaginatedResult(IEnumerable<T> items, int totalItems, int actualPage, int itemsPerPage)
 		{

@@ -1,16 +1,16 @@
 ﻿using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Projects.Application.Common.Notifications;
 using Projects.Application.Interfaces;
 using Projects.Application.Services;
 using Projects.Domain.Entities;
+using Projects.Domain.Events; 
 using Projects.Domain.Exceptions;
 using Projects.Domain.Repositories;
 using Projects.Domain.ValueObjects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Projects.Application.Projects.Commands.CreateProject
@@ -21,7 +21,12 @@ namespace Projects.Application.Projects.Commands.CreateProject
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly ILogger<CreateProjectCommandHandler> _logger;
 		private readonly TagParserService _tagParserService;
-		public CreateProjectCommandHandler(IProjectRepository repository, IUnitOfWork unitOfWork, ILogger<CreateProjectCommandHandler> logger, TagParserService tagParserService)
+
+		public CreateProjectCommandHandler(
+			IProjectRepository repository,
+			IUnitOfWork unitOfWork,
+			ILogger<CreateProjectCommandHandler> logger,
+			TagParserService tagParserService)
 		{
 			_repository = repository;
 			_unitOfWork = unitOfWork;
@@ -48,6 +53,8 @@ namespace Projects.Application.Projects.Commands.CreateProject
 					Category.From(request.Category),
 					tagsResult.Value
 				);
+
+				_logger.LogInformation("CreatedAt for project: {CreatedAt}", project.CreatedAt);
 			}
 			catch (DomainException ex)
 			{
@@ -58,17 +65,18 @@ namespace Projects.Application.Projects.Commands.CreateProject
 			try
 			{
 				await _repository.AddAsync(project, cancellationToken);
+				_unitOfWork.TrackEntity(project);
 				await _unitOfWork.SaveChangesAsync(cancellationToken);
 			}
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "Unexpected error while saving project. Title: {Title}, OwnerId: {OwnerId}", request.Title, request.OwnerId);
-				throw; 
+				throw;
 			}
 
 			_logger.LogInformation("Project created successfully with ID: {ProjectId}", project.Id);
+
 			return Result.Ok(project.Id);
 		}
-
 	}
 }

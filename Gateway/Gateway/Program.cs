@@ -34,7 +34,20 @@ builder.Services.AddAuthentication(options =>
 		RoleClaimType = "role",
 	};
 });
-
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowFrontend", policy =>
+	{
+		policy
+			.WithOrigins(
+				"http://localhost:8080",   // фронтенд внутри Docker при пробросе 8080
+				"http://localhost:5000"    // фронтенд локально через gateway
+			)
+			.AllowAnyHeader()
+			.AllowAnyMethod()
+			.AllowCredentials();
+	});
+});
 builder.Services.AddReverseProxy()
 	.LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
 	.AddTransforms(builderContext =>
@@ -62,7 +75,10 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseRouting();
 
+// вот здесь включаем CORS
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 

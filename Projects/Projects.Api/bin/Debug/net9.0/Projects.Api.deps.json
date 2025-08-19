@@ -8,6 +8,9 @@
     ".NETCoreApp,Version=v9.0": {
       "Projects.Api/1.0.0": {
         "dependencies": {
+          "Hangfire.AspNetCore": "1.8.20",
+          "Hangfire.Core": "1.8.20",
+          "Hangfire.PostgreSql": "1.20.12",
           "Mapster": "7.4.0",
           "MediatR": "12.5.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.6",
@@ -68,6 +71,14 @@
           }
         }
       },
+      "Dapper/2.0.123": {
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.123.33578"
+          }
+        }
+      },
       "FluentResults/4.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "9.0.6",
@@ -97,6 +108,100 @@
           "lib/net8.0/FluentValidation.DependencyInjectionExtensions.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.0.0"
+          }
+        }
+      },
+      "Hangfire.AspNetCore/1.8.20": {
+        "dependencies": {
+          "Hangfire.NetCore": "1.8.20"
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Hangfire.AspNetCore.dll": {
+            "assemblyVersion": "1.8.20.0",
+            "fileVersion": "1.8.20.0"
+          }
+        }
+      },
+      "Hangfire.Core/1.8.20": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Hangfire.Core.dll": {
+            "assemblyVersion": "1.8.20.0",
+            "fileVersion": "1.8.20.0"
+          }
+        },
+        "resources": {
+          "lib/netstandard2.0/ca/Hangfire.Core.resources.dll": {
+            "locale": "ca"
+          },
+          "lib/netstandard2.0/de/Hangfire.Core.resources.dll": {
+            "locale": "de"
+          },
+          "lib/netstandard2.0/es/Hangfire.Core.resources.dll": {
+            "locale": "es"
+          },
+          "lib/netstandard2.0/fa/Hangfire.Core.resources.dll": {
+            "locale": "fa"
+          },
+          "lib/netstandard2.0/fr/Hangfire.Core.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/netstandard2.0/nb/Hangfire.Core.resources.dll": {
+            "locale": "nb"
+          },
+          "lib/netstandard2.0/nl/Hangfire.Core.resources.dll": {
+            "locale": "nl"
+          },
+          "lib/netstandard2.0/pt-BR/Hangfire.Core.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/netstandard2.0/pt-PT/Hangfire.Core.resources.dll": {
+            "locale": "pt-PT"
+          },
+          "lib/netstandard2.0/pt/Hangfire.Core.resources.dll": {
+            "locale": "pt"
+          },
+          "lib/netstandard2.0/sv/Hangfire.Core.resources.dll": {
+            "locale": "sv"
+          },
+          "lib/netstandard2.0/tr-TR/Hangfire.Core.resources.dll": {
+            "locale": "tr-TR"
+          },
+          "lib/netstandard2.0/zh-TW/Hangfire.Core.resources.dll": {
+            "locale": "zh-TW"
+          },
+          "lib/netstandard2.0/zh/Hangfire.Core.resources.dll": {
+            "locale": "zh"
+          }
+        }
+      },
+      "Hangfire.NetCore/1.8.20": {
+        "dependencies": {
+          "Hangfire.Core": "1.8.20",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Hosting.Abstractions": "3.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.6"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Hangfire.NetCore.dll": {
+            "assemblyVersion": "1.8.20.0",
+            "fileVersion": "1.8.20.0"
+          }
+        }
+      },
+      "Hangfire.PostgreSql/1.20.12": {
+        "dependencies": {
+          "Dapper": "2.0.123",
+          "Hangfire.Core": "1.8.20",
+          "Microsoft.CSharp": "4.7.0",
+          "Npgsql": "9.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Hangfire.PostgreSql.dll": {
+            "assemblyVersion": "1.20.12.0",
+            "fileVersion": "1.20.12.0"
           }
         }
       },
@@ -202,7 +307,7 @@
       },
       "Microsoft.AspNetCore.Http.Features/2.3.0": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.6"
+          "Microsoft.Extensions.Primitives": "9.0.7"
         }
       },
       "Microsoft.AspNetCore.OpenApi/9.0.6": {
@@ -512,6 +617,7 @@
           }
         }
       },
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.EntityFrameworkCore/9.0.6": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "9.0.6",
@@ -577,24 +683,24 @@
           "Microsoft.EntityFrameworkCore.Design": "9.0.6"
         }
       },
-      "Microsoft.Extensions.Caching.Abstractions/9.0.6": {
+      "Microsoft.Extensions.Caching.Abstractions/9.0.7": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.6"
+          "Microsoft.Extensions.Primitives": "9.0.7"
         },
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.Caching.Abstractions.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.625.26613"
+            "fileVersion": "9.0.725.31616"
           }
         }
       },
       "Microsoft.Extensions.Caching.Memory/9.0.6": {
         "dependencies": {
-          "Microsoft.Extensions.Caching.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Caching.Abstractions": "9.0.7",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.6",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.6",
           "Microsoft.Extensions.Options": "9.0.6",
-          "Microsoft.Extensions.Primitives": "9.0.6"
+          "Microsoft.Extensions.Primitives": "9.0.7"
         },
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.Caching.Memory.dll": {
@@ -605,7 +711,7 @@
       },
       "Microsoft.Extensions.Caching.StackExchangeRedis/9.0.6": {
         "dependencies": {
-          "Microsoft.Extensions.Caching.Abstractions": "9.0.6",
+          "Microsoft.Extensions.Caching.Abstractions": "9.0.7",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.6",
           "Microsoft.Extensions.Options": "9.0.6",
           "StackExchange.Redis": "2.8.41"
@@ -619,7 +725,7 @@
       },
       "Microsoft.Extensions.Configuration.Abstractions/9.0.6": {
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "9.0.6"
+          "Microsoft.Extensions.Primitives": "9.0.7"
         },
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
@@ -666,6 +772,19 @@
           }
         }
       },
+      "Microsoft.Extensions.FileProviders.Abstractions/3.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "9.0.7"
+        }
+      },
+      "Microsoft.Extensions.Hosting.Abstractions/3.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.6",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.6",
+          "Microsoft.Extensions.FileProviders.Abstractions": "3.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.6"
+        }
+      },
       "Microsoft.Extensions.Logging/9.0.6": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "9.0.6",
@@ -693,7 +812,7 @@
       "Microsoft.Extensions.Options/9.0.6": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.6",
-          "Microsoft.Extensions.Primitives": "9.0.6"
+          "Microsoft.Extensions.Primitives": "9.0.7"
         },
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.Options.dll": {
@@ -708,7 +827,7 @@
           "Microsoft.Extensions.Configuration.Binder": "9.0.6",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.6",
           "Microsoft.Extensions.Options": "9.0.6",
-          "Microsoft.Extensions.Primitives": "9.0.6"
+          "Microsoft.Extensions.Primitives": "9.0.7"
         },
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
@@ -717,11 +836,11 @@
           }
         }
       },
-      "Microsoft.Extensions.Primitives/9.0.6": {
+      "Microsoft.Extensions.Primitives/9.0.7": {
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.Primitives.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.625.26613"
+            "fileVersion": "9.0.725.31616"
           }
         }
       },
@@ -807,6 +926,14 @@
           "lib/net6.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "3.0.0.0",
             "fileVersion": "3.0.0.1"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
           }
         }
       },
@@ -976,14 +1103,7 @@
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "System.Text.Encodings.Web/8.0.0": {},
-      "System.Text.Json/9.0.6": {
-        "runtime": {
-          "lib/net9.0/System.Text.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.625.26613"
-          }
-        }
-      },
+      "System.Text.Json/9.0.6": {},
       "System.Threading.Channels/7.0.0": {},
       "System.Threading.Tasks.Extensions/4.5.4": {},
       "Projects.Application/1.0.0": {
@@ -992,11 +1112,14 @@
           "FluentResults": "4.0.0",
           "FluentValidation": "12.0.0",
           "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+          "Hangfire.Core": "1.8.20",
           "Mapster": "7.4.0",
           "MediatR": "12.5.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
+          "Microsoft.Extensions.Caching.Abstractions": "9.0.7",
           "Microsoft.Extensions.Configuration.Abstractions": "9.0.6",
+          "Newtonsoft.Json": "13.0.3",
           "Projects.Domain": "1.0.0",
           "Projects.Shared": "1.0.0"
         },
@@ -1022,6 +1145,9 @@
         "dependencies": {
           "AWSSDK.Core": "4.0.0.13",
           "AWSSDK.S3": "4.0.3.1",
+          "Hangfire.AspNetCore": "1.8.20",
+          "Hangfire.Core": "1.8.20",
+          "Hangfire.PostgreSql": "1.20.12",
           "Mapster": "7.4.0",
           "Mapster.EFCore": "5.1.1",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.6",
@@ -1106,6 +1232,13 @@
       "path": "awssdk.s3/4.0.3.1",
       "hashPath": "awssdk.s3.4.0.3.1.nupkg.sha512"
     },
+    "Dapper/2.0.123": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "path": "dapper/2.0.123",
+      "hashPath": "dapper.2.0.123.nupkg.sha512"
+    },
     "FluentResults/4.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1126,6 +1259,34 @@
       "sha512": "sha512-B28fBRL1UjhGsBC8fwV6YBZosh+SiU1FxdD7l7p5dGPgRlVI7UnM+Lgzmg+unZtV1Zxzpaw96UY2MYfMaAd8cg==",
       "path": "fluentvalidation.dependencyinjectionextensions/12.0.0",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512"
+    },
+    "Hangfire.AspNetCore/1.8.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OoVxOZanKlnpyAuCAYWKGztQHYw6GTQxQD/W3bfOfFsD+8fYp7FEDKbMEsrrMvAtF+gLiY1HNk9xYjUpNnSxGA==",
+      "path": "hangfire.aspnetcore/1.8.20",
+      "hashPath": "hangfire.aspnetcore.1.8.20.nupkg.sha512"
+    },
+    "Hangfire.Core/1.8.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-PSk0daUo3WCcnh89Bydj/xJ+M7GA+eR4nXXD5v/CIBOTCAx+oa3/DNjqLJPC9QHojsKXt0DO6u87aGxCQZ78Og==",
+      "path": "hangfire.core/1.8.20",
+      "hashPath": "hangfire.core.1.8.20.nupkg.sha512"
+    },
+    "Hangfire.NetCore/1.8.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QCMoUaOokUsScJIyyo9SDVaAOpPIaIpBhGzN7M9GgZI9Kzetd7Y+hmFlQUTpROi7bcASIGoTOPnPoqdNA///Rw==",
+      "path": "hangfire.netcore/1.8.20",
+      "hashPath": "hangfire.netcore.1.8.20.nupkg.sha512"
+    },
+    "Hangfire.PostgreSql/1.20.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KvozigeVgbYSinFmaj5qQWRaBG7ey/S73UP6VLIOPcP1UrZO0/6hSw4jN53TKpWP2UsiMuYONRmQbFDxGAi4ug==",
+      "path": "hangfire.postgresql/1.20.12",
+      "hashPath": "hangfire.postgresql.1.20.12.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -1274,6 +1435,13 @@
       "path": "microsoft.codeanalysis.workspaces.msbuild/4.8.0",
       "hashPath": "microsoft.codeanalysis.workspaces.msbuild.4.8.0.nupkg.sha512"
     },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
+    },
     "Microsoft.EntityFrameworkCore/9.0.6": {
       "type": "package",
       "serviceable": true,
@@ -1316,12 +1484,12 @@
       "path": "microsoft.entityframeworkcore.tools/9.0.6",
       "hashPath": "microsoft.entityframeworkcore.tools.9.0.6.nupkg.sha512"
     },
-    "Microsoft.Extensions.Caching.Abstractions/9.0.6": {
+    "Microsoft.Extensions.Caching.Abstractions/9.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-bL/xQsVNrdVkzjP5yjX4ndkQ03H3+Bk3qPpl+AMCEJR2RkfgAYmoQ/xXffPV7is64+QHShnhA12YAaFmNbfM+A==",
-      "path": "microsoft.extensions.caching.abstractions/9.0.6",
-      "hashPath": "microsoft.extensions.caching.abstractions.9.0.6.nupkg.sha512"
+      "sha512": "sha512-30necCQehcg9lFkMEIE7HczcoYGML8GUH6jlincA18d896fLZM9wl5tpTPJHgzANQE/6KXRLZSWbgevgg5csSw==",
+      "path": "microsoft.extensions.caching.abstractions/9.0.7",
+      "hashPath": "microsoft.extensions.caching.abstractions.9.0.7.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Memory/9.0.6": {
       "type": "package",
@@ -1372,6 +1540,20 @@
       "path": "microsoft.extensions.dependencymodel/9.0.6",
       "hashPath": "microsoft.extensions.dependencymodel.9.0.6.nupkg.sha512"
     },
+    "Microsoft.Extensions.FileProviders.Abstractions/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kahEeykb6FyQytoZNNXuz74X85B4weIEt8Kd+0klK48bkXDWOIHAOvNjlGsPMcS9CL935Te8QGQS83JqCbpdHA==",
+      "path": "microsoft.extensions.fileproviders.abstractions/3.0.0",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.3.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Hosting.Abstractions/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qeDWS5ErmkUN96BdQqpmeCmLk5HJWQ/SPw3ux5v5/Qb0hKZS5wojBMulnBC7JUEiBwg7Ir71Yjf1lFiRT5MdtQ==",
+      "path": "microsoft.extensions.hosting.abstractions/3.0.0",
+      "hashPath": "microsoft.extensions.hosting.abstractions.3.0.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.Logging/9.0.6": {
       "type": "package",
       "serviceable": true,
@@ -1400,12 +1582,12 @@
       "path": "microsoft.extensions.options.configurationextensions/9.0.6",
       "hashPath": "microsoft.extensions.options.configurationextensions.9.0.6.nupkg.sha512"
     },
-    "Microsoft.Extensions.Primitives/9.0.6": {
+    "Microsoft.Extensions.Primitives/9.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BHniU24QV67qp1pJknqYSofAPYGmijGI8D+ci9yfw33iuFdyOeB9lWTg78ThyYLyQwZw3s0vZ36VMb0MqbUuLw==",
-      "path": "microsoft.extensions.primitives/9.0.6",
-      "hashPath": "microsoft.extensions.primitives.9.0.6.nupkg.sha512"
+      "sha512": "sha512-ti/zD9BuuO50IqlvhWQs9GHxkCmoph5BHjGiWKdg2t6Or8XoyAfRJiKag+uvd/fpASnNklfsB01WpZ4fhAe0VQ==",
+      "path": "microsoft.extensions.primitives/9.0.7",
+      "hashPath": "microsoft.extensions.primitives.9.0.7.nupkg.sha512"
     },
     "Microsoft.IdentityModel.Abstractions/8.12.1": {
       "type": "package",
@@ -1469,6 +1651,13 @@
       "sha512": "sha512-YqueG52R/Xej4VVbKuRIodjiAhV0HR/XVbLbNrJhCZnzjnSjgMJ/dCdV0akQQxavX6hp/LC6rqLGLcXeQYU7XA==",
       "path": "mono.texttemplating/3.0.0",
       "hashPath": "mono.texttemplating.3.0.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
     "Npgsql/9.0.3": {
       "type": "package",

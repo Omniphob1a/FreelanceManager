@@ -14,7 +14,7 @@ namespace Projects.Persistence.Mappings
 		public void Register(TypeAdapterConfig config)
 		{
 			config.NewConfig<ProjectAttachmentEntity, ProjectAttachment>()
-				.ConstructUsing(src => new ProjectAttachment(src.FileName, src.Url, src.ProjectId));
+				.MapWith(src => ProjectAttachment.Load(src.Id, src.FileName, src.Url, src.ProjectId));
 
 
 			config.NewConfig<ProjectAttachment, ProjectAttachmentEntity>()

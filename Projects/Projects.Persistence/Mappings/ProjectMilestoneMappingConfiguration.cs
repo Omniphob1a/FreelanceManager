@@ -1,5 +1,5 @@
 ﻿using Mapster;
-using Projects.Domain.Entities.ProjectService.Domain.Entities;
+using Projects.Domain.Entities;
 using Projects.Persistence.Models;
 using System;
 using System.Collections.Generic;
@@ -14,13 +14,14 @@ namespace Projects.Persistence.Mappings
 		public void Register(TypeAdapterConfig config)
 		{
 			config.NewConfig<ProjectMilestoneEntity, ProjectMilestone>()
-				.MapWith(src => ProjectMilestone.Load(src.Title, src.DueDate, src.IsCompleted, src.ProjectId));
+				.MapWith(src => ProjectMilestone.Load(src.Id, src.Title, src.DueDate, src.IsCompleted, src.IsEscalated, src.ProjectId));
 
 			config.NewConfig<ProjectMilestone, ProjectMilestoneEntity>()
 				.Map(dest => dest.Id, src => src.Id)
 				.Map(dest => dest.Title, src => src.Title)
 				.Map(dest => dest.DueDate, src => src.DueDate)
 				.Map(dest => dest.IsCompleted, src => src.IsCompleted)
+				.Map(dest => dest.IsEscalated, src => src.IsEscalated)
 				.Map(dest => dest.ProjectId, src => src.ProjectId);
 		}
 	}

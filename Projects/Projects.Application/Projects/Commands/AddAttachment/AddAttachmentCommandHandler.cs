@@ -64,6 +64,7 @@ public class AddAttachmentCommandHandler : IRequestHandler<AddAttachmentCommand,
 			_logger.LogInformation("Attachment properties before saving: {name}, {ulr}", attachment.FileName, attachment.Url);
 
 			await _repository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 
 			_logger.LogInformation("Attachment {AttachmentId} added to Project {ProjectId}", attachment.Id, project.Id);

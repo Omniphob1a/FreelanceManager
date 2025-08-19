@@ -1,5 +1,7 @@
-﻿
+﻿version: '3.8'
+
 services:
+  # Существующие сервисы (users-api, projects-api, gateway, frontend)
   users-api:
     build:
       context: ./Users
@@ -10,8 +12,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__UsersDbContext=Server=users-db;Port=5432;Database=users;User Id=postgres;Password=123;
+      - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
     depends_on:
       - users-db
+      - hangfire-db
       - redis
 
   projects-api:
@@ -24,10 +28,26 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__ProjectsDbContext=Server=projects-db;Port=5432;Database=projects;User Id=postgres;Password=123;
+      - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
     depends_on:
       - projects-db
+      - hangfire-db
       - redis
 
+
+  # База данных для Hangfire
+  hangfire-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: hangfire
+    ports:
+      - "5434:5432"
+    volumes:
+      - hangfire_pgdata:/var/lib/postgresql/data
+
+  # Существующие сервисы (gateway, frontend, БД, redis)
   gateway:
     build:
       context: ./Gateway
@@ -41,6 +61,17 @@ services:
       - users-api
       - projects-api
       - redis
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - API_URL=http://gateway:8080
+    depends_on:
+      - gateway
 
   users-db:
     image: postgres:16
@@ -72,3 +103,4 @@ services:
 volumes:
   pgdata:
   users_pgdata:
+  hangfire_pgdata:

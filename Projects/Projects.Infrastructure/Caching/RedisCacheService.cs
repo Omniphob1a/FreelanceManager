@@ -1,7 +1,9 @@
-﻿using System.Text.Json;
-using Microsoft.Extensions.Caching.Distributed;
+﻿using Microsoft.Extensions.Caching.Distributed;
 using Projects.Application.Common.Abstractions;
 using StackExchange.Redis;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 
 namespace Projects.Infrastructure.Caching;
 
@@ -9,22 +11,34 @@ public class RedisCacheService : ICacheService
 {
 	private readonly IDistributedCache _redis;
 	private readonly IConnectionMultiplexer _connection;
+	private readonly JsonSerializerOptions _jsonOptions;
+
 
 	public RedisCacheService(IDistributedCache redis, IConnectionMultiplexer connection)
 	{
 		_redis = redis;
 		_connection = connection;
+
+		_jsonOptions = new JsonSerializerOptions
+		{
+			PropertyNameCaseInsensitive = true,
+			IncludeFields = true,
+			ReferenceHandler = ReferenceHandler.Preserve,
+			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+			WriteIndented = false,
+			TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+		};
 	}
 
 	public async Task<T?> GetAsync<T>(string key, CancellationToken ct)
 	{
 		var str = await _redis.GetStringAsync(key, ct);
-		return str is null ? default : JsonSerializer.Deserialize<T>(str);
+		return str is null ? default : JsonSerializer.Deserialize<T>(str, _jsonOptions);
 	}
 
 	public Task SetAsync<T>(string key, T value, TimeSpan ttl, CancellationToken ct)
 		=> _redis.SetStringAsync(key,
-			JsonSerializer.Serialize(value),
+			JsonSerializer.Serialize(value, _jsonOptions),
 			new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = ttl }, ct);
 
 	public Task RemoveAsync(string key, CancellationToken ct)

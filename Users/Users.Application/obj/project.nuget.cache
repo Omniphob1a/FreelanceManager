@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9ba3+YK/GTU=",
+  "dgSpecHash": "5YX+0kl5zEs=",
   "success": true,
   "projectFilePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
   "expectedPackageFiles": [
@@ -115,8 +115,10 @@
     {
       "code": "NU1608",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Версия обнаруженного пакета нарушает ограничение зависимости: MediatR.Extensions.Microsoft.DependencyInjection 11.1.0 требуется MediatR (>= 11.0.0 && < 12.0.0), но в результате разрешения получена версия MediatR 12.5.0.",
+      "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
       "libraryId": "MediatR",
       "targetGraphs": [
         "net9.0"

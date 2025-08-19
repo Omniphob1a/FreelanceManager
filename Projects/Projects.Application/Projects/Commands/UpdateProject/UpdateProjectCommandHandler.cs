@@ -86,6 +86,7 @@ namespace Projects.Application.Projects.Commands.UpdateProject
 			try
 			{
 				await _repository.UpdateAsync(project, ct);
+				_unitOfWork.TrackEntity(project);
 				await _unitOfWork.SaveChangesAsync(ct);
 			}
 			catch (Exception ex)

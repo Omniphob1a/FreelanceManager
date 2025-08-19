@@ -16,6 +16,7 @@ namespace Projects.Persistence.Configurations
 			builder.HasKey(p => p.Id);
 
 			builder.Property(p => p.CreatedAt).IsRequired();
+
 			builder.Property(p => p.ExpiresAt);
 
 			builder.Property(p => p.Category)

@@ -1,5 +1,4 @@
-﻿using Projects.Domain.Entities.ProjectService.Domain.Entities;
-using Projects.Domain.Entities;
+﻿using Projects.Domain.Entities;
 using Projects.Domain.Enums;
 using Projects.Domain.ValueObjects;
 using System;
@@ -22,9 +21,10 @@ namespace Projects.Application.DTOs
 		public int Status { get; set; }
 		public decimal? BudgetMin { get; set; }
 		public decimal? BudgetMax { get; set; }
-		public string Currency { get; set; } = default!;
+		public string CurrencyCode { get; set; } = default!;
 		public List<ProjectMilestoneDto> Milestones { get; set; } = new();
 		public List<ProjectAttachmentDto> Attachments { get; set; } = new();
 		public List<string> Tags { get; set; } = new();
+		public bool IsExpired { get; set; }
 	}
 }

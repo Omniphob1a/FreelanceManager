@@ -1,0 +1,19 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tasks.Persistence.Models;
+
+namespace Tasks.Persistence.Configurations
+{
+	public class CommentEntityConfiguration : IEntityTypeConfiguration<CommentEntity>
+	{
+		public void Configure(EntityTypeBuilder<CommentEntity> builder)
+		{
+			builder.HasKey(x => x.Id);
+		}
+	}
+}

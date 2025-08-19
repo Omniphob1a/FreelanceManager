@@ -1,12 +1,14 @@
 ﻿using FluentResults;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
 using Projects.Application.Common.Abstractions;
 using Projects.Application.Common.Pagination;
 using Projects.Application.DTOs;
 using Projects.Application.Interfaces;
 using Projects.Application.Projects.Queries.GetProjectById;
+using Projects.Domain.Entities;
 using Projects.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -41,18 +43,14 @@ namespace Projects.Application.Projects.Queries.GetProjectsByFilter
 			{
 				var paginatedProjects = await _queryService.GetPaginatedAsync(request.Filter, ct);
 
-				if (!paginatedProjects.Items.Any())
-				{
-					_logger.LogWarning("No projects found for filter {@Filter}", request.Filter);
-					return Result.Fail<PaginatedResult<ProjectDto>>("No projects found");
-				}
+				var items = paginatedProjects.Items ?? new List<Project>();
+				var dtos = _mapper.Map<List<ProjectDto>>(items) ?? new List<ProjectDto>();
 
-				var dtos = _mapper.Map<List<ProjectDto>>(paginatedProjects.Items);
-
-				var paginatedResultDto = new PaginatedResult<ProjectDto>(dtos,
-																		paginatedProjects.Pagination.TotalItems,
-																		paginatedProjects.Pagination.ActualPage,
-																		paginatedProjects.Pagination.ItemsPerPage);
+				var paginatedResultDto = new PaginatedResult<ProjectDto>(
+					dtos,
+					paginatedProjects.Pagination.TotalItems,
+					paginatedProjects.Pagination.ActualPage,
+					paginatedProjects.Pagination.ItemsPerPage);
 
 				_logger.LogInformation("Projects successfully retrieved, total: {Total}", paginatedResultDto.Pagination.TotalItems);
 				return Result.Ok(paginatedResultDto);

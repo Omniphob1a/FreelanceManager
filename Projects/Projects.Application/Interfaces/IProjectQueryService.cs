@@ -15,5 +15,8 @@ namespace Projects.Application.Interfaces
 		Task<Project?> GetByIdAsync(Guid id, CancellationToken ct);
 		Task<Project?> GetByIdWithMilestonesAsync(Guid id, CancellationToken ct);
 		Task<Project?> GetByIdWithAttachmentsAsync(Guid id, CancellationToken ct);
+		Task<Project> GetFullProjectByIdAsync(Guid id, CancellationToken ct);
+		Task<List<Project>> GetOutOfDateProjectsAsync(DateTime thresholdDate);
+		Task<List<Project>> GetAllAsync();
 	}
 }

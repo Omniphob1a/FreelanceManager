@@ -41,7 +41,7 @@ public class GetProjectByIdQueryHandler : IRequestHandler<GetProjectByIdQuery, R
 			var dto = _mapper.Map<ProjectDto>(project);
 			_logger.LogInformation("Project with Id {ProjectId} retrieved successfully", request.Id);
 
-			return Result.Ok(dto);
+		 	return Result.Ok(dto);
 		}
 		catch (Exception ex)
 		{

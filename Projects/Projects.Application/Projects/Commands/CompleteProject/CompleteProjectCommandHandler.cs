@@ -46,9 +46,11 @@ public class CompleteProjectCommandHandler : IRequestHandler<CompleteProjectComm
 				return Result.Ok(); 
 			}
 
+			_logger.LogInformation("Project status before domain method call: {Status}", project.Status);
 			project.Complete();
 
-			await _projectRepository.CompleteAsync(request.ProjectId, ct);
+			await _projectRepository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 			_logger.LogInformation("Project {ProjectId} marked as completed", request.ProjectId);
 

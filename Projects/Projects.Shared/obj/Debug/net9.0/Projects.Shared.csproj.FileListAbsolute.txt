@@ -6,6 +6,7 @@ C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.AssemblyInfoInputs.cache
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.AssemblyInfo.cs
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.sourcelink.json
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.dll
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\refint\Projects.Shared.dll
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Shared\obj\Debug\net9.0\Projects.Shared.pdb

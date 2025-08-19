@@ -1,8 +1,3 @@
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.csproj.AssemblyReference.cache
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.AssemblyInfoInputs.cache
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.AssemblyInfo.cs
-C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.csproj.CoreCompileInputs.cache
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\bin\Debug\net9.0\Projects.Application.deps.json
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\bin\Debug\net9.0\Projects.Application.dll
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\bin\Debug\net9.0\Projects.Application.pdb
@@ -10,6 +5,12 @@ C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\bin\D
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\bin\Debug\net9.0\Projects.Shared.dll
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\bin\Debug\net9.0\Projects.Domain.pdb
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\bin\Debug\net9.0\Projects.Shared.pdb
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.sourcelink.json
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.B93E3F40.Up2Date
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\Projects.Application.dll
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Application\obj\Debug\net9.0\refint\Projects.Application.dll

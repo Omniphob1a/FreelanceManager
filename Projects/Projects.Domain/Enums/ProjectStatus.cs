@@ -11,6 +11,7 @@ namespace Projects.Domain.Enums
 		Draft,
 		Active,
 		Completed,
-		Archived
+		Archived,
+		NeedsReview
 	}
 }

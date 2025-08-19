@@ -1,9 +1,11 @@
 ﻿using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Projects.Application.Common.Notifications;
 using Projects.Application.Interfaces;
 using Projects.Application.Projects.Commands.CompleteProject;
 using Projects.Domain.Enums;
+using Projects.Domain.Events;
 using Projects.Domain.Exceptions;
 using Projects.Domain.Repositories;
 
@@ -15,6 +17,7 @@ public class PublishProjectCommandHandler : IRequestHandler<PublishProjectComman
 	private readonly IProjectQueryService _queryService;
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly ILogger<CompleteProjectCommandHandler> _logger;
+
 
 	public PublishProjectCommandHandler(
 		IProjectRepository projectRepository,
@@ -48,8 +51,8 @@ public class PublishProjectCommandHandler : IRequestHandler<PublishProjectComman
 			}
 
 			project.Publish(request.ExpiresAt);
-
-			await _projectRepository.PublishAsync(request.ProjectId, ct);
+			await _projectRepository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 			_logger.LogInformation("Project {ProjectId} published successfully", request.ProjectId);
 

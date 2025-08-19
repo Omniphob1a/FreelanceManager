@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Projects.Domain.Entities.ProjectService.Domain.Entities;
 
 namespace Projects.Persistence.Repositories
 {
@@ -71,6 +70,7 @@ namespace Projects.Persistence.Repositories
 				_logger.LogDebug("Adding project with ID {ProjectId}", project.Id);
 
 				var projectEntity = _mapper.Map<ProjectEntity>(project);
+				_logger.LogInformation("Project createdAt after mapping: {CreatedAt}", projectEntity.CreatedAt);
 				await _context.Projects.AddAsync(projectEntity, cancellationToken);
 
 				_logger.LogInformation("Project with ID {ProjectId} added successfully", project.Id);
@@ -107,10 +107,46 @@ namespace Projects.Persistence.Repositories
 
 				_mapper.Map(project, existingEntity);
 
-				await SyncAttachmentsAsync(existingEntity, project.Attachments, cancellationToken);
-				await SyncMilestonesAsync(existingEntity, project.Milestones, cancellationToken);
+				if (project.Milestones?.Any() == true)
+				{
+					await _context.Entry(existingEntity)
+						.Collection(p => p.Milestones)
+						.LoadAsync(cancellationToken);
+
+					await SyncMilestonesAsync(existingEntity, project.Milestones, cancellationToken);
+				}
+
+				if (project.Attachments?.Any() == true)
+				{
+					await _context.Entry(existingEntity)
+						.Collection(p => p.Attachments)
+						.LoadAsync(cancellationToken);
+
+					await SyncAttachmentsAsync(existingEntity, project.Attachments, cancellationToken);
+				}
 
 				_logger.LogInformation("Project with ID {ProjectId} updated successfully", project.Id);
+				var entries = _context.ChangeTracker.Entries()
+					.Where(e => e.State != EntityState.Unchanged)
+					.ToList();
+
+				if (!entries.Any())
+				{
+					_logger.LogWarning("No tracked changes detected before SaveChanges");
+				}
+				else
+				{
+					foreach (var entry in entries)
+					{
+						var entityType = entry.Entity.GetType().Name;
+						var state = entry.State;
+						var idProperty = entry.Properties.FirstOrDefault(p => p.Metadata.IsPrimaryKey());
+						var id = idProperty?.CurrentValue?.ToString() ?? "N/A";
+
+						_logger.LogInformation("Tracked entity: {EntityType}, ID: {Id}, State: {State}",
+							entityType, id, state);
+					}
+				}
 			}
 			catch (Exception ex)
 			{
@@ -314,25 +350,6 @@ namespace Projects.Persistence.Repositories
 			}
 		}
 
-
-
-		public async Task ArchiveAsync(Guid projectId, CancellationToken cancellationToken = default)
-		{
-			await UpdateStatusAsync(projectId, ProjectStatus.Archived, cancellationToken);
-		}
-
-		public async Task PublishAsync(Guid projectId, CancellationToken cancellationToken = default)
-		{
-			await UpdateStatusAsync(projectId, ProjectStatus.Active, cancellationToken);
-		}
-
-		public async Task CompleteAsync(Guid projectId, CancellationToken cancellationToken = default)
-		{
-			await UpdateStatusAsync(projectId, ProjectStatus.Completed, cancellationToken);
-		}
-
-
-
 		private async Task SyncAttachmentsAsync(ProjectEntity projectEntity, IEnumerable<ProjectAttachment> attachments,
 			CancellationToken cancellationToken)
 		{
@@ -356,10 +373,7 @@ namespace Projects.Persistence.Repositories
 				{
 					var newEntity = _mapper.Map<ProjectAttachmentEntity>(attachment);
 					newEntity.ProjectId = projectEntity.Id;
-					if (newEntity.Id == Guid.Empty)
-					{
-						newEntity.Id = Guid.NewGuid();
-					}
+					_context.Entry(newEntity).State = EntityState.Added;
 					projectEntity.Attachments.Add(newEntity);
 				}
 			}
@@ -388,10 +402,7 @@ namespace Projects.Persistence.Repositories
 				{
 					var newEntity = _mapper.Map<ProjectMilestoneEntity>(milestone);
 					newEntity.ProjectId = projectEntity.Id;
-					if (newEntity.Id == Guid.Empty)
-					{
-						newEntity.Id = Guid.NewGuid();
-					}
+					_context.Entry(newEntity).State = EntityState.Added;
 					projectEntity.Milestones.Add(newEntity);
 				}
 			}

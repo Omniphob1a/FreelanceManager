@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NoSm23iqhso=",
+  "dgSpecHash": "22Wr2UqIzpQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects.Application.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\volod\\.nuget\\packages\\fluentresults\\4.0.0\\fluentresults.4.0.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.0.0\\fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\hangfire.core\\1.8.20\\hangfire.core.1.8.20.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mediatr\\12.5.0\\mediatr.12.5.0.nupkg.sha512",
@@ -15,13 +16,15 @@
     "C:\\Users\\volod\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.0\\microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.0\\microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\9.0.7\\microsoft.extensions.caching.abstractions.9.0.7.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.6\\microsoft.extensions.configuration.abstractions.9.0.6.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.6\\microsoft.extensions.dependencyinjection.9.0.6.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.6\\microsoft.extensions.dependencyinjection.abstractions.9.0.6.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.logging\\9.0.6\\microsoft.extensions.logging.9.0.6.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.6\\microsoft.extensions.logging.abstractions.9.0.6.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.options\\9.0.6\\microsoft.extensions.options.9.0.6.nupkg.sha512",
-    "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.6\\microsoft.extensions.primitives.9.0.6.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.7\\microsoft.extensions.primitives.9.0.7.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],

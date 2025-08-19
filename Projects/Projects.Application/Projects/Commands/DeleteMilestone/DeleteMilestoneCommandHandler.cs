@@ -55,6 +55,7 @@ public class DeleteMilestoneCommandHandler : IRequestHandler<DeleteMilestoneComm
 			project.DeleteMilestone(milestone);
 
 			await _projectRepository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 			_logger.LogInformation("Milestone {MilestoneId} removed from Project {ProjectId}", milestone.Id, project.Id);
 

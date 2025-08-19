@@ -20,5 +20,18 @@ namespace Projects.Domain.Entities
 			FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
 			Url = url ?? throw new ArgumentNullException(nameof(url));
 		}
+		
+		private ProjectAttachment(Guid id, string fileName, string url, Guid projectId)
+		{
+			Id = id;
+			FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
+			Url = url ?? throw new ArgumentNullException(nameof(url));
+			ProjectId = projectId;
+		}
+
+		public static ProjectAttachment Load(Guid id, string fileName, string url, Guid projectId)
+		{
+			return new ProjectAttachment(id, fileName, url, projectId);
+		}
 	}
 }

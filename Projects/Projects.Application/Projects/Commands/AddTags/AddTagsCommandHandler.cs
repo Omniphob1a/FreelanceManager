@@ -57,6 +57,7 @@ public class AddTagsCommandHandler : IRequestHandler<AddTagsCommand, Result>
 			}
 
 			await _projectRepository.UpdateAsync(project, ct);
+			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);
 			_logger.LogInformation("Tags [{Tags}] added to Project {ProjectId}", string.Join(", ", tagsResult.Value), project.Id);
 

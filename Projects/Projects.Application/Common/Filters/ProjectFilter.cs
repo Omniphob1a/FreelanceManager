@@ -34,6 +34,9 @@ namespace Projects.Application.Common.Filters
 		public int Page { get; set; } = 1;
 		public int PageSize { get; set; } = 10;
 
+		public bool IncludeMilestones { get; set; }
+		public bool IncludeAttachments { get; set; }
+
 		public string ToCacheKey()
 		{
 			var builder = new StringBuilder();
@@ -56,6 +59,9 @@ namespace Projects.Application.Common.Filters
 			builder.Append($"desc={(Desc ? "1" : "0")}|");
 			builder.Append($"page={Page}|");
 			builder.Append($"size={PageSize}");
+
+			builder.Append($"includeMilestones={(IncludeMilestones ? "1" : "0")}|");
+			builder.Append($"includeAttachments={(IncludeAttachments ? "1" : "0")}");
 
 			return builder.ToString();
 		}

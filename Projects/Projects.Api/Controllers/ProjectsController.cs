@@ -23,12 +23,14 @@ using Projects.Application.Projects.Commands.DeleteTags;
 using Projects.Application.Projects.Commands.PublishProject;
 using Projects.Application.Projects.Commands.RescheduleMilestone;
 using Projects.Application.Projects.Commands.UpdateProject;
+using Projects.Application.Projects.Queries.GetFullProjectById;
 using Projects.Application.Projects.Queries.GetProjectById;
 using Projects.Application.Projects.Queries.GetProjectsByFilter;
 using Projects.Shared.Extensions;
 
 namespace Projects.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ProjectsController : ControllerBase
@@ -48,7 +50,6 @@ public class ProjectsController : ControllerBase
 	}
 
 	[HttpPost]
-	[Authorize]
 	[ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<IActionResult> CreateProject([FromBody] CreateProjectRequest request, CancellationToken ct)
@@ -78,20 +79,44 @@ public class ProjectsController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> GetProjects([FromQuery] ProjectFilter filter, CancellationToken ct)
 	{
-		_logger.LogInformation("Fetching projects with filter {@Filter}", filter);
-
-		var result = await _mediator.Send(new GetProjectsByFilterQuery(filter), ct);
-
-		if (result.IsFailed)
+		try
 		{
-			var errors = result.Errors.Select(e => e.Message);
-			_logger.LogWarning("Projects not found. Errors: {Errors}", errors);
-			return NotFound(new { errors });
-		}
+			filter ??= new ProjectFilter();
+			filter.OwnerId ??= _currentUserService.UserId;
 
-		_logger.LogInformation("Projects fetched successfully. Total: {Total}", result.Value.Pagination.TotalItems);
-		return Ok(result.Value);
+			if (filter.Page < 1) filter.Page = 1;
+			if (filter.PageSize > 100) filter.PageSize = 100;
+
+			var result = await _mediator.Send(new GetProjectsByFilterQuery(filter), ct);
+
+			if (result.IsFailed)
+			{
+				return BadRequest(result.Errors);
+			}
+
+			if (result.Value == null)
+			{
+				_logger.LogWarning("Result value is null");
+				return Ok(new PaginatedResult<ProjectDto>(
+					new List<ProjectDto>(),
+					0,
+					filter.Page,
+					filter.PageSize
+				));
+			}
+
+			_logger.LogInformation("Projects fetched. Total: {Total}",
+				result.Value.Pagination.TotalItems);
+
+			return Ok(result.Value);
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Unhandled exception in GetProjects");
+			return StatusCode(500, "Internal server error");
+		}
 	}
+
 
 	[HttpGet("{projectId:guid}")]
 	[ProducesResponseType(typeof(ProjectDto), StatusCodes.Status200OK)]
@@ -100,7 +125,7 @@ public class ProjectsController : ControllerBase
 	{
 		_logger.LogInformation("Fetching project with ID: {ProjectId}", projectId);
 
-		var result = await _mediator.Send(new GetProjectByIdQuery(projectId), ct);
+		var result = await _mediator.Send(new GetFullProjectByIdQuery(projectId), ct);
 
 		if (result.IsFailed)
 		{
@@ -404,7 +429,7 @@ public class ProjectsController : ControllerBase
 			return BadRequest(new { errors = new[] { "New due date must be in the future." } });
 		}
 
-		var result = await _mediator.Send(new RescheduleMilestoneCommand(projectId, request.MilestoneId, request.NewDueDate), ct);
+		var result = await _mediator.Send(new RescheduleSingleMilestoneCommand(projectId, request.MilestoneId, request.NewDueDate), ct);
 
 		if (result.IsFailed)
 		{

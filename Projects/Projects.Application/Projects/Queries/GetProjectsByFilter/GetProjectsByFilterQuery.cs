@@ -16,7 +16,9 @@ namespace Projects.Application.Projects.Queries.GetProjectsByFilter
 	public record GetProjectsByFilterQuery(ProjectFilter Filter) : IRequest<Result<PaginatedResult<ProjectDto>>>,
 		ICacheableQuery
 	{
-		public string CacheKey => $"project:list:filtered:{Filter.ToCacheKey()}";
-		public TimeSpan Ttl => TimeSpan.FromMinutes(2);
+		public string CacheKey => $"project:list:filtered:owner:{Filter.OwnerId}:{Filter.ToCacheKey()}";
+		public bool BypassCache => false;
+		public int SlidingExpirationInMinutes => 2;
+		public int AbsoluteExpirationInMinutes => 5;
 	}
 }
