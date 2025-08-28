@@ -373,6 +373,9 @@
               },
               "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Projects.Domain.csproj": {
                 "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Projects.Domain.csproj"
+              },
+              "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Projects.Persistence.csproj": {
+                "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Projects.Persistence.csproj"
               }
             }
           }
@@ -400,6 +403,10 @@
             "AWSSDK.S3": {
               "target": "Package",
               "version": "[4.0.3.1, )"
+            },
+            "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.11.1, )"
             },
             "Hangfire.AspNetCore": {
               "target": "Package",

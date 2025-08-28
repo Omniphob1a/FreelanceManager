@@ -11,6 +11,7 @@ using Tasks.Application.DTOs;
 using Tasks.Application.Interfaces;
 using Tasks.Application.ProjectTasks.Commands.UpdateProjectTask;
 using Tasks.Domain.Aggregate.Root;
+using Tasks.Domain.Interfaces;
 
 namespace Tasks.Application.ProjectTasks.Queries.GetProjectTaskById
 {
@@ -18,15 +19,18 @@ namespace Tasks.Application.ProjectTasks.Queries.GetProjectTaskById
 	{
 		private readonly IProjectTaskQueryService _projectTaskQueryService;
 		private readonly ILogger<UpdateProjectTaskCommandHandler> _logger;
+		private readonly IProjectTaskRepository _projectTaskRepository;
 		private readonly IMapper _mapper;
 
 		public GetProjectTaskByIdQueryHandler(
 			IProjectTaskQueryService projectTaskQueryService,
 			ILogger<UpdateProjectTaskCommandHandler> logger,
+			IProjectTaskRepository projectTaskRepository,
 			IMapper mapper)
 		{
 			_projectTaskQueryService = projectTaskQueryService;
 			_logger = logger;
+			_projectTaskRepository = projectTaskRepository;
 			_mapper = mapper;
 		}
 
@@ -40,7 +44,7 @@ namespace Tasks.Application.ProjectTasks.Queries.GetProjectTaskById
 				return Result.Fail("TaskId is required.");
 			}
 
-			ProjectTask task = await _projectTaskQueryService.GetByIdAsync(request.TaskId, cancellationToken);
+			ProjectTask task = await _projectTaskQueryService.GetProjectTaskWithCollectionsById(request.TaskId, request.Includes, cancellationToken);
 
 			try
 			{

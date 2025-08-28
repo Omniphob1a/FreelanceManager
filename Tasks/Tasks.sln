@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasks.Api", "Tasks\Tasks.Api.csproj", "{E63097E7-700C-4486-AC31-11EECFF21AA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasks.Api", "Tasks.Api\Tasks.Api.csproj", "{E63097E7-700C-4486-AC31-11EECFF21AA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasks.Domain", "Tasks.Domain\Tasks.Domain.csproj", "{B25A147C-7E3B-45E2-B0A2-983232889BEA}"
 EndProject

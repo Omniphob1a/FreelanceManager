@@ -24,10 +24,10 @@ namespace Tasks.Application.ProjectTasks.Commands.CompleteProjectTask
 			ILogger<CompleteProjectTaskCommandHandler> logger,
 			IUnitOfWork unitOfWork)
 		{
-			_projectTaskRepository = projectTaskRepository ?? throw new ArgumentNullException(nameof(projectTaskRepository));
-			_projectTaskQueryService = projectTaskQueryService ?? throw new ArgumentNullException(nameof(projectTaskQueryService));
-			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
-			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+			_projectTaskRepository = projectTaskRepository;
+			_projectTaskQueryService = projectTaskQueryService;
+			_logger = logger;
+			_unitOfWork = unitOfWork;
 		}
 
 		public async Task<Result<Unit>> Handle(CompleteProjectTaskCommand request, CancellationToken cancellationToken)
@@ -40,7 +40,7 @@ namespace Tasks.Application.ProjectTasks.Commands.CompleteProjectTask
 				return Result.Fail<Unit>("TaskId is required.");
 			}
 
-			ProjectTask task = await _projectTaskQueryService.GetByIdAsync(request.TaskId, cancellationToken);
+			ProjectTask task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 			if (task is null)
 			{
 				_logger.LogWarning("Task {TaskId} not found for completion", request.TaskId);
@@ -49,7 +49,7 @@ namespace Tasks.Application.ProjectTasks.Commands.CompleteProjectTask
 
 			try
 			{
-				task.Complete();
+				task.MarkCompleted();
 			}
 			catch (DomainException dex)
 			{

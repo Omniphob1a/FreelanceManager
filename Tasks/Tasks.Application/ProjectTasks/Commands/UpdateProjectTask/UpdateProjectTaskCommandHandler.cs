@@ -42,7 +42,7 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 				return Result.Fail<Unit>("TaskId is required.");
 			}
 
-			ProjectTask task = await _projectTaskQueryService.GetByIdAsync(request.TaskId, cancellationToken);
+			ProjectTask task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 			if (task is null)
 			{
 				_logger.LogWarning("Task {TaskId} not found for update", request.TaskId);

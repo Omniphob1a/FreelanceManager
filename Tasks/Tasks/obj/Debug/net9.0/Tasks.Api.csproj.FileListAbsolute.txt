@@ -1,9 +1,0 @@
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.csproj.AssemblyReference.cache
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\rpswa.dswa.cache.json
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.AssemblyInfoInputs.cache
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.AssemblyInfo.cs
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.csproj.CoreCompileInputs.cache
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks\obj\Debug\net9.0\Tasks.Api.sourcelink.json

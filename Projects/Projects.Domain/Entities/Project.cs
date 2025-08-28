@@ -27,6 +27,8 @@ public class Project : EntityBase
 
 	private readonly List<Tag> _tags = new();
 	public IReadOnlyCollection<Tag> Tags => _tags.AsReadOnly();
+	private readonly List<ProjectMember> _members = new();
+	public IReadOnlyCollection<ProjectMember> Members => _members.AsReadOnly();
 
 	public static Project CreateDraft(
 		string title,
@@ -62,6 +64,7 @@ public class Project : EntityBase
 		List<Tag> tags,
 		List<ProjectMilestone> milestones,
 		List<ProjectAttachment> attachments,
+		List<ProjectMember> members,
 		ProjectStatus status,
 		DateTime? expiresAt,
 		DateTime createdAt)
@@ -70,6 +73,7 @@ public class Project : EntityBase
 
 		project._milestones.AddRange(milestones ?? []);
 		project._attachments.AddRange(attachments ?? []);
+		project._members.AddRange(members ?? []);
 
 		project.Status = status;
 		project.ExpiresAt = expiresAt;
@@ -158,6 +162,45 @@ public class Project : EntityBase
 
 		Status = ProjectStatus.Archived;
 		AddDomainEvent(new ProjectArchivedDomainEvent(Id));
+	}
+
+	public void AddMember(ProjectMember member)
+	{
+		if (member is null)
+			throw new ArgumentNullException(nameof(member));
+
+		if (_members.Any(m => m.UserId == member.UserId))
+			throw new InvalidOperationException("User is already a member of this project.");
+
+		_members.Add(member);
+		AddDomainEvent(new ProjectMemberAddedDomainEvent(Id, member.Id, member.UserId, member.Role));
+	}
+
+	public void RemoveMember(Guid memberId)
+	{
+		var member = _members.FirstOrDefault(m => m.Id == memberId);
+		if (member is null)
+			throw new ArgumentException("Member not found.", nameof(memberId));
+
+		_members.Remove(member);
+		AddDomainEvent(new ProjectMemberRemovedDomainEvent(Id, member.Id, member.UserId));
+	}
+
+	public void ChangeMemberRole(Guid memberId, string newRole)
+	{
+		var member = _members.FirstOrDefault(m => m.Id == memberId);
+		if (member is null)
+			throw new ArgumentException("Member not found.", nameof(memberId));
+
+		if (string.IsNullOrWhiteSpace(newRole))
+			throw new ArgumentNullException(nameof(newRole));
+
+		var updated = ProjectMember.Load(member.Id, member.UserId, newRole, member.ProjectId, member.AddedAt);
+
+		_members.Remove(member);
+		_members.Add(updated);
+
+		AddDomainEvent(new ProjectMemberRoleChangedDomainEvent(Id, updated.Id, updated.UserId, newRole));
 	}
 
 	public void AddMilestone(ProjectMilestone milestone)

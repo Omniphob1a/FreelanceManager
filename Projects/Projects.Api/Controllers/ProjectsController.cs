@@ -11,6 +11,7 @@ using Projects.Application.DTOs;
 using Projects.Application.Interfaces;
 using Projects.Application.Projects.Commands;
 using Projects.Application.Projects.Commands.AddAttachment;
+using Projects.Application.Projects.Commands.AddMember;
 using Projects.Application.Projects.Commands.AddMilestone;
 using Projects.Application.Projects.Commands.AddTag;
 using Projects.Application.Projects.Commands.ArchiveProject;
@@ -21,10 +22,12 @@ using Projects.Application.Projects.Commands.DeleteAttachment;
 using Projects.Application.Projects.Commands.DeleteProject;
 using Projects.Application.Projects.Commands.DeleteTags;
 using Projects.Application.Projects.Commands.PublishProject;
+using Projects.Application.Projects.Commands.RemoveMember;
 using Projects.Application.Projects.Commands.RescheduleMilestone;
 using Projects.Application.Projects.Commands.UpdateProject;
 using Projects.Application.Projects.Queries.GetFullProjectById;
 using Projects.Application.Projects.Queries.GetProjectById;
+using Projects.Application.Projects.Queries.GetProjectMembers;
 using Projects.Application.Projects.Queries.GetProjectsByFilter;
 using Projects.Shared.Extensions;
 
@@ -92,17 +95,6 @@ public class ProjectsController : ControllerBase
 			if (result.IsFailed)
 			{
 				return BadRequest(result.Errors);
-			}
-
-			if (result.Value == null)
-			{
-				_logger.LogWarning("Result value is null");
-				return Ok(new PaginatedResult<ProjectDto>(
-					new List<ProjectDto>(),
-					0,
-					filter.Page,
-					filter.PageSize
-				));
 			}
 
 			_logger.LogInformation("Projects fetched. Total: {Total}",
@@ -352,6 +344,52 @@ public class ProjectsController : ControllerBase
 		return Ok(result.Value);
 	}
 
+	[HttpPatch("{projectId:guid}/add-member")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> AddMember(Guid projectId, [FromBody] AddMemberRequest request, CancellationToken ct)
+	{
+		_logger.LogInformation("Received request to add member to project with ID: {ProjectId}", projectId);
+
+		var result = await _mediator.Send(new AddMemberCommand(projectId, request.Email, request.Role), ct);
+
+		if (result.IsFailed)
+		{
+			var errors = result.Errors.Select(e => e.Message).ToList();
+
+			_logger.LogWarning("Failed to add member to project {ProjectId}. Errors: {Errors}", projectId, errors);
+			return BadRequest(new { errors });
+		}
+
+		_logger.LogInformation("Member to project {ProjectId} successfully added", projectId);
+		return Ok(result.Value);
+	}
+
+	[HttpPatch("{projectId:guid}/remove-member")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<IActionResult> RemoveMember(Guid projectId, [FromBody] RemoveMemberRequest request, CancellationToken ct)
+	{
+		_logger.LogInformation("Received request to delete milestone from project with ID: {ProjectId}", projectId);
+
+		var result = await _mediator.Send(new RemoveMemberCommand(projectId, request.Email), ct);
+
+		if (result.IsFailed)
+		{
+			var errors = result.Errors.Select(e => e.Message).ToList();
+			if (errors.Any(e => e.Contains("not found", StringComparison.OrdinalIgnoreCase)))
+			{
+				_logger.LogWarning("Project with ID {ProjectId} not found", projectId);
+				return NotFound(new { errors });
+			}
+			_logger.LogWarning("Failed to remove member from project {ProjectId}. Errors: {Errors}", projectId, errors);
+			return BadRequest(new { errors });
+		}
+
+		_logger.LogInformation("Member from project {ProjectId} successfully deleted", projectId);
+		return Ok();
+	}
+
 	[HttpPatch("{projectId:guid}/delete-milestone")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -494,5 +532,37 @@ public class ProjectsController : ControllerBase
 
 		_logger.LogInformation("Tags from project {ProjectId} successfully deleted", projectId);
 		return Ok();
+	}
+
+	[HttpGet("{projectId:guid}/members")]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	[ProducesResponseType(typeof(List<ProjectMemberDto>), StatusCodes.Status200OK)]
+	public async Task<IActionResult> GetMembers(Guid projectId, CancellationToken ct)
+	{
+		_logger.LogDebug("HTTP GET members for project {ProjectId}", projectId);
+
+		var result = await _mediator.Send(new GetProjectMembersQuery(projectId), ct);
+
+		if (result.IsFailed)
+		{
+			var errorMessage = result.Errors.FirstOrDefault()?.Message ?? "Unknown error";
+			_logger.LogWarning("Failed to get members for project {ProjectId}: {Error}", projectId, errorMessage);
+
+			if (errorMessage.Contains("not found", StringComparison.OrdinalIgnoreCase))
+			{
+				return NotFound(new { Message = errorMessage });
+			}
+
+			return BadRequest(new { Message = errorMessage });
+		}
+
+		if (result.Value == null || !result.Value.Any())
+		{
+			_logger.LogInformation("Project {ProjectId} has no members", projectId);
+			return Ok(new List<ProjectMemberDto>()); 
+		}
+
+		_logger.LogInformation("Returning {Count} members for project {ProjectId}", result.Value.Count, projectId);
+		return Ok(result.Value);
 	}
 }

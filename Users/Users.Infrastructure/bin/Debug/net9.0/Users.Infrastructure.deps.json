@@ -1587,14 +1587,7 @@
           "System.Text.Encoding": "4.3.0"
         }
       },
-      "System.Text.Json/9.0.6": {
-        "runtime": {
-          "lib/net9.0/System.Text.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.625.26613"
-          }
-        }
-      },
+      "System.Text.Json/9.0.6": {},
       "System.Text.RegularExpressions/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -1697,6 +1690,7 @@
           "FluentValidation": "12.0.0",
           "FluentValidation.AspNetCore": "11.3.1",
           "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+          "Mapster": "7.4.0",
           "MediatR": "12.5.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.1.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.6",

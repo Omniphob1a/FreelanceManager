@@ -30,7 +30,8 @@ namespace Projects.Persistence.Mappings
 				.Map(dest => dest.ExpiresAt, src => src.ExpiresAt)
 				.Map(dest => dest.Tags, src => string.Join(",", src.Tags.Select(t => t.Value)))
 				.Ignore(dest => dest.Milestones)
-				.Ignore(dest => dest.Attachments);
+				.Ignore(dest => dest.Attachments)
+				.Ignore(dest => dest.Members);
 		}
 
 		private static Project MapToDomain(ProjectEntity src, TypeAdapterConfig config)
@@ -44,6 +45,7 @@ namespace Projects.Persistence.Mappings
 
 			var milestones = src.Milestones?.Adapt<List<ProjectMilestone>>(config) ?? new();
 			var attachments = src.Attachments?.Adapt<List<ProjectAttachment>>(config) ?? new();
+			var members = src.Members?.Adapt<List<ProjectMember>>(config) ?? new();
 			var status = (ProjectStatus)src.Status;
 
 			var project = Project.Restore(
@@ -56,6 +58,7 @@ namespace Projects.Persistence.Mappings
 				tags: tags,
 				milestones: milestones,
 				attachments: attachments,
+				members: members,
 				status: status,
 				expiresAt: src.ExpiresAt,
 				createdAt: src.CreatedAt

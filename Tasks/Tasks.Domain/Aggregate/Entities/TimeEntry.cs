@@ -15,7 +15,7 @@ namespace Tasks.Domain.Aggregate.Entities
 		public TimeRange Period { get; private set; }
 		public string? Description { get; private set; }
 		public bool IsBillable { get; private set; }
-		public Money? HourlyRateSnapshot { get; private set; }
+		public Money? HourlyRateSnapshot { get; private set; } 
 		public DateTime CreatedAt { get; private set; }
 
 

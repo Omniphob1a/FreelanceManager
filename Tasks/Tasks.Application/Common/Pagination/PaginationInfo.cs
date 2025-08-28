@@ -8,16 +8,18 @@ namespace Tasks.Application.Common.Pagination
 {
 	public class PaginationInfo
 	{
-		public int TotalItems { get; }
-		public int ItemsPerPage { get; }
-		public int ActualPage { get; }
+		public int TotalItems { get; set; }
+		public int ItemsPerPage { get; set; }
+		public int ActualPage { get; set; } 
 		public int TotalPages => (int)Math.Ceiling((double)TotalItems / ItemsPerPage);
+
+		public PaginationInfo() { }
 
 		public PaginationInfo(int totalItems, int itemsPerPage, int actualPage)
 		{
-			TotalItems = totalItems;
-			ItemsPerPage = itemsPerPage;
-			ActualPage = actualPage;
+			ActualPage = actualPage < 1 ? 1 : actualPage;
+			ItemsPerPage = itemsPerPage is < 1 ? 10 : (itemsPerPage > 100 ? 100 : itemsPerPage);
+			TotalItems = totalItems < 0 ? 0 : totalItems;
 		}
 	}
 }

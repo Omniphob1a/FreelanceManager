@@ -18,3 +18,5 @@ C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Infrastructure\ob
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Infrastructure\obj\Debug\net9.0\refint\Projects.Infrastructure.dll
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Infrastructure\obj\Debug\net9.0\Projects.Infrastructure.pdb
 C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Infrastructure\obj\Debug\net9.0\ref\Projects.Infrastructure.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Infrastructure\bin\Debug\net9.0\Projects.Persistence.dll
+C:\Users\volod\source\repos\FreelanceManager\Projects\Projects.Infrastructure\bin\Debug\net9.0\Projects.Persistence.pdb

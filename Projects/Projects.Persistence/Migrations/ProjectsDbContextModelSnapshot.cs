@@ -22,6 +22,42 @@ namespace Projects.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Projects.Persistence.Models.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastError")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("OccurredAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Payload")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Processed")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("ProcessedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("RetryCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Topic")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OutboxMessages");
+                });
+
             modelBuilder.Entity("Projects.Persistence.Models.ProjectAttachmentEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -106,6 +142,32 @@ namespace Projects.Persistence.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("Projects.Persistence.Models.ProjectMemberEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectMembers");
+                });
+
             modelBuilder.Entity("Projects.Persistence.Models.ProjectMilestoneEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -144,6 +206,15 @@ namespace Projects.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Projects.Persistence.Models.ProjectMemberEntity", b =>
+                {
+                    b.HasOne("Projects.Persistence.Models.ProjectEntity", null)
+                        .WithMany("Members")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Projects.Persistence.Models.ProjectMilestoneEntity", b =>
                 {
                     b.HasOne("Projects.Persistence.Models.ProjectEntity", null)
@@ -156,6 +227,8 @@ namespace Projects.Persistence.Migrations
             modelBuilder.Entity("Projects.Persistence.Models.ProjectEntity", b =>
                 {
                     b.Navigation("Attachments");
+
+                    b.Navigation("Members");
 
                     b.Navigation("Milestones");
                 });

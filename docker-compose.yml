@@ -34,6 +34,21 @@ services:
       - hangfire-db
       - redis
 
+  tasks-api:
+    build:
+      context: ./Tasks
+      dockerfile: Tasks.Api/Dockerfile
+    ports:
+      - "5003:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__ProjectTasksDbContext=Server=projects-db;Port=5432;Database=tasks;User Id=postgres;Password=123;
+    depends_on:
+      - projects-db
+      - hangfire-db
+      - redis
+
 
   # База данных для Hangfire
   hangfire-db:
@@ -47,7 +62,6 @@ services:
     volumes:
       - hangfire_pgdata:/var/lib/postgresql/data
 
-  # Существующие сервисы (gateway, frontend, БД, redis)
   gateway:
     build:
       context: ./Gateway
@@ -60,6 +74,7 @@ services:
     depends_on:
       - users-api
       - projects-api
+      - tasks-api
       - redis
 
   frontend:

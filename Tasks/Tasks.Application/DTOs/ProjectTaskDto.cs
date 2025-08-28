@@ -26,7 +26,6 @@ namespace Tasks.Application.DTOs
 
 		public DateTime CreatedAt { get; set; }
 		public DateTime UpdatedAt { get; set; }
-		public Guid CreatedBy { get; set; }
 
 		public List<TimeEntryDto> TimeEntries { get; set; } = new();
 		public List<CommentDto> Comments { get; set; } = new();

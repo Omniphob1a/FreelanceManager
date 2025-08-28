@@ -1,0 +1,25 @@
+﻿using FluentResults;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tasks.Application.Common.Filters;
+using Tasks.Application.Common.Pagination;
+using Tasks.Application.DTOs;
+using Tasks.Application.Interfaces;
+
+namespace Tasks.Application.ProjectTasks.Queries.GetTasks
+{
+	public record GetProjectTasksQuery(TaskFilter filter, PaginationInfo paginationInfo) : IRequest<Result<PaginatedResult<TaskListItemDto>>>, ICacheableQuery
+	{
+		public bool BypassCache => false;
+
+		public string CacheKey => $"task:list:filtered:reporterId:{filter.ReporterId}:{filter.ToCacheKey()}";
+
+		public int SlidingExpirationInMinutes => 2;
+
+		public int AbsoluteExpirationInMinutes => 5;
+	}
+}

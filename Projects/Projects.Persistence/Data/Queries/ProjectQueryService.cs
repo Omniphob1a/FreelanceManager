@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Projects.Application.Common.Filters;
 using Projects.Application.Common.Pagination;
+using Projects.Application.DTOs;
 using Projects.Application.Interfaces;
 using Projects.Domain.Entities;
 using Projects.Persistence.Data;
@@ -217,6 +218,66 @@ public class ProjectQueryService : IProjectQueryService
 		{
 			_logger.LogError(ex, "Failed to get full project by Id: {ProjectId}", id);
 			throw;
+		}
+	}
+
+	public async Task<Project?> GetByIdWithMembersAsync(Guid id, CancellationToken ct)
+	{
+		_logger.LogDebug("Getting project by Id with members: {ProjectId}", id);
+
+		try
+		{
+			var spec = new ProjectByIdWithMembersSpec(id);
+			var entity = await _context.Projects
+				.WithSpecification(spec)
+				.FirstOrDefaultAsync(ct);
+
+			if (entity is null)
+			{
+				_logger.LogWarning("Project with Id {ProjectId} not found (with members)", id);
+				return null;
+			}
+
+			return _mapper.Map<Project>(entity);
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Failed to get project with members by Id: {ProjectId}", id);
+			throw;
+		}
+	}
+
+	public async Task<List<ProjectMemberDto>> GetMembersAsync(Guid projectId, CancellationToken ct)
+	{
+		_logger.LogDebug("Getting members for project {ProjectId}", projectId);
+
+		try
+		{
+			var project = await _context.Projects
+				.AsNoTracking()
+				.Include(p => p.Members)
+				.FirstOrDefaultAsync(p => p.Id == projectId, ct);
+
+			if (project is null)
+			{
+				_logger.LogWarning("Project {ProjectId} not found when trying to get members", projectId);
+				return new List<ProjectMemberDto>();
+			}
+
+			if (project.Members is null || !project.Members.Any())
+			{
+				_logger.LogInformation("No members found for project {ProjectId}", projectId);
+				return new List<ProjectMemberDto>();
+			}
+
+			var members = _mapper.Map<List<ProjectMemberDto>>(project.Members);
+
+			return members ?? new List<ProjectMemberDto>();
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Failed to get members for project {ProjectId}", projectId);
+			return new List<ProjectMemberDto>();
 		}
 	}
 }

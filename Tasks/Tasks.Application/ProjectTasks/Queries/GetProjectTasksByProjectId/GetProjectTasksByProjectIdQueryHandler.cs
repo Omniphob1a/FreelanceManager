@@ -42,16 +42,15 @@ namespace Tasks.Application.ProjectTasks.Queries.GetProjectTasksByProjectId
 
 			try
 			{
-				var paginatedTasks = await _projectTaskQueryService.GetByProjectIdAsync(request.ProjectId, cancellationToken);
+				var paginatedTasks = await _projectTaskQueryService.GetByProjectIdAsync(request.ProjectId, request.filter, request.paginationInfo, cancellationToken);
 
 				var items = paginatedTasks.Items;
 				var dtos = _mapper.Map<List<ProjectTaskDto>>(items);
 
 				var paginatedResultDto = new PaginatedResult<ProjectTaskDto>(
-						dtos,
-						paginatedTasks.Pagination.TotalItems,
-						paginatedTasks.Pagination.ActualPage,
-						paginatedTasks.Pagination.ItemsPerPage);
+					dtos,
+					request.paginationInfo
+				);
 
 				_logger.LogInformation("Tasks successfully retrieved, total: {Total}", paginatedResultDto.Pagination.TotalItems);
 				return Result.Ok(paginatedResultDto);

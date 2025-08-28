@@ -21,6 +21,7 @@ namespace Projects.Persistence.Models
 		public string CurrencyCode { get; set; } = default!;
 		public List<ProjectMilestoneEntity> Milestones { get; set; } = new();
 		public List<ProjectAttachmentEntity> Attachments { get; set; } = new();
+		public List<ProjectMemberEntity> Members { get; set; } = new();
 		public string Tags { get; set; } = default!;
 	}
 }

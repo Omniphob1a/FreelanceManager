@@ -15,6 +15,7 @@ using Users.Application.Users.Commands.UpdateUser;
 using Users.Application.Users.Queries.AuthenticateUser;
 using Users.Application.Users.Queries.GetAllActiveUsers;
 using Users.Application.Users.Queries.GetUserByCredentials;
+using Users.Application.Users.Queries.GetUserByEmail;
 using Users.Application.Users.Queries.GetUserByLogin;
 using Users.Application.Users.Queries.GetUsersByAge;
 using Users.Domain.ValueObjects;
@@ -51,13 +52,27 @@ namespace Users.Api.Controllers
 			return Ok(users);
 		}
 
-		[HttpGet("{login}")]
+		[HttpGet("by-login/{login}")]
 		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> GetByLogin(string login)
 		{
 			try
 			{
 				UserDto dto = await _mediator.Send(new GetUserByLoginQuery(login));
+				return Ok(dto);
+			}
+			catch (KeyNotFoundException)
+			{
+				return NotFound();
+			}
+		}
+		[HttpGet("by-email/{email}")]
+		[Authorize(Roles = "User")]
+		public async Task<IActionResult> GetByEmail(string email)
+		{
+			try
+			{
+				UserDto dto = await _mediator.Send(new GetUserByEmailQuery(email));
 				return Ok(dto);
 			}
 			catch (KeyNotFoundException)

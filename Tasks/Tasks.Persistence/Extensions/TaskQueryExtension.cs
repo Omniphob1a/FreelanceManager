@@ -12,7 +12,7 @@ namespace Tasks.Persistence.Extensions
 {
 	public static class TaskQueryExtension
 	{
-		public static IQueryable<ProjectTaskEntity> ApplyFilters(this IQueryable<ProjectTaskEntity> query, TaskFilter filter, PaginationInfo paginationInfo)
+		public static IQueryable<ProjectTaskEntity> ApplyFilters(this IQueryable<ProjectTaskEntity> query, TaskFilter filter)
 		{
 			if (filter.IncludeComments)
 				query = query.Include(t => t.Comments);
@@ -88,9 +88,15 @@ namespace Tasks.Persistence.Extensions
 
 		public static IQueryable<ProjectTaskEntity> ApplyPagination(this IQueryable<ProjectTaskEntity> query, PaginationInfo paginationInfo)
 		{
+			var page = paginationInfo.ActualPage;
+			if (page < 1) page = 1;
+
+			var pageSize = paginationInfo.ItemsPerPage;
+			if (pageSize < 1) pageSize = 1;
+
 			query = query
-				.Skip((paginationInfo.ActualPage - 1) * paginationInfo.ItemsPerPage)
-				.Take(paginationInfo.ItemsPerPage);
+				.Skip((page - 1) * pageSize)
+				.Take(pageSize);
 
 			return query;
 		}

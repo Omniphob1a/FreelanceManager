@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wP7q+4TzOo8=",
+  "dgSpecHash": "CBCMRK/ud8s=",
   "success": true,
   "projectFilePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Projects.Api.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\volod\\.nuget\\packages\\ardalis.specification.entityframeworkcore\\9.2.0\\ardalis.specification.entityframeworkcore.9.2.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\awssdk.core\\4.0.0.13\\awssdk.core.4.0.0.13.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\awssdk.s3\\4.0.3.1\\awssdk.s3.4.0.3.1.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\confluent.kafka\\2.11.1\\confluent.kafka.2.11.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\fluentresults\\4.0.0\\fluentresults.4.0.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
@@ -17,6 +18,7 @@
     "C:\\Users\\volod\\.nuget\\packages\\hangfire.netcore\\1.8.20\\hangfire.netcore.1.8.20.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\hangfire.postgresql\\1.20.12\\hangfire.postgresql.1.20.12.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\librdkafka.redist\\2.11.1\\librdkafka.redist.2.11.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mapster.dependencyinjection\\1.0.1\\mapster.dependencyinjection.1.0.1.nupkg.sha512",

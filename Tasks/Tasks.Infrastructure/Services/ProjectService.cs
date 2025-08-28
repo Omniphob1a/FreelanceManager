@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Reflection.Metadata;
 using System.Text;
@@ -17,15 +18,26 @@ namespace Tasks.Infrastructure.Services
 	{
 		private readonly HttpClient _httpClient;
 		private readonly ILogger<ProjectService> _logger;
+		private readonly IAuthorizationService _authService;
 
-		public ProjectService(HttpClient httpClient, ILogger<ProjectService> logger)
+		public ProjectService(HttpClient httpClient, ILogger<ProjectService> logger, IAuthorizationService authService)
 		{
 			_httpClient = httpClient;
 			_logger = logger;
+			_logger.LogInformation("ProjectService BaseAddress: {BaseAddress}", _httpClient.BaseAddress);
+			_authService = authService;
 		}
 
 		public async Task<bool> ExistsAsync(Guid projectId, CancellationToken cancellationToken)
 		{
+			var token = _authService.GetAccessToken();
+
+			if (!string.IsNullOrEmpty(token))
+			{
+				_httpClient.DefaultRequestHeaders.Authorization =
+					new AuthenticationHeaderValue("Bearer", token);
+			}
+
 			_logger.LogInformation("Checking if project {ProjectId} exists", projectId);
 
 			var response = await _httpClient.GetAsync($"projects/{projectId}", cancellationToken);

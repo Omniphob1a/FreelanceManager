@@ -19,15 +19,15 @@ namespace Tasks.Application.Mappings
 				.Map(dest => dest.Title, src => src.Title)
 				.Map(dest => dest.Description, src => src.Description)
 				.Map(dest => dest.AssigneeId, src => src.AssigneeId)
+				.Map(dest => dest.ReporterId, src => src.ReporterId)
 				.Map(dest => dest.Status, src => (int)src.Status)
-				.Map(dest => dest.EstimateValue, src => src.Estimate.Value)
-				.Map(dest => dest.EstimateUnit, src => (int)src.Estimate.Unit)
-				.Map(dest => dest.Amount, src => src.HourlyRate.Amount)
-				.Map(dest => dest.Currency, src => src.HourlyRate.Currency)
+				.Map(dest => dest.Priority, src => (int)src.Priority)
+				.Map(dest => dest.TimeEstimatedTicks, src => (long?)src.TimeEstimated.Ticks)
+		        .Map(dest => dest.TimeSpentTicks, src => (long?)src.TimeSpent.Ticks)
 				.Map(dest => dest.IsBillable, src => src.IsBillable)
 				.Map(dest => dest.DueDate, src => src.DueDate)
 				.Map(dest => dest.CreatedAt, src => src.CreatedAt)
-				.Map(dest => dest.CreatedBy, src => src.CreatedBy);	
+				.Map(dest => dest.UpdatedAt, src => src.UpdatedAt);
 		}
 	}
 }

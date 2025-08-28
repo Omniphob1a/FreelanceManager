@@ -27,7 +27,6 @@ namespace Projects.Application
 			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
 
 			services.AddValidatorsFromAssembly(assembly);
-			services.AddScoped<ICurrentUserService, CurrentUserService>();
 			services.AddScoped<TagParserService>();
 			services.AddTransient(
 				typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));

@@ -25,9 +25,7 @@ namespace Tasks.Domain.Aggregate.Root
 		public Money? HourlyRate { get; private set; }
 		public DateTime CreatedAt { get; }
 		public DateTime UpdatedAt { get; private set; }
-
 		public TimeSpan TimeEstimated { get; private set; }
-
 		public TimeSpan TimeSpent => _timeEntries.Aggregate(TimeSpan.Zero, (acc, e) => acc + e.Duration);
 
 		private readonly List<TimeEntry> _timeEntries = new();
@@ -144,7 +142,7 @@ namespace Tasks.Domain.Aggregate.Root
 			UpdatedAt = DateTime.UtcNow;
 			AddDomainEvent(new TaskStartedDomainEvent(Id));
 		}
-
+		
 		public void Reopen()
 		{
 			if (Status != ProjectTaskStatus.Completed)

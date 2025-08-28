@@ -31,7 +31,7 @@ namespace Tasks.Application.ProjectTasks.Commands.DeleteProjectTask
 		{
 			try
 			{
-				var task = await _projectTaskQueryService.GetByIdAsync(request.TaskId, cancellationToken);
+				var task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 				if (task is null)
 					return Result.Fail("Task not found.");
 

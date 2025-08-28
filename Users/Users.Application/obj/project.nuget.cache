@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5YX+0kl5zEs=",
+  "dgSpecHash": "PTJdmeLRoPs=",
   "success": true,
   "projectFilePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\volod\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.0.0\\fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
+    "C:\\Users\\volod\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mediatr\\12.5.0\\mediatr.12.5.0.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
@@ -123,6 +125,15 @@
       "targetGraphs": [
         "net9.0"
       ]
+    },
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Произошла ошибка при получении данных уязвимости пакета: Не удалось загрузить индекс службы для источника https://api.nuget.org/v3/index.json.",
+      "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users.Application.csproj",
+      "targetGraphs": []
     }
   ]
 }

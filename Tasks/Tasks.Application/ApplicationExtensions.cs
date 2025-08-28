@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Tasks.Application.Interfaces;
 
 namespace Tasks.Application
 {
@@ -15,7 +16,6 @@ namespace Tasks.Application
 			var assembly = Assembly.GetExecutingAssembly();
 
 			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
-
 			return services;
 		}
 	}

@@ -46,7 +46,7 @@ namespace Tasks.Application.ProjectTasks.Commands.AssignProjectTask
 				return Result.Fail<Unit>("AssigneeId is required.");
 			}
 
-			ProjectTask task = await _projectTaskQueryService.GetByIdAsync(request.TaskId, cancellationToken);
+			ProjectTask task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 
 			if (task is null)
 			{

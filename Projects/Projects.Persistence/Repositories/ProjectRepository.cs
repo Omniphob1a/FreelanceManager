@@ -124,6 +124,14 @@ namespace Projects.Persistence.Repositories
 
 					await SyncAttachmentsAsync(existingEntity, project.Attachments, cancellationToken);
 				}
+				if (project.Members?.Any() == true)
+				{
+					await _context.Entry(existingEntity)
+						.Collection(p => p.Members)
+						.LoadAsync(cancellationToken);
+
+					await SyncMembersAsync(existingEntity, project.Members, cancellationToken);
+				}
 
 				_logger.LogInformation("Project with ID {ProjectId} updated successfully", project.Id);
 				var entries = _context.ChangeTracker.Entries()
@@ -404,6 +412,35 @@ namespace Projects.Persistence.Repositories
 					newEntity.ProjectId = projectEntity.Id;
 					_context.Entry(newEntity).State = EntityState.Added;
 					projectEntity.Milestones.Add(newEntity);
+				}
+			}
+		}
+
+		private async Task SyncMembersAsync(ProjectEntity projectEntity, IEnumerable<ProjectMember> members,
+			CancellationToken cancellationToken)
+		{
+			var membersList = members?.ToList() ?? new List<ProjectMember>();
+			var existingDict = projectEntity.Members.ToDictionary(e => e.Id);
+			var newDict = membersList.ToDictionary(m => m.Id);
+
+			var toRemove = projectEntity.Members.Where(e => !newDict.ContainsKey(e.Id)).ToList();
+			foreach (var member in toRemove)
+			{
+				projectEntity.Members.Remove(member);
+			}
+
+			foreach (var member in membersList)
+			{
+				if (existingDict.TryGetValue(member.Id, out var existingEntity))
+				{
+					_mapper.Map(member, existingEntity);
+				}
+				else
+				{
+					var newEntity = _mapper.Map<ProjectMemberEntity>(member);
+					newEntity.ProjectId = projectEntity.Id;
+					_context.Entry(newEntity).State = EntityState.Added;
+					projectEntity.Members.Add(newEntity);
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 ﻿using Projects.Application.Common.Filters;
 using Projects.Application.Common.Pagination;
+using Projects.Application.DTOs;
 using Projects.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace Projects.Application.Interfaces
 		Task<Project?> GetByIdAsync(Guid id, CancellationToken ct);
 		Task<Project?> GetByIdWithMilestonesAsync(Guid id, CancellationToken ct);
 		Task<Project?> GetByIdWithAttachmentsAsync(Guid id, CancellationToken ct);
+		Task<Project?> GetByIdWithMembersAsync(Guid id, CancellationToken ct);
+		Task<List<ProjectMemberDto>> GetMembersAsync(Guid projectId, CancellationToken ct);
 		Task<Project> GetFullProjectByIdAsync(Guid id, CancellationToken ct);
 		Task<List<Project>> GetOutOfDateProjectsAsync(DateTime thresholdDate);
 		Task<List<Project>> GetAllAsync();

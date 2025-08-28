@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MIRc1zKwpt0=",
+  "dgSpecHash": "SDLyQy3DsVM=",
   "success": true,
   "projectFilePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
   "expectedPackageFiles": [
@@ -172,6 +172,15 @@
       "targetGraphs": [
         "net9.0"
       ]
+    },
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Произошла ошибка при получении данных уязвимости пакета: Не удалось загрузить индекс службы для источника https://api.nuget.org/v3/index.json.",
+      "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Users.Api.csproj",
+      "targetGraphs": []
     }
   ]
 }

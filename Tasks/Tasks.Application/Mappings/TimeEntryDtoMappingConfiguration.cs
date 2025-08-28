@@ -20,8 +20,16 @@ namespace Tasks.Application.Mappings
 				.Map(dest => dest.StartedAt, src => src.Period.Start)
 				.Map(dest => dest.EndedAt, src => src.Period.End)
 				.Map(dest => dest.Description, src => src.Description)
-				.Map(dest => dest.Hours, src => (decimal)src.Duration.TotalHours)
-				.Map(dest => dest.CreatedAt, src => src.CreatedAt);
+				.Map(dest => dest.IsBillable, src => src.IsBillable)
+				.Map(dest => dest.CreatedAt, src => src.CreatedAt)
+				.AfterMapping((src, dest) =>
+				{
+					if (src.HourlyRateSnapshot != null)
+					{
+						dest.HourlyRateAmount = src.HourlyRateSnapshot.Amount;
+						dest.HourlyRateCurrency = src.HourlyRateSnapshot.Currency;
+					}
+				});
 		}
 	}
 }

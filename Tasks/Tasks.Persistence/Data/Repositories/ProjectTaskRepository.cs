@@ -277,31 +277,5 @@ namespace Tasks.Persistence.Data.Repositories
 			}
 
 		}
-
-		public async Task<ProjectTask> GetFullTaskByIdAsync(Guid TaskId, CancellationToken cancellationToken)
-		{
-			_logger.LogInformation("Trying to get full task by ID {Id}", TaskId);
-
-			try
-			{
-				var entity = await _context.Tasks
-					.Include(t => t.TimeEntries)
-					.Include(t => t.Comments)
-					.FirstOrDefaultAsync(t => t.Id == TaskId, cancellationToken);
-
-				if (entity == null)
-				{
-					_logger.LogWarning("Task with if {TaskId} not found", TaskId);
-					return null;
-				}
-
-				return _mapper.ToDomain(entity);
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "Failed to get task by Id: {ProjectId}", TaskId);
-				throw;
-			}
-		}
 	}
 }

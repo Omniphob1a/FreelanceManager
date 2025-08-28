@@ -53,6 +53,11 @@ namespace Projects.Persistence.Configurations
 				.HasForeignKey(a => a.ProjectId)
 				.OnDelete(DeleteBehavior.Cascade);
 
+			builder.HasMany(p => p.Members)
+				.WithOne()
+				.HasForeignKey(p => p.ProjectId)
+				.OnDelete(DeleteBehavior.Cascade);
+
 			builder.Property(p => p.Title)
 				.HasMaxLength(200)
 				.IsRequired();

@@ -56,6 +56,9 @@ namespace Users.Application.Users.Commands.RegisterUser
 
 			var user = userResult.Value;
 
+			var userRoleId = Guid.Parse("b9654606-8b85-4a67-a997-60128896fe4d");
+			user.RoleIds.Add(userRoleId);
+
 			if (user.Admin)
 			{
 				var adminRoleId = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");

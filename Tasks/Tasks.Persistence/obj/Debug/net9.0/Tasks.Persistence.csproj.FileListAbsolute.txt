@@ -10,3 +10,11 @@ C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\n
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\refint\Tasks.Persistence.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.pdb
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\ref\Tasks.Persistence.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Persistence.runtimeconfig.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Application.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Application.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\bin\Debug\net9.0\Tasks.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Pe.FB741925.Up2Date
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Persistence\obj\Debug\net9.0\Tasks.Persistence.genruntimeconfig.cache
