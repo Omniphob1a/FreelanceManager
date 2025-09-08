@@ -14,11 +14,6 @@ namespace Projects.Api
 					Version = "v1",
 					Title = "Freelance Projects API",
 					Description = "API для управления проектами фрилансеров",
-					Contact = new OpenApiContact
-					{
-						Name = "Support",
-						Email = "support@freelanceapp.com"
-					}
 				});
 
 				options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

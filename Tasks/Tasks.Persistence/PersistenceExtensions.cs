@@ -40,6 +40,8 @@ namespace Tasks.Persistence
 			services.AddScoped<CommentMapper>();
 
 			services.AddScoped<IProjectTaskRepository, ProjectTaskRepository>();
+			services.AddScoped<IProjectReadRepository, ProjectReadRepository>();
+			services.AddScoped<IMemberReadRepository, MemberReadRepository>();
 			services.AddScoped<IProjectTaskQueryService, ProjectTaskQueryService>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			return services;

@@ -1,4 +1,3 @@
-// modules/ui.js
 import { formatCurrency } from '../api.js';
 
 export function showToast(message, type = 'success') {
@@ -38,23 +37,38 @@ export function showToast(message, type = 'success') {
     });
 }
 
-export function getStatusClass(status) {
+// Функции для статусов задач
+export function getTaskStatusClass(status) {
     const statusClasses = {
-        0: 'bg-gray-100 text-gray-800',
-        1: 'bg-blue-100 text-blue-800',
-        2: 'bg-green-100 text-green-800',
-        3: 'bg-yellow-100 text-yellow-800'
+        0: 'bg-gray-100 text-gray-800',    // To Do
+        1: 'bg-blue-100 text-blue-800',    // In Progress
+        2: 'bg-green-100 text-green-800',  // Completed
+        3: 'bg-red-100 text-red-800'       // Cancelled
     };
     return statusClasses[status] || 'bg-gray-100 text-gray-800';
 }
 
-export function formatCategory(category) {
-    if (!category) return '';
-    // Преобразуем "machine-learning" в "Machine Learning"
-    return category.split('-').map(word => 
-        word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
+export function getTaskStatusText(status) {
+    const texts = {
+        0: 'To Do',
+        1: 'In Progress',
+        2: 'Completed',
+        3: 'Cancelled'
+    };
+    return texts[status] || 'Unknown';
 }
+
+// Функции для статусов проектов
+export function getStatusClass(status) {
+    const statusClasses = {
+        0: 'bg-gray-100 text-gray-800',    // Draft
+        1: 'bg-blue-100 text-blue-800',    // Active
+        2: 'bg-green-100 text-green-800',  // Completed
+        3: 'bg-yellow-100 text-yellow-800' // Archived
+    };
+    return statusClasses[status] || 'bg-gray-100 text-gray-800';
+}
+
 export function getStatusText(status) {
     const statusTexts = {
         0: 'Draft',
@@ -76,6 +90,36 @@ export function getStatusHint(status) {
     return hints[status] || '';
 }
 
+// Функции для приоритетов задач
+export function getPriorityClass(priority) {
+    const classes = {
+        0: 'bg-gray-100 text-gray-800',    // Low
+        1: 'bg-blue-100 text-blue-800',    // Medium
+        2: 'bg-yellow-100 text-yellow-800',// High
+        3: 'bg-red-100 text-red-800'       // Urgent
+    };
+    return classes[priority] || 'bg-gray-100 text-gray-800';
+}
+
+export function getPriorityText(priority) {
+    const texts = {
+        0: 'Low',
+        1: 'Medium',
+        2: 'High',
+        3: 'Urgent'
+    };
+    return texts[priority] || 'Unknown';
+}
+
+// Общие вспомогательные функции
+export function formatCategory(category) {
+    if (!category) return '';
+    // Преобразуем "machine-learning" в "Machine Learning"
+    return category.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+}
+
 export function formatBudget(project) {
     if (!project.currency) project.currency = 'USD';
     if (project.budgetMin && project.budgetMax) {
@@ -85,37 +129,57 @@ export function formatBudget(project) {
 }
 
 export function formatDate(dateString) {
-  if (!dateString) return '-';
-  
-  try {
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) return '-';
+    if (!dateString) return '-';
     
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return date.toLocaleDateString(undefined, options);
-  } catch {
-    return '-';
-  }
+    try {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return '-';
+        
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return date.toLocaleDateString(undefined, options);
+    } catch {
+        return '-';
+    }
 }
+
 export function getDaysLeft(endDate) {
-  if (!endDate) return 'No due date';
-  
-  try {
-    const today = new Date();
-    const dueDate = new Date(endDate);
+    if (!endDate) return 'No due date';
     
-    if (isNaN(dueDate.getTime())) return 'Invalid date';
-    
-    const diffTime = dueDate - today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    if (diffDays < 0) return `${Math.abs(diffDays)} days overdue`;
-    if (diffDays === 0) return 'Today';
-    return `${diffDays} days left`;
-  } catch {
-    return 'Error calculating';
-  }
+    try {
+        const today = new Date();
+        const dueDate = new Date(endDate);
+        
+        if (isNaN(dueDate.getTime())) return 'Invalid date';
+        
+        const diffTime = dueDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays < 0) return `${Math.abs(diffDays)} days overdue`;
+        if (diffDays === 0) return 'Today';
+        return `${diffDays} days left`;
+    } catch {
+        return 'Error calculating';
+    }
 }
+
+// Добавим новую функцию для получения количества дней в числовом формате
+export function getDaysLeftNumber(endDate) {
+    if (!endDate) return null;
+    
+    try {
+        const today = new Date();
+        const dueDate = new Date(endDate);
+        
+        if (isNaN(dueDate.getTime())) return null;
+        
+        const diffTime = dueDate - today;
+        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    } catch {
+        return null;
+    }
+}
+
+
 export function formatDateForInput(dateString) {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -128,25 +192,25 @@ export function formatDateForInput(dateString) {
 }
 
 export function getFileIconClass(fileName) {
-  if (!fileName) return 'fa-file text-gray-500';
-  
-  const ext = fileName.split('.').pop().toLowerCase();
-  switch (ext) {
-    case 'pdf': return 'fa-file-pdf text-red-500';
-    case 'doc': case 'docx': return 'fa-file-word text-blue-500';
-    case 'xls': case 'xlsx': return 'fa-file-excel text-green-500';
-    case 'jpg': case 'jpeg': case 'png': case 'gif': return 'fa-file-image text-yellow-500';
-    case 'zip': case 'rar': return 'fa-file-archive text-purple-500';
-    default: return 'fa-file text-gray-500';
-  }
+    if (!fileName) return 'fa-file text-gray-500';
+    
+    const ext = fileName.split('.').pop().toLowerCase();
+    switch (ext) {
+        case 'pdf': return 'fa-file-pdf text-red-500';
+        case 'doc': case 'docx': return 'fa-file-word text-blue-500';
+        case 'xls': case 'xlsx': return 'fa-file-excel text-green-500';
+        case 'jpg': case 'jpeg': case 'png': case 'gif': return 'fa-file-image text-yellow-500';
+        case 'zip': case 'rar': return 'fa-file-archive text-purple-500';
+        default: return 'fa-file text-gray-500';
+    }
 }
 
 export function formatFileSize(bytes) {
-  if (!bytes) return '0 Bytes';
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    if (!bytes) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
 export function formatActivityTime(timestamp) {

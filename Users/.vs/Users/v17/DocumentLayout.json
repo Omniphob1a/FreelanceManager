@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\authenticateuser\\authenticateuserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\authenticateuser\\authenticateuserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -181,10 +185,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|solutionrelative:users.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.application\\users\\queries\\authenticateuser\\authenticateuserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EC33979C-B0D7-48EF-894F-B64AD34B5B13}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\users\\queries\\authenticateuser\\authenticateuserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2BE01FB-645C-4A25-8AAF-CFFB4114DF30}|Users.Api\\Users.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\users\\users.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -430,7 +430,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -442,20 +442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RolesController.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\RolesController.cs",
-              "RelativeDocumentMoniker": "Users.Api\\Controllers\\RolesController.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\RolesController.cs",
-              "RelativeToolTip": "Users.Api\\Controllers\\RolesController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T17:14:03.566Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "UsersDbContext.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Data\\UsersDbContext.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Data\\UsersDbContext.cs",
@@ -463,25 +450,24 @@
               "RelativeToolTip": "Users.Infrastructure\\Data\\UsersDbContext.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAAAEsAAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T18:53:26.994Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-29T18:53:26.994Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Users.Api\\Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Users.Api\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAAAEUAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAAwJkAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-16T16:44:05.27Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "RegisterUserCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
@@ -489,25 +475,24 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T21:16:23.312Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T21:16:23.312Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Users.Api\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Users.Api\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAABwAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-15T00:36:45.605Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "RegisterUserCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
@@ -515,12 +500,11 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
               "ViewState": "AgIAACMAAAAAAAAAAADgvzYAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T21:19:08.268Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T21:19:08.268Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\User.cs",
               "RelativeDocumentMoniker": "Users.Domain\\Entities\\User.cs",
@@ -528,12 +512,11 @@
               "RelativeToolTip": "Users.Domain\\Entities\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-20T14:06:30.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-20T14:06:30.154Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ApiExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\ApiExtensions.cs",
               "RelativeDocumentMoniker": "Users.Api\\ApiExtensions.cs",
@@ -541,12 +524,36 @@
               "RelativeToolTip": "Users.Api\\ApiExtensions.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T23:15:57.998Z",
+              "WhenOpened": "2025-05-16T23:15:57.998Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthenticateUserQuery.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "RelativeToolTip": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-16T14:39:03.497Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
+              "Title": "RolesController.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\RolesController.cs",
+              "RelativeDocumentMoniker": "Users.Api\\Controllers\\RolesController.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Controllers\\RolesController.cs",
+              "RelativeToolTip": "Users.Api\\Controllers\\RolesController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-26T17:14:03.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "CreateRoleRequest.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\Models\\Requests\\CreateRoleRequest.cs",
               "RelativeDocumentMoniker": "Users.Api\\Models\\Requests\\CreateRoleRequest.cs",
@@ -554,12 +561,11 @@
               "RelativeToolTip": "Users.Api\\Models\\Requests\\CreateRoleRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T21:37:57.994Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-26T21:37:57.994Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "RolePermissionEntity.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\RolePermissionEntity.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\RolePermissionEntity.cs",
@@ -571,7 +577,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Permission.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\ValueObjects\\Permission.cs",
               "RelativeDocumentMoniker": "Users.Domain\\ValueObjects\\Permission.cs",
@@ -583,7 +589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ApplicationExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\ApplicationExtensions.cs",
               "RelativeDocumentMoniker": "Users.Application\\ApplicationExtensions.cs",
@@ -595,7 +601,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "GetRoleByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Queries\\GetRoleById\\GetRoleByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Queries\\GetRoleById\\GetRoleByIdQueryHandler.cs",
@@ -607,7 +613,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ListRolesQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Queries\\ListRoles\\ListRolesQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Queries\\ListRoles\\ListRolesQuery.cs",
@@ -619,7 +625,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "ListRolesQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Queries\\ListRoles\\ListRolesQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Queries\\ListRoles\\ListRolesQueryHandler.cs",
@@ -631,7 +637,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "GetRoleByIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Queries\\GetRoleById\\GetRoleByIdQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Queries\\GetRoleById\\GetRoleByIdQuery.cs",
@@ -643,7 +649,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "RemovePermissionFromRoleCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\RemovePermissionFromRole\\RemovePermissionFromRoleCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\RemovePermissionFromRole\\RemovePermissionFromRoleCommandHandler.cs",
@@ -655,7 +661,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "InfrastructureExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\InfrastructureExtensions.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\InfrastructureExtensions.cs",
@@ -667,7 +673,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "RemovePermissionFromRoleCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\RemovePermissionFromRole\\RemovePermissionFromRoleCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\RemovePermissionFromRole\\RemovePermissionFromRoleCommand.cs",
@@ -679,7 +685,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "AddPermissionToRoleCommandValidator.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\AddPermissionToRole\\AddPermissionToRoleCommandValidator.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\AddPermissionToRole\\AddPermissionToRoleCommandValidator.cs",
@@ -691,7 +697,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "AddPermissionToRoleCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\AddPermissionToRole\\AddPermissionToRoleCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\AddPermissionToRole\\AddPermissionToRoleCommandHandler.cs",
@@ -703,7 +709,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "AddPermissionToRoleCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\AddPermissionToRole\\AddPermissionToRoleCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\AddPermissionToRole\\AddPermissionToRoleCommand.cs",
@@ -715,7 +721,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "DeleteRoleCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\DeleteRole\\DeleteRoleCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\DeleteRole\\DeleteRoleCommandHandler.cs",
@@ -727,7 +733,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "DeleteRoleCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\DeleteRole\\DeleteRoleCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\DeleteRole\\DeleteRoleCommand.cs",
@@ -739,7 +745,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "RoleDto.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\DTOs\\RoleDto.cs",
               "RelativeDocumentMoniker": "Users.Application\\DTOs\\RoleDto.cs",
@@ -751,7 +757,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "CreateRoleCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\CreateRole\\CreateRoleCommand.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\CreateRole\\CreateRoleCommand.cs",
@@ -763,7 +769,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "RoleEntity.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\RoleEntity.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\RoleEntity.cs",
@@ -775,7 +781,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "UserRoleEntity.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Models\\UserRoleEntity.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Models\\UserRoleEntity.cs",
@@ -787,7 +793,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "Role.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Entities\\Role.cs",
               "RelativeDocumentMoniker": "Users.Domain\\Entities\\Role.cs",
@@ -799,7 +805,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "CreateRoleCommandValidator.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\CreateRole\\CreateRoleCommandValidator.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\CreateRole\\CreateRoleCommandValidator.cs",
@@ -811,7 +817,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "CreateRoleCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Roles\\Commands\\CreateRole\\CreateRoleCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Roles\\Commands\\CreateRole\\CreateRoleCommandHandler.cs",
@@ -823,7 +829,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "AuthorizePermissionAttribute.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Auth\\AuthorizePermissionAttribute.cs",
@@ -835,7 +841,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "RoleMappingConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Mappings\\RoleMappingConfiguration.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Mappings\\RoleMappingConfiguration.cs",
@@ -847,7 +853,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "RegisterUserCommandValidator.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandValidator.cs",
@@ -859,7 +865,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\DTOs\\UserDto.cs",
               "RelativeDocumentMoniker": "Users.Application\\DTOs\\UserDto.cs",
@@ -871,7 +877,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "RoleRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\RoleRepository.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\RoleRepository.cs",
@@ -883,7 +889,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "PermissionRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\PermissionRepository.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\PermissionRepository.cs",
@@ -895,7 +901,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Users.Infrastructure\\Repositories\\UserRepository.cs",
@@ -907,7 +913,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "GetUserByEmailQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByEmail\\GetUserByEmailQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByEmail\\GetUserByEmailQueryHandler.cs",
@@ -919,7 +925,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Users.Domain\\Interfaces\\Repositories\\IUserRepository.cs",
@@ -931,7 +937,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "GetUsersByLoginQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUsersByLoginQueryHandler.cs",
@@ -943,7 +949,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "GetUserByEmailQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByEmail\\GetUserByEmailQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByEmail\\GetUserByEmailQuery.cs",
@@ -955,7 +961,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "GetUserByLoginQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByLogin\\GetUserByLoginQuery.cs",
@@ -967,7 +973,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "GetUserByCredentialsQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
               "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\GetUserByCredentials\\GetUserByCredentialsQuery.cs",
@@ -979,7 +985,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 45,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Api\\appsettings.json",
               "RelativeDocumentMoniker": "Users.Api\\appsettings.json",
@@ -988,18 +994,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-05-15T00:28:28.334Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "AuthenticateUserQuery.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
-              "RelativeDocumentMoniker": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
-              "RelativeToolTip": "Users.Application\\Users\\Queries\\AuthenticateUser\\AuthenticateUserQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T14:39:03.497Z"
             },
             {
               "$type": "Document",

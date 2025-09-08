@@ -1,30 +1,22 @@
-﻿using FluentResults;
-using Mapster;
+﻿using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Tasks.Api.Models.Requests;
 using Tasks.Application.Common;
 using Tasks.Application.Common.Filters;
 using Tasks.Application.Common.Pagination;
 using Tasks.Application.DTOs;
 using Tasks.Application.Interfaces;
-using Tasks.Application.ProjectTasks.Commands;
+using Tasks.Application.ProjectTasks.Commands.AddComment;
 using Tasks.Application.ProjectTasks.Commands.AddTimeEntry;
 using Tasks.Application.ProjectTasks.Commands.AssignProjectTask;
 using Tasks.Application.ProjectTasks.Commands.CancelProjectTask;
-using Tasks.Application.ProjectTasks.Commands.CompleteProjectTask;
 using Tasks.Application.ProjectTasks.Commands.CreateProjectTask;
 using Tasks.Application.ProjectTasks.Commands.DeleteProjectTask;
 using Tasks.Application.ProjectTasks.Commands.StartProjectTask;
+using Tasks.Application.ProjectTasks.Commands.UnassignProjectTask;
 using Tasks.Application.ProjectTasks.Commands.UpdateProjectTask;
-using Tasks.Application.ProjectTasks.Queries;
 using Tasks.Application.ProjectTasks.Queries.GetProjectTaskById;
 using Tasks.Application.ProjectTasks.Queries.GetTasks;
 
@@ -235,6 +227,40 @@ namespace Tasks.Api.Controllers
 			return NoContent();
 		}
 
+		[HttpPatch("{taskId:guid}/unassign")]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<IActionResult> UnassignTask(Guid taskId, [FromBody] UnassignTaskRequest request, CancellationToken ct)
+		{
+			_logger.LogInformation("Received request to unassign task {TaskId} to user {AssigneeId}", taskId, request.AssigneeId);
+
+			if (taskId == Guid.Empty)
+				return BadRequest(new { errors = new[] { "TaskId is required." } });
+
+			if (request.AssigneeId == Guid.Empty)
+				return BadRequest(new { errors = new[] { "AssigneeId is required." } });
+
+			var command = new UnassignProjectTaskCommand(taskId, request.AssigneeId);
+			var result = await _mediator.Send(command, ct);
+
+			if (result.IsFailed)
+			{
+				var errors = result.Errors.Select(e => e.Message).ToList();
+				if (errors.Any(e => e.Contains("not found", StringComparison.OrdinalIgnoreCase)))
+				{
+					_logger.LogWarning("Task {TaskId} not found for assign", taskId);
+					return NotFound(new { errors });
+				}
+
+				_logger.LogWarning("Failed to unassign task {TaskId}. Errors: {Errors}", taskId, errors);
+				return BadRequest(new { errors });
+			}
+
+			_logger.LogInformation("Task {TaskId} unassigned to {AssigneeId} by user {UserId}", taskId, request.AssigneeId, _currentUserService.UserId);
+			return NoContent();
+		}
+
 		[HttpPatch("{taskId:guid}/start")]
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -364,6 +390,42 @@ namespace Tasks.Api.Controllers
 			}
 
 			_logger.LogInformation("Time entry {TimeEntryId} added to task {TaskId} by user {UserId}", result.Value, taskId, _currentUserService.UserId);
+			return Ok(result.Value);
+		}
+
+		[HttpPost("{taskId:guid}/comments")]
+		[ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<IActionResult> AddComment(Guid taskId, [FromBody] AddCommentRequest request, CancellationToken ct)
+		{
+			_logger.LogInformation("Received request to add comment to task {TaskId} by user {UserId}", taskId, _currentUserService.UserId);
+
+			if (taskId == Guid.Empty)
+				return BadRequest(new { errors = new[] { "TaskId is required." } });
+
+			var command = request.Adapt<AddCommentCommand>() with
+			{
+				TaskId = taskId,
+				AuthorId = _currentUserService.UserId
+			};
+
+			var result = await _mediator.Send(command, ct);
+
+			if (result.IsFailed)
+			{
+				var errors = result.Errors.Select(e => e.Message).ToList();
+				if (errors.Any(e => e.Contains("not found", StringComparison.OrdinalIgnoreCase)))
+				{
+					_logger.LogWarning("Task {TaskId} not found for adding comment", taskId);
+					return NotFound(new { errors });
+				}
+
+				_logger.LogWarning("Failed to add comment to task {TaskId}. Errors: {Errors}", taskId, errors);
+				return BadRequest(new { errors });
+			}
+
+			_logger.LogInformation("Comment {CommentId} added to task {TaskId} by user {UserId}", result.Value, taskId, _currentUserService.UserId);
 			return Ok(result.Value);
 		}
 	}

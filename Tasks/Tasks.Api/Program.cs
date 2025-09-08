@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Projects.Api;
 using System.Net;
 using Tasks.Api;
 using Tasks.Application;
@@ -18,6 +20,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerWithJwt();
+
 
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
@@ -53,6 +57,13 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Freelance Tasks API v1");
+	c.RoutePrefix = "swagger";
+});
 
 app.UseHttpsRedirection();
 

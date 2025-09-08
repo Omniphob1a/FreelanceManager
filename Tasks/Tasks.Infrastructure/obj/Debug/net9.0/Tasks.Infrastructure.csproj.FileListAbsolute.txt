@@ -18,3 +18,5 @@ C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\bin\Debu
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\bin\Debug\net9.0\Tasks.Domain.pdb
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.In.E44DA345.Up2Date
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\obj\Debug\net9.0\Tasks.Infrastructure.genruntimeconfig.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\bin\Debug\net9.0\Tasks.Persistence.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Infrastructure\bin\Debug\net9.0\Tasks.Persistence.pdb

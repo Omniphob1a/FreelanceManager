@@ -1,7 +1,9 @@
 ﻿using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Projects.Application.DTOs;
 using Projects.Application.Interfaces;
+using Projects.Application.Outbox;
 using Projects.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,13 +19,20 @@ namespace Projects.Application.Projects.Commands.DeleteProject
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly ILogger<DeleteProjectCommandHandler> _logger;
 		private readonly IProjectQueryService _projectQueryService;
+		private readonly IOutboxService _outboxService;
 
-		public DeleteProjectCommandHandler(IProjectRepository repository, IUnitOfWork unitOfWork, ILogger<DeleteProjectCommandHandler> logger, IProjectQueryService projectQueryService)
+		public DeleteProjectCommandHandler(
+			IProjectRepository repository,
+			IUnitOfWork unitOfWork,
+			ILogger<DeleteProjectCommandHandler> logger,
+			IProjectQueryService projectQueryService, 
+			IOutboxService outboxService)
 		{
 			_repository = repository;
 			_unitOfWork = unitOfWork;
 			_logger = logger;
 			_projectQueryService = projectQueryService;
+			_outboxService = outboxService;
 		}
 
 		public async Task<Result> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
@@ -39,7 +48,12 @@ namespace Projects.Application.Projects.Commands.DeleteProject
 				project.Delete();
 
 				await _repository.DeleteAsync(request.Id, cancellationToken);
-			    _unitOfWork.TrackEntity(project);	
+			    _unitOfWork.TrackEntity(project);
+
+				var topic = "projects";
+				var key = $"{project.Id}";
+				await _outboxService.AddTombstone(topic, key, cancellationToken);
+
 				await _unitOfWork.SaveChangesAsync(cancellationToken);
 				return Result.Ok();
 			}

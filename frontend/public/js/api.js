@@ -112,6 +112,10 @@ export const ProjectAPI = {
       throw error;
     }
   },
+  
+  async getProjectMembers(projectId) {
+    return fetchAPI(`/api/Projects/${projectId}/members`);
+  },
 
   // Создание проекта
   async createProject(projectData) {
@@ -288,29 +292,75 @@ export function getDaysLeft(endDate) {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }
 
+// Добавим в конец файла
 export const TaskAPI = {
-    // Получение задач
+    // Получение задач с фильтрами
     async getTasks(filters = {}) {
-        // Здесь будет запрос к вашему API
-        return [];
+        const queryParams = new URLSearchParams();
+        Object.entries(filters).forEach(([key, value]) => {
+            if (value !== null && value !== undefined) {
+                queryParams.append(key, value);
+            }
+        });
+        return fetchAPI(`/api/ProjectTasks?${queryParams}`);
     },
-    
+
     // Создание задачи
     async createTask(taskData) {
-        // Здесь будет запрос к вашему API
-        return { id: 'new-task-id' };
+        return fetchAPI('/api/ProjectTasks', 'POST', taskData);
     },
-    
+
+    // Получение задачи по ID
+    async getTaskById(taskId, includes = []) {
+        const queryParams = includes.length > 0 
+            ? `?includes=${includes.join(',')}`
+            : '';
+        return fetchAPI(`/api/ProjectTasks/${taskId}${queryParams}`);
+    },
+
     // Обновление задачи
     async updateTask(taskId, taskData) {
-        // Здесь будет запрос к вашему API
-        return true;
+        return fetchAPI(`/api/ProjectTasks/${taskId}`, 'PUT', taskData);
     },
-    
+
     // Удаление задачи
     async deleteTask(taskId) {
-        // Здесь будет запрос к вашему API
-        return true;
+        return fetchAPI(`/api/ProjectTasks/${taskId}`, 'DELETE');
+    },
+
+    // Назначение задачи
+    async assignTask(taskId, assigneeId) {
+        return fetchAPI(`/api/ProjectTasks/${taskId}/assign`, 'PATCH', { assigneeId });
+    },
+
+    // Снятие назначения
+    async unassignTask(taskId, assigneeId) {
+        return fetchAPI(`/api/ProjectTasks/${taskId}/unassign`, 'PATCH', { assigneeId });
+    },
+
+    // Начало работы над задачей
+    async startTask(taskId) {
+        return fetchAPI(`/api/ProjectTasks/${taskId}/start`, 'PATCH');
+    },
+
+    // Завершение задачи
+    async completeTask(taskId) {
+        return fetchAPI(`/api/ProjectTasks/${taskId}/complete`, 'PATCH');
+    },
+
+    // Отмена задачи
+    async cancelTask(taskId, reason) {
+        return fetchAPI(`/api/ProjectTasks/${taskId}/cancel`, 'PATCH', { reason });
+    },
+
+    // Добавление записи времени
+    async addTimeEntry(taskId, timeEntryData) {
+        return fetchAPI(`/api/ProjectTasks/${taskId}/time-entries`, 'POST', timeEntryData);
+    },
+
+    // Добавление комментария
+    async addComment(taskId, commentData) {
+        return fetchAPI(`/api/ProjectTasks/${taskId}/comments`, 'POST', commentData);
     }
 };
 
@@ -354,3 +404,4 @@ export const ActivityAPI = {
         ];
     }
 };
+

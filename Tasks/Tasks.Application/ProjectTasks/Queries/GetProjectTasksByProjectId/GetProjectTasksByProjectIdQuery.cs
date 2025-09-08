@@ -8,8 +8,19 @@ using System.Threading.Tasks;
 using Tasks.Application.Common.Filters;
 using Tasks.Application.Common.Pagination;
 using Tasks.Application.DTOs;
+using Tasks.Application.Interfaces;
 
 namespace Tasks.Application.ProjectTasks.Queries.GetProjectTasksByProjectId
 {
-	public record GetProjectTasksByProjectIdQuery(Guid ProjectId, TaskFilter filter, PaginationInfo paginationInfo) : IRequest<Result<PaginatedResult<ProjectTaskDto>>>;
+	public record GetProjectTasksByProjectIdQuery(Guid ProjectId, TaskFilter filter, PaginationInfo paginationInfo) : IRequest<Result<PaginatedResult<ProjectTaskDto>>>, ICacheableQuery
+	{
+		public bool BypassCache => false;
+
+		public string CacheKey => $"task:list:filtered:{filter.ToCacheKey()}";
+
+		public int SlidingExpirationInMinutes => 2;
+
+		public int AbsoluteExpirationInMinutes => 5;
+	}
 }
+ 

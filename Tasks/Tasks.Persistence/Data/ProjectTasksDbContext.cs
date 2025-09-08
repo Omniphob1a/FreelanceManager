@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tasks.Persistence.Models;
+using Tasks.Persistence.Models.ReadModels;
 
 namespace Tasks.Persistence.Data
 {

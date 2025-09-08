@@ -217,6 +217,9 @@
               },
               "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Domain\\Tasks.Domain.csproj": {
                 "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Domain\\Tasks.Domain.csproj"
+              },
+              "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\Tasks.Persistence.csproj": {
+                "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\Tasks.Persistence.csproj"
               }
             }
           }
@@ -237,6 +240,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.11.1, )"
+            },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.3.0, )"
@@ -251,6 +258,10 @@
               "target": "Package",
               "version": "[9.0.8, )"
             },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
             "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[9.0.8, )"
@@ -258,6 +269,120 @@
             "StackExchange.Redis": {
               "target": "Package",
               "version": "[2.9.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\Tasks.Persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\Tasks.Persistence.csproj",
+        "projectName": "Tasks.Persistence",
+        "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\Tasks.Persistence.csproj",
+        "packagesPath": "C:\\Users\\volod\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\volod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Application\\Tasks.Application.csproj": {
+                "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Application\\Tasks.Application.csproj"
+              },
+              "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Domain\\Tasks.Domain.csproj": {
+                "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Domain\\Tasks.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )"
             }
           },
           "imports": [

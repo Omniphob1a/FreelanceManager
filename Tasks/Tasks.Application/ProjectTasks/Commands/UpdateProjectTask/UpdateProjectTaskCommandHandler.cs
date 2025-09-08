@@ -19,17 +19,20 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 		private readonly IProjectTaskQueryService _projectTaskQueryService;
 		private readonly ILogger<UpdateProjectTaskCommandHandler> _logger;
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IProjectReadRepository _projectReadRepository;
 
 		public UpdateProjectTaskCommandHandler(
 			IProjectTaskRepository projectTaskRepository,
 			IProjectTaskQueryService projectTaskQueryService,
 			ILogger<UpdateProjectTaskCommandHandler> logger,
-			IUnitOfWork unitOfWork)
+			IUnitOfWork unitOfWork,
+			IProjectReadRepository projectReadRepository	)
 		{
 			_projectTaskRepository = projectTaskRepository ?? throw new ArgumentNullException(nameof(projectTaskRepository));
 			_projectTaskQueryService = projectTaskQueryService ?? throw new ArgumentNullException(nameof(projectTaskQueryService));
 			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+			_projectReadRepository = projectReadRepository;
 		}
 
 		public async Task<Result<Unit>> Handle(UpdateProjectTaskCommand request, CancellationToken cancellationToken)
@@ -47,6 +50,14 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 			{
 				_logger.LogWarning("Task {TaskId} not found for update", request.TaskId);
 				return Result.Fail<Unit>("Task not found.");
+			}
+
+			var isExists = await _projectReadRepository.ExistsAsync(task.ProjectId, cancellationToken);
+
+			if (!isExists)
+			{
+				_logger.LogWarning("Project {ProjectId} is not exists, cannot update", task.ProjectId);
+				return Result.Fail<Unit>("Project not exists");
 			}
 
 			try

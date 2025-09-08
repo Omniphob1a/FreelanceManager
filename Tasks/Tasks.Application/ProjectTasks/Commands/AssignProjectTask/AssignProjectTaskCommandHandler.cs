@@ -17,17 +17,20 @@ namespace Tasks.Application.ProjectTasks.Commands.AssignProjectTask
 		private readonly IProjectTaskQueryService _projectTaskQueryService;
 		private readonly ILogger<AssignProjectTaskCommandHandler> _logger;
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IMemberReadRepository _membersReadRepository;
 
 		public AssignProjectTaskCommandHandler(
 			IProjectTaskRepository projectTaskRepository,
 			IProjectTaskQueryService projectTaskQueryService,
 			ILogger<AssignProjectTaskCommandHandler> logger,
-			IUnitOfWork unitOfWork)
+			IUnitOfWork unitOfWork,
+			IMemberReadRepository membersReadRepository)
 		{
 			_projectTaskRepository = projectTaskRepository ?? throw new ArgumentNullException(nameof(projectTaskRepository));
 			_projectTaskQueryService = projectTaskQueryService ?? throw new ArgumentNullException(nameof(projectTaskQueryService));
 			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+			_membersReadRepository = membersReadRepository;
 		}
 
 		public async Task<Result<Unit>> Handle(AssignProjectTaskCommand request, CancellationToken cancellationToken)
@@ -47,6 +50,14 @@ namespace Tasks.Application.ProjectTasks.Commands.AssignProjectTask
 			}
 
 			ProjectTask task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
+
+			var isExists = await _membersReadRepository.ExistsAsync(task.ProjectId, request.AssigneeId, cancellationToken);
+
+			if (!isExists)
+			{
+				_logger.LogWarning("User {AssigneeId} is not a member of project {ProjectId}", request.AssigneeId, task.ProjectId);
+				return Result.Fail<Unit>("Assignee must be a project member.");
+			}
 
 			if (task is null)
 			{

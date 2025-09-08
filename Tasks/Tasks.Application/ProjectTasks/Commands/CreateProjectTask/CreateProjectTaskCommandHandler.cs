@@ -1,9 +1,11 @@
 ﻿using FluentResults;
+using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Tasks.Application.DTOs;
 using Tasks.Application.Interfaces;
 using Tasks.Domain.Aggregate.Root;
 using Tasks.Domain.Exceptions;
@@ -15,22 +17,19 @@ namespace Tasks.Application.ProjectTasks.Commands.CreateProjectTask
 	{
 		private readonly ILogger<CreateProjectTaskCommandHandler> _logger;
 		private readonly IProjectTaskRepository _projectTaskRepository;
-		private readonly IProjectTaskQueryService _projectTaskQueryService;
-		private readonly IProjectService _projectService;
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IProjectReadRepository _projectReadRepository;
 
 		public CreateProjectTaskCommandHandler(
 			ILogger<CreateProjectTaskCommandHandler> logger,
 			IProjectTaskRepository projectTaskRepository,
-			IProjectTaskQueryService projectTaskQueryService,
-			IProjectService projectService,
-			IUnitOfWork unitOfWork)
+			IUnitOfWork unitOfWork,
+			IProjectReadRepository projectReadRepository)
 		{
-			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
-			_projectTaskRepository = projectTaskRepository ?? throw new ArgumentNullException(nameof(projectTaskRepository));
-			_projectTaskQueryService = projectTaskQueryService ?? throw new ArgumentNullException(nameof(projectTaskQueryService));
-			_projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
-			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+			_logger = logger;
+			_projectTaskRepository = projectTaskRepository;
+			_unitOfWork = unitOfWork;
+			_projectReadRepository = projectReadRepository;
 		}
 
 		public async Task<Result<Guid>> Handle(CreateProjectTaskCommand request, CancellationToken cancellationToken)
@@ -50,7 +49,7 @@ namespace Tasks.Application.ProjectTasks.Commands.CreateProjectTask
 				return Result.Fail<Guid>("Title is required.");
 			}
 
-			bool projectExists = await _projectService.ExistsAsync(request.ProjectId, cancellationToken);
+			bool projectExists = await _projectReadRepository.ExistsAsync(request.ProjectId, cancellationToken);
 			if (!projectExists)
 			{
 				_logger.LogWarning("Project {ProjectId} not found", request.ProjectId);
@@ -76,7 +75,7 @@ namespace Tasks.Application.ProjectTasks.Commands.CreateProjectTask
 			try
 			{
 				await _projectTaskRepository.AddAsync(task, cancellationToken);
-				_unitOfWork.TrackEntity(task); 
+				_unitOfWork.TrackEntity(task);
 				await _unitOfWork.SaveChangesAsync(cancellationToken);
 			}
 			catch (Exception ex)

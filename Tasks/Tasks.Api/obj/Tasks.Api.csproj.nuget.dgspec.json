@@ -94,6 +94,14 @@
             "Polly": {
               "target": "Package",
               "version": "[8.6.2, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[9.0.4, )"
             }
           },
           "imports": [
@@ -332,6 +340,9 @@
               },
               "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Domain\\Tasks.Domain.csproj": {
                 "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Domain\\Tasks.Domain.csproj"
+              },
+              "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\Tasks.Persistence.csproj": {
+                "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Tasks\\Tasks.Persistence\\Tasks.Persistence.csproj"
               }
             }
           }
@@ -352,6 +363,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.11.1, )"
+            },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.3.0, )"
@@ -363,6 +378,10 @@
               "version": "[9.0.8, )"
             },
             "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
               "version": "[9.0.8, )"
             },

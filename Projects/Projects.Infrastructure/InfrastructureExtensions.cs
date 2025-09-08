@@ -1,5 +1,6 @@
 ﻿using Amazon;
 using Amazon.S3;
+using Confluent.Kafka;
 using Hangfire;
 using Hangfire.PostgreSql;
 using MediatR;
@@ -36,7 +37,6 @@ namespace Projects.Infrastructure
 		{
 			services.AddStackExchangeRedisCache(opt =>
 				opt.Configuration = configuration.GetConnectionString("Redis"));
-
 			services.AddScoped<ICacheService, RedisCacheService>();
 			services.AddSingleton<IConnectionMultiplexer>(sp =>
 				ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
@@ -46,8 +46,8 @@ namespace Projects.Infrastructure
 				cfg.RegisterServicesFromAssemblies(typeof(GetProjectByIdQuery).Assembly);
 			});
 
-			services.Configure<S3Options>(configuration.GetSection("S3"));
 
+			services.Configure<S3Options>(configuration.GetSection("S3"));
 			services.AddSingleton<IAmazonS3>(sp =>
 			{
 				var options = sp.GetRequiredService<IOptions<S3Options>>().Value;
@@ -60,6 +60,7 @@ namespace Projects.Infrastructure
 
 				return new AmazonS3Client(options.AccessKey, options.SecretKey, config);
 			});
+
 			services.AddHangfire(config =>
 			{
 				var connectionString = configuration.GetConnectionString("Hangfire")
@@ -71,19 +72,27 @@ namespace Projects.Infrastructure
 					QueuePollInterval = TimeSpan.FromSeconds(5)
 				});
 			});
+
 			services.AddHttpClient<IUserService, UserService>(client =>
 			{
 				client.BaseAddress = new Uri("http://gateway:8080/api/");
 			});
+
 			services.AddScoped<IAuthorizationService, AuthorizationService>();
 			services.AddScoped<ICurrentUserService, CurrentUserService>();
 			services.AddHangfireServer();
 			services.AddScoped<IBackgroundJobManager, BackgroundJobManager>();
 			services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
 			services.AddScoped<IFileStorage, S3FileStorage>();
-			services.AddSingleton(new KafkaSettings { BootstrapServers = "localhost:9092" });
-			services.AddSingleton<IKafkaProducer, ConfluentKafkaProducer>();
+
+			services.AddHostedService<OutboxPublisherHostedService>();
+			var kafkaSection = configuration.GetSection("Kafka");
+			services.Configure<KafkaSettings>(kafkaSection);
+			var settings = kafkaSection.Get<KafkaSettings>();
+			services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(settings));
+
 			services.AddScoped<IOutboxService, OutboxService>();
+
 			services.AddDistributedMemoryCache();
 			return services;
 		}
