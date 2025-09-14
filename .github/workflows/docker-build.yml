@@ -31,7 +31,7 @@ jobs:
             context: ./Gateway
             image: gateway
           - service: frontend
-            dockerfile: Dockerfile
+ 	    dockerfile: ./frontend/Dockerfile
             context: ./frontend
             image: frontend
 
