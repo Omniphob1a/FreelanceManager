@@ -13,25 +13,25 @@ jobs:
     strategy:
       matrix:
         service: [Users, Projects, Tasks, Gateway, frontend] # твои сервисы
-        include:
+         include:
           - service: Users
-            dockerfile: Users.Api/Dockerfile
+            dockerfile: ./Users/Users.Api/Dockerfile
             context: ./Users
             image: users
           - service: Projects
-            dockerfile: Projects.Api/Dockerfile
+            dockerfile: ./Projects/Projects.Api/Dockerfile
             context: ./Projects
             image: projects
           - service: Tasks
-            dockerfile: Tasks.Api/Dockerfile
+            dockerfile: ./Tasks/Tasks.Api/Dockerfile
             context: ./Tasks
             image: tasks
           - service: Gateway
-            dockerfile: Gateway/Dockerfile
+            dockerfile: ./Gateway/Dockerfile
             context: ./Gateway
             image: gateway
           - service: frontend
-            dockerfile: ./frontend/Dockerfile   # вот тут фикс
+            dockerfile: ./frontend/Dockerfile
             context: ./frontend
             image: frontend
 
