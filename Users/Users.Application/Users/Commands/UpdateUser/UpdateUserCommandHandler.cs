@@ -1,12 +1,9 @@
 ﻿using FluentResults;
+using MapsterMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Users.Application.Contracts;
-using Users.Application.Users.Commands.UpdateUser;
+using Users.Application.DTOs;
+using Users.Application.Interfaces;
 using Users.Domain.Interfaces.Repositories;
 using Users.Domain.ValueObjects;
 
@@ -16,33 +13,46 @@ namespace Users.Application.Users.Commands.UpdateUser
 		: IRequestHandler<UpdateUserRequest, Result>
 	{
 		private readonly IUserRepository _userRepo;
+		private readonly IOutboxService _outboxService;
+		private readonly IMapper _mapper;
 
-		public UpdateUserCommandHandler(IUserRepository userRepo) => _userRepo = userRepo;
+		public UpdateUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper)
+		{
+			_outboxService = outboxService;
+			_userRepo = userRepo;
+			_mapper = mapper;
+		}
 
-		public async Task<Result> Handle(
-			UpdateUserRequest request,
-			CancellationToken ct)
+		public async Task<Result> Handle(UpdateUserRequest request, CancellationToken ct)
 		{
 			var user = await _userRepo.GetById(request.UserId, ct);
 			if (user is null)
 				return Result.Fail("User not found");
-			var emailObj = new Email(request.Command.NewEmail);
+
 			try
 			{
-				user.UpdateUser(
+				var emailObj = new Email(request.Command.NewEmail);
+
+				user.UpdateProfile(
 					request.Command.NewName,
 					request.Command.NewGender,
 					request.Command.NewBirthday,
-					emailObj,  
-					request.Command.ModifiedBy);
+					emailObj,
+					request.Command.ModifiedBy
+				);
+
+				var dto = _mapper.Map<PublicUserDto>(user);
+				var topic = "users";
+				var key = user.Id.ToString();
+				await _outboxService.Add(dto, topic, key, ct);
+
+				await _userRepo.Update(user, ct);
+				return Result.Ok();
 			}
 			catch (Exception ex)
 			{
-				return Result.Fail(ex.Message);
+				return Result.Fail(new Error(ex.Message));
 			}
-
-			await _userRepo.Update(user, ct);
-			return Result.Ok();
 		}
 	}
 }

@@ -247,7 +247,7 @@ public class ProjectQueryService : IProjectQueryService
 		}
 	}
 
-	public async Task<List<ProjectMemberDto>> GetMembersAsync(Guid projectId, CancellationToken ct)
+	public async Task<List<ProjectMemberReadDto>> GetMembersAsync(Guid projectId, CancellationToken ct)
 	{
 		_logger.LogDebug("Getting members for project {ProjectId}", projectId);
 
@@ -261,23 +261,23 @@ public class ProjectQueryService : IProjectQueryService
 			if (project is null)
 			{
 				_logger.LogWarning("Project {ProjectId} not found when trying to get members", projectId);
-				return new List<ProjectMemberDto>();
+				return new List<ProjectMemberReadDto>();
 			}
 
 			if (project.Members is null || !project.Members.Any())
 			{
 				_logger.LogInformation("No members found for project {ProjectId}", projectId);
-				return new List<ProjectMemberDto>();
+				return new List<ProjectMemberReadDto>();
 			}
 
-			var members = _mapper.Map<List<ProjectMemberDto>>(project.Members);
+			var members = _mapper.Map<List<ProjectMemberReadDto>>(project.Members);
 
-			return members ?? new List<ProjectMemberDto>();
+			return members ?? new List<ProjectMemberReadDto>();
 		}
 		catch (Exception ex)
 		{
 			_logger.LogError(ex, "Failed to get members for project {ProjectId}", projectId);
-			return new List<ProjectMemberDto>();
+			return new List<ProjectMemberReadDto>();
 		}
 	}
 }

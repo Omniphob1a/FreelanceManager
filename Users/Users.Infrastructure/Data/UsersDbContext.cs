@@ -15,6 +15,7 @@ namespace Users.Infrastructure.Data
 		public DbSet<PermissionEntity> Permissions { get; set; } = null!;
 		public DbSet<UserRoleEntity> UserRoles { get; set; } = null!;
 		public DbSet<RolePermissionEntity> RolePermissions { get; set; } = null!;
+		public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

@@ -16,6 +16,7 @@ using Users.Application.Users.Queries.AuthenticateUser;
 using Users.Application.Users.Queries.GetAllActiveUsers;
 using Users.Application.Users.Queries.GetUserByCredentials;
 using Users.Application.Users.Queries.GetUserByEmail;
+using Users.Application.Users.Queries.GetUserById;
 using Users.Application.Users.Queries.GetUserByLogin;
 using Users.Application.Users.Queries.GetUsersByAge;
 using Users.Domain.ValueObjects;
@@ -50,6 +51,21 @@ namespace Users.Api.Controllers
 		{
 			var users = await _mediator.Send(new GetAllActiveUsersQuery());
 			return Ok(users);
+		}
+
+		[HttpGet("{id}")]
+		[Authorize(Roles = "User")]
+		public async Task<IActionResult> GetById(Guid id)
+		{
+			try
+			{
+				PublicUserDto dto = await _mediator.Send(new GetUserByIdQuery(id));
+				return Ok(dto);
+			}
+			catch (KeyNotFoundException)
+			{
+				return NotFound();
+			}
 		}
 
 		[HttpGet("by-login/{login}")]

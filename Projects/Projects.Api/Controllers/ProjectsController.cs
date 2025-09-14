@@ -351,7 +351,7 @@ public class ProjectsController : ControllerBase
 	{
 		_logger.LogInformation("Received request to add member to project with ID: {ProjectId}", projectId);
 
-		var result = await _mediator.Send(new AddMemberCommand(projectId, request.Email, request.Role), ct);
+		var result = await _mediator.Send(new AddMemberCommand(projectId, request.Login, request.Role), ct);
 
 		if (result.IsFailed)
 		{
@@ -372,7 +372,7 @@ public class ProjectsController : ControllerBase
 	{
 		_logger.LogInformation("Received request to delete milestone from project with ID: {ProjectId}", projectId);
 
-		var result = await _mediator.Send(new RemoveMemberCommand(projectId, request.Email), ct);
+		var result = await _mediator.Send(new RemoveMemberCommand(projectId, request.Login), ct);
 
 		if (result.IsFailed)
 		{
@@ -536,7 +536,7 @@ public class ProjectsController : ControllerBase
 
 	[HttpGet("{projectId:guid}/members")]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
-	[ProducesResponseType(typeof(List<ProjectMemberDto>), StatusCodes.Status200OK)]
+	[ProducesResponseType(typeof(List<ProjectMemberReadDto>), StatusCodes.Status200OK)]
 	public async Task<IActionResult> GetMembers(Guid projectId, CancellationToken ct)
 	{
 		_logger.LogDebug("HTTP GET members for project {ProjectId}", projectId);
@@ -559,7 +559,7 @@ public class ProjectsController : ControllerBase
 		if (result.Value == null || !result.Value.Any())
 		{
 			_logger.LogInformation("Project {ProjectId} has no members", projectId);
-			return Ok(new List<ProjectMemberDto>()); 
+			return Ok(new List<ProjectMemberReadDto>()); 
 		}
 
 		_logger.LogInformation("Returning {Count} members for project {ProjectId}", result.Value.Count, projectId);

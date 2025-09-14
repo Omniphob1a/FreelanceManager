@@ -1,7 +1,9 @@
 ﻿using FluentResults;
+using MapsterMapper;
 using MediatR;
 using System.Security.Cryptography;
 using System.Text;
+using Users.Application.DTOs;
 using Users.Application.Interfaces;
 using Users.Application.Responses;
 using Users.Domain.Entities;
@@ -16,15 +18,21 @@ namespace Users.Application.Users.Commands.RegisterUser
 		private readonly IUserRepository _userRepo;
 		private readonly IRoleRepository _roleRepo;
 		private readonly IJwtTokenGenerator _jwtGen;
+		private readonly IOutboxService _outboxService;
+		private readonly IMapper _mapper;
 
 		public RegisterUserCommandHandler(
 			IUserRepository userRepo,
 			IJwtTokenGenerator jwtGen,
-			IRoleRepository roleRepo)
+			IRoleRepository roleRepo,
+			IOutboxService outboxService,
+			IMapper mapper)
 		{
 			_userRepo = userRepo;
 			_jwtGen = jwtGen;
 			_roleRepo = roleRepo;
+			_outboxService = outboxService;
+			_mapper = mapper;
 		}
 
 		public async Task<Result<AuthenticationResult>> Handle(
@@ -41,29 +49,42 @@ namespace Users.Application.Users.Commands.RegisterUser
 
 			var emailObj = new Email(cmd.Email);
 
-			var userResult = User.TryCreate(
-				cmd.Login,
-				hash,
-				cmd.Name,
-				cmd.Gender,
-				birthdayUtc,
-				emailObj,
-				cmd.CreatedBy,
-				cmd.IsAdmin);
-
-			if (userResult.IsFailed)
-				return Result.Fail(userResult.Errors);
-
-			var user = userResult.Value;
-
-			var userRoleId = Guid.Parse("b9654606-8b85-4a67-a997-60128896fe4d");
-			user.RoleIds.Add(userRoleId);
-
-			if (user.Admin)
+			User user;
+			try
 			{
-				var adminRoleId = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
-				user.RoleIds.Add(adminRoleId);
+				user = User.Register(
+					login: cmd.Login,
+					passwordHash: hash,
+					name: cmd.Name,
+					gender: cmd.Gender,
+					email: emailObj,
+					createdBy: cmd.CreatedBy
+				);
+
+				if (birthdayUtc.HasValue)
+				{
+					user.UpdateProfile(cmd.Name, cmd.Gender, birthdayUtc, emailObj, cmd.CreatedBy);
+				}
+
+				if (cmd.IsAdmin)
+				{
+					user.AddRole(Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), cmd.CreatedBy);
+				}
+
+				// базовая роль для всех
+				user.AddRole(Guid.Parse("b9654606-8b85-4a67-a997-60128896fe4d"), cmd.CreatedBy);
 			}
+			catch (Exception ex)
+			{
+				return Result.Fail(new Error(ex.Message));
+			}
+
+
+
+			var dto = _mapper.Map<PublicUserDto>(user);
+			var topic = "users";
+			var key = user.Id.ToString();
+			await _outboxService.Add(dto, topic, key, ct);
 
 			await _userRepo.Add(user, ct);
 
@@ -83,4 +104,3 @@ namespace Users.Application.Users.Commands.RegisterUser
 		}
 	}
 }
-

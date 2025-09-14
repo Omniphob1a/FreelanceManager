@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'users-api'
+    static_configs:
+      - targets: ['users-api:80']
+  - job_name: 'projects-api'
+    static_configs:
+      - targets: ['projects-api:80']
+  - job_name: 'tasks-api'
+    static_configs:
+      - targets: ['tasks-api:8080']

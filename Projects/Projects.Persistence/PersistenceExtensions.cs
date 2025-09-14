@@ -9,6 +9,8 @@ using Projects.Application.Mappings;
 using Projects.Domain.Repositories;
 using Projects.Persistence.Common;
 using Projects.Persistence.Data;
+using Projects.Persistence.Data.Queries;
+using Projects.Persistence.Data.Repositories;
 using Projects.Persistence.Mappings;
 using Projects.Persistence.Repositories;
 using System;
@@ -41,7 +43,9 @@ namespace Projects.Persistence
 
 
 			services.AddScoped<IProjectRepository, ProjectRepository>();
+			services.AddScoped<IUserReadRepository, UserReadRepository>();
 			services.AddScoped<IProjectQueryService, ProjectQueryService>();
+			services.AddScoped<IProjectMemberQueryService, ProjectMemberQueryService>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			return services;

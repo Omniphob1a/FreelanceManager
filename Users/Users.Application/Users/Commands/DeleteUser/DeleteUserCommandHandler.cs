@@ -1,10 +1,6 @@
 ﻿using FluentResults;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Users.Application.Interfaces;
 using Users.Domain.Interfaces.Repositories;
 
 namespace Users.Application.Users.Commands.DeleteUser
@@ -12,8 +8,14 @@ namespace Users.Application.Users.Commands.DeleteUser
 	public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Result>
 	{
 		private readonly IUserRepository _userRepo;
+		private readonly IOutboxService _outboxService;
 
-		public DeleteUserCommandHandler(IUserRepository userRepo) => _userRepo = userRepo;
+		public DeleteUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService)
+		{
+			_userRepo = userRepo;
+			_outboxService = outboxService;
+		}
+	
 
 		public async Task<Result> Handle(DeleteUserCommand cmd, CancellationToken ct)
 		{
@@ -23,16 +25,27 @@ namespace Users.Application.Users.Commands.DeleteUser
 
 			if (cmd.HardDelete)
 			{
+				// Полное удаление
 				await _userRepo.Delete(cmd.UserId, ct);
 				return Result.Ok();
 			}
 
-			var result = user.Revoke(cmd.RevokedBy);
-			if (result.IsFailed)
-				return result;
+			try
+			{
+				// Мягкое удаление 
+				user.Delete(cmd.RevokedBy);
 
-			await _userRepo.Update(user, ct);
-			return Result.Ok();
+				string topic = "users"; 
+				string key = user.Id.ToString();
+				await _outboxService.AddTombstone(topic, key, ct);
+
+				await _userRepo.Update(user, ct);
+				return Result.Ok();
+			}
+			catch (Exception ex)
+			{
+				return Result.Fail(new Error(ex.Message));
+			}
 		}
 	}
 }

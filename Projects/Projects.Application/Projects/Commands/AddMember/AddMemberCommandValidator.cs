@@ -9,9 +9,10 @@ public class AddMemberCommandValidator : AbstractValidator<AddMemberCommand>
 		RuleFor(x => x.ProjectId)
 			.NotEmpty().WithMessage("ProjectId is required.");
 
-		RuleFor(x => x.Email)
-				.NotEmpty().WithMessage("Email is required.")
-				.EmailAddress().WithMessage("Invalid email format.");
+		RuleFor(x => x.Login)
+			.NotEmpty().WithMessage("Login is required.")
+			.MaximumLength(100).WithMessage("Login must not exceed 100 characters.");
+
 
 		RuleFor(x => x.Role)
 			.NotEmpty().WithMessage("Role is required.")

@@ -632,15 +632,15 @@ function renderProjectsTable(projects) {
     if (noProjectsRow) noProjectsRow.classList.add('hidden');
     
     tableBody.innerHTML = projects.map(project => `
-        <tr class="hover:bg-gray-50" data-id="${project.id}">
+        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800" data-id="${project.id}">
             <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
                         <i class="fas fa-project-diagram text-blue-600"></i>
                     </div>
                     <div class="ml-4">
-                        <div class="text-sm font-medium text-gray-900">${project.title || 'Untitled Project'}</div>
-                        <div class="text-sm text-gray-500">${project.category || 'No category'}</div>
+                        <div class="text-sm font-medium text-gray-900 dark:text-gray-100">${project.title || 'Untitled Project'}</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">${project.category || 'No category'}</div>
                     </div>
                 </div>
             </td>
@@ -649,15 +649,15 @@ function renderProjectsTable(projects) {
                     ${getStatusText(project.status)}
                 </span>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                 ${project.expiresAt ? formatDate(project.expiresAt) : 'No due date'}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
                 ${formatBudget(project)}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button data-id="${project.id}" class="edit-btn text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                <button data-id="${project.id}" class="delete-btn text-red-600 hover:text-red-900">Delete</button>
+                <button data-id="${project.id}" class="edit-btn text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 mr-3">Edit</button>
+                <button data-id="${project.id}" class="delete-btn text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Delete</button>
             </td>
         </tr>
     `).join('');

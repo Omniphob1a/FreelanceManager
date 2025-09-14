@@ -12,6 +12,7 @@ using Projects.Infrastructure;
 using Projects.Infrastructure.Hangfire;
 using Projects.Persistence;
 using Projects.Persistence.Data;
+using Prometheus;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
@@ -101,10 +102,17 @@ app.UseExceptionHandler(errorApp =>
 	});
 });
 
-app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
 	var jobManager = scope.ServiceProvider.GetRequiredService<IBackgroundJobManager>();
 	HangfireInitializer.InitializeRecurringJobs(jobManager);
 }
+
+app.UseHttpMetrics();
+
+app.MapControllers();
+
+app.MapMetrics();
+
+
 app.Run();

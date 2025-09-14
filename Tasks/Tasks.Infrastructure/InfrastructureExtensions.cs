@@ -43,6 +43,7 @@ namespace Tasks.Infrastructure
 
 			services.AddHostedService<MembersConsumerHostedService>();
 			services.AddHostedService<ProjectsConsumerHostedService>();
+			services.AddHostedService<UsersConsumerHostedService>();
 
 			services.AddScoped<IAuthorizationService, AuthorizationService>();
 			services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();

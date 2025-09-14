@@ -28,6 +28,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Tasks.Infrastructure.Services;
+using Users.Infrastructure.Kafka;
 
 namespace Projects.Infrastructure
 {
@@ -85,11 +86,15 @@ namespace Projects.Infrastructure
 			services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
 			services.AddScoped<IFileStorage, S3FileStorage>();
 
+			services.AddHostedService<UsersConsumerHostedService>();
+
 			services.AddHostedService<OutboxPublisherHostedService>();
 			var kafkaSection = configuration.GetSection("Kafka");
-			services.Configure<KafkaSettings>(kafkaSection);
-			var settings = kafkaSection.Get<KafkaSettings>();
-			services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(settings));
+			var kafkaSettings = kafkaSection.Get<KafkaSettings>() ?? new KafkaSettings();
+			services.AddSingleton(kafkaSettings);
+
+			services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(kafkaSettings));
+
 
 			services.AddScoped<IOutboxService, OutboxService>();
 

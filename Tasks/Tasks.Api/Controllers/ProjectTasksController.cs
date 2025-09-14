@@ -17,6 +17,7 @@ using Tasks.Application.ProjectTasks.Commands.DeleteProjectTask;
 using Tasks.Application.ProjectTasks.Commands.StartProjectTask;
 using Tasks.Application.ProjectTasks.Commands.UnassignProjectTask;
 using Tasks.Application.ProjectTasks.Commands.UpdateProjectTask;
+using Tasks.Application.ProjectTasks.Queries.GetComments;
 using Tasks.Application.ProjectTasks.Queries.GetProjectTaskById;
 using Tasks.Application.ProjectTasks.Queries.GetTasks;
 
@@ -426,6 +427,38 @@ namespace Tasks.Api.Controllers
 			}
 
 			_logger.LogInformation("Comment {CommentId} added to task {TaskId} by user {UserId}", result.Value, taskId, _currentUserService.UserId);
+			return Ok(result.Value);
+		}
+
+		[HttpGet("{taskId:guid}/comments")]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(typeof(List<CommentReadDto>), StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetMembers(Guid taskId, CancellationToken ct)
+		{
+			_logger.LogDebug("HTTP GET comments for task {TaskId}", taskId);
+
+			var result = await _mediator.Send(new GetCommentsByTaskIdQuery(taskId), ct);
+
+			if (result.IsFailed)
+			{
+				var errorMessage = result.Errors.FirstOrDefault()?.Message ?? "Unknown error";
+				_logger.LogWarning("Failed to get comments for task {TaskId}: {Error}", taskId, errorMessage);
+
+				if (errorMessage.Contains("not found", StringComparison.OrdinalIgnoreCase))
+				{
+					return NotFound(new { Message = errorMessage });
+				}
+
+				return BadRequest(new { Message = errorMessage });
+			}
+
+			if (result.Value == null || !result.Value.Any())
+			{
+				_logger.LogInformation("Project {ProjectId} has no comments", taskId);
+				return Ok(new List<CommentReadDto>());
+			}
+
+			_logger.LogInformation("Returning {Count} comments for task {TaskId}", result.Value.Count, taskId);
 			return Ok(result.Value);
 		}
 	}

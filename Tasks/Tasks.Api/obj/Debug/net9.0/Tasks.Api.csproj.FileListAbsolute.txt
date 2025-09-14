@@ -356,3 +356,4 @@ C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\ru
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

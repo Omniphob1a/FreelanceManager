@@ -4,7 +4,6 @@ namespace Projects.Api.Models.Requests
 {
 	public class RemoveMemberRequest
 	{
-		[EmailAddress]
-		public string Email { get; set; } = default!;
+		public string Login { get; set; } = default!;
 	}
 }

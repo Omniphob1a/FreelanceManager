@@ -1,0 +1,61 @@
+name: Build & Push services to Docker Hub
+
+on:
+  push:
+    branches: [ master ]          # <- поменяй на "main" если у тебя main
+  workflow_dispatch: {}           # возможность запустить вручную
+
+jobs:
+  build-services:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [ Users, Tasks, Projects, Gateway, frontend ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU (for multi-arch support, optional)
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          install: true
+
+      - name: Prepare build cache dir
+        run: |
+          mkdir -p /tmp/.buildx-cache
+
+      - name: Restore Docker layer cache (optional)
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ matrix.service }}-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ matrix.service }}-
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}    # <- обязательный секрет
+          password: ${{ secrets.DOCKER_TOKEN }}       # <- обязательный секрет
+
+      - name: Build and push image for ${{ matrix.service }}
+        id: docker_build
+        uses: docker/build-push-action@v4
+        with:
+          context: ./{{ matrix.service }}                    # контекст сборки — папка сервиса
+          file: ./{{ matrix.service }}/Dockerfile            # путь к Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}          # использовать созданный buildx builder
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/freelancemanager-${{ matrix.service }}:latest
+            ${{ secrets.DOCKER_USERNAME }}/freelancemanager-${{ matrix.service }}:${{ github.sha }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+
+      - name: Show pushed image digest
+        run: echo "Image digest: ${{ steps.docker_build.outputs.digest }}"

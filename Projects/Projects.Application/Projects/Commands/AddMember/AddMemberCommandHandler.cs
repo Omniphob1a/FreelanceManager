@@ -18,7 +18,7 @@ public class AddMemberCommandHandler : IRequestHandler<AddMemberCommand, Result<
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly ILogger<AddMemberCommandHandler> _logger;
 	private readonly IMapper _mapper;
-	private readonly IUserService _userService;
+	private readonly IUserReadRepository _userReadRepository;
 	private readonly IOutboxService _outboxService;
 
 	public AddMemberCommandHandler(
@@ -27,7 +27,7 @@ public class AddMemberCommandHandler : IRequestHandler<AddMemberCommand, Result<
 		IUnitOfWork unitOfWork,
 		ILogger<AddMemberCommandHandler> logger,
 		IMapper mapper,
-		IUserService userService,
+		IUserReadRepository userReadRepository,
 		IOutboxService outboxService)
 	{
 		_repository = repository;
@@ -35,22 +35,22 @@ public class AddMemberCommandHandler : IRequestHandler<AddMemberCommand, Result<
 		_unitOfWork = unitOfWork;
 		_logger = logger;
 		_mapper = mapper;
-		_userService = userService;
+		_userReadRepository = userReadRepository;
 		_outboxService = outboxService;
 	}
 
 	public async Task<Result<ProjectMemberDto>> Handle(AddMemberCommand request, CancellationToken ct)
 	{
-		_logger.LogDebug("Handling AddMemberCommand for ProjectId: {ProjectId}, Email: {Email}",
-			request.ProjectId, request.Email);
+		_logger.LogDebug("Handling AddMemberCommand for ProjectId: {ProjectId}, Login: {Login}",
+			request.ProjectId, request.Login);
 
 		try
 		{
-			var userDto = await _userService.GetUserByEmail(request.Email, ct);
+			var user = await _userReadRepository.GetByLoginAsync(request.Login, ct);
 
-			if (userDto is null)
+			if (user is null)
 			{
-				_logger.LogWarning("User not found by email {Email}", request.Email);
+				_logger.LogWarning("User not found by login {Login}", request.Login);
 				return Result.Fail<ProjectMemberDto>("User not found");
 			}
 
@@ -61,13 +61,13 @@ public class AddMemberCommandHandler : IRequestHandler<AddMemberCommand, Result<
 				return Result.Fail<ProjectMemberDto>("Project not found.");
 			}
 
-			if (project.Members.Any(m => m.UserId == userDto.Id))
+			if (project.Members.Any(m => m.UserId == user.Id))
 			{
-				_logger.LogWarning("User {UserId} is already a member of Project {ProjectId}", userDto.Id, project.Id);
+				_logger.LogWarning("User {UserId} is already a member of Project {ProjectId}", user.Id, project.Id);
 				return Result.Fail<ProjectMemberDto>("User is already a member of the project");
 			}
 
-			var member = new ProjectMember(userDto.Id, request.Role, request.ProjectId);
+			var member = new ProjectMember(user.Id, request.Role, request.ProjectId);
 			project.AddMember(member);
 
 			await _repository.UpdateAsync(project, ct);
@@ -81,20 +81,20 @@ public class AddMemberCommandHandler : IRequestHandler<AddMemberCommand, Result<
 			await _unitOfWork.SaveChangesAsync(ct);
 
 			_logger.LogInformation("Member {UserId} with role {Role} added to Project {ProjectId}",
-				userDto.Id, request.Role, project.Id);
+				user.Id, request.Role, project.Id);
 
 			return Result.Ok(dto);
 		}
 		catch (DomainException ex)
 		{
-			_logger.LogError(ex, "Domain error while adding member {UserEmail} to Project {ProjectId}",
-				request.Email, request.ProjectId);
+			_logger.LogError(ex, "Domain error while adding member {UserLogin} to Project {ProjectId}",
+				request.Login, request.ProjectId);
 			return Result.Fail<ProjectMemberDto>(ex.Message);
 		}
 		catch (Exception ex)
 		{
-			_logger.LogError(ex, "Unexpected error while adding member {UserEmail} to Project {ProjectId}",
-				request.Email, request.ProjectId);
+			_logger.LogError(ex, "Unexpected error while adding member {UserLogin} to Project {ProjectId}",
+				request.Login, request.ProjectId);
 			return Result.Fail<ProjectMemberDto>("Unexpected error occurred.");
 		}
 	}

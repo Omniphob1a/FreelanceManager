@@ -16,15 +16,5 @@
     "C:\\Users\\volod\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.0.1\\system.identitymodel.tokens.jwt.8.0.1.nupkg.sha512",
     "C:\\Users\\volod\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Произошла ошибка при получении данных уязвимости пакета: Не удалось загрузить индекс службы для источника https://api.nuget.org/v3/index.json.",
-      "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Users.Domain.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Domain\\Users.Domain.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

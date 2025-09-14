@@ -112,6 +112,14 @@ export const ProjectAPI = {
       throw error;
     }
   },
+
+    async addMember(projectId, login, role) {
+    return fetchAPI(`/api/Projects/${projectId}/add-member`, 'PATCH', { login, role });
+  },
+
+  async removeMember(projectId, login) {
+    return fetchAPI(`/api/Projects/${projectId}/remove-member`, 'PATCH', { login });
+  },
   
   async getProjectMembers(projectId) {
     return fetchAPI(`/api/Projects/${projectId}/members`);
@@ -255,20 +263,70 @@ export const AuthAPI = {
     
 };
 
-// Функции для работы с пользователями
 export const UserAPI = {
-    // Получение списка пользователей
+    // --- CREATE ---
+    // Создание нового пользователя (только админ)
+    async createUser(userData) {
+        return fetchAPI('/api/Users', 'POST', userData);
+    },
+
+    // --- READ ---
+    // Получение всех пользователей (только админ)
     async getUsers() {
         return fetchAPI('/api/Users');
     },
-    
+
+    // Получение пользователя по ID (возвращает PublicUserDto)
+    async getUserById(userId) {
+        return fetchAPI(`/api/Users/${userId}`);
+    },
+
+    // Получение пользователя по логину (только админ)
+    async getUserByLogin(login) {
+        return fetchAPI(`/api/Users/by-login/${encodeURIComponent(login)}`);
+    },
+
+    // Получение пользователя по email (возвращает UserDto, доступно для User)
+    async getUserByEmail(email) {
+        return fetchAPI(`/api/Users/by-email/${encodeURIComponent(email)}`);
+    },
+
+    // Получение пользователей старше определённого возраста (только админ)
+    async getUsersByAge(minAge) {
+        return fetchAPI(`/api/Users/age/${minAge}`);
+    },
+
+    // Получение профиля текущего пользователя
+    async getProfile() {
+        return fetchAPI('/api/Users/get-my-profile', 'POST');
+    },
+
+    // --- UPDATE ---
     // Обновление пользователя
     async updateUser(userId, userData) {
         return fetchAPI(`/api/Users/${userId}`, 'PUT', userData);
     },
 
-    async getProfile() {
-        return fetchAPI('/api/Users/get-my-profile', 'POST');
+    // Изменение пароля пользователя
+    async changePassword(userId, passwordData) {
+        return fetchAPI(`/api/Users/${userId}/password`, 'PUT', passwordData);
+    },
+
+    // Изменение логина пользователя
+    async changeLogin(userId, loginData) {
+        return fetchAPI(`/api/Users/${userId}/login`, 'PUT', loginData);
+    },
+
+    // --- DELETE ---
+    // Удаление пользователя (только админ, можно soft/hard через query)
+    async deleteUser(userId, hard = false) {
+        return fetchAPI(`/api/Users/${userId}?hard=${hard}`, 'DELETE');
+    },
+
+    // --- PATCH ---
+    // Восстановление пользователя (только админ)
+    async restoreUser(userId) {
+        return fetchAPI(`/api/Users/${userId}/restore`, 'PATCH');
     }
 };
 

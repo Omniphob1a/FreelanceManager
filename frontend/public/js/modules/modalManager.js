@@ -183,6 +183,7 @@ async function renderProjectModal(project, container) {
     setupMilestones(container, project);
     setupTags(container, project);
     setupDescriptionEditor(container, project);
+    setupTeamManagement(container, project);
     container.querySelector('.close-btn')?.addEventListener('click', closeProjectModal);
   } catch (err) {
     console.error('Error rendering project modal:', err);
@@ -234,6 +235,112 @@ function setupTabs(container) {
       switchTab(container, tabName);
     });
   });
+}
+
+function setupTeamManagement(container, project) {
+    const addMemberBtn = container.querySelector('#addTeamMemberBtn');
+    const addMemberForm = container.querySelector('#addMemberForm');
+    const cancelAddMemberBtn = container.querySelector('#cancelAddMemberBtn');
+    const saveMemberBtn = container.querySelector('#saveMemberBtn');
+    const teamMembersContainer = container.querySelector('#teamMembersContainer');
+
+    if (!addMemberBtn || !addMemberForm) return;
+
+    // Обработчик кнопки добавления участника
+    addMemberBtn.addEventListener('click', () => {
+        addMemberForm.classList.remove('hidden');
+    });
+
+    // Обработчик отмены добавления
+    cancelAddMemberBtn.addEventListener('click', () => {
+        addMemberForm.classList.add('hidden');
+    });
+
+    // Обработчик сохранения участника
+    saveMemberBtn.addEventListener('click', async () => {
+        const loginInput = container.querySelector('#memberLoginInput');
+        const roleSelect = container.querySelector('#memberRoleInput');
+        const login = loginInput.value.trim();
+        const role = roleSelect.value;
+
+        if (!login) {
+            showToast('Please enter login', 'error');
+            return;
+        }
+
+        try {
+            await ProjectAPI.addMember(project.id, login, role);
+            showToast('Member added successfully');
+            addMemberForm.classList.add('hidden');
+            loginInput.value = '';
+            await loadTeamMembers(container, project.id);
+        } catch (error) {
+            showToast(error.message, 'error');
+        }
+    });
+
+    // Функция загрузки участников
+    async function loadTeamMembers(container, projectId) {
+        try {
+            const members = await ProjectAPI.getProjectMembers(projectId);
+            renderTeamMembers(container, members);
+        } catch (error) {
+            showToast('Failed to load team members', 'error');
+        }
+    }
+
+    // Функция отображения участников
+    function renderTeamMembers(container, members) {
+        const teamMembersContainer = container.querySelector('#teamMembersContainer');
+        if (!teamMembersContainer) return;
+
+        if (!members || members.length === 0) {
+            teamMembersContainer.innerHTML = '<div class="text-center py-4 text-gray-500">No team members added</div>';
+            return;
+        }
+
+        teamMembersContainer.innerHTML = members.map(member => `
+            <div class="team-member-item bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-gray-800">${member.user?.name || 'Unknown User'}</h4>
+                        <p class="text-sm text-gray-500">${member.user?.login || 'No login'} • ${member.role}</p>
+                        ${member.user?.birthday ? `<p class="text-xs text-gray-400">Birthday: ${formatDate(member.user.birthday)}</p>` : ''}
+                    </div>
+                </div>
+                <button class="remove-member-btn text-red-600 hover:text-red-800 p-2" data-login="${member.user?.login}">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `).join('');
+
+        // Обработчики удаления участников
+        teamMembersContainer.querySelectorAll('.remove-member-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const login = btn.dataset.login;
+                if (confirm(`Remove ${login} from project?`)) {
+                    try {
+                        await ProjectAPI.removeMember(project.id, login);
+                        showToast('Member removed successfully');
+                        await loadTeamMembers(container, project.id);
+                    } catch (error) {
+                        showToast(error.message, 'error');
+                    }
+                }
+            });
+        });
+    }
+
+    // Загружаем участников при открытии вкладки Team
+    const teamTabBtn = container.querySelector('.tab-btn[data-tab="team"]');
+    if (teamTabBtn) {
+        teamTabBtn.addEventListener('click', () => {
+            loadTeamMembers(container, project.id);
+        });
+    }
 }
 
 function switchTab(container, tabName) {

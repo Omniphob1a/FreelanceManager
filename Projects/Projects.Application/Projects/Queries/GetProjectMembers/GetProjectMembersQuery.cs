@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Projects.Application.Projects.Queries.GetProjectMembers
 {
-	public record GetProjectMembersQuery(Guid ProjectId) : IRequest<Result<List<ProjectMemberDto>>>;
+	public record GetProjectMembersQuery(Guid ProjectId) : IRequest<Result<List<ProjectMemberReadDto>>>;
 }

@@ -1,4 +1,4 @@
-<!-- START: improved project-detail (replace original block) -->
+<!-- START: improved project-detail with team management -->
 <div class="project-detail bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-full max-w-4xl max-h-[90vh]">
     <!-- Header (flat, accent strip, avatars, next milestone, progress) -->
     <div class="bg-white text-gray-900 p-6 flex flex-col gap-4 border-b border-gray-100">
@@ -70,6 +70,9 @@
         </button>
         <button class="tab-btn px-6 py-4 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="milestones" aria-selected="false">
             <i class="fas fa-flag-checkered mr-2"></i> Milestones
+        </button>
+        <button class="tab-btn px-6 py-4 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="team" aria-selected="false">
+            <i class="fas fa-users mr-2"></i> Team
         </button>
         <button class="tab-btn px-6 py-4 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="attachments" aria-selected="false">
             <i class="fas fa-paperclip mr-2"></i> Attachments
@@ -229,6 +232,49 @@
             </div>
         </div>
 
+        <!-- Team Tab -->
+        <div id="teamTab" class="tab-content hidden p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold text-gray-800">Team Members</h3>
+                <button id="addTeamMemberBtn"
+                        class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center text-sm font-medium shadow-md">
+                    <i class="fas fa-plus mr-2"></i> Add Member
+                </button>
+            </div>
+
+            <!-- Add Member Form -->
+            <div id="addMemberForm" class="hidden bg-white rounded-xl p-5 mb-6 border border-gray-200">
+                <h4 class="font-semibold text-gray-800 mb-4 text-base">Add Team Member</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Login*</label>
+                        <input type="text" id="memberLoginInput"
+                               class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="User login">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                        <select id="memberRoleInput" class="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="member">Member</option>
+                            <option value="admin">Admin</option>
+                            <option value="viewer">Viewer</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 mt-5">
+                    <button id="cancelAddMemberBtn" class="px-4 py-2.5 text-gray-600 hover:bg-gray-100 rounded-lg font-medium">Cancel</button>
+                    <button id="saveMemberBtn" class="px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition shadow-md">
+                        <i class="fas fa-save mr-2"></i> Add Member
+                    </button>
+                </div>
+            </div>
+
+            <!-- Team Members List -->
+            <div class="space-y-4" id="teamMembersContainer">
+                <div class="text-center py-4 text-gray-500">Loading team members...</div>
+            </div>
+        </div>
+
         <!-- Attachments Tab -->
         <div id="attachmentsTab" class="tab-content hidden p-6">
             <div class="flex justify-between items-center mb-6">
@@ -255,4 +301,4 @@
         </button>
     </div>
 </div>
-<!-- END: improved project-detail -->
+<!-- END: improved project-detail with team management -->

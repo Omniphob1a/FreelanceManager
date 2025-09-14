@@ -1,203 +1,210 @@
-﻿using FluentResults;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Users.Domain.Common;
+using Users.Domain.Events;
 using Users.Domain.ValueObjects;
 
-namespace Users.Domain.Entities;
-public class User
+namespace Users.Domain.Entities
 {
-	public Guid Id { get; private set; }
-	public string Login { get; private set; }
-	public string PasswordHash { get; private set; }
-	public string Name { get; private set; }
-	public int Gender { get; private set; }
-	public DateTime? Birthday { get; private set; }
-	public bool Admin { get; private set; }
-	public Email Email { get; private set; }
-	public DateTime CreatedAt { get; private set; }
-	public string CreatedBy { get; private set; }
-	public DateTime? ModifiedOn { get; private set; }
-	public string ModifiedBy { get; private set; }
-	public DateTime? RevokedOn { get; private set; }
-	public string RevokedBy { get; private set; }
-	public ICollection<Guid> RoleIds { get; set; } = [];
-
-	private User() { }
-
-	private static Result Validate(string login, string passwordHash, string name, int gender, DateTime? birthday, Email email)
+	public class User : EntityBase
 	{
-		var result = Result.Ok();
+		public Guid Id { get; }
+		public string Login { get; private set; }
+		public string PasswordHash { get; private set; }
+		public string Name { get; private set; }
+		public int Gender { get; private set; }
+		public DateTime? Birthday { get; private set; }
+		public bool Admin { get; private set; }
+		public Email Email { get; private set; }
+		public DateTime CreatedAt { get; }
+		public string CreatedBy { get; }
+		public DateTime? ModifiedOn { get; private set; }
+		public string? ModifiedBy { get; private set; }
+		public DateTime? RevokedOn { get; private set; }
+		public string? RevokedBy { get; private set; }
 
-		if (string.IsNullOrWhiteSpace(login))
-			result = result.WithError("Login cannot be empty");
+		private readonly List<Guid> _roleIds = new();
+		public IReadOnlyCollection<Guid> RoleIds => _roleIds.AsReadOnly();
 
-		if (string.IsNullOrWhiteSpace(passwordHash))
-			result = result.WithError("Password hash cannot be empty");
-
-		if (string.IsNullOrWhiteSpace(name))
-			result = result.WithError("Name cannot be empty");
-
-		if (email is null)
-			result = result.WithError("Email cannot be null");
-
-		if (gender < 0 || gender > 2)
-			result = result.WithError("Gender must be 0 (Unknown), 1 (Male), or 2 (Female)");
-
-		if (birthday > DateTime.UtcNow)
-			result = result.WithError("Birthday cannot be in the future");
-
-		return result;
-	}
-
-	private static Result ValidateUserData(string name, int gender, DateTime? birthday, Email email)
-	{
-		var result = Result.Ok();
-
-		if (string.IsNullOrWhiteSpace(name))
-			result = result.WithError("Name cannot be empty");
-
-		if (email is null)
-			result = result.WithError("Email cannot be null");
-
-		if (gender < 0 || gender > 2)
-			result = result.WithError("Gender must be 0 (Unknown), 1 (Male), or 2 (Female)");
-
-		if (birthday > DateTime.UtcNow)
-			result = result.WithError("Birthday cannot be in the future");
-
-		return result;
-	}
-
-	public static Result<User> TryCreate(
-		string login,
-		string passwordHash,
-		string name,
-		int gender,
-		DateTime? birthday,
-		Email email,
-		string createdBy,
-		bool isAdmin)
-	{
-		var validationResult = Validate(login, passwordHash, name, gender, birthday, email);
-
-		if (validationResult.IsFailed)
+		private User(
+			Guid id,
+			string login,
+			string passwordHash,
+			string name,
+			int gender,
+			Email email,
+			string createdBy,
+			DateTime createdAtUtc)
 		{
-			return Result.Fail(validationResult.Errors);
+			if (string.IsNullOrWhiteSpace(login)) throw new ArgumentException("Login is required.", nameof(login));
+			if (string.IsNullOrWhiteSpace(passwordHash)) throw new ArgumentException("Password hash is required.", nameof(passwordHash));
+			if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name is required.", nameof(name));
+			if (email is null) throw new ArgumentNullException(nameof(email));
+
+			Id = id;
+			Login = login;
+			PasswordHash = passwordHash;
+			Name = name;
+			Gender = gender;
+			Email = email;
+			CreatedBy = createdBy ?? throw new ArgumentNullException(nameof(createdBy));
+			CreatedAt = createdAtUtc;
 		}
 
-		var user = new User
+		// ==========================
+		// Factory method
+		// ==========================
+		public static User Register(
+			string login,
+			string passwordHash,
+			string name,
+			int gender,
+			Email email,
+			string createdBy)
 		{
-			Id = Guid.NewGuid(),
-			Login = login,
-			PasswordHash = passwordHash,
-			Name = name,
-			Gender = gender,
-			Birthday = birthday,
-			Email = email,
-			CreatedAt = DateTime.UtcNow,
-			CreatedBy = createdBy,
-			Admin = isAdmin
-		};
+			var user = new User(
+				Guid.NewGuid(),
+				login,
+				passwordHash,
+				name,
+				gender,
+				email,
+				createdBy,
+				DateTime.UtcNow);
 
-		return Result.Ok(user);
-	}
-
-	public Result AssignRole(Guid roleId)
-	{
-		if (!RoleIds.Contains(roleId))
-		{
-			RoleIds.Add(roleId);
-			return Result.Ok();
+			user.AddDomainEvent(new UserRegisteredDomainEvent(user.Id, user.Login, user.Email));
+			return user;
 		}
-		return Result.Fail("Role already assigned.");
-	}
 
-	public Result RemoveRole(Guid roleId)
-	{
-		if (RoleIds.Contains(roleId))
+		// ==========================
+		// Update methods
+		// ==========================
+		public void UpdateProfile(string name, int gender, DateTime? birthday, Email email, string modifiedBy)
 		{
-			RoleIds.Remove(roleId);
-			return Result.Ok();
+			if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name is required.", nameof(name));
+			if (email is null) throw new ArgumentNullException(nameof(email));
+
+			Name = name;
+			Gender = gender;
+			Birthday = birthday;
+			Email = email;
+
+			ModifiedBy = modifiedBy;
+			ModifiedOn = DateTime.UtcNow;
+
+			AddDomainEvent(new UserProfileUpdatedDomainEvent(Id));
 		}
-		return Result.Fail("Role not found.");
+
+		public void ChangeLogin(string newLogin, string modifiedBy)
+		{
+			if (string.IsNullOrWhiteSpace(newLogin)) throw new ArgumentException("Login is required.", nameof(newLogin));
+
+			Login = newLogin;
+			ModifiedBy = modifiedBy;
+			ModifiedOn = DateTime.UtcNow;
+
+			AddDomainEvent(new UserLoginChangedDomainEvent(Id, newLogin));
+		}
+
+		public void ChangePassword(string newPasswordHash, string modifiedBy)
+		{
+			if (string.IsNullOrWhiteSpace(newPasswordHash)) throw new ArgumentException("Password hash is required.", nameof(newPasswordHash));
+
+			PasswordHash = newPasswordHash;
+			ModifiedBy = modifiedBy;
+			ModifiedOn = DateTime.UtcNow;
+
+			AddDomainEvent(new UserPasswordChangedDomainEvent(Id));
+		}
+
+		// ==========================
+		// Role management
+		// ==========================
+		public void AddRole(Guid roleId, string modifiedBy)
+		{
+			if (roleId == Guid.Empty) throw new ArgumentException("RoleId cannot be empty.", nameof(roleId));
+			if (_roleIds.Contains(roleId)) return;
+
+			_roleIds.Add(roleId);
+			ModifiedBy = modifiedBy;
+			ModifiedOn = DateTime.UtcNow;
+
+			AddDomainEvent(new UserRoleAddedDomainEvent(Id, roleId));
+		}
+
+		public void RemoveRole(Guid roleId, string modifiedBy)
+		{
+			if (!_roleIds.Contains(roleId)) return;
+
+			_roleIds.Remove(roleId);
+			ModifiedBy = modifiedBy;
+			ModifiedOn = DateTime.UtcNow;
+
+			AddDomainEvent(new UserRoleRemovedDomainEvent(Id, roleId));
+		}
+
+		// ==========================
+		// Deletion / Restore
+		// ==========================
+		public void Delete(string revokedBy)
+		{
+			if (RevokedOn.HasValue)
+				throw new InvalidOperationException("User already revoked.");
+
+			RevokedOn = DateTime.UtcNow;
+			RevokedBy = revokedBy;
+
+			AddDomainEvent(new UserDeletedDomainEvent(Id));
+		}
+
+		public void Restore(string modifiedBy)
+		{
+			if (!RevokedOn.HasValue)
+				throw new InvalidOperationException("User is not revoked.");
+
+			RevokedOn = null;
+			RevokedBy = null;
+			ModifiedBy = modifiedBy;
+			ModifiedOn = DateTime.UtcNow;
+
+			AddDomainEvent(new UserRestoredDomainEvent(Id));
+		}
+
+		// ==========================
+		// Rehydration (for EF Core)
+		// ==========================
+		public static User Restore(
+			Guid id,
+			string login,
+			string passwordHash,
+			string name,
+			int gender,
+			DateTime? birthday,
+			bool admin,
+			Email email,
+			string createdBy,
+			DateTime createdAt,
+			DateTime? modifiedOn,
+			string? modifiedBy,
+			DateTime? revokedOn,
+			string? revokedBy,
+			IEnumerable<Guid>? roleIds)
+		{
+			var user = new User(id, login, passwordHash, name, gender, email, createdBy, createdAt)
+			{
+				Birthday = birthday,
+				Admin = admin,
+				ModifiedOn = modifiedOn,
+				ModifiedBy = modifiedBy,
+				RevokedOn = revokedOn,
+				RevokedBy = revokedBy
+			};
+
+			if (roleIds != null)
+				user._roleIds.AddRange(roleIds);
+
+			return user;
+		}
 	}
-	public Result UpdateName(string newName, string modifiedBy)
-	{
-		if (string.IsNullOrWhiteSpace(newName))
-			return Result.Fail("Password hash cannot be empty.");
-
-		Name = newName;
-		ModifiedOn = DateTime.UtcNow;
-		ModifiedBy = modifiedBy;
-
-		return Result.Ok();
-	}
-
-	public Result UpdateLogin(string newLogin, string modifiedBy)
-	{
-		if (string.IsNullOrWhiteSpace(newLogin))
-			return Result.Fail("Password hash cannot be empty.");
-
-		Login = newLogin;
-		ModifiedOn = DateTime.UtcNow;
-		ModifiedBy = modifiedBy;
-
-		return Result.Ok();
-	}
-
-	public Result UpdatePassword(string newPasswordHash, string modifiedBy)
-	{
-		if (string.IsNullOrWhiteSpace(newPasswordHash))
-			return Result.Fail("Password hash cannot be empty.");
-
-		PasswordHash = newPasswordHash;
-		ModifiedOn = DateTime.UtcNow;
-		ModifiedBy = modifiedBy;
-
-		return Result.Ok();
-	}
-
-	public void UpdateUser(string name, int gender, DateTime? birthday, Email email, string modifiedBy)
-	{
-		var validationResult = ValidateUserData(name, gender, birthday, email);
-		if (validationResult.IsFailed)
-			throw new ArgumentException(string.Join("; ", validationResult.Errors));
-
-		Name = name;
-		Gender = gender;
-		Birthday = birthday;
-		Email = email;
-		ModifiedOn = DateTime.UtcNow;
-		ModifiedBy = modifiedBy;
-	}
-
-	public Result Revoke(string revokedBy)
-	{
-		RevokedOn = DateTime.UtcNow;
-		RevokedBy = revokedBy;
-		return Result.Ok();
-	}
-
-	public bool VerifyPassword(string password)
-	{
-		using var sha256 = SHA256.Create();
-		var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-		var hashString = Convert.ToBase64String(hashBytes);
-		return PasswordHash == hashString;
-	}
-
-	public Result Restore(string modifiedBy)
-	{
-		if (RevokedOn == null)
-			return Result.Fail("User is not revoked.");
-
-		RevokedOn = null;
-		RevokedBy = null;
-		ModifiedOn = DateTime.UtcNow;
-		ModifiedBy = modifiedBy;
-
-		return Result.Ok();
-	}
-
-
 }

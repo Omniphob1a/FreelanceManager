@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projects.Persistence.Models;
+using Projects.Persistence.Models.ReadModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Projects.Persistence.Data
 		public DbSet<ProjectAttachmentEntity> ProjectAttachments { get; set; } = null!;
 		public DbSet<ProjectMemberEntity> ProjectMembers { get; set; } = null!;
 		public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
+		public DbSet<UserReadModel> Users { get; set; } = null!;
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

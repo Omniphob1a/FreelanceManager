@@ -1,5 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
+using System.Security.Cryptography;
+using System.Text;
 using Users.Application.Interfaces;
 using Users.Application.Responses;
 using Users.Application.Users.Queries.AuthenticateUser;
@@ -24,12 +26,19 @@ public class AuthenticateUserQueryHandler
 		CancellationToken ct)
 	{
 		var user = await _userRepo.GetByLogin(cmd.Login, ct);
-		if (user is null || !user.VerifyPassword(cmd.Password))
+		if (user is null || user.RevokedOn.HasValue)
 			return Result.Fail("Invalid credentials or user revoked");
 
+		var hash = Convert.ToBase64String(
+			SHA256.Create()
+				  .ComputeHash(Encoding.UTF8.GetBytes(cmd.Password)));
+
+		if (!string.Equals(user.PasswordHash, hash, StringComparison.Ordinal))
+			return Result.Fail("Invalid credentials");
+
 		var roles = (await _userRepo.GetUserRoles(user.Id, ct))
-						.Distinct()
-						.ToList();
+			.Distinct()
+			.ToList();
 
 		var token = await _jwtGen.GenerateToken(
 			user.Id,

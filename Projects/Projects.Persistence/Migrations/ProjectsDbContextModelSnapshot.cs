@@ -197,6 +197,31 @@ namespace Projects.Persistence.Migrations
                     b.ToTable("ProjectMilestones");
                 });
 
+            modelBuilder.Entity("Projects.Persistence.Models.ReadModels.UserReadModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("Birthday")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Projects.Persistence.Models.ProjectAttachmentEntity", b =>
                 {
                     b.HasOne("Projects.Persistence.Models.ProjectEntity", null)

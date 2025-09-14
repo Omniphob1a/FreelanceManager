@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Mapster;
+﻿using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -7,10 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Users.Application.Interfaces;
+using Users.Application.Mappings;
 using Users.Domain.Interfaces.Repositories;
 using Users.Infrastructure.Auth;
 using Users.Infrastructure.Data;
+using Users.Infrastructure.Kafka;
+using Users.Infrastructure.Outbox;
 using Users.Infrastructure.Repositories;
 
 public static class InfrastructureExtensions
@@ -39,6 +42,8 @@ public static class InfrastructureExtensions
 
 		new UserMappingConfiguration().Register(config);
 		new RoleMappingConfiguration().Register(config);
+		new UserDtoMappingConfiguration().Register(config);
+		new PublicUserDtoMappingConfiguration().Register(config);
 
 		services.AddSingleton(config);
 
@@ -48,7 +53,13 @@ public static class InfrastructureExtensions
 			return new Mapper(cfg);
 		});
 
+		services.AddHostedService<OutboxPublisherHostedService>();
+		var kafkaSection = configuration.GetSection("Kafka");
+		services.Configure<KafkaSettings>(kafkaSection);
+		var settings = kafkaSection.Get<KafkaSettings>();
+		services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(settings));
 
+		services.AddScoped<IOutboxService, OutboxService>();
 
 		services.AddHttpContextAccessor();
 

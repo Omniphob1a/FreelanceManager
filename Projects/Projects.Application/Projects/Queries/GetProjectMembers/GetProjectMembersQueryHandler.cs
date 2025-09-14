@@ -3,29 +3,24 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Projects.Application.DTOs;
 using Projects.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projects.Application.Projects.Queries.GetProjectMembers
 {
 	public class GetProjectMembersQueryHandler
-	: IRequestHandler<GetProjectMembersQuery, Result<List<ProjectMemberDto>>>
+		: IRequestHandler<GetProjectMembersQuery, Result<List<ProjectMemberReadDto>>>
 	{
-		private readonly IProjectQueryService _queryService;
+		private readonly IProjectMemberQueryService _membersQueryService;
 		private readonly ILogger<GetProjectMembersQueryHandler> _logger;
 
 		public GetProjectMembersQueryHandler(
-			IProjectQueryService queryService,
+			IProjectMemberQueryService membersQueryService,
 			ILogger<GetProjectMembersQueryHandler> logger)
 		{
-			_queryService = queryService;
+			_membersQueryService = membersQueryService;
 			_logger = logger;
 		}
 
-		public async Task<Result<List<ProjectMemberDto>>> Handle(
+		public async Task<Result<List<ProjectMemberReadDto>>> Handle(
 			GetProjectMembersQuery request,
 			CancellationToken ct)
 		{
@@ -33,20 +28,13 @@ namespace Projects.Application.Projects.Queries.GetProjectMembers
 
 			try
 			{
-				var members = await _queryService.GetMembersAsync(request.ProjectId, ct);
-
-				if (members is null || !members.Any())
-				{
-					_logger.LogInformation("No members found for project {ProjectId}", request.ProjectId);
-					return Result.Ok(new List<ProjectMemberDto>()); 
-				}
-
+				var members = await _membersQueryService.GetProjectMembersAsync(request.ProjectId, ct);
 				return Result.Ok(members);
 			}
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "Error while fetching members for project {ProjectId}", request.ProjectId);
-				return Result.Fail<List<ProjectMemberDto>>("Unexpected error occurred.");
+				return Result.Fail<List<ProjectMemberReadDto>>("Unexpected error occurred.");
 			}
 		}
 	}

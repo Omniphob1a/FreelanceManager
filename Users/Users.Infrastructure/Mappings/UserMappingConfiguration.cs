@@ -7,6 +7,7 @@ public class UserMappingConfiguration : IRegister
 {
 	public void Register(TypeAdapterConfig config)
 	{
+
 		config.NewConfig<User, UserData>()
 			.Map(dest => dest.Id, src => src.Id)
 			.Map(dest => dest.Login, src => src.Login)
@@ -23,56 +24,31 @@ public class UserMappingConfiguration : IRegister
 			.Map(dest => dest.RevokedOn, src => src.RevokedOn)
 			.Map(dest => dest.RevokedBy, src => src.RevokedBy)
 			.Map(dest => dest.UserRoles,
-				src => src.RoleIds.Select(roleId => new UserRoleEntity { UserId = src.Id, RoleId = roleId }))
+				src => src.RoleIds.Select(roleId => new UserRoleEntity
+				{
+					UserId = src.Id,
+					RoleId = roleId
+				}))
 			.IgnoreNonMapped(true);
+
 
 		config.NewConfig<UserData, User>()
-			.Map(dest => dest.Id, src => src.Id)
-			.MapWith(src => MapUserFromData(src))
+			.MapWith(src => User.Restore(
+				src.Id,
+				src.Login,
+				src.PasswordHash,
+				src.Name,
+				src.Gender,
+				src.Birthday,
+				src.Admin,
+				new Email(src.Email),
+				src.CreatedBy,
+				src.CreatedAt,
+				src.ModifiedOn,
+				src.ModifiedBy,
+				src.RevokedOn,
+				src.RevokedBy,
+				src.UserRoles.Select(ur => ur.RoleId)))
 			.IgnoreNonMapped(true);
-	}
-
-	private static User MapUserFromData(UserData src)
-	{
-		var userResult = User.TryCreate(
-			src.Login,
-			src.PasswordHash,
-			src.Name,
-			src.Gender,
-			src.Birthday,
-			new Email(src.Email),
-			src.CreatedBy,
-			src.Admin
-		);
-
-		if (!userResult.IsSuccess)
-			throw new InvalidDataException($"Invalid user data: {string.Join(", ", userResult.Errors)}");
-
-		var user = userResult.Value;
-
-		typeof(User)
-			.GetProperty("Id")?
-			.SetValue(user, src.Id);
-
-		SetPropertyIfExists(user, "ModifiedOn", src.ModifiedOn);
-		SetPropertyIfExists(user, "ModifiedBy", src.ModifiedBy);
-		SetPropertyIfExists(user, "RevokedOn", src.RevokedOn);
-		SetPropertyIfExists(user, "RevokedBy", src.RevokedBy);
-
-		foreach (var roleId in src.UserRoles.Select(ur => ur.RoleId))
-		{
-			user.AssignRole(roleId);
-		}
-
-		return user;
-	}
-
-	private static void SetPropertyIfExists<T>(User user, string propName, T value)
-	{
-		var prop = typeof(User).GetProperty(propName);
-		if (prop?.GetSetMethod(nonPublic: true) != null && value != null)
-		{
-			prop.SetValue(user, value);
-		}
 	}
 }

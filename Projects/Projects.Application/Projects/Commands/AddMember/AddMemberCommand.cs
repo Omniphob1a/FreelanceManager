@@ -11,7 +11,7 @@ namespace Projects.Application.Projects.Commands.AddMember
 {
 	public record AddMemberCommand(
 		Guid ProjectId,
-		string Email,
+		string Login,
 		string Role
 	) : IRequest<Result<ProjectMemberDto>>;
 }

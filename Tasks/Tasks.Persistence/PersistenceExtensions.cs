@@ -42,6 +42,9 @@ namespace Tasks.Persistence
 			services.AddScoped<IProjectTaskRepository, ProjectTaskRepository>();
 			services.AddScoped<IProjectReadRepository, ProjectReadRepository>();
 			services.AddScoped<IMemberReadRepository, MemberReadRepository>();
+			services.AddScoped<IUserReadRepository, UserReadRepository>();
+			services.AddScoped<ICommentReadRepository, CommentReadRepository>();	
+
 			services.AddScoped<IProjectTaskQueryService, ProjectTaskQueryService>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			return services;
