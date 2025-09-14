@@ -31,7 +31,7 @@ jobs:
             context: ./Gateway
             image: gateway
           - service: frontend
- 	    dockerfile: ./frontend/Dockerfile
+            dockerfile: ./frontend/Dockerfile   # вот тут фикс
             context: ./frontend
             image: frontend
 
