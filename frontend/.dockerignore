@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+yarn-error.log
+
+# build outputs
+dist
+build
+
+# misc
+.git
+.vscode
+.DS_Store
