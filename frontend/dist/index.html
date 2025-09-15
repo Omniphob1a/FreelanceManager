@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreelanceHub - Project Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">	
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script type="module" crossorigin src="/js/main.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CpTgWc4Y.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-button fixed top-4 left-4 z-50 p-2 rounded-md bg-white shadow-md text-gray-700 hidden md:hidden transition-all duration-200 hover:bg-gray-100 hover:scale-105">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar bg-white h-screen fixed shadow-md flex flex-col w-64 transition-all duration-300">
+        <!-- Logo -->
+        <div class="p-4 flex items-center border-b border-gray-200">
+            <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-md">
+                <i class="fas fa-project-diagram"></i>
+            </div>
+            <span class="logo-text ml-3 text-xl font-semibold text-gray-800">FreelanceHub</span>
+        </div>
+
+        <!-- User Profile -->
+        <div class="p-4 border-b border-gray-200 flex items-center">
+            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden ring-2 ring-transparent hover:ring-blue-500 transition-all duration-200">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-full h-full object-cover">
+            </div>
+            <div class="ml-3">
+                <div class="text-sm font-medium text-gray-800">Sarah Johnson</div>
+                <div class="text-xs text-gray-500">Freelancer</div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex-1 overflow-y-auto">
+            <nav class="p-2">
+                <div class="space-y-1">
+                    <a href="#dashboard" data-page="dashboard" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-blue-600 shadow-sm hover:shadow-md transition-all duration-200">
+                        <i class="fas fa-home text-white"></i>
+                        <span class="sidebar-text ml-3">Dashboard</span>
+                    </a>
+                    <a href="#projects" data-page="projects" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
+                        <i class="fas fa-project-diagram text-gray-500"></i>
+                        <span class="sidebar-text ml-3">Projects</span>
+                    </a>
+                    <a href="#tasks" data-page="tasks" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
+                        <i class="fas fa-tasks text-gray-500"></i>
+                        <span class="sidebar-text ml-3">Tasks</span>
+                    </a>
+                    <a href="#notifications" data-page="notifications" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
+                        <i class="fas fa-bell text-gray-500"></i>
+                        <span class="sidebar-text ml-3">Notifications</span>
+                        <span id="sidebarNotificationBadge" class="ml-auto inline-block py-0.5 px-2 text-xs font-medium bg-red-100 text-red-800 rounded-full hidden">3</span>
+                    </a>
+                    <a href="#profile" data-page="profile" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
+                        <i class="fas fa-user text-gray-500"></i>
+                        <span class="sidebar-text ml-3">My Profile</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Collapse Button -->
+        <div class="p-4 border-t border-gray-200 flex justify-end">
+            <button class="text-gray-500 hover:text-gray-700 transition-all duration-200 hover:scale-110">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content ml-64">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <h1 id="pageTitle" class="text-lg font-semibold text-gray-900">Dashboard</h1>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button id="notificationButton" class="p-2 rounded-full text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 relative">
+                            <i class="fas fa-bell"></i>
+                            <span id="notificationBadge" class="absolute top-0 right-0 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center hidden">3</span>
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <button id="userMenuButton" class="flex items-center text-sm rounded-full focus:outline-none transition-all duration-200 hover:scale-105">
+                            <span class="sr-only">Open user menu</span>
+                            <img class="h-8 w-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition-all duration-200" src="https://randomuser.me/api/portraits/women/44.jpg" alt="User photo">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main id="content" class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 animate-fade-in">
+            <!-- Контент будет загружаться динамически -->
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-50 space-y-2 w-80">
+        <!-- Toasts will be added here dynamically -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/js/app.js"></script>
+    <div id="modal-root"></div>
+</body>
+</html>
