@@ -48,9 +48,10 @@ namespace Tasks.Persistence.Data.Repositories
 				var totalItems = await query.CountAsync(cancellationToken);
 
 				var entities = await query
+					.AsNoTracking()
 					.ApplyPagination(paginationInfo)
 					.ToListAsync(cancellationToken);
-
+				_logger.LogInformation("GetAllAsync → из базы пришло {Count} задач", entities.Count);
 				var items = _mapper.ToDomainCollection(entities);
 
 				var updatedPaginationInfo = new PaginationInfo(totalItems, paginationInfo.ItemsPerPage, paginationInfo.ActualPage);

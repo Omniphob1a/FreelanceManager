@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tasks.Application.Common.Cache;
 using Tasks.Application.Common.Filters;
 using Tasks.Application.Common.Pagination;
 using Tasks.Application.DTOs;
@@ -12,11 +13,12 @@ using Tasks.Application.Interfaces;
 
 namespace Tasks.Application.ProjectTasks.Queries.GetTasks
 {
-	public record GetProjectTasksQuery(TaskFilter filter, PaginationInfo paginationInfo) : IRequest<Result<PaginatedResult<TaskListItemDto>>>, ICacheableQuery
+	public record GetProjectTasksQuery(TaskFilter filter, PaginationInfo paginationInfo)
+	: IRequest<Result<PaginatedResult<TaskListItemDto>>>, ICacheableQuery
 	{
 		public bool BypassCache => false;
 
-		public string CacheKey => $"task:list:filtered:reporterId:{filter.ReporterId}:{filter.ToCacheKey()}";
+		public string CacheKey => CacheKeyBuilder.BuildTaskListKey(filter, paginationInfo);
 
 		public int SlidingExpirationInMinutes => 2;
 

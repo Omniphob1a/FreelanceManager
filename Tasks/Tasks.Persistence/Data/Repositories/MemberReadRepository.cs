@@ -34,7 +34,7 @@ namespace Tasks.Persistence.Data.Repositories
 
 			try
 			{
-				var isExists = _context.Set<MemberReadModel>()
+				var isExists = _context.ProjectMembers
 					.AnyAsync(m => m.ProjectId == projectId && m.UserId == userId, ct);
 
 				return isExists;

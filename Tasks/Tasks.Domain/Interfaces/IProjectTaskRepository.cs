@@ -10,6 +10,7 @@ namespace Tasks.Domain.Interfaces
 	public interface IProjectTaskRepository
 	{
 		Task<ProjectTask> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+		Task<ProjectTask?> GetByIdForUpdateAsync(Guid taskId, CancellationToken ct);
 		Task AddAsync(ProjectTask task, CancellationToken cancellationToken);
 		Task UpdateAsync(ProjectTask task, CancellationToken cancellationToken);
 		Task DeleteAsync(Guid TaskId, CancellationToken cancellationToken);

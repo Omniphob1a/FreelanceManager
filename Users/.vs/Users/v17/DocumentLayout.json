@@ -534,7 +534,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -543,18 +543,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20250911215611_KafkaCommunicationIntegrated.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
-              "RelativeDocumentMoniker": "Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
-              "RelativeToolTip": "Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T21:56:51.299Z"
             },
             {
               "$type": "Document",
@@ -628,6 +616,18 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-15T00:29:24.278Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "20250911215611_KafkaCommunicationIntegrated.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Users\\Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
+              "RelativeToolTip": "Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-11T21:56:51.299Z"
             },
             {
               "$type": "Document",

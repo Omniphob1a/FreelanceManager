@@ -18,6 +18,7 @@ namespace Tasks.Persistence.Data
 		public DbSet<CommentEntity> Comments { get; set; } = null!;
 		public DbSet<TimeEntryEntity> TimeEnries { get; set; } = null!;
 		public DbSet<UserReadModel> Users { get; set; } = null!;
+		public DbSet<MemberReadModel> ProjectMembers { get; set; } = null!;
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

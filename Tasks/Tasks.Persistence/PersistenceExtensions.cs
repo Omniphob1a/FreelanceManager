@@ -14,6 +14,7 @@ using Tasks.Application.Interfaces;
 using Tasks.Application.Mappings;
 using Tasks.Domain.Interfaces;
 using Tasks.Persistence.Data;
+using Tasks.Persistence.Data.Queries;
 using Tasks.Persistence.Data.Repositories;
 using Tasks.Persistence.Mappings;
 
@@ -46,6 +47,7 @@ namespace Tasks.Persistence
 			services.AddScoped<ICommentReadRepository, CommentReadRepository>();	
 
 			services.AddScoped<IProjectTaskQueryService, ProjectTaskQueryService>();
+			services.AddScoped<IProjectMemberQueryService, ProjectMemberQueryService>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			return services;
 		}

@@ -370,10 +370,19 @@ export const TaskAPI = {
 
     // Получение задачи по ID
     async getTaskById(taskId, includes = []) {
-        const queryParams = includes.length > 0 
-            ? `?includes=${includes.join(',')}`
-            : '';
-        return fetchAPI(`/api/ProjectTasks/${taskId}${queryParams}`);
+    // Создаем URLSearchParams для правильного формирования параметров
+    const params = new URLSearchParams();
+    
+    // Добавляем каждый include как отдельный параметр с одинаковым ключом
+    includes.forEach(include => {
+        params.append('includes', include);
+    });
+    
+    const queryString = params.toString();
+    const url = `/api/ProjectTasks/${taskId}${queryString ? '?' + queryString : ''}`;
+    
+    console.log('Fetching task with URL:', url);
+    return fetchAPI(url);
     },
 
     // Обновление задачи
@@ -419,7 +428,21 @@ export const TaskAPI = {
     // Добавление комментария
     async addComment(taskId, commentData) {
         return fetchAPI(`/api/ProjectTasks/${taskId}/comments`, 'POST', commentData);
-    }
+    },
+    
+    async getComments(taskId) {
+        try {
+            return await fetchAPI(`/api/ProjectTasks/${taskId}/comments`);
+        } catch (error) {
+            console.error('Failed to fetch comments:', error);
+            // Возвращаем пустой массив в случае ошибки
+            return [];
+        }
+    },
+
+    async getProjectMembers(projectId) {
+    return fetchAPI(`/api/ProjectTasks/${projectId}/projectMembers`);
+    },
 };
 
 export const NotificationAPI = {
@@ -462,4 +485,8 @@ export const ActivityAPI = {
         ];
     }
 };
+
+ function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+ }
 

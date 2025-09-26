@@ -51,9 +51,6 @@ public class ProjectTaskEntityConfiguration : IEntityTypeConfiguration<ProjectTa
 		builder.Property(x => x.UpdatedAt)
 			.IsRequired();
 
-		builder.Property(x => x.CreatedBy)
-			.IsRequired();
-
 		builder.HasMany(x => x.TimeEntries)
 			.WithOne()
 			.HasForeignKey(te => te.TaskId)

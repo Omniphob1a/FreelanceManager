@@ -10,198 +10,300 @@
 <body class="bg-gray-50 text-gray-900">
   <div class="container mx-auto px-4 py-8">
     <!-- Header and create button -->
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex justify-between items-center mb-8">
       <div>
         <h1 class="text-3xl font-bold text-gray-900">Task Management</h1>
         <p class="text-gray-600 mt-1">Manage and track all your tasks in one place</p>
       </div>
-      <button id="newTaskBtn" class="filters-btn" type="button">
+      <button id="newTaskBtn" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center shadow-md" type="button">
         <i class="fas fa-plus mr-2"></i> New Task
       </button>
     </div>
 
-    <!-- Filters toggle button -->
-    <div class="flex justify-between items-center mb-6">
-      <div class="relative">
-        <button id="toggleFiltersBtn" class="filters-btn relative" type="button" aria-expanded="false" aria-controls="filtersPanel">
-          <i class="fas fa-filter mr-2"></i> Filters
-          <span id="filterCounter" class="filter-counter hidden">0</span>
-        </button>
+    <!-- Quick stats and filters header -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+      <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+            <i class="fas fa-tasks text-blue-600 text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Total Tasks</p>
+            <p class="text-2xl font-semibold text-gray-800" id="totalTasksCount">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+            <i class="fas fa-play-circle text-green-600 text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">In Progress</p>
+            <p class="text-2xl font-semibold text-gray-800" id="inProgressTasksCount">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+            <i class="fas fa-exclamation-circle text-orange-600 text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Due Soon</p>
+            <p class="text-2xl font-semibold text-gray-800" id="dueSoonTasksCount">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+            <i class="fas fa-clock text-red-600 text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Overdue</p>
+            <p class="text-2xl font-semibold text-gray-800" id="overdueTasksCount">0</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ФИЛЬТРЫ: панель -->
-    <div id="filtersPanel" class="bg-white rounded-lg shadow-md mb-6 hidden">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
-        <!-- Status filter -->
-        <div class="filter-card">
-          <label class="block text-sm font-medium text-gray-700 mb-3">Status</label>
-          <div class="space-y-2">
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-status mr-3" value="0" />
-              <span class="text-sm">To Do</span>
-            </label>
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-status mr-3" value="1" />
-              <span class="text-sm">In Progress</span>
-            </label>
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-status mr-3" value="2" />
-              <span class="text-sm">Completed</span>
-            </label>
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-status mr-3" value="3" />
-              <span class="text-sm">Cancelled</span>
+    <!-- Main content area -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <!-- Toolbar with filters and search -->
+      <div class="p-6 border-b border-gray-100">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-4 lg:space-y-0">
+          <div class="flex flex-wrap items-center gap-4">
+            <!-- Ownership filter -->
+            <div class="relative">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Task Ownership</label>
+              <div class="flex space-x-2 bg-gray-50 p-1 rounded-lg">
+                <button class="task-ownership-filter px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 active" data-value="all">
+                  All Tasks
+                </button>
+                <button class="task-ownership-filter px-3 py-2 rounded-md text-sm font-medium transition-all duration-200" data-value="assigned">
+                  Assigned to Me
+                </button>
+                <button class="task-ownership-filter px-3 py-2 rounded-md text-sm font-medium transition-all duration-200" data-value="reported">
+                  Created by Me
+                </button>
+              </div>
+            </div>
+
+            <!-- Status quick filter -->
+            <div class="relative">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+              <select id="quickStatusFilter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <option value="">All Statuses</option>
+                <option value="0">To Do</option>
+                <option value="1">In Progress</option>
+                <option value="2">Completed</option>
+                <option value="3">Cancelled</option>
+              </select>
+            </div>
+
+            <!-- Priority quick filter -->
+            <div class="relative">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+              <select id="quickPriorityFilter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <option value="">All Priorities</option>
+                <option value="0">Low</option>
+                <option value="1">Medium</option>
+                <option value="2">High</option>
+                <option value="3">Urgent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <!-- Search -->
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-search text-gray-400"></i>
+              </div>
+              <input type="text" id="taskSearch" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Search tasks...">
+            </div>
+
+            <!-- Filters toggle button -->
+            <button id="toggleFiltersBtn" class="filters-btn relative flex items-center px-4 py-2.5 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200" type="button" aria-expanded="false" aria-controls="filtersPanel">
+              <i class="fas fa-filter mr-2 text-gray-600"></i>
+              <span class="text-sm font-medium text-gray-700">Filters</span>
+              <span id="filterCounter" class="filter-counter hidden ml-2 bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ФИЛЬТРЫ: панель -->
+      <div id="filtersPanel" class="bg-gray-50 border-b border-gray-200 hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+          <!-- Status filter -->
+          <div class="filter-card bg-white rounded-lg p-4 shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 mb-3">Status</label>
+            <div class="space-y-2">
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-status mr-3 rounded text-blue-600 focus:ring-blue-500" value="0" />
+                <span class="text-sm">To Do</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-status mr-3 rounded text-blue-600 focus:ring-blue-500" value="1" />
+                <span class="text-sm">In Progress</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-status mr-3 rounded text-blue-600 focus:ring-blue-500" value="2" />
+                <span class="text-sm">Completed</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-status mr-3 rounded text-blue-600 focus:ring-blue-500" value="3" />
+                <span class="text-sm">Cancelled</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Priority filter -->
+          <div class="filter-card bg-white rounded-lg p-4 shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 mb-3">Priority</label>
+            <div class="space-y-2">
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-priority mr-3 rounded text-blue-600 focus:ring-blue-500" value="0" />
+                <span class="text-sm">Low</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-priority mr-3 rounded text-blue-600 focus:ring-blue-500" value="1" />
+                <span class="text-sm">Medium</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-priority mr-3 rounded text-blue-600 focus:ring-blue-500" value="2" />
+                <span class="text-sm">High</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input type="checkbox" class="filter-priority mr-3 rounded text-blue-600 focus:ring-blue-500" value="3" />
+                <span class="text-sm">Urgent</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Date range filter -->
+          <div class="filter-card bg-white rounded-lg p-4 shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Due Date From</label>
+            <input type="date" id="filterDueFrom" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm mb-3 focus:ring-blue-500 focus:border-blue-500" />
+
+            <label class="block text-sm font-medium text-gray-700 mb-2">Due Date To</label>
+            <input type="date" id="filterDueTo" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500" />
+          </div>
+
+          <!-- Project filter -->
+          <div class="filter-card bg-white rounded-lg p-4 shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Project</label>
+            <select id="filterProject" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500">
+              <option value="">All projects</option>
+              <!-- Projects will be populated dynamically -->
+            </select>
+          </div>
+
+          <!-- Estimated hours filter -->
+          <div class="filter-card bg-white rounded-lg p-4 shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Estimated Hours</label>
+            <div class="flex items-center space-x-2 mb-3">
+              <input type="number" id="filterMinEstimatedHours" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Min" min="0" step="0.5" />
+              <span class="text-gray-400">-</span>
+              <input type="number" id="filterMaxEstimatedHours" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Max" min="0" step="0.5" />
+            </div>
+          </div>
+
+          <!-- Billable filter -->
+          <div class="filter-card bg-white rounded-lg p-4 shadow-sm">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Billable</label>
+            <select id="filterBillable" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500">
+              <option value="">All</option>
+              <option value="true">Billable only</option>
+              <option value="false">Non-billable only</option>
+            </select>
+          </div>
+
+          <!-- Overdue filter -->
+          <div class="filter-card bg-white rounded-lg p-4 shadow-sm">
+            <label class="flex items-center cursor-pointer mt-6">
+              <input type="checkbox" id="filterOverdue" class="mr-3 rounded text-blue-600 focus:ring-blue-500" />
+              <span class="text-sm font-medium text-gray-700">Overdue only</span>
             </label>
           </div>
         </div>
 
-        <!-- Priority filter -->
-        <div class="filter-card">
-          <label class="block text-sm font-medium text-gray-700 mb-3">Priority</label>
-          <div class="space-y-2">
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-priority mr-3" value="0" />
-              <span class="text-sm">Low</span>
-            </label>
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-priority mr-3" value="1" />
-              <span class="text-sm">Medium</span>
-            </label>
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-priority mr-3" value="2" />
-              <span class="text-sm">High</span>
-            </label>
-            <label class="flex items-center cursor-pointer">
-              <input type="checkbox" class="filter-priority mr-3" value="3" />
-              <span class="text-sm">Urgent</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Date range filter -->
-        <div class="filter-card">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Due Date From</label>
-          <input type="date" id="filterDueFrom" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm mb-3" />
-
-          <label class="block text-sm font-medium text-gray-700 mb-2">Due Date To</label>
-          <input type="date" id="filterDueTo" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm" />
-        </div>
-
-        <!-- Project filter -->
-        <div class="filter-card">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Project</label>
-          <select id="filterProject" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
-            <option value="">All projects</option>
-            <!-- Projects will be populated dynamically -->
-          </select>
-        </div>
-
-        <!-- Estimated hours filter -->
-        <div class="filter-card">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Estimated Hours</label>
-          <div class="flex items-center space-x-2 mb-3">
-            <input type="number" id="filterMinEstimatedHours" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm" placeholder="Min" min="0" step="0.5" />
-            <span class="text-gray-400">-</span>
-            <input type="number" id="filterMaxEstimatedHours" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm" placeholder="Max" min="0" step="0.5" />
-          </div>
-        </div>
-
-        <!-- Billable filter -->
-        <div class="filter-card">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Billable</label>
-          <select id="filterBillable" class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm">
-            <option value="">All</option>
-            <option value="true">Billable only</option>
-            <option value="false">Non-billable only</option>
-          </select>
-        </div>
-
-        <!-- Overdue filter -->
-        <div class="filter-card">
-          <label class="flex items-center cursor-pointer mt-6">
-            <input type="checkbox" id="filterOverdue" class="mr-3" />
-            <span class="text-sm font-medium text-gray-700">Overdue only</span>
-          </label>
+        <!-- Filter action buttons -->
+        <div class="mt-6 flex justify-end space-x-3 p-6 border-t border-gray-200 bg-white">
+          <button id="applyFiltersBtn" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center" type="button">
+            <i class="fas fa-check-circle mr-2"></i> Apply Filters
+          </button>
+          <button id="clearFiltersBtn" class="px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-all duration-200 flex items-center" type="button">
+            <i class="fas fa-times mr-2"></i> Clear
+          </button>
         </div>
       </div>
 
-      <!-- Filter action buttons -->
-      <div class="mt-6 flex justify-end space-x-3 p-4 border-t border-gray-100">
-        <button id="applyFiltersBtn" class="filters-btn" type="button">
-          <i class="fas fa-check-circle mr-2"></i> Apply Filters
-        </button>
-        <button id="clearFiltersBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-all" type="button">
-          <i class="fas fa-times mr-2"></i> Clear
+      <!-- Tasks table -->
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Task</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assignee</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Due Date</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tasksTableBody" class="bg-white divide-y divide-gray-200">
+            <!-- Tasks will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Loading indicator -->
+      <div id="tasksLoader" class="p-12 text-center">
+        <div class="inline-flex items-center px-6 py-3 border border-gray-200 text-sm font-medium rounded-lg text-gray-500 bg-gray-50">
+          <i class="fas fa-spinner fa-spin mr-3"></i> Loading tasks...
+        </div>
+      </div>
+
+      <!-- No tasks message -->
+      <div id="noTasksRow" class="hidden p-12 text-center">
+        <div class="mx-auto w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+          <i class="fas fa-tasks text-blue-500 text-3xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">No tasks found</h3>
+        <p class="text-gray-600 mb-6">Get started by creating your first task</p>
+        <button id="createFirstTaskBtn" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center mx-auto" type="button">
+          <i class="fas fa-plus mr-2"></i> Create Task
         </button>
       </div>
-    </div>
 
-    <!-- Task counters and view options -->
-    <div class="flex justify-between items-center mb-6">
-      <div class="text-sm text-gray-600">
-        <span id="tasksCount">Loading tasks...</span>
-      </div>
-    </div>
-
-    <!-- Kanban board -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- To Do Column -->
-      <div class="kanban-column bg-gray-50 rounded-lg p-4 border border-gray-200">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-medium text-gray-900">To Do</h3>
-          <span class="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full" id="todoCount">0</span>
-        </div>
-        <div class="space-y-4" id="todoTasks">
-          <!-- Tasks will be loaded here -->
+      <!-- Pagination -->
+      <div class="bg-white px-6 py-4 border-t border-gray-200">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div class="text-sm text-gray-600">
+            Showing <span id="tasksShowing">0</span> of <span id="tasksTotal">0</span> tasks
+          </div>
+          <div class="flex space-x-2">
+            <button id="prevPageBtn" class="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+              Previous
+            </button>
+            <button id="nextPageBtn" class="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+              Next
+            </button>
+          </div>
         </div>
       </div>
-
-      <!-- In Progress Column -->
-      <div class="kanban-column bg-blue-50 rounded-lg p-4 border border-blue-200">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-medium text-gray-900">In Progress</h3>
-          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full" id="inProgressCount">0</span>
-        </div>
-        <div class="space-y-4" id="inProgressTasks">
-          <!-- Tasks will be loaded here -->
-        </div>
-      </div>
-
-      <!-- Completed Column -->
-      <div class="kanban-column bg-green-50 rounded-lg p-4 border border-green-200">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-medium text-gray-900">Completed</h3>
-          <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full" id="completedCount">0</span>
-        </div>
-        <div class="space-y-4" id="completedTasks">
-          <!-- Tasks will be loaded here -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Loading indicator -->
-    <div id="tasksLoader" class="p-8 text-center">
-      <div class="inline-flex items-center px-4 py-2 border text-sm font-medium rounded-md text-gray-500 bg-gray-100">
-        <i class="fas fa-spinner fa-spin mr-2"></i> Loading tasks...
-      </div>
-    </div>
-
-    <!-- No tasks message -->
-    <div id="noTasksRow" class="hidden bg-white rounded-lg shadow p-8 text-center">
-      <div class="mx-auto w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-        <i class="fas fa-tasks text-blue-500 text-3xl"></i>
-      </div>
-      <h3 class="text-xl font-semibold text-gray-800 mb-2">No tasks found</h3>
-      <p class="text-gray-600 mb-6">Get started by creating your first task</p>
-      <button id="createFirstTaskBtn" class="filters-btn" type="button">
-        <i class="fas fa-plus mr-2"></i> Create Task
-      </button>
     </div>
   </div>
 
   <!-- Task Detail Modal -->
-  <div id="taskModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div id="taskModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
     <!-- Modal content will be loaded dynamically -->
   </div>
 

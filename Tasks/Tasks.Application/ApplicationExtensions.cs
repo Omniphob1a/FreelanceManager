@@ -17,6 +17,7 @@ namespace Tasks.Application
 		{
 			var assembly = Assembly.GetExecutingAssembly();
 
+
 			services.AddTransient(
 				typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
 			services.AddTransient(

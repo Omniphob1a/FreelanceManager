@@ -34,7 +34,7 @@ namespace Tasks.Application.ProjectTasks.Commands.AddTimeEntry
 				"Adding time entry for TaskId: {TaskId}, UserId: {UserId}, Start: {Start}, End: {End}",
 				request.TaskId, request.UserId, request.StartedAt, request.EndedAt);
 
-			var task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
+			var task = await _projectTaskRepository.GetByIdForUpdateAsync(request.TaskId, cancellationToken);
 			if (task is null)
 			{
 				_logger.LogWarning("Task {TaskId} not found when adding time entry", request.TaskId);

@@ -10,7 +10,8 @@ namespace Tasks.Persistence.Models
 	{
 		public Guid Id { get; set; }
 		public Guid ProjectId { get; set; }
-		public string Title { get; set; } = string.Empty; public string? Description { get; set; }
+		public string Title { get; set; } = string.Empty; 
+		public string? Description { get; set; }
 		public Guid? AssigneeId { get; set; }
 		public Guid ReporterId { get; set; }
 		public int Status { get; set; }
@@ -21,7 +22,6 @@ namespace Tasks.Persistence.Models
 		public bool IsBillable { get; set; }
 		public DateTime CreatedAt { get; set; }
 		public DateTime UpdatedAt { get; set; }
-		public Guid CreatedBy { get; set; }
 		public List<TimeEntryEntity> TimeEntries { get; set; } = new(); 
 		public List<CommentEntity> Comments { get; set; } = new();
 	}

@@ -554,8 +554,7 @@
               "RelativeToolTip": "Users.Infrastructure\\Migrations\\20250911215611_KafkaCommunicationIntegrated.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T21:56:51.299Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T21:56:51.299Z"
             },
             {
               "$type": "Document",
@@ -567,8 +566,7 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\RegisterUser\\RegisterUserCommandHandler.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAowFMAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T21:19:08.268Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T21:19:08.268Z"
             },
             {
               "$type": "Document",
@@ -580,8 +578,7 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\RestoreUser\\RestoreUserCommandHandler.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACgAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T16:13:54.848Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T16:13:54.848Z"
             },
             {
               "$type": "Document",
@@ -593,8 +590,7 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\UpdateUser\\UpdateUserCommandHandler.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAQwCIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T16:10:22.087Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T16:10:22.087Z"
             },
             {
               "$type": "Document",
@@ -606,8 +602,7 @@
               "RelativeToolTip": "Users.Infrastructure\\Outbox\\OutboxService.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T21:08:31.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T21:08:31.208Z"
             },
             {
               "$type": "Document",
@@ -619,8 +614,7 @@
               "RelativeToolTip": "Users.Application\\DTOs\\PublicUserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T20:10:14.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T20:10:14.531Z"
             },
             {
               "$type": "Document",
@@ -645,8 +639,7 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserPassword\\ChangeUserPasswordCommandHandler.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABEAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T16:11:52.015Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T16:11:52.015Z"
             },
             {
               "$type": "Document",
@@ -658,8 +651,7 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\ChangeUserLogin\\ChangeUserLoginCommandHandler.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T16:12:50.075Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T16:12:50.075Z"
             },
             {
               "$type": "Document",
@@ -671,8 +663,7 @@
               "RelativeToolTip": "Users.Application\\Interfaces\\IOutboxService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T21:10:19.815Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T21:10:19.815Z"
             },
             {
               "$type": "Document",
@@ -684,8 +675,7 @@
               "RelativeToolTip": "Users.Application\\Mappings\\PublicUserDtoMappingConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T21:39:50.811Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T21:39:50.811Z"
             },
             {
               "$type": "Document",
@@ -697,8 +687,7 @@
               "RelativeToolTip": "Users.Application\\Mappings\\UserDtoMappingConfiguration.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T21:19:11.737Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T21:19:11.737Z"
             },
             {
               "$type": "Document",
@@ -710,8 +699,7 @@
               "RelativeToolTip": "Users.Application\\Users\\Commands\\DeleteUser\\DeleteUserCommandHandler.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACwAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-16T16:13:28.832Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-16T16:13:28.832Z"
             },
             {
               "$type": "Document",
@@ -723,8 +711,7 @@
               "RelativeToolTip": "Users.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T21:03:58.743Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T21:03:58.743Z"
             },
             {
               "$type": "Document",
@@ -736,8 +723,7 @@
               "RelativeToolTip": "Users.Api\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-15T00:28:28.334Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T00:28:28.334Z"
             },
             {
               "$type": "Document",
@@ -749,8 +735,7 @@
               "RelativeToolTip": "Users.Application\\ApplicationExtensions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T20:46:31.07Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-27T20:46:31.07Z"
             },
             {
               "$type": "Document",
@@ -762,8 +747,7 @@
               "RelativeToolTip": "Users.Application\\DTOs\\UserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T00:40:37.344Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-15T00:40:37.344Z"
             },
             {
               "$type": "Document",

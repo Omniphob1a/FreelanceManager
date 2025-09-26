@@ -167,6 +167,26 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # -------------------
+  # RedisInsight (UI)
+  # -------------------
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    container_name: redis-insight
+    restart: unless-stopped
+    ports:
+      - "8001:5540"       # <-- пробрасываем хост 8001 в контейнер 5540
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - redisinsight_data:/db
 
   # -------------------
   # Zookeeper
@@ -185,8 +205,8 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.5.0
     ports:
-      - "9092:9092"    # для доступа из контейнеров
-      - "29092:29092"  # для доступа с хоста
+      - "9092:9092"
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -219,7 +239,6 @@ services:
       kafka:
         condition: service_healthy
 
-
   prometheus:
     image: prom/prometheus:latest
     ports:
@@ -242,3 +261,4 @@ volumes:
   pgdata:
   users_pgdata:
   hangfire_pgdata:
+  redisinsight_data: {}

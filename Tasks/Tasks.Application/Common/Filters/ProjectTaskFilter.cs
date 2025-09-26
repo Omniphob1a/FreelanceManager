@@ -34,6 +34,9 @@ namespace Tasks.Application.Common.Filters
 		public bool IncludeTimeEntries { get; set; } = false;
 		public bool IncludeComments { get; set; } = false;
 
+		public bool OnlyMyTasks { get; set; } = true;
+		public Guid? CurrentUserId { get; set; }
+
 		public string ToCacheKey()
 		{
 			var builder = new StringBuilder();
@@ -46,11 +49,11 @@ namespace Tasks.Application.Common.Filters
 			builder.Append($"status={Status?.ToString() ?? "null"}|");
 			builder.Append($"priority={Priority?.ToString() ?? "null"}|");
 
-			builder.Append($"minEstimatedHours={MinEstimatedHours?.ToString("F2") ?? "null"}|");
-			builder.Append($"maxEstimatedHours={MaxEstimatedHours?.ToString("F2") ?? "null"}|");
+			builder.Append($"minEstimatedHours={MinEstimatedHours?.ToString("F2", System.Globalization.CultureInfo.InvariantCulture) ?? "null"}|");
+			builder.Append($"maxEstimatedHours={MaxEstimatedHours?.ToString("F2", System.Globalization.CultureInfo.InvariantCulture) ?? "null"}|");
 
-			builder.Append($"minSpentHours={MinSpentHours?.ToString("F2") ?? "null"}|");
-			builder.Append($"maxSpentHours={MaxSpentHours?.ToString("F2") ?? "null"}|");
+			builder.Append($"minSpentHours={MinSpentHours?.ToString("F2", System.Globalization.CultureInfo.InvariantCulture) ?? "null"}|");
+			builder.Append($"maxSpentHours={MaxSpentHours?.ToString("F2", System.Globalization.CultureInfo.InvariantCulture) ?? "null"}|");
 
 			builder.Append($"dueFrom={DueFrom?.ToString("O") ?? "null"}|");
 			builder.Append($"dueTo={DueTo?.ToString("O") ?? "null"}|");
@@ -71,15 +74,21 @@ namespace Tasks.Application.Common.Filters
 			builder.Append($"hasComments={hasComments}|");
 			builder.Append($"overdue={overdue}|");
 
-			builder.Append($"search={Search ?? "null"}|");
+			var normalizedSearch = string.IsNullOrWhiteSpace(Search) ? "null" : Search.Trim().ToLowerInvariant();
+			builder.Append($"search={normalizedSearch}|");
+
 			builder.Append($"sortBy={SortBy ?? "created"}|");
 			builder.Append($"desc={(Desc ? "1" : "0")}|");
 
 			builder.Append($"includeTimeEntries={(IncludeTimeEntries ? "1" : "0")}|");
-			builder.Append($"includeComments={(IncludeComments ? "1" : "0")}");
+			builder.Append($"includeComments={(IncludeComments ? "1" : "0")}|");
+
+			builder.Append($"onlyMyTasks={(OnlyMyTasks ? "1" : "0")}|");
+			builder.Append($"currentUserId={CurrentUserId?.ToString() ?? "null"}|");
 
 			return builder.ToString();
 		}
+
 
 	}
 }

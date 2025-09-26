@@ -18,6 +18,7 @@ using Tasks.Application.ProjectTasks.Commands.StartProjectTask;
 using Tasks.Application.ProjectTasks.Commands.UnassignProjectTask;
 using Tasks.Application.ProjectTasks.Commands.UpdateProjectTask;
 using Tasks.Application.ProjectTasks.Queries.GetComments;
+using Tasks.Application.ProjectTasks.Queries.GetProjectMembers;
 using Tasks.Application.ProjectTasks.Queries.GetProjectTaskById;
 using Tasks.Application.ProjectTasks.Queries.GetTasks;
 
@@ -75,12 +76,15 @@ namespace Tasks.Api.Controllers
 
 			try
 			{
+				filter ??= new TaskFilter();
+
+				if (filter.OnlyMyTasks)
+					filter.CurrentUserId = _currentUserService.UserId;
+
 				var result = await _mediator.Send(new GetProjectTasksQuery(filter, paginationInfo));
 
 				if (result.IsFailed)
-				{
 					return BadRequest(result.Errors);
-				}
 
 				_logger.LogInformation("Tasks fetched. Total: {Total}", result.Value.Pagination.TotalItems);
 
@@ -98,7 +102,6 @@ namespace Tasks.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<IActionResult> GetTaskById(Guid taskId, [FromQuery] string[] includes, CancellationToken ct)
 		{
-
 			_logger.LogInformation("Fetching task with ID: {TaskId}", taskId);
 
 			var includeOptions = includes
@@ -433,7 +436,7 @@ namespace Tasks.Api.Controllers
 		[HttpGet("{taskId:guid}/comments")]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		[ProducesResponseType(typeof(List<CommentReadDto>), StatusCodes.Status200OK)]
-		public async Task<IActionResult> GetMembers(Guid taskId, CancellationToken ct)
+		public async Task<IActionResult> GetComments(Guid taskId, CancellationToken ct)
 		{
 			_logger.LogDebug("HTTP GET comments for task {TaskId}", taskId);
 
@@ -461,5 +464,38 @@ namespace Tasks.Api.Controllers
 			_logger.LogInformation("Returning {Count} comments for task {TaskId}", result.Value.Count, taskId);
 			return Ok(result.Value);
 		}
+
+		[HttpGet("{projectId:guid}/projectMembers")]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(typeof(List<CommentReadDto>), StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetProjectMembers(Guid projectId, CancellationToken ct)
+		{
+			_logger.LogDebug("HTTP GET projectMembers for project {ProjectId}", projectId);
+
+			var result = await _mediator.Send(new GetProjectMembersQuery(projectId), ct);
+
+			if (result.IsFailed)
+			{
+				var errorMessage = result.Errors.FirstOrDefault()?.Message ?? "Unknown error";
+				_logger.LogWarning("Failed to get members for project {ProjectId}: {Error}", projectId, errorMessage);
+
+				if (errorMessage.Contains("not found", StringComparison.OrdinalIgnoreCase))
+				{
+					return NotFound(new { Message = errorMessage });
+				}
+
+				return BadRequest(new { Message = errorMessage });
+			}
+
+			if (result.Value == null || !result.Value.Any())
+			{
+				_logger.LogInformation("Project {ProjectId} has no comments", projectId);
+				return Ok(new List<ProjectMemberReadDto>());
+			}
+
+			_logger.LogInformation("Returning {Count} members for project {ProjectId}", result.Value.Count, projectId);
+			return Ok(result.Value);
+		}
 	}
 }
+ 

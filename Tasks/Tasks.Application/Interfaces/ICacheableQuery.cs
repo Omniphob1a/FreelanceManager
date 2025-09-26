@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tasks.Application.Common.Pagination;
 
 namespace Tasks.Application.Interfaces
 {
@@ -12,5 +13,6 @@ namespace Tasks.Application.Interfaces
 		string CacheKey { get; }
 		int SlidingExpirationInMinutes { get; }
 		int AbsoluteExpirationInMinutes { get; }
+		PaginationInfo? PaginationInfo => null;
 	}
 }

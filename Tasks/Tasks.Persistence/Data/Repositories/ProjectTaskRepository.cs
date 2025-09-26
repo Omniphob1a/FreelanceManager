@@ -277,5 +277,31 @@ namespace Tasks.Persistence.Data.Repositories
 			}
 
 		}
+
+		public async Task<ProjectTask?> GetByIdForUpdateAsync(Guid TaskId, CancellationToken ct)
+		{
+			_logger.LogInformation("Trying to get task for update by ID {Id}", TaskId);
+
+			try
+			{
+				var entity = await _context.Tasks
+					.Include(t => t.Comments)
+					.Include(t => t.TimeEntries)
+					.FirstOrDefaultAsync(t => t.Id == TaskId, ct);
+
+				if (entity == null)
+				{
+					_logger.LogWarning("Task with if {TaskId} not found", TaskId);
+					return null;
+				}
+
+				return _mapper.ToDomain(entity);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Failed to get task by Id: {ProjectId}", TaskId);
+				throw;
+			}
+		}
 	}
 }

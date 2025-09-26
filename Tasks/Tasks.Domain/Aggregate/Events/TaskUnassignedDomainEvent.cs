@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Tasks.Domain.Aggregate.Events
 {
-	public record TaskCancelledDomainEvent(Guid TaskId, string Reason) : DomainEvent(TaskId);
+	public record TaskUnassignedDomainEvent(Guid TaskId, Guid AssigneeId) : DomainEvent(TaskId);
 }

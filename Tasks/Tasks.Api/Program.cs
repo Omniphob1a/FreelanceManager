@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Projects.Api;
+using Prometheus;
 using System.Net;
 using Tasks.Api;
 using Tasks.Application;
@@ -79,7 +80,11 @@ app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 
+app.UseHttpMetrics();
+
 app.MapControllers();
+
+app.MapMetrics();
 
 app.UseExceptionHandler(errorApp =>
 {

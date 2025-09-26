@@ -4,24 +4,45 @@ import { showToast, getPriorityClass, getPriorityText, getTaskStatusClass, getTa
 let currentTasks = [];
 let currentFilters = {};
 let allProjects = [];
-let currentTaskId = null;
+let taskOwnershipFilter = 'all'; // 'all', 'assigned', 'reported'
+let currentUserId = null;
+
 
 export async function initTasksPage() {
   try {
     console.log('Initializing tasks page...');
+    
+    // Получаем ID текущего пользователя - ДОБАВЛЕНО ДЕТАЛЬНОЕ ЛОГИРОВАНИЕ
+    try {
+      const user = await UserAPI.getProfile();
+      console.log('User profile response:', user); // ✅ Логируем весь ответ
+      
+      // Пробуем разные возможные пути к ID пользователя
+      currentUserId = user.id || user.userId || user.userID || user.Id;
+      console.log('Extracted currentUserId:', currentUserId);
+      
+      if (!currentUserId) {
+        console.warn('No user ID found in profile response. Available keys:', Object.keys(user));
+      }
+    } catch (error) {
+      console.error('Failed to get current user profile:', error);
+      currentUserId = null;
+    }
     
     // Показываем загрузчик
     const loader = document.getElementById('tasksLoader');
     if (loader) loader.classList.remove('hidden');
     
     await loadProjectsForFilter();
-    await loadTasks();
-    setupTaskEventListeners();
+    await applyFilters(); // Изменено: вместо loadTasks()
+    
+    // Инициализация всех обработчиков фильтрации
+    setupAllFilters();
     setupExpandableFilters();
     updateFilterCounter();
     updateTaskCounters();
     
-    console.log('Tasks page initialized successfully');
+    console.log('Tasks page initialized. Current user ID:', currentUserId);
   } catch (error) {
     console.error('Failed to initialize tasks page:', error);
     showToast('Failed to initialize tasks page', 'error');
@@ -30,6 +51,108 @@ export async function initTasksPage() {
     const loader = document.getElementById('tasksLoader');
     if (loader) loader.classList.add('hidden');
   }
+}
+function setupQuickFilters() {
+  const quickStatusFilter = document.getElementById('quickStatusFilter');
+  const quickPriorityFilter = document.getElementById('quickPriorityFilter');
+  
+  if (quickStatusFilter) {
+    quickStatusFilter.addEventListener('change', function() {
+      console.log('Quick status filter changed:', this.value);
+      if (this.value) {
+        // Очищаем checkbox статусы в расширенной панели
+        document.querySelectorAll('.filter-status').forEach(cb => cb.checked = false);
+        currentFilters.status = this.value;
+      } else {
+        delete currentFilters.status;
+      }
+      applyFilters();
+    });
+  }
+  
+  if (quickPriorityFilter) {
+    quickPriorityFilter.addEventListener('change', function() {
+      console.log('Quick priority filter changed:', this.value);
+      if (this.value) {
+        // Очищаем checkbox приоритеты в расширенной панели
+        document.querySelectorAll('.filter-priority').forEach(cb => cb.checked = false);
+        currentFilters.priority = this.value;
+      } else {
+        delete currentFilters.priority;
+      }
+      applyFilters();
+    });
+  }
+}
+
+function setupSearchFilter() {
+  const searchFilter = document.getElementById('taskSearch'); // Исправлено с searchFilter на taskSearch
+  
+  if (searchFilter) {
+    let searchTimeout;
+    searchFilter.addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        if (e.target.value) {
+          currentFilters.search = e.target.value;
+        } else {
+          delete currentFilters.search;
+        }
+        applyFilters();
+      }, 500);
+    });
+  }
+}
+
+
+// ДОБАВЛЕНО: Новая функция для настройки всех фильтров
+function setupAllFilters() {
+  setupOwnershipFilter();
+  setupQuickFilters();
+  setupSearchFilter();
+  setupTaskEventListeners();
+  
+  // Инициализируем начальное состояние кнопок владения
+  updateOwnershipFilterUI();
+}
+
+// ДОБАВЛЕНО: Функция для обновления UI кнопок владения
+function updateOwnershipFilterUI() {
+  const ownershipButtons = document.querySelectorAll('.task-ownership-filter');
+  const activeButton = document.querySelector(`.task-ownership-filter[data-value="${taskOwnershipFilter}"]`);
+  
+  ownershipButtons.forEach(btn => {
+    btn.classList.remove('active', 'bg-blue-600', 'text-white');
+    btn.classList.add('text-gray-700', 'hover:bg-gray-100');
+  });
+  
+  if (activeButton) {
+    activeButton.classList.add('active', 'bg-blue-600', 'text-white');
+    activeButton.classList.remove('text-gray-700', 'hover:bg-gray-100');
+  }
+}
+
+// ДОБАВЛЕНО: Обновленная функция для кнопок владения
+function setupOwnershipFilter() {
+  const ownershipButtons = document.querySelectorAll('.task-ownership-filter');
+  
+  ownershipButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      console.log('Ownership filter clicked:', button.dataset.value);
+      
+      // Устанавливаем значение фильтра
+      taskOwnershipFilter = button.dataset.value;
+      
+      // Обновляем UI
+      updateOwnershipFilterUI();
+      
+      // Применяем фильтры
+      applyFilters();
+    });
+  });
+  
+  // Устанавливаем начальное состояние
+  updateOwnershipFilterUI();
 }
 
 async function loadTasks(filters = {}) {
@@ -43,46 +166,78 @@ async function loadTasks(filters = {}) {
     // Преобразуем фильтры в формат, понятный API
     const apiFilters = {};
     
+    // Статус
     if (filters.status) {
-      apiFilters.Status = filters.status;
+      apiFilters.status = filters.status;
     }
     
+    // Приоритет
     if (filters.priority) {
-      apiFilters.Priority = filters.priority;
+      apiFilters.priority = filters.priority;
     }
     
+    // Проект
     if (filters.projectId) {
-      apiFilters.ProjectId = filters.projectId;
+      apiFilters.project = filters.projectId;
     }
     
+    // Ключевое исправление: параметры для фильтрации по владению
+    if (filters.OnlyMyTasks !== undefined) {
+      apiFilters.OnlyMyTasks = filters.OnlyMyTasks;
+    }
+    
+    if (filters.CurrentUserId) {
+      apiFilters.CurrentUserId = filters.CurrentUserId;
+    }
+    
+    // Назначенный пользователь
+    if (filters.AssigneeId) {
+      apiFilters.AssigneeId = filters.AssigneeId;
+    }
+    
+    // Создатель задачи
+    if (filters.ReporterId) {
+      apiFilters.ReporterId = filters.ReporterId;
+    }
+    
+    // Дата от
     if (filters.dueFrom) {
-      apiFilters.DueFrom = new Date(filters.dueFrom).toISOString();
+      apiFilters.dueFrom = new Date(filters.dueFrom).toISOString();
     }
     
+    // Дата до
     if (filters.dueTo) {
-      // Устанавливаем время на конец дня
       const dueToDate = new Date(filters.dueTo);
       dueToDate.setHours(23, 59, 59, 999);
-      apiFilters.DueTo = dueToDate.toISOString();
+      apiFilters.dueTo = dueToDate.toISOString();
     }
     
+    // Минимальные часы
     if (filters.minEstimatedHours) {
-      apiFilters.MinEstimatedHours = parseFloat(filters.minEstimatedHours);
+      apiFilters.minEstimatedHours = parseFloat(filters.minEstimatedHours);
     }
     
+    // Максимальные часы
     if (filters.maxEstimatedHours) {
-      apiFilters.MaxEstimatedHours = parseFloat(filters.maxEstimatedHours);
+      apiFilters.maxEstimatedHours = parseFloat(filters.maxEstimatedHours);
     }
     
+    // Billable
     if (filters.isBillable) {
-      apiFilters.IsBillable = filters.isBillable === 'true';
+      apiFilters.isBillable = filters.isBillable === 'true';
     }
     
+    // Просроченные
     if (filters.overdue) {
-      apiFilters.Overdue = true;
+      apiFilters.overdue = true;
     }
 
-    console.log('Loading tasks with filters:', apiFilters);
+    // Поиск
+    if (filters.search) {
+      apiFilters.search = filters.search;
+    }
+
+    console.log('Loading tasks with API filters:', apiFilters);
     
     const response = await TaskAPI.getTasks(apiFilters);
     currentTasks = response.items || response || [];
@@ -90,12 +245,6 @@ async function loadTasks(filters = {}) {
     // Обновляем UI
     renderTasks(currentTasks);
     updateTaskCounters();
-    
-    // Обновляем счетчик задач
-    const tasksCountElement = document.getElementById('tasksCount');
-    if (tasksCountElement) {
-      tasksCountElement.textContent = `${currentTasks.length} task${currentTasks.length !== 1 ? 's' : ''}`;
-    }
     
     // Показываем/скрываем сообщение о отсутствии задач
     if (currentTasks.length === 0 && noTasksRow) {
@@ -115,31 +264,116 @@ async function loadTasks(filters = {}) {
 }
 
 function renderTasks(tasks) {
-    const todoContainer = document.getElementById('todoTasks');
-    const inProgressContainer = document.getElementById('inProgressTasks');
-    const completedContainer = document.getElementById('completedTasks');
-    
-    [todoContainer, inProgressContainer, completedContainer].forEach(container => {
-        if (container) container.innerHTML = '';
-    });
+  const tableBody = document.getElementById('tasksTableBody');
+  
+  if (!tableBody) return;
+  
+  tableBody.innerHTML = '';
 
-    tasks.forEach(task => {
-        const taskElement = createTaskElement(task);
-        const status = task.status || 0;
-        
-        switch(status) {
-            case 0: // To Do
-                if (todoContainer) todoContainer.appendChild(taskElement);
-                break;
-            case 1: // In Progress
-                if (inProgressContainer) inProgressContainer.appendChild(taskElement);
-                break;
-            case 2: // Completed
-                if (completedContainer) completedContainer.appendChild(taskElement);
-                break;
-        }
-    });
+  if (!tasks || tasks.length === 0) {
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7" class="px-6 py-8 text-center text-gray-500">
+          No tasks found matching your criteria
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tasks.forEach(task => {
+    const row = createTaskTableRow(task);
+    tableBody.appendChild(row);
+  });
 }
+
+function createTaskTableRow(task) {
+  const row = document.createElement('tr');
+  row.className = 'hover:bg-gray-50 transition-colors duration-150';
+  row.dataset.id = task.id;
+  
+  const daysLeftNumber = getDaysLeftNumber(task.dueDate);
+  const isOverdue = daysLeftNumber !== null && daysLeftNumber < 0;
+  const isDueSoon = daysLeftNumber !== null && daysLeftNumber >= 0 && daysLeftNumber < 3;
+  
+  row.innerHTML = `
+    <td class="px-6 py-4 whitespace-nowrap">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+          <i class="fas fa-tasks text-blue-600"></i>
+        </div>
+        <div>
+          <div class="text-sm font-medium text-gray-900">${task.title || 'No title'}</div>
+          <div class="text-sm text-gray-500 truncate max-w-xs">${task.description || 'No description'}</div>
+        </div>
+      </div>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+      <div class="text-sm text-gray-900">${task.projectName || 'No project'}</div>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+      <div class="flex items-center">
+        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden mr-3">
+          <img src="https://ui-avatars.com/api/?name=${task.assigneeName || 'Unassigned'}&background=random" alt="${task.assigneeName || 'Unassigned'}">
+        </div>
+        <div class="text-sm text-gray-900">${task.assigneeName || 'Unassigned'}</div>
+      </div>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+      <div class="text-sm ${isOverdue ? 'text-red-600 font-medium' : isDueSoon ? 'text-orange-600' : 'text-gray-500'}">
+        ${task.dueDate ? formatDate(task.dueDate) : 'No due date'}
+      </div>
+      ${task.dueDate ? `<div class="text-xs ${isOverdue ? 'text-red-500' : isDueSoon ? 'text-orange-500' : 'text-gray-400'}">${getDaysLeft(task.dueDate)}</div>` : ''}
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+      <span class="px-2.5 py-1 text-xs font-medium rounded-full ${getPriorityClass(task.priority)}">
+        ${getPriorityText(task.priority)}
+      </span>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+      <span class="px-2.5 py-1 text-xs font-medium rounded-full ${getTaskStatusClass(task.status)}">
+        ${getTaskStatusText(task.status)}
+      </span>
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+      <div class="flex space-x-2">
+        <button class="view-task-btn text-blue-600 hover:text-blue-900 p-1 rounded" title="View Details">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="edit-task-btn text-gray-600 hover:text-gray-900 p-1 rounded" title="Edit">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="delete-task-btn text-red-600 hover:text-red-900 p-1 rounded" title="Delete">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </td>
+  `;
+  
+  // Добавляем обработчики событий для кнопок действий
+  row.querySelector('.view-task-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    openTaskModal(task.id);
+  });
+  
+  row.querySelector('.edit-task-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    showEditTaskModal(task);
+  });
+  
+  row.querySelector('.delete-task-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    deleteTask(task.id);
+  });
+  
+  // Клик по строке открывает детали задачи
+  row.addEventListener('click', () => {
+    openTaskModal(task.id);
+  });
+  
+  return row;
+}
+
 function setupExpandableFilters() {
   const toggleBtn = document.getElementById('toggleFiltersBtn');
   const panel = document.getElementById('filtersPanel');
@@ -147,7 +381,7 @@ function setupExpandableFilters() {
   const clearBtn = document.getElementById('clearFiltersBtn');
 
   if (!toggleBtn || !panel) {
-    console.error('Filter elements not found in DOM');
+    console.warn('Filter elements not found in DOM, skipping filter setup');
     return;
   }
 
@@ -230,7 +464,7 @@ function setupExpandableFilters() {
       const filters = getExpandableFilterValues();
       try {
         currentFilters = filters;
-        await loadTasks(filters);
+        applyFilters(); // Изменено: вместо loadTasks(filters)
         showToast('Filters applied', 'success');
         hidePanel();
         updateFilterCounter();
@@ -259,7 +493,7 @@ function setupExpandableFilters() {
 
       try {
         currentFilters = {};
-        await loadTasks({});
+        applyFilters(); // Изменено: вместо loadTasks({})
         showToast('Filters cleared', 'info');
         hidePanel();
         updateFilterCounter();
@@ -313,6 +547,7 @@ function setupExpandableFilters() {
   // Первичная синхронизация счетчика
   updateFilterCounter();
 }
+
 function updateFilterCounter() {
   const filters = getExpandableFilterValues();
   const activeFilters = Object.keys(filters).filter(key => filters[key]).length;
@@ -458,7 +693,56 @@ function createTaskElement(task) {
 
 async function openTaskModal(taskId) {
     try {
-        const task = await TaskAPI.getTaskById(taskId, ['timeEntries', 'comments']);
+        console.log('Opening task modal for task ID:', taskId);
+        
+        // Загружаем основную информацию о задаче
+        const task = await TaskAPI.getTaskById(taskId, ['timeEntries']);
+        console.log('Task data received:', task);
+        
+        // Если задача имеет назначенного пользователя, загружаем его данные
+        if (task.assigneeId) {
+            try {
+                // Загружаем участников проекта для получения информации о назначенном пользователе
+                const members = await TaskAPI.getProjectMembers(task.projectId);
+                let membersArray = [];
+                
+                if (Array.isArray(members)) {
+                    membersArray = members;
+                } else if (members && Array.isArray(members.items)) {
+                    membersArray = members.items;
+                } else if (members && Array.isArray(members.value)) {
+                    membersArray = members.value;
+                }
+                
+                // Находим назначенного пользователя - ИСПРАВЛЕНИЕ: сравниваем с user.id
+                const assignedMember = membersArray.find(member => {
+                    // Пропускаем участников без объекта user
+                    if (!member.user) return false;
+                    
+                    // ИСПРАВЛЕНИЕ: Сравниваем с member.user.id вместо member.userId
+                    const memberUserId = member.user.id;
+                    return memberUserId === task.assigneeId;
+                });
+                
+                if (assignedMember) {
+                    const user = assignedMember.user;
+                    task.assigneeName = user.name || user.userName || user.email || `User ${task.assigneeId}`;
+                } else {
+                    task.assigneeName = `User ${task.assigneeId}`;
+                }
+            } catch (error) {
+                console.error('Failed to load assignee info:', error);
+                task.assigneeName = `User ${task.assigneeId}`;
+            }
+        }
+        
+        // Загружаем комментарии через отдельный endpoint
+        const comments = await TaskAPI.getComments(taskId);
+        console.log('Comments with author data:', comments);
+        
+        // Добавляем комментарии к задаче
+        task.comments = comments || [];
+        
         renderTaskModal(task);
     } catch (error) {
         console.error('Failed to load task details:', error);
@@ -466,10 +750,49 @@ async function openTaskModal(taskId) {
     }
 }
 
+
 function renderTaskModal(task) {
     const modal = document.getElementById('taskModal');
-    if (!modal) return;
+    if (!modal) {
+        console.error('Task modal element not found');
+        return;
+    }
     
+    console.log('Rendering task modal with data:', task);
+    
+    // Убедимся, что свойства существуют
+    if (!task.timeEntries) task.timeEntries = [];
+    if (!task.comments) task.comments = [];
+    
+    // Форматируем время для time entries
+    const formatTimeEntryDuration = (duration) => {
+        if (!duration) return '0h';
+        try {
+            // Парсим строку формата "-04:00:00" или объекта с тиками
+            if (typeof duration === 'string') {
+                const [hours, minutes, seconds] = duration.substring(1).split(':').map(Number);
+                return `${hours}.${Math.round(minutes/60*10)}h`;
+            } else if (typeof duration === 'number') {
+                // Если duration в тиках, конвертируем в часы
+                return (duration / 36000000000).toFixed(1) + 'h';
+            }
+            return '0h';
+        } catch {
+            return '0h';
+        }
+    };
+
+    // Форматируем даты для time entries
+    const formatTimeEntryDate = (dateString) => {
+        if (!dateString) return 'Unknown date';
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleDateString();
+        } catch {
+            return 'Invalid date';
+        }
+    };
+
     modal.innerHTML = `
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-screen overflow-y-auto">
             <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
@@ -559,15 +882,15 @@ function renderTaskModal(task) {
                 
                 <div class="mb-6">
                     <h5 class="font-medium text-gray-900 mb-3">Time Entries</h5>
-                    <div class="space-y-2">
+                    <div class="space-y-2" id="timeEntriesContainer">
                         ${task.timeEntries && task.timeEntries.length > 0 ? 
                             task.timeEntries.map(entry => `
                                 <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
                                     <div>
-                                        <span class="text-sm font-medium">${formatDate(entry.startedAt)}</span>
+                                        <span class="text-sm font-medium">${formatTimeEntryDate(entry.startedAt)}</span>
                                         <span class="text-xs text-gray-500 ml-2">${entry.description || 'No description'}</span>
                                     </div>
-                                    <span class="text-sm font-medium">${(entry.duration / 36000000000).toFixed(1)}h</span>
+                                    <span class="text-sm font-medium">${formatTimeEntryDuration(entry.duration)}</span>
                                 </div>
                             `).join('') : 
                             '<p class="text-sm text-gray-500">No time entries</p>'
@@ -580,16 +903,16 @@ function renderTaskModal(task) {
                 
                 <div>
                     <h5 class="font-medium text-gray-900 mb-3">Comments</h5>
-                    <div class="space-y-4">
+                    <div class="space-y-4" id="commentsContainer">
                         ${task.comments && task.comments.length > 0 ? 
                             task.comments.map(comment => `
                                 <div class="flex">
                                     <div class="flex-shrink-0 mr-3">
-                                        <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=${comment.authorName}&background=random" alt="${comment.authorName}">
+                                        <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=${comment.author?.name || comment.author?.login || 'Unknown'}&background=random" alt="${comment.author?.name || 'Author'}">
                                     </div>
                                     <div class="bg-gray-50 p-3 rounded-lg flex-1">
                                         <div class="flex justify-between">
-                                            <span class="text-sm font-medium">${comment.authorName}</span>
+                                            <span class="text-sm font-medium">${comment.author?.name || comment.author?.login || 'Unknown User'}</span>
                                             <span class="text-xs text-gray-500">${formatDate(comment.createdAt)}</span>
                                         </div>
                                         <p class="text-sm mt-1">${comment.text}</p>
@@ -639,17 +962,44 @@ function setupTaskFilters() {
 }
 
 function applyFilters() {
-  const filters = getExpandableFilterValues();
+  console.log('Applying filters with ownership:', taskOwnershipFilter);
   
-  // Добавляем поиск из отдельного поля
-  const searchFilter = document.getElementById('searchFilter');
-  if (searchFilter && searchFilter.value) {
-    filters.search = searchFilter.value;
+  // Копируем текущие фильтры
+  let filters = { ...currentFilters };
+  
+  // Добавляем фильтры владения на основе taskOwnershipFilter
+  if (currentUserId) {
+    // Всегда добавляем CurrentUserId, если он доступен
+    filters.CurrentUserId = currentUserId;
+    
+    switch (taskOwnershipFilter) {
+      case 'all':
+        // Показываем все свои задачи (assigned OR reported)
+        filters.OnlyMyTasks = true;
+        delete filters.AssigneeId;
+        delete filters.ReporterId;
+        break;
+        
+      case 'assigned':
+        // Показываем только назначенные на текущего пользователя
+        filters.OnlyMyTasks = false;
+        filters.AssigneeId = currentUserId;
+        delete filters.ReporterId;
+        break;
+        
+      case 'reported':
+        // Показываем только созданные текущим пользователем
+        filters.OnlyMyTasks = false;
+        filters.ReporterId = currentUserId;
+        delete filters.AssigneeId;
+        break;
+    }
+  } else {
+    console.warn('No currentUserId available - ownership filters may not work');
   }
   
-  currentFilters = filters;
+  // Загружаем задачи с обновленными фильтрами
   loadTasks(filters);
-  updateFilterCounter();
 }
 
 function setupTaskModalEventListeners(task) {
@@ -738,8 +1088,31 @@ async function addCommentToTask(taskId, modal) {
         showToast('Comment added successfully');
         commentInput.value = '';
         
-        // Обновляем модальное окно
-        openTaskModal(taskId);
+        // Перезагружаем комментарии после добавления
+        const comments = await TaskAPI.getComments(taskId);
+        
+        // Находим контейнер комментариев и обновляем его
+        const commentsContainer = modal.querySelector('#commentsContainer');
+        
+        if (comments && comments.length > 0) {
+            // Очищаем контейнер и добавляем все комментарии
+            commentsContainer.innerHTML = comments.map(comment => `
+                <div class="flex">
+                    <div class="flex-shrink-0 mr-3">
+                        <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=${comment.author?.name || comment.author?.login || 'Unknown'}&background=random" alt="${comment.author?.name || 'Author'}">
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg flex-1">
+                        <div class="flex justify-between">
+                            <span class="text-sm font-medium">${comment.author?.name || comment.author?.login || 'Unknown User'}</span>
+                            <span class="text-xs text-gray-500">${formatDate(comment.createdAt)}</span>
+                        </div>
+                        <p class="text-sm mt-1">${comment.text}</p>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            commentsContainer.innerHTML = '<p class="text-sm text-gray-500">No comments</p>';
+        }
     } catch (error) {
         console.error('Failed to add comment:', error);
         showToast('Failed to add comment', 'error');
@@ -747,22 +1120,39 @@ async function addCommentToTask(taskId, modal) {
 }
 
 function updateTaskCounters() {
-    const counters = {
-        todo: document.getElementById('todoCount'),
-        inProgress: document.getElementById('inProgressCount'),
-        completed: document.getElementById('completedCount')
-    };
-    
-    if (counters.todo) {
-        counters.todo.textContent = currentTasks.filter(task => task.status === 0).length;
-    }
-    
-    if (counters.inProgress) {
-        counters.inProgress.textContent = currentTasks.filter(task => task.status === 1).length;
-    }
-    
-    if (counters.completed) {
-        counters.completed.textContent = currentTasks.filter(task => task.status === 2).length;
+    try {
+        const totalTasks = currentTasks.length;
+        const inProgressTasks = currentTasks.filter(task => task.status === 1).length;
+        
+        // Считаем задачи, которые скоро должны быть выполнены (менее 3 дней)
+        const dueSoonTasks = currentTasks.filter(task => {
+            const daysLeft = getDaysLeftNumber(task.dueDate);
+            return daysLeft !== null && daysLeft >= 0 && daysLeft < 3;
+        }).length;
+        
+        // Считаем просроченные задачи
+        const overdueTasks = currentTasks.filter(task => {
+            const daysLeft = getDaysLeftNumber(task.dueDate);
+            return daysLeft !== null && daysLeft < 0;
+        }).length;
+        
+        // Безопасное обновление счетчиков
+        const updateElement = (id, value) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = value;
+        };
+        
+        updateElement('totalTasksCount', totalTasks);
+        updateElement('inProgressTasksCount', inProgressTasks);
+        updateElement('dueSoonTasksCount', dueSoonTasks);
+        updateElement('overdueTasksCount', overdueTasks);
+        
+        // Обновляем счетчик в подвале таблицы
+        updateElement('tasksShowing', totalTasks);
+        updateElement('tasksTotal', totalTasks);
+        
+    } catch (error) {
+        console.error('Error updating task counters:', error);
     }
 }
 
@@ -790,7 +1180,6 @@ async function showCreateTaskModal() {
             formHtml = await fetch('/partials/task-form.html').then(r => r.text());
         } catch (error) {
             console.error('Failed to load task form HTML:', error);
-            // Fallback: создаем базовую форму
             formHtml = `
                 <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
                     <h2 class="text-2xl font-semibold text-gray-900 mb-6">Create New Task</h2>
@@ -837,21 +1226,9 @@ async function showCreateTaskModal() {
                 }
                 
                 try {
-                    // Загружаем участников проекта
-                    const membersResponse = await ProjectAPI.getProjectMembers(projectId);
-                    console.log('Members response:', membersResponse);
-                    
-                    // Обрабатываем разные форматы ответа
-                    let members = [];
-                    if (Array.isArray(membersResponse)) {
-                        members = membersResponse;
-                    } else if (membersResponse && Array.isArray(membersResponse.items)) {
-                        members = membersResponse.items;
-                    } else if (membersResponse && Array.isArray(membersResponse.value)) {
-                        members = membersResponse.value;
-                    }
-                    
-                    console.log('Processed members:', members);
+                    // Загружаем участников проекта через правильный endpoint
+                    const members = await ProjectAPI.getProjectMembers(projectId);
+                    console.log('Members response:', members);
                     
                     if (assigneeSelect) {
                         assigneeSelect.disabled = false;
@@ -863,14 +1240,43 @@ async function showCreateTaskModal() {
                         unassignedOption.textContent = 'Unassigned';
                         assigneeSelect.appendChild(unassignedOption);
                         
+                        // Обрабатываем разные форматы ответа
+                        let membersArray = [];
+                        if (Array.isArray(members)) {
+                            membersArray = members;
+                        } else if (members && Array.isArray(members.items)) {
+                            membersArray = members.items;
+                        } else if (members && Array.isArray(members.value)) {
+                            membersArray = members.value;
+                        }
+                        
                         // Добавляем участников проекта
-                        if (members.length > 0) {
-                            members.forEach(member => {
+                        if (membersArray.length > 0) {
+                            membersArray.forEach(member => {
                                 const option = document.createElement('option');
-                                // Пробуем разные возможные форматы ID
-                                option.value = member.userId || member.id || member.userID;
-                                // Пробуем разные возможные форматы имени
-                                option.textContent = member.name || member.userName || member.email || `User ${option.value}`;
+                                
+                                // Получаем ID пользователя из разных возможных форматов
+                                const memberId = member.userId || member.id || member.userID;
+                                option.value = memberId;
+                                
+                                // Получаем информацию о пользователе
+                                const user = member.user || member;
+                                const userName = user.name || user.userName || user.fullName;
+                                const userEmail = user.email || user.userEmail;
+                                
+                                // Формируем текст для отображения
+                                let displayText = '';
+                                if (userName && userEmail) {
+                                    displayText = `${userName} (${userEmail})`;
+                                } else if (userName) {
+                                    displayText = userName;
+                                } else if (userEmail) {
+                                    displayText = userEmail;
+                                } else {
+                                    displayText = `User ${memberId}`;
+                                }
+                                
+                                option.textContent = displayText;
                                 assigneeSelect.appendChild(option);
                             });
                         } else {
@@ -1028,20 +1434,9 @@ async function showEditTaskModal(task) {
         
         if (task.projectId) {
             try {
-                const membersResponse = await ProjectAPI.getProjectMembers(task.projectId);
-                console.log('Members response:', membersResponse);
-                
-                // Обрабатываем разные форматы ответа
-                let members = [];
-                if (Array.isArray(membersResponse)) {
-                    members = membersResponse;
-                } else if (membersResponse && Array.isArray(membersResponse.items)) {
-                    members = membersResponse.items;
-                } else if (membersResponse && Array.isArray(membersResponse.value)) {
-                    members = membersResponse.value;
-                }
-                
-                console.log('Processed members:', members);
+                // Загружаем участников проекта через правильный endpoint
+                const members = await ProjectAPI.getProjectMembers(task.projectId);
+                console.log('Members response:', members);
                 
                 if (assigneeSelect) {
                     assigneeSelect.disabled = false;
@@ -1054,15 +1449,43 @@ async function showEditTaskModal(task) {
                     unassignedOption.selected = !task.assigneeId;
                     assigneeSelect.appendChild(unassignedOption);
                     
+                    // Обрабатываем разные форматы ответа
+                    let membersArray = [];
+                    if (Array.isArray(members)) {
+                        membersArray = members;
+                    } else if (members && Array.isArray(members.items)) {
+                        membersArray = members.items;
+                    } else if (members && Array.isArray(members.value)) {
+                        membersArray = members.value;
+                    }
+                    
                     // Добавляем участников проекта
-                    if (members.length > 0) {
-                        members.forEach(member => {
+                    if (membersArray.length > 0) {
+                        membersArray.forEach(member => {
                             const option = document.createElement('option');
-                            // Пробуем разные возможные форматы ID
+                            
+                            // Получаем ID пользователя из разных возможных форматов
                             const memberId = member.userId || member.id || member.userID;
                             option.value = memberId;
-                            // Пробуем разные возможные форматы имени
-                            option.textContent = member.name || member.userName || member.email || `User ${memberId}`;
+                            
+                            // Получаем информацию о пользователе
+                            const user = member.user || member;
+                            const userName = user.name || user.userName || user.fullName;
+                            const userEmail = user.email || user.userEmail;
+                            
+                            // Формируем текст для отображения
+                            let displayText = '';
+                            if (userName && userEmail) {
+                                displayText = `${userName} (${userEmail})`;
+                            } else if (userName) {
+                                displayText = userName;
+                            } else if (userEmail) {
+                                displayText = userEmail;
+                            } else {
+                                displayText = `User ${memberId}`;
+                            }
+                            
+                            option.textContent = displayText;
                             option.selected = memberId === task.assigneeId;
                             assigneeSelect.appendChild(option);
                         });
@@ -1098,20 +1521,9 @@ async function showEditTaskModal(task) {
             }
             
             try {
-                const membersResponse = await ProjectAPI.getProjectMembers(projectId);
-                console.log('Members response:', membersResponse);
-                
-                // Обрабатываем разные форматы ответа
-                let members = [];
-                if (Array.isArray(membersResponse)) {
-                    members = membersResponse;
-                } else if (membersResponse && Array.isArray(membersResponse.items)) {
-                    members = membersResponse.items;
-                } else if (membersResponse && Array.isArray(membersResponse.value)) {
-                    members = membersResponse.value;
-                }
-                
-                console.log('Processed members:', members);
+                // Загружаем участников проекта через правильный endpoint
+                const members = await ProjectAPI.getProjectMembers(projectId);
+                console.log('Members response:', members);
                 
                 assigneeSelect.disabled = false;
                 assigneeSelect.innerHTML = '';
@@ -1122,14 +1534,43 @@ async function showEditTaskModal(task) {
                 unassignedOption.textContent = 'Unassigned';
                 assigneeSelect.appendChild(unassignedOption);
                 
+                // Обрабатываем разные форматы ответа
+                let membersArray = [];
+                if (Array.isArray(members)) {
+                    membersArray = members;
+                } else if (members && Array.isArray(members.items)) {
+                    membersArray = members.items;
+                } else if (members && Array.isArray(members.value)) {
+                    membersArray = members.value;
+                }
+                
                 // Добавляем участников проекта
-                if (members.length > 0) {
-                    members.forEach(member => {
+                if (membersArray.length > 0) {
+                    membersArray.forEach(member => {
                         const option = document.createElement('option');
-                        // Пробуем разные возможные форматы ID
-                        option.value = member.userId || member.id || member.userID;
-                        // Пробуем разные возможные форматы имени
-                        option.textContent = member.name || member.userName || member.email || `User ${option.value}`;
+                        
+                        // Получаем ID пользователя из разных возможных форматов
+                        const memberId = member.userId || member.id || member.userID;
+                        option.value = memberId;
+                        
+                        // Получаем информацию о пользователе
+                        const user = member.user || member;
+                        const userName = user.name || user.userName || user.fullName;
+                        const userEmail = user.email || user.userEmail;
+                        
+                        // Формируем текст для отображения
+                        let displayText = '';
+                        if (userName && userEmail) {
+                            displayText = `${userName} (${userEmail})`;
+                        } else if (userName) {
+                            displayText = userName;
+                        } else if (userEmail) {
+                            displayText = userEmail;
+                        } else {
+                            displayText = `User ${memberId}`;
+                        }
+                        
+                        option.textContent = displayText;
                         assigneeSelect.appendChild(option);
                     });
                 } else {
@@ -1242,20 +1683,9 @@ async function showAssignTaskModal(taskId) {
             return;
         }
         
-        const membersResponse = await ProjectAPI.getProjectMembers(task.projectId);
-        console.log('Members response:', membersResponse);
-        
-        // Обрабатываем разные форматы ответа
-        let members = [];
-        if (Array.isArray(membersResponse)) {
-            members = membersResponse;
-        } else if (membersResponse && Array.isArray(membersResponse.items)) {
-            members = membersResponse.items;
-        } else if (membersResponse && Array.isArray(membersResponse.value)) {
-            members = membersResponse.value;
-        }
-        
-        console.log('Processed members:', members);
+        // Загружаем участников проекта
+        const members = await TaskAPI.getProjectMembers(task.projectId);
+        console.log('Project members:', members);
         
         const modal = document.createElement('div');
         modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
@@ -1280,7 +1710,7 @@ async function showAssignTaskModal(taskId) {
         modal.innerHTML = `<div class="modal-container">${formHtml}</div>`;
         document.body.appendChild(modal);
         
-        // Заполняем выпадающий список участниками проекта с отображением email
+        // Заполняем выпадающий список участниками проекта
         const assigneeSelect = modal.querySelector('#assigneeSelect');
         
         // Добавляем опцию "Unassigned"
@@ -1290,16 +1720,52 @@ async function showAssignTaskModal(taskId) {
         unassignedOption.selected = !task.assigneeId;
         assigneeSelect.appendChild(unassignedOption);
         
-        // Добавляем участников проекта с отображением email
-        if (members.length > 0) {
-            members.forEach(member => {
+        // Обрабатываем разные форматы ответа
+        let membersArray = [];
+        if (Array.isArray(members)) {
+            membersArray = members;
+        } else if (members && Array.isArray(members.items)) {
+            membersArray = members.items;
+        } else if (members && Array.isArray(members.value)) {
+            membersArray = members.value;
+        }
+        
+        console.log('Processed members array:', membersArray);
+        
+        // Добавляем участников проекта с отображением имени и email - ИСПРАВЛЕНИЕ: используем user.id
+        if (membersArray.length > 0) {
+            membersArray.forEach(member => {
+                // Пропускаем участников без объекта user
+                if (!member.user) {
+                    console.warn('Member without user object found:', member);
+                    return;
+                }
+                
                 const option = document.createElement('option');
-                const memberId = member.userId || member.id || member.userID;
-                option.value = memberId;
-                // Всегда показываем email, если он доступен
-                option.textContent = member.email || member.userEmail || 
-                                    (member.userName ? `${member.userName}` : `User ${memberId}`);
-                option.selected = memberId === task.assigneeId;
+                
+                // ИСПРАВЛЕНИЕ: Используем member.user.id вместо member.userId
+                const userId = member.user.id;
+                option.value = userId;
+                
+                // Получаем информацию о пользователе
+                const user = member.user;
+                const userName = user.name || user.userName || user.fullName;
+                const userEmail = user.email || user.userEmail;
+                
+                // Формируем текст для отображения
+                let displayText = '';
+                if (userName && userEmail) {
+                    displayText = `${userName} (${userEmail})`;
+                } else if (userName) {
+                    displayText = userName;
+                } else if (userEmail) {
+                    displayText = userEmail;
+                } else {
+                    displayText = `User ${userId}`;
+                }
+                
+                option.textContent = displayText;
+                option.selected = userId === task.assigneeId;
                 assigneeSelect.appendChild(option);
             });
         } else {
@@ -1317,21 +1783,34 @@ async function showAssignTaskModal(taskId) {
         
         modal.querySelector('#confirmAssignBtn').addEventListener('click', async () => {
             const assigneeId = assigneeSelect.value;
-            if (assigneeId) {
-                await TaskAPI.assignTask(taskId, assigneeId);
-                showToast('Task assigned successfully');
-            } else {
-                await TaskAPI.unassignTask(taskId, task.assigneeId);
-                showToast('Task unassigned successfully');
-            }
-            
-            document.body.removeChild(modal);
-            await loadTasks(currentFilters);
-            
-            // Обновляем детальное модальное окно если оно открыто
-            const taskModal = document.getElementById('taskModal');
-            if (taskModal && !taskModal.classList.contains('hidden')) {
-                openTaskModal(taskId);
+            try {
+                if (assigneeId) {
+                    await TaskAPI.assignTask(taskId, assigneeId);
+                    showToast('Task assigned successfully');
+                } else {
+                    await TaskAPI.unassignTask(taskId, task.assigneeId);
+                    showToast('Task unassigned successfully');
+                }
+                
+                document.body.removeChild(modal);
+                await loadTasks(currentFilters);
+                
+                // Обновляем детальное модальное окно если оно открыто
+                const taskModal = document.getElementById('taskModal');
+                if (taskModal && !taskModal.classList.contains('hidden')) {
+                    openTaskModal(taskId);
+                }
+            } catch (error) {
+                console.error('Failed to assign task:', error);
+                let errorMessage = 'Failed to assign task';
+                
+                if (error.message.includes('Assignee must be a project member')) {
+                    errorMessage = 'Selected user must be a member of the project first';
+                } else if (error.status === 400) {
+                    errorMessage = 'Invalid request. User may not be a project member.';
+                }
+                
+                showToast(errorMessage, 'error');
             }
         });
         

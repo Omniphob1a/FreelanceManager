@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tasks.Application.Common;
 using Tasks.Application.Common.Filters;
 using Tasks.Application.Common.Pagination;
 using Tasks.Persistence.Models;
@@ -20,14 +21,22 @@ namespace Tasks.Persistence.Extensions
 			if (filter.IncludeTimeEntries)
 				query = query.Include(t => t.TimeEntries);
 
+			if (filter.OnlyMyTasks && filter.CurrentUserId.HasValue)
+			{
+				var userId = filter.CurrentUserId.Value;
+				query = query.Where(t => t.AssigneeId == userId || t.ReporterId == userId);
+			}
+			else
+			{
+				if (filter.AssigneeId.HasValue)
+					query = query.Where(t => t.AssigneeId == filter.AssigneeId);
+
+				if (filter.ReporterId.HasValue)
+					query = query.Where(t => t.ReporterId == filter.ReporterId);
+			}
+
 			if (filter.ProjectId.HasValue)
 				query = query.Where(t => t.ProjectId == filter.ProjectId);
-
-			if (filter.AssigneeId.HasValue)
-				query = query.Where(t => t.AssigneeId == filter.AssigneeId);
-
-			if (filter.ReporterId.HasValue)
-				query = query.Where(t => t.ReporterId == filter.ReporterId);
 
 			if (!string.IsNullOrWhiteSpace(filter.Search))
 				query = query.Where(t => t.Title.Contains(filter.Search) || (t.Description != null && t.Description.Contains(filter.Search)));
@@ -81,7 +90,6 @@ namespace Tasks.Persistence.Extensions
 				query = query.Where(t => t.DueDate < DateTime.UtcNow);
 
 			query = ApplySorting(query, filter.SortBy, filter.Desc);
-			
 
 			return query;
 		}
@@ -94,6 +102,7 @@ namespace Tasks.Persistence.Extensions
 			var pageSize = paginationInfo.ItemsPerPage;
 			if (pageSize < 1) pageSize = 1;
 
+
 			query = query
 				.Skip((page - 1) * pageSize)
 				.Take(pageSize);
@@ -101,7 +110,7 @@ namespace Tasks.Persistence.Extensions
 			return query;
 		}
 
-		private static IQueryable<ProjectTaskEntity> ApplySorting(IQueryable<ProjectTaskEntity> query, string? sortBy, bool desc)
+		private static IQueryable<ProjectTaskEntity> ApplySorting(this IQueryable<ProjectTaskEntity> query, string? sortBy, bool desc)
 		{
 			return (sortBy?.ToLowerInvariant()) switch
 			{

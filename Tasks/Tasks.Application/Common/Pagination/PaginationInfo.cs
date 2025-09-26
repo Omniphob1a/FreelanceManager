@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tasks.Application.Common.Pagination
+﻿public record PaginationInfo(
+	int TotalItems,
+	int ItemsPerPage,
+	int ActualPage
+)
 {
-	public class PaginationInfo
+	public PaginationInfo() : this(0, 10, 1) { }
+
+	public int NormalizedItemsPerPage => ItemsPerPage switch
 	{
-		public int TotalItems { get; set; }
-		public int ItemsPerPage { get; set; }
-		public int ActualPage { get; set; } 
-		public int TotalPages => (int)Math.Ceiling((double)TotalItems / ItemsPerPage);
+		< 1 => 10,
+		> 100 => 100,
+		_ => ItemsPerPage
+	};
 
-		public PaginationInfo() { }
+	public int NormalizedPage => ActualPage < 1 ? 1 : ActualPage;
 
-		public PaginationInfo(int totalItems, int itemsPerPage, int actualPage)
-		{
-			ActualPage = actualPage < 1 ? 1 : actualPage;
-			ItemsPerPage = itemsPerPage is < 1 ? 10 : (itemsPerPage > 100 ? 100 : itemsPerPage);
-			TotalItems = totalItems < 0 ? 0 : totalItems;
-		}
-	}
+	public int TotalPages => (int)Math.Ceiling((double)(TotalItems < 0 ? 0 : TotalItems) / NormalizedItemsPerPage);
 }

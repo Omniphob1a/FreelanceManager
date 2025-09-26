@@ -39,7 +39,7 @@ namespace Tasks.Application.ProjectTasks.Commands.AddComment
 				"Adding comment for TaskId: {TaskId}, AuthorId: {AuthorId}",
 				request.TaskId, request.AuthorId);
 
-			var task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
+			var task = await _projectTaskRepository.GetByIdForUpdateAsync(request.TaskId, cancellationToken);
 			if (task is null)
 			{
 				_logger.LogWarning("Task {TaskId} not found when adding comment", request.TaskId);
