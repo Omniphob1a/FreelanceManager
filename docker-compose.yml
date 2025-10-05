@@ -17,6 +17,8 @@ services:
       - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
       - Kafka__BootstrapServers=kafka:9092
       - Kafka__GroupId=users-service
+    volumes:
+      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
       users-db:
         condition: service_started
@@ -43,6 +45,8 @@ services:
       - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
       - Kafka__BootstrapServers=kafka:9092
       - Kafka__GroupId=projects-service
+    volumes:
+      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
       projects-db:
         condition: service_started
@@ -68,6 +72,8 @@ services:
       - ConnectionStrings__ProjectTasksDbContext=Server=projects-db;Port=5432;Database=tasks;User Id=postgres;Password=123;
       - Kafka__BootstrapServers=kafka:9092
       - Kafka__GroupId=tasks-service
+    volumes:
+      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
       projects-db:
         condition: service_started
@@ -181,7 +187,7 @@ services:
     container_name: redis-insight
     restart: unless-stopped
     ports:
-      - "8001:5540"       # <-- пробрасываем хост 8001 в контейнер 5540
+      - "8001:5540"
     depends_on:
       redis:
         condition: service_healthy

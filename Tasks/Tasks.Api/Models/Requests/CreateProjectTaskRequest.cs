@@ -6,16 +6,13 @@
 		public string Title { get; set; } = string.Empty;
 		public string? Description { get; set; }
 
-		public decimal EstimateValue { get; set; }
-		public int EstimateUnit { get; set; } 
-
+		public TimeSpan? TimeEstimated { get; set; }   
 		public DateTime? DueDate { get; set; }
 
 		public bool IsBillable { get; set; }
+		public decimal? HourlyRate { get; set; }      
 
-		public decimal Amount { get; set; }
-		public string? Currency { get; set; }
-
-		public int Priority { get; set; } 
+		public int Priority { get; set; }             
+		public Guid? AssigneeId { get; set; }          
 	}
 }

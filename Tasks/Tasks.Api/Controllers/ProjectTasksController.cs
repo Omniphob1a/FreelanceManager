@@ -21,6 +21,7 @@ using Tasks.Application.ProjectTasks.Queries.GetComments;
 using Tasks.Application.ProjectTasks.Queries.GetProjectMembers;
 using Tasks.Application.ProjectTasks.Queries.GetProjectTaskById;
 using Tasks.Application.ProjectTasks.Queries.GetTasks;
+using Tasks.Domain.Aggregate.Enums.Tasks.Domain.Aggregate.Enums;
 
 namespace Tasks.Api.Controllers
 {
@@ -52,7 +53,7 @@ namespace Tasks.Api.Controllers
 
 			var command = request.Adapt<CreateProjectTaskCommand>() with
 			{
-				ReporterId = _currentUserService.UserId
+				ReporterId = _currentUserService.UserId,
 			};
 
 			var result = await _mediator.Send(command, ct);

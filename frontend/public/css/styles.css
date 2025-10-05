@@ -639,20 +639,94 @@ input:focus, select:focus, textarea:focus {
   display: block;
 }
 .flatpickr-calendar {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-shadow: none !important;
+    width: 320px !important;
+    max-width: 320px !important;
+}
+
+.flatpickr-innerContainer {
+    padding-top: 0 !important;
+    border-top: none !important;
+}
+
+.flatpickr-rContainer {
+    width: 100% !important;
+}
+
+.flatpickr-days {
+    width: 100% !important;
+}
+
+.dayContainer {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+.flatpickr-day {
+    width: 14.28% !important;
+    max-width: 14.28% !important;
+    flex-basis: 14.28% !important;
+}
+
+.flatpickr-weekdays {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.flatpickr-weekday {
+    width: 14.28% !important;
+    flex-basis: 14.28% !important;
+}
+
+/* Убираем промежуток между заголовком и днями */
+.flatpickr-current-month {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    height: auto !important;
 }
 
 .flatpickr-months {
-  padding: 10px;
+    margin-bottom: 0 !important;
+}
+
+/* Гарантируем, что все дни недели видны */
+.flatpickr-calendar:before,
+.flatpickr-calendar:after {
+    display: none !important;
+}
+
+/* Убираем тень, которая может обрезать контент */
+.flatpickr-calendar {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Исправляем позиционирование */
+.flatpickr-calendar.open {
+    z-index: 10001 !important;
+}
+
+/* Улучшаем внешний вид для лучшего отображения */
+.flatpickr-day:hover {
+    background: #3b82f6 !important;
+    color: white !important;
+    border-color: #3b82f6 !important;
 }
 
 .flatpickr-day.selected {
-  background: #3b82f6 !important;
-  border-color: #3b82f6 !important;
+    background: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+}/* Стили для полей с календарем */
+.date-input {
+  background-color: white !important;
+  cursor: pointer !important;
 }
 
+.date-input:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
 #datePickerContainer .flatpickr-innerContainer {
   max-height: 300px;
   overflow: auto;

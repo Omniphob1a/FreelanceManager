@@ -1,4 +1,5 @@
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\bin\Debug\net9.0\Tasks.Application.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\bin\Debug\net9.0\Tasks.Application.runtimeconfig.json
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\bin\Debug\net9.0\Tasks.Application.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\bin\Debug\net9.0\Tasks.Application.pdb
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\bin\Debug\net9.0\Tasks.Domain.dll
@@ -13,6 +14,5 @@ C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\obj\Debug\n
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\obj\Debug\net9.0\Tasks.Application.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\obj\Debug\net9.0\refint\Tasks.Application.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\obj\Debug\net9.0\Tasks.Application.pdb
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\obj\Debug\net9.0\ref\Tasks.Application.dll
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\bin\Debug\net9.0\Tasks.Application.runtimeconfig.json
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\obj\Debug\net9.0\Tasks.Application.genruntimeconfig.cache
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Application\obj\Debug\net9.0\ref\Tasks.Application.dll

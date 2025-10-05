@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 {
 	public record UpdateProjectTaskCommand(
-		Guid TaskId, 
+		Guid TaskId,
 		string Title,
-		string Description,
-		decimal EstimateValue,
-		int EstimateUnit,
-		DateTime DueDate,
+		string? Description,
+		TimeSpan? TimeEstimated,
+		DateTime? DueDate,
 		bool IsBillable,
-		decimal Amount,
-		string Currency) 
-		: IRequest<Result<Unit>>;
+		decimal? HourlyRate,
+		string? Currency,
+		int Priority,
+		Guid? AssigneeId
+	) : IRequest<Result<Unit>>;
+
 }

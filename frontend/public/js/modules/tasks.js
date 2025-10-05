@@ -12,12 +12,11 @@ export async function initTasksPage() {
   try {
     console.log('Initializing tasks page...');
     
-    // Получаем ID текущего пользователя - ДОБАВЛЕНО ДЕТАЛЬНОЕ ЛОГИРОВАНИЕ
+    // Получаем ID текущего пользователя
     try {
       const user = await UserAPI.getProfile();
-      console.log('User profile response:', user); // ✅ Логируем весь ответ
+      console.log('User profile response:', user);
       
-      // Пробуем разные возможные пути к ID пользователя
       currentUserId = user.id || user.userId || user.userID || user.Id;
       console.log('Extracted currentUserId:', currentUserId);
       
@@ -34,13 +33,19 @@ export async function initTasksPage() {
     if (loader) loader.classList.remove('hidden');
     
     await loadProjectsForFilter();
-    await applyFilters(); // Изменено: вместо loadTasks()
+    await applyFilters();
     
     // Инициализация всех обработчиков фильтрации
     setupAllFilters();
+    setupFlatpickrReposition();
     setupExpandableFilters();
     updateFilterCounter();
     updateTaskCounters();
+    
+    // ИНИЦИАЛИЗИРУЕМ КАЛЕНДАРИ НА СТРАНИЦЕ
+    setTimeout(() => {
+        initAllDatePickers();
+    }, 100);
     
     console.log('Tasks page initialized. Current user ID:', currentUserId);
   } catch (error) {
@@ -52,6 +57,7 @@ export async function initTasksPage() {
     if (loader) loader.classList.add('hidden');
   }
 }
+
 function setupQuickFilters() {
   const quickStatusFilter = document.getElementById('quickStatusFilter');
   const quickPriorityFilter = document.getElementById('quickPriorityFilter');
@@ -296,6 +302,9 @@ function createTaskTableRow(task) {
   const isOverdue = daysLeftNumber !== null && daysLeftNumber < 0;
   const isDueSoon = daysLeftNumber !== null && daysLeftNumber >= 0 && daysLeftNumber < 3;
   
+  // Format estimated hours
+  const estimatedHours = task.estimateValue ? `${task.estimateValue}h` : '-';
+  
   row.innerHTML = `
     <td class="px-6 py-4 whitespace-nowrap">
       <div class="flex items-center">
@@ -309,21 +318,13 @@ function createTaskTableRow(task) {
       </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
-      <div class="text-sm text-gray-900">${task.projectName || 'No project'}</div>
-    </td>
-    <td class="px-6 py-4 whitespace-nowrap">
-      <div class="flex items-center">
-        <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden mr-3">
-          <img src="https://ui-avatars.com/api/?name=${task.assigneeName || 'Unassigned'}&background=random" alt="${task.assigneeName || 'Unassigned'}">
-        </div>
-        <div class="text-sm text-gray-900">${task.assigneeName || 'Unassigned'}</div>
-      </div>
-    </td>
-    <td class="px-6 py-4 whitespace-nowrap">
       <div class="text-sm ${isOverdue ? 'text-red-600 font-medium' : isDueSoon ? 'text-orange-600' : 'text-gray-500'}">
         ${task.dueDate ? formatDate(task.dueDate) : 'No due date'}
       </div>
       ${task.dueDate ? `<div class="text-xs ${isOverdue ? 'text-red-500' : isDueSoon ? 'text-orange-500' : 'text-gray-400'}">${getDaysLeft(task.dueDate)}</div>` : ''}
+    </td>
+    <td class="px-6 py-4 whitespace-nowrap">
+      <div class="text-sm text-gray-900">${estimatedHours}</div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
       <span class="px-2.5 py-1 text-xs font-medium rounded-full ${getPriorityClass(task.priority)}">
@@ -400,6 +401,10 @@ function setupExpandableFilters() {
     // если панель видима — убираем inline maxHeight чтобы позволить контенту менять высоту
     if (panel.classList.contains('visible')) {
       panel.style.maxHeight = '';
+      // ИНИЦИАЛИЗИРУЕМ КАЛЕНДАРИ ПОСЛЕ ОТКРЫТИЯ ПАНЕЛИ ФИЛЬТРОВ
+      setTimeout(() => {
+        initAllDatePickers();
+      }, 300);
     } else {
       // если панель скрыта — ставим hidden и очистим inline-стили
       panel.classList.add('hidden');
@@ -427,7 +432,7 @@ function setupExpandableFilters() {
 
     console.log('Panel expanding (animated to content height)');
   };
-
+  initDatePickersInContainer(panel);
   const hidePanel = () => {
     if (!panel.classList.contains('visible')) return;
 
@@ -464,7 +469,7 @@ function setupExpandableFilters() {
       const filters = getExpandableFilterValues();
       try {
         currentFilters = filters;
-        applyFilters(); // Изменено: вместо loadTasks(filters)
+        applyFilters();
         showToast('Filters applied', 'success');
         hidePanel();
         updateFilterCounter();
@@ -493,7 +498,7 @@ function setupExpandableFilters() {
 
       try {
         currentFilters = {};
-        applyFilters(); // Изменено: вместо loadTasks({})
+        applyFilters();
         showToast('Filters cleared', 'info');
         hidePanel();
         updateFilterCounter();
@@ -628,12 +633,12 @@ function getExpandableFilterValues() {
   if (project) filters.projectId = project;
 
   // Estimated Hours Range
-  const minEstimatedHoursEl = document.getElementById('filterMinEstimatedHours');
-  const maxEstimatedHoursEl = document.getElementById('filterMaxEstimatedHours');
-  const minEstimatedHours = minEstimatedHoursEl ? minEstimatedHoursEl.value : '';
-  const maxEstimatedHours = maxEstimatedHoursEl ? maxEstimatedHoursEl.value : '';
-  if (minEstimatedHours) filters.minEstimatedHours = minEstimatedHours;
-  if (maxEstimatedHours) filters.maxEstimatedHours = maxEstimatedHours;
+    const minEstimatedHoursEl = document.getElementById('filterMinEstimatedHours');
+    const maxEstimatedHoursEl = document.getElementById('filterMaxEstimatedHours');
+    const minEstimatedHours = minEstimatedHoursEl ? minEstimatedHoursEl.value : '';
+    const maxEstimatedHours = maxEstimatedHoursEl ? maxEstimatedHoursEl.value : '';
+    if (minEstimatedHours) filters.minEstimatedHours = minEstimatedHours;
+    if (maxEstimatedHours) filters.maxEstimatedHours = maxEstimatedHours;
 
   // Billable filter
   const billableEl = document.getElementById('filterBillable');
@@ -699,11 +704,23 @@ async function openTaskModal(taskId) {
         const task = await TaskAPI.getTaskById(taskId, ['timeEntries']);
         console.log('Task data received:', task);
         
-        // Если задача имеет назначенного пользователя, загружаем его данные
-        if (task.assigneeId) {
+        // Загружаем информацию о проекте
+        if (task.projectId) {
             try {
-                // Загружаем участников проекта для получения информации о назначенном пользователе
-                const members = await TaskAPI.getProjectMembers(task.projectId);
+                const project = await ProjectAPI.getProjectById(task.projectId);
+                task.projectName = project.title;
+            } catch (error) {
+                console.error('Failed to load project details:', error);
+                task.projectName = 'Unknown project';
+            }
+        } else {
+            task.projectName = 'No project';
+        }
+        
+        // Загружаем участников проекта для получения информации о reporter и assignee
+        if (task.projectId) {
+            try {
+                const members = await ProjectAPI.getProjectMembers(task.projectId);
                 let membersArray = [];
                 
                 if (Array.isArray(members)) {
@@ -714,28 +731,50 @@ async function openTaskModal(taskId) {
                     membersArray = members.value;
                 }
                 
-                // Находим назначенного пользователя - ИСПРАВЛЕНИЕ: сравниваем с user.id
-                const assignedMember = membersArray.find(member => {
-                    // Пропускаем участников без объекта user
+                // Находим reporter (создателя задачи)
+                const reporterMember = membersArray.find(member => {
                     if (!member.user) return false;
-                    
-                    // ИСПРАВЛЕНИЕ: Сравниваем с member.user.id вместо member.userId
                     const memberUserId = member.user.id;
-                    return memberUserId === task.assigneeId;
+                    return memberUserId === task.reporterId;
                 });
                 
-                if (assignedMember) {
-                    const user = assignedMember.user;
-                    task.assigneeName = user.name || user.userName || user.email || `User ${task.assigneeId}`;
+                if (reporterMember) {
+                    const user = reporterMember.user;
+                    task.reporterName = user.name || user.userName || user.email || `User ${task.reporterId}`;
                 } else {
+                    task.reporterName = `User ${task.reporterId}`;
+                }
+                
+                // Находим assignee (исполнителя)
+                if (task.assigneeId) {
+                    const assignedMember = membersArray.find(member => {
+                        if (!member.user) return false;
+                        const memberUserId = member.user.id;
+                        return memberUserId === task.assigneeId;
+                    });
+                    
+                    if (assignedMember) {
+                        const user = assignedMember.user;
+                        task.assigneeName = user.name || user.userName || user.email || `User ${task.assigneeId}`;
+                    } else {
+                        task.assigneeName = `User ${task.assigneeId}`;
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Failed to load project members:', error);
+                task.reporterName = `User ${task.ReporterId}`;
+                if (task.assigneeId) {
                     task.assigneeName = `User ${task.assigneeId}`;
                 }
-            } catch (error) {
-                console.error('Failed to load assignee info:', error);
+            }
+        } else {
+            task.reporterName = `User ${task.ReporterId}`;
+            if (task.assigneeId) {
                 task.assigneeName = `User ${task.assigneeId}`;
             }
         }
-        
+        initDatePickersInContainer(taskModal);
         // Загружаем комментарии через отдельный endpoint
         const comments = await TaskAPI.getComments(taskId);
         console.log('Comments with author data:', comments);
@@ -750,6 +789,16 @@ async function openTaskModal(taskId) {
     }
 }
 
+function convertHoursToTimeString(hours) {
+    if (!hours || hours <= 0) return null;
+    
+    const totalMinutes = Math.round(hours * 60);
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
+    
+    // Форматируем как TimeSpan: "HH:mm:ss"
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00`;
+}
 
 function renderTaskModal(task) {
     const modal = document.getElementById('taskModal');
@@ -813,6 +862,10 @@ function renderTaskModal(task) {
                         <h5 class="font-medium text-gray-900 mb-3">Details</h5>
                         <div class="space-y-2">
                             <div class="flex">
+                                <span class="text-sm text-gray-500 w-32">Project:</span>
+                                <span class="text-sm font-medium">${task.projectName || 'No project'}</span>
+                            </div>
+                            <div class="flex">
                                 <span class="text-sm text-gray-500 w-32">Status:</span>
                                 <span class="text-sm font-medium ${getTaskStatusClass(task.status)} px-2 py-1 rounded-full">
                                     ${getTaskStatusText(task.status)}
@@ -830,8 +883,25 @@ function renderTaskModal(task) {
                             </div>
                             <div class="flex">
                                 <span class="text-sm text-gray-500 w-32">Estimated Hours:</span>
-                                <span class="text-sm font-medium">${task.timeEstimatedTicks ? (task.timeEstimatedTicks / 36000000000).toFixed(1) : 'Not set'}</span>
+                                <span class="text-sm font-medium">${task.timeEstimatedTicks ? `${(task.timeEstimatedTicks / 36000000000).toFixed(1)}h` : 'Not estimated'}</span>
                             </div>
+                            <div class="flex">
+                                <span class="text-sm text-gray-500 w-32">Billable:</span>
+                                <span class="text-sm font-medium flex items-center">
+                                    ${task.isBillable ? 
+                                        '<i class="fas fa-check-circle text-green-500 mr-2"></i> Yes' : 
+                                        '<i class="fas fa-times-circle text-gray-400 mr-2"></i> No'
+                                    }
+                                </span>
+                            </div>
+                            ${task.isBillable ? `
+                                <div class="flex">
+                                    <span class="text-sm text-gray-500 w-32">Hourly Rate:</span>
+                                    <span class="text-sm font-medium">
+                                        ${task.hourlyRate ? `${task.hourlyRate} ${task.currency || 'USD'}` : 'Not set'}
+                                    </span>
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                     
@@ -938,7 +1008,6 @@ function renderTaskModal(task) {
     setupTaskModalEventListeners(task);
     modal.classList.remove('hidden');
 }
-
 function setupTaskEventListeners() {
     const newTaskBtn = document.getElementById('newTaskBtn');
     if (newTaskBtn) {
@@ -1191,7 +1260,7 @@ async function showCreateTaskModal() {
             `;
         }
         
-        modal.innerHTML = `<div class="modal-container">${formHtml}</div>`;
+        modal.innerHTML = `<div class="modal-container" style="z-index: 10003;">${formHtml}</div>`;
         document.body.appendChild(modal);
         
         // Заполняем выпадающий список проектов
@@ -1298,13 +1367,26 @@ async function showCreateTaskModal() {
             });
         }
         
-        // Инициализируем datepicker
-        if (window.flatpickr && modal.querySelector('#taskDueDate')) {
-            flatpickr(modal.querySelector('#taskDueDate'), {
-                dateFormat: 'Y-m-d',
-                minDate: 'today'
-            });
-        }
+        // Инициализируем календарь для Due Date
+        setTimeout(() => {
+            const dueDateInput = modal.querySelector('#taskDueDate');
+            if (dueDateInput) {
+                console.log('Initializing calendar for due date input');
+                initDatePicker(dueDateInput);
+                
+                // Добавляем placeholder для лучшего UX
+                dueDateInput.placeholder = 'Click to select date';
+                
+                // Принудительно открываем календарь при фокусе
+                dueDateInput.addEventListener('focus', function() {
+                    if (this._flatpickr) {
+                        this._flatpickr.open();
+                    }
+                });
+            } else {
+                console.warn('Due date input not found in modal');
+            }
+        }, 100);
         
         // Обработчики событий
         const cancelBtn = modal.querySelector('.cancel-btn');
@@ -1339,19 +1421,38 @@ async function createTaskFromForm(modal) {
             return;
         }
 
-        // Форматируем данные согласно CreateProjectTaskRequest
+        // Validate estimated hours
+        const estimatedHours = parseFloat(formData.get('estimatedHours'));
+        if (estimatedHours && estimatedHours <= 0) {
+            showToast('Estimated hours must be positive', 'error');
+            return;
+        }
+        if (estimatedHours && estimatedHours > 160) {
+            showToast('Consider breaking down tasks larger than 160 hours', 'warning');
+        }
+
+        // Преобразуем часы в формат времени
+        const timeEstimated = convertHoursToTimeString(estimatedHours);
+
+        // Форматируем данные согласно API
         const taskData = {
-            projectId: projectId, // Исправлено на projectId (с маленькой "d")
+            projectId: projectId,
             title: formData.get('title'),
             description: formData.get('description'),
-            estimateValue: parseFloat(formData.get('estimatedHours')) || 0,
-            estimateUnit: 0, // 0 = Hours (соответствует EstimateUnit в DTO)
+            timeEstimated: timeEstimated, // Исправлено: используем timeEstimated вместо estimateValue
             dueDate: formData.get('dueDate') ? new Date(formData.get('dueDate')).toISOString() : null,
             isBillable: formData.get('isBillable') === 'on',
-            amount: parseFloat(formData.get('amount')) || 0,
-            currency: formData.get('currency') || 'USD',
-            priority: parseInt(formData.get('priority')) || 1
+            hourlyRate: parseFloat(formData.get('amount')) || 0, // Исправлено: hourlyRate вместо amount
+            priority: parseInt(formData.get('priority')) || 1,
+            assigneeId: formData.get('assigneeId') || null // Добавлено: assigneeId
         };
+
+        // Убираем пустые поля
+        Object.keys(taskData).forEach(key => {
+            if (taskData[key] === null || taskData[key] === undefined || taskData[key] === '') {
+                delete taskData[key];
+            }
+        });
 
         console.log('Sending task data:', taskData);
         
@@ -1361,7 +1462,6 @@ async function createTaskFromForm(modal) {
         await loadTasks(currentFilters);
     } catch (error) {
         console.error('Failed to create task:', error);
-        // Более конкретное сообщение об ошибке
         if (error.message.includes('Project not found')) {
             showToast('Selected project was not found. Please choose another project.', 'error');
         } else {
@@ -1403,9 +1503,15 @@ async function showEditTaskModal(task) {
                 </div>
             `;
         }
-        
+        if (window.flatpickr && modal.querySelector('#taskDueDate')) {
+            const datePicker = initDatePicker(modal.querySelector('#taskDueDate'));
+            if (datePicker) {
+                console.log('Date picker initialized successfully for edit modal');
+            }
+        }
         modal.innerHTML = `<div class="modal-container">${formHtml}</div>`;
         document.body.appendChild(modal);
+        initDatePickersInContainer(modal);
         
         // Заполняем форму данными задачи
         modal.querySelector('#taskFormTitle').textContent = 'Edit Task';
@@ -1598,22 +1704,41 @@ async function showEditTaskModal(task) {
             modal.querySelector('#taskDueDate').value = task.dueDate.split('T')[0];
         }
         
-        modal.querySelector('#taskPriority').value = task.priority || 1;
-        modal.querySelector('#taskEstimatedHours').value = task.timeEstimatedTicks ? (task.timeEstimatedTicks / 36000000000) : '';
-        modal.querySelector('#taskBillable').checked = task.isBillable || false;
+        // Преобразуем тики в часы для поля estimatedHours
+        if (task.timeEstimatedTicks) {
+            const hours = task.timeEstimatedTicks / 36000000000;
+            modal.querySelector('#taskEstimatedHours').value = hours.toFixed(1);
+        } else {
+            modal.querySelector('#taskEstimatedHours').value = '';
+        }
         
-        if (task.isBillable) {
-            modal.querySelector('#billingFields').classList.remove('hidden');
-            modal.querySelector('#taskAmount').value = task.amount || '';
+        modal.querySelector('#taskPriority').value = task.priority || 1;
+        
+        // БЕЗОПАСНОЕ обновление billable полей
+        const billableCheckbox = modal.querySelector('#taskBillable');
+        const billingFields = modal.querySelector('#billingFields');
+        
+        if (billableCheckbox) {
+            billableCheckbox.checked = task.isBillable || false;
+            
+            // Показываем/скрываем billing fields только если элемент существует
+            if (billingFields) {
+                if (task.isBillable) {
+                    billingFields.classList.remove('hidden');
+                } else {
+                    billingFields.classList.add('hidden');
+                }
+            }
+        }
+        
+        if (task.isBillable && billingFields) {
+            modal.querySelector('#taskAmount').value = task.hourlyRate || '';
             modal.querySelector('#taskCurrency').value = task.currency || 'USD';
         }
         
-        // Инициализируем datepicker
-        if (window.flatpickr) {
-            flatpickr(modal.querySelector('#taskDueDate'), {
-                dateFormat: 'Y-m-d',
-                minDate: 'today'
-            });
+        // Инициализируем datepicker ПОСЛЕ того как все элементы готовы
+        if (window.flatpickr && modal.querySelector('#taskDueDate')) {
+            initDatePicker(modal.querySelector('#taskDueDate'));
         }
         
         // Обработчики событий
@@ -1632,21 +1757,141 @@ async function showEditTaskModal(task) {
     }
 }
 
+function initDatePicker(element) {
+    try {
+        if (element._flatpickr) {
+            console.log('Date picker already initialized on:', element);
+            return element._flatpickr;
+        }
+
+        console.log('Initializing date picker on:', element);
+
+        const instance = flatpickr(element, {
+            dateFormat: 'Y-m-d', // Формат для хранения значения (для сервера)
+            altInput: true,
+            altFormat: 'd-m-Y', // Изменено: формат отображения дд-мм-гггг
+            allowInput: true,
+            locale: {
+                firstDayOfWeek: 1
+            },
+            // Улучшенные настройки для фикса проблем с отображением
+            appendTo: document.body,
+            static: true,
+            position: "auto",
+            onReady: function(selectedDates, dateStr, instance) {
+                // Принудительно пересчитываем размеры после инициализации
+                setTimeout(() => {
+                    instance.redraw();
+                }, 100);
+            },
+            onOpen: function(selectedDates, dateStr, instance) {
+                console.log('Calendar opened');
+                element.classList.add('ring-2', 'ring-blue-500');
+                
+                // Принудительно пересчитываем размеры при открытии
+                setTimeout(() => {
+                    instance.redraw();
+                    instance._positionCalendar();
+                }, 50);
+            },
+            onClose: function(selectedDates, dateStr, instance) {
+                console.log('Calendar closed');
+                element.classList.remove('ring-2', 'ring-blue-500');
+            }
+        });
+
+        element._flatpickr = instance;
+        console.log('Date picker initialized successfully on:', element);
+
+        return instance;
+    } catch (error) {
+        console.error('Error initializing date picker:', error);
+        return null;
+    }
+}
+
+// Новая функция: глобальный обработчик для reposition при скролле/resize
+function setupFlatpickrReposition() {
+    if (window._flatpickrRepositionSetup) return; // Чтобы не дублировать
+    window._flatpickrRepositionSetup = true;
+
+    const repositionAll = () => {
+        document.querySelectorAll('input.date-input').forEach(input => {
+            if (input._flatpickr && input._flatpickr.isOpen) {
+                input._flatpickr.redraw();
+                input._flatpickr._positionCalendar();
+            }
+        });
+    };
+
+    window.addEventListener('scroll', repositionAll, true); // true для capture
+    window.addEventListener('resize', repositionAll);
+}
+
+// Функция для инициализации всех календарей в контейнере
+function initDatePickersInContainer(container) {
+    if (!container) return;
+    
+    const dateInputs = container.querySelectorAll('input[type="text"].date-input, input[type="date"]');
+    console.log('Found date inputs:', dateInputs.length);
+    
+    dateInputs.forEach(input => {
+        if (input.type === 'date') {
+            input.type = 'text';
+        }
+        initDatePicker(input);
+    });
+    
+    // Пересчет после инициализации
+    setTimeout(() => setupFlatpickrReposition(), 100);
+}
+
+// Функция для инициализации всех календарей на странице
+function initAllDatePickers() {
+    console.log('Initializing all date pickers...');
+    
+    // Инициализируем календари для полей фильтров
+    const filterDateFields = [
+        '#filterDueFrom',
+        '#filterDueTo'
+    ];
+    
+    filterDateFields.forEach(selector => {
+        const element = document.querySelector(selector);
+        if (element && !element._flatpickr) {
+            initDatePicker(element);
+            console.log('Initialized date picker for:', selector);
+        }
+    });
+    
+    // Инициализируем календари в модальных окнах при их открытии
+    // (это будет сделано в соответствующих функциях открытия модалок)
+}
+
 async function updateTaskFromForm(modal, taskId) {
     try {
         const formData = new FormData(modal.querySelector('#taskForm'));
         
-        // Форматируем данные согласно UpdateProjectTaskRequest
+        // Validate estimated hours
+        const estimatedHours = parseFloat(formData.get('estimatedHours'));
+        if (estimatedHours && estimatedHours <= 0) {
+            showToast('Estimated hours must be positive', 'error');
+            return;
+        }
+
+        // Преобразуем часы в формат времени
+        const timeEstimated = convertHoursToTimeString(estimatedHours);
+
+        // Форматируем данные согласно API
         const taskData = {
             title: formData.get('title'),
             description: formData.get('description'),
-            estimateValue: parseFloat(formData.get('estimatedHours')) || 0,
-            estimateUnit: 0, // 0 = Hours
+            timeEstimated: timeEstimated, // Исправлено: используем timeEstimated вместо estimateValue
             dueDate: formData.get('dueDate') ? new Date(formData.get('dueDate')).toISOString() : null,
             isBillable: formData.get('isBillable') === 'on',
-            amount: parseFloat(formData.get('amount')) || 0,
-            currency: formData.get('currency') || 'USD',
-            priority: parseInt(formData.get('priority')) || 1
+            hourlyRate: parseFloat(formData.get('amount')) || 0, // Исправлено: hourlyRate вместо amount
+            priority: parseInt(formData.get('priority')) || 1,
+            assigneeId: formData.get('assigneeId') || null // Добавлено: assigneeId
         };
 
         // Убираем пустые поля

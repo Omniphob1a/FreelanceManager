@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tasks.Domain.Aggregate.Enums.Tasks.Domain.Aggregate.Enums;
 using Tasks.Domain.Aggregate.ValueObjects;
 
 namespace Tasks.Application.ProjectTasks.Commands.CreateProjectTask
@@ -15,10 +16,12 @@ namespace Tasks.Application.ProjectTasks.Commands.CreateProjectTask
 		string? Description,
 		Guid ReporterId,
 		Guid CreatedBy,
+		bool IsBillable,
+		int Priority,
 		Guid? AssigneeId = null,
-		WorkEstimate? Estimate = null,
+		TimeSpan? TimeEstimated = null,
 		DateTime? DueDate = null,
-		bool IsBillable = false,
-		Money? HourlyRate = null
+		decimal? HourlyRate = null,
+		string? Currency = null
 	) : IRequest<Result<Guid>>;
 }

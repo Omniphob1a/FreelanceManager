@@ -21,21 +21,26 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 			RuleFor(x => x.Description)
 				.MaximumLength(2000).WithMessage("Description must not exceed 2000 characters.");
 
-			RuleFor(x => x.EstimateValue)
-				.GreaterThanOrEqualTo(0).WithMessage("Estimate value must be greater than or equal to 0.");
-
-			RuleFor(x => x.EstimateUnit)
-				.GreaterThan(0).WithMessage("Estimate unit must be greater than 0.");
+			RuleFor(x => x.TimeEstimated)
+				.Must(te => te == null || te.Value.TotalMinutes >= 0)
+				.WithMessage("Time estimated must be greater than or equal to 0 minutes.");
 
 			RuleFor(x => x.DueDate)
-				.GreaterThan(DateTime.UtcNow).WithMessage("Due date must be in the future.");
+				.Must(d => d == null || d > DateTime.UtcNow)
+				.WithMessage("Due date must be in the future.");
 
-			RuleFor(x => x.Amount)
-				.GreaterThanOrEqualTo(0).WithMessage("Amount must be greater than or equal to 0.");
+			RuleFor(x => x.HourlyRate)
+				.Must(rate => rate == null || rate >= 0)
+				.WithMessage("Hourly rate must be greater than or equal to 0.");
 
 			RuleFor(x => x.Currency)
-				.NotEmpty().WithMessage("Currency is required.")
-				.Length(3).WithMessage("Currency code must be exactly 3 characters.");
+				.Must(c => string.IsNullOrEmpty(c) || c.Length == 3)
+				.WithMessage("Currency code must be exactly 3 characters.");
+
+			RuleFor(x => x.Priority)
+				.InclusiveBetween(0, 2) 
+				.WithMessage("Priority must be between 0 and 2.");
 		}
 	}
+
 }

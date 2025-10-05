@@ -41,7 +41,9 @@ namespace Tasks.Domain.Aggregate.Root
 			string? description,
 			Guid? assigneeId,
 			Guid reporterId,
-			DateTime createdAtUtc)
+			DateTime createdAtUtc,
+			TaskPriority priority
+			)
 		{
 			if (projectId == Guid.Empty) throw new ArgumentException("Project ID is required.", nameof(projectId));
 			if (reporterId == Guid.Empty) throw new ArgumentException("Reporter ID is required.", nameof(reporterId));
@@ -56,11 +58,22 @@ namespace Tasks.Domain.Aggregate.Root
 			CreatedAt = createdAtUtc;
 			UpdatedAt = createdAtUtc;
 			Status = ProjectTaskStatus.ToDo;
-			Priority = TaskPriority.Medium;
+			Priority = priority;
 			TimeEstimated = TimeSpan.Zero;
 		}
 
-		public static ProjectTask CreateDraft(Guid projectId, string title, string? description, Guid reporterId, Guid? assigneeId = null)
+		public static ProjectTask CreateDraft(
+			Guid projectId,
+			string title,
+			string? description,
+			Guid reporterId,
+			Guid? assigneeId = null,
+			bool isBillable = false,
+			Money? hourlyRate = null,
+			TaskPriority priority = TaskPriority.Medium,
+			TimeSpan? timeEstimated = null,
+			DateTime? dueDate = null
+		)
 		{
 			var task = new ProjectTask(
 				Guid.NewGuid(),
@@ -69,12 +82,19 @@ namespace Tasks.Domain.Aggregate.Root
 				description,
 				assigneeId,
 				reporterId,
-				DateTime.UtcNow
+				DateTime.UtcNow,
+				priority
 			);
+
+			task.IsBillable = isBillable;
+			task.HourlyRate = isBillable ? hourlyRate : null;
+			task.TimeEstimated = timeEstimated ?? TimeSpan.Zero;
+			task.DueDate = dueDate;
 
 			task.AddDomainEvent(new TaskCreatedDomainEvent(task.Id, projectId));
 			return task;
 		}
+
 
 		public void Delete()
 		{
@@ -84,25 +104,28 @@ namespace Tasks.Domain.Aggregate.Root
 		public void UpdateDetails(
 			string title,
 			string? description,
-			WorkEstimate estimate,
+			TimeSpan? timeEstimated,
 			DateTime? dueDate,
 			bool isBillable,
 			Money? hourlyRate,
-			TaskPriority? priority = null)
+			TaskPriority priority,
+			Guid? assigneeId = null
+		)
 		{
 			if (string.IsNullOrWhiteSpace(title))
 				throw new ArgumentException("Title is required.", nameof(title));
 
-			if (estimate is null)
-				throw new ArgumentNullException(nameof(estimate));
-
 			Title = title;
 			Description = description;
-			TimeEstimated = estimate.ToTimeSpan();
+			TimeEstimated = timeEstimated ?? TimeSpan.Zero;
 			DueDate = dueDate;
 			IsBillable = isBillable;
-			HourlyRate = hourlyRate;
-			Priority = priority ?? Priority;
+			HourlyRate = isBillable ? hourlyRate : null;
+			Priority = priority;
+
+			if (assigneeId != null)
+				AssigneeId = assigneeId;
+
 			UpdatedAt = DateTime.UtcNow;
 
 			AddDomainEvent(new TaskUpdatedDomainEvent(Id));
@@ -203,7 +226,7 @@ namespace Tasks.Domain.Aggregate.Root
 			List<TimeEntry>? timeEntries,
 			List<Comment>? comments)
 		{
-			var task = new ProjectTask(id, projectId, title, description, assigneeId, reporterId, createdAt);
+			var task = new ProjectTask(id, projectId, title, description, assigneeId, reporterId, createdAt, priority);
 
 			task.Status = status;
 			task.Priority = priority;
@@ -212,6 +235,8 @@ namespace Tasks.Domain.Aggregate.Root
 			task.HourlyRate = hourlyRate;
 			task.UpdatedAt = updatedAt;
 			task.TimeEstimated = timeEstimated;
+			task.IsBillable = isBillable;
+			task.HourlyRate = isBillable ? hourlyRate : null;
 
 			if (timeEntries != null)
 				task._timeEntries.AddRange(timeEntries.Select(te => te)); 

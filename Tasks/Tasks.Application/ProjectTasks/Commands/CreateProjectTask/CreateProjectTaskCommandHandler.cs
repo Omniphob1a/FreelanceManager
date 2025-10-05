@@ -7,7 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Tasks.Application.DTOs;
 using Tasks.Application.Interfaces;
+using Tasks.Domain.Aggregate.Enums.Tasks.Domain.Aggregate.Enums;
 using Tasks.Domain.Aggregate.Root;
+using Tasks.Domain.Aggregate.ValueObjects;
 using Tasks.Domain.Exceptions;
 using Tasks.Domain.Interfaces;
 
@@ -60,11 +62,19 @@ namespace Tasks.Application.ProjectTasks.Commands.CreateProjectTask
 			try
 			{
 				task = ProjectTask.CreateDraft(
-					request.ProjectId,
-					request.Title,
-					request.Description,
-					request.ReporterId
-				);
+				   request.ProjectId,
+				   request.Title,
+				   request.Description,
+				   request.ReporterId,
+				   request.AssigneeId,
+				   request.IsBillable,
+				   request.HourlyRate.HasValue && request.IsBillable
+					   ? Money.From(request.HourlyRate.Value, request.Currency ?? "USD")
+					   : null,
+				   (TaskPriority)request.Priority,
+				   request.TimeEstimated,
+				   request.DueDate
+			   );
 			}
 			catch (DomainException ex)
 			{

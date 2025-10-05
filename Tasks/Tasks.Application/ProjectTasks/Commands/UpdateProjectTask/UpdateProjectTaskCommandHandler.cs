@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Tasks.Application.Interfaces;
 using Tasks.Domain.Aggregate.Enums;
+using Tasks.Domain.Aggregate.Enums.Tasks.Domain.Aggregate.Enums;
 using Tasks.Domain.Aggregate.Root;
 using Tasks.Domain.Aggregate.ValueObjects;
 using Tasks.Domain.Exceptions;
@@ -15,29 +16,27 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 {
 	public class UpdateProjectTaskCommandHandler : IRequestHandler<UpdateProjectTaskCommand, Result<Unit>>
 	{
-		private readonly IProjectTaskRepository _projectTaskRepository;
-		private readonly IProjectTaskQueryService _projectTaskQueryService;
 		private readonly ILogger<UpdateProjectTaskCommandHandler> _logger;
+		private readonly IProjectTaskRepository _projectTaskRepository;
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IProjectReadRepository _projectReadRepository;
 
 		public UpdateProjectTaskCommandHandler(
-			IProjectTaskRepository projectTaskRepository,
-			IProjectTaskQueryService projectTaskQueryService,
 			ILogger<UpdateProjectTaskCommandHandler> logger,
+			IProjectTaskRepository projectTaskRepository,
 			IUnitOfWork unitOfWork,
-			IProjectReadRepository projectReadRepository	)
+			IProjectReadRepository projectReadRepository)
 		{
-			_projectTaskRepository = projectTaskRepository ?? throw new ArgumentNullException(nameof(projectTaskRepository));
-			_projectTaskQueryService = projectTaskQueryService ?? throw new ArgumentNullException(nameof(projectTaskQueryService));
-			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
-			_unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+			_logger = logger;
+			_projectTaskRepository = projectTaskRepository;
+			_unitOfWork = unitOfWork;
 			_projectReadRepository = projectReadRepository;
 		}
 
 		public async Task<Result<Unit>> Handle(UpdateProjectTaskCommand request, CancellationToken cancellationToken)
 		{
-			_logger.LogInformation("Updating task {TaskId}", request.TaskId);
+			_logger.LogInformation("Updating task {TaskId}. Title: {Title}, AssigneeId: {AssigneeId}",
+				request.TaskId, request.Title, request.AssigneeId);
 
 			if (request.TaskId == Guid.Empty)
 			{
@@ -45,53 +44,56 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 				return Result.Fail<Unit>("TaskId is required.");
 			}
 
-			ProjectTask task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
+			ProjectTask? task = await _projectTaskRepository.GetByIdAsync(request.TaskId, cancellationToken);
 			if (task is null)
 			{
-				_logger.LogWarning("Task {TaskId} not found for update", request.TaskId);
+				_logger.LogWarning("Task {TaskId} not found", request.TaskId);
 				return Result.Fail<Unit>("Task not found.");
 			}
 
-			var isExists = await _projectReadRepository.ExistsAsync(task.ProjectId, cancellationToken);
-
-			if (!isExists)
+			bool projectExists = await _projectReadRepository.ExistsAsync(task.ProjectId, cancellationToken);
+			if (!projectExists)
 			{
-				_logger.LogWarning("Project {ProjectId} is not exists, cannot update", task.ProjectId);
-				return Result.Fail<Unit>("Project not exists");
+				_logger.LogWarning("Project {ProjectId} not found for Task {TaskId}", task.ProjectId, request.TaskId);
+				return Result.Fail<Unit>("Project not found.");
 			}
 
 			try
 			{
 				task.UpdateDetails(
-					task.Title,
-					task.Description,
-					WorkEstimate.From(request.EstimateValue, (WorkUnit)request.EstimateUnit),
-					task.DueDate,
-					task.IsBillable,
-					Money.From(request.Amount, request.Currency)
+					request.Title,
+					request.Description,
+					request.TimeEstimated,
+					request.DueDate,
+					request.IsBillable,
+					request.HourlyRate.HasValue && request.IsBillable
+						? Money.From(request.HourlyRate.Value, request.Currency ?? "USD")
+						: null,
+					(TaskPriority)request.Priority,
+					request.AssigneeId
 				);
 			}
-			catch (ArgumentException aex)
+			catch (DomainException ex)
 			{
-				_logger.LogWarning(aex, "Validation error while updating task {TaskId}", request.TaskId);
-				return Result.Fail<Unit>(aex.Message);
+				_logger.LogWarning(ex, "Domain error while updating Task {TaskId}", request.TaskId);
+				return Result.Fail<Unit>(ex.Message);
 			}
-			catch (DomainException dex)
+			catch (ArgumentException ex)
 			{
-				_logger.LogWarning(dex, "Domain error while updating task {TaskId}", request.TaskId);
-				return Result.Fail<Unit>(dex.Message);
+				_logger.LogWarning(ex, "Validation error while updating Task {TaskId}", request.TaskId);
+				return Result.Fail<Unit>(ex.Message);
 			}
 
 			try
 			{
 				await _projectTaskRepository.UpdateAsync(task, cancellationToken);
-				_unitOfWork.TrackEntity(task); 
+				_unitOfWork.TrackEntity(task);
 				await _unitOfWork.SaveChangesAsync(cancellationToken);
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError(ex, "Unexpected error while saving task {TaskId}", request.TaskId);
-				throw; 
+				_logger.LogError(ex, "Unexpected error while saving Task {TaskId}", request.TaskId);
+				throw;
 			}
 
 			_logger.LogInformation("Task {TaskId} updated successfully", request.TaskId);

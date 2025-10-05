@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\projects\\commands\\createproject\\createprojectcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\projects\\commands\\createproject\\createprojectcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\applicationextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -43,10 +55,6 @@
       "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\models\\requests\\createprojectrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\projects\\commands\\createproject\\createprojectcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\projects\\commands\\createproject\\createprojectcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\projects\\commands\\createproject\\createprojectcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\projects\\commands\\createproject\\createprojectcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -75,20 +83,12 @@
       "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\configurations\\projectentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\repositories\\userreadrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\repositories\\userreadrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\data\\projectsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\data\\projectsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\usersconsumerhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -913,31 +913,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProjectMemberReadDto.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
-              "RelativeDocumentMoniker": "Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
-              "RelativeToolTip": "Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T17:28:32.641Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ProjectMemberQueryService.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
-              "RelativeDocumentMoniker": "Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
-              "RelativeToolTip": "Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAADwv1cAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T19:25:03.935Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "IProjectMemberQueryService.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Interfaces\\IProjectMemberQueryService.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Interfaces\\IProjectMemberQueryService.cs",
@@ -949,32 +925,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "ProjectsController.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Controllers\\ProjectsController.cs",
               "RelativeDocumentMoniker": "Projects.Api\\Controllers\\ProjectsController.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Controllers\\ProjectsController.cs",
               "RelativeToolTip": "Projects.Api\\Controllers\\ProjectsController.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAADgCAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAIBJwDgCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-12T14:25:01.489Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "AttachmentAddedEventHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\EventHandlers\\AttachmentAddedEventHandler.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\EventHandlers\\AttachmentAddedEventHandler.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\EventHandlers\\AttachmentAddedEventHandler.cs",
               "RelativeToolTip": "Projects.Application\\Projects\\EventHandlers\\AttachmentAddedEventHandler.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBJwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T20:47:08.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-07T20:47:08.416Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ApplicationExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\ApplicationExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Application\\ApplicationExtensions.cs",
@@ -982,12 +957,72 @@
               "RelativeToolTip": "Projects.Application\\ApplicationExtensions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T13:35:11.878Z",
+              "WhenOpened": "2025-06-13T13:35:11.878Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Projects.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
+              "RelativeToolTip": "Projects.Api\\Program.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAAAG4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T14:17:40.152Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CreateProjectCommand.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
+              "RelativeToolTip": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T14:37:12.318Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
+              "Title": "ProjectMemberQueryService.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
+              "RelativeToolTip": "Projects.Persistence\\Data\\Queries\\ProjectMemberQueryService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAADwv1cAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T19:25:03.935Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InfrastructureExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAIwF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T19:01:03.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProjectMemberReadDto.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
+              "RelativeToolTip": "Projects.Application\\DTOs\\ProjectMemberReadDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T17:28:32.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "GetProjectMembersQuery.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Queries\\GetProjectMembers\\GetProjectMembersQuery.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Queries\\GetProjectMembers\\GetProjectMembersQuery.cs",
@@ -999,7 +1034,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "GetProjectMembersQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Queries\\GetProjectMembers\\GetProjectMembersQueryHandler.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Queries\\GetProjectMembers\\GetProjectMembersQueryHandler.cs",
@@ -1011,7 +1046,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "ICurrentUserService.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Interfaces\\ICurrentUserService.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Interfaces\\ICurrentUserService.cs",
@@ -1023,7 +1058,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "CreateProjectRequest.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Models\\Requests\\CreateProjectRequest.cs",
               "RelativeDocumentMoniker": "Projects.Api\\Models\\Requests\\CreateProjectRequest.cs",
@@ -1035,19 +1070,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CreateProjectCommand.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
-              "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
-              "RelativeToolTip": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T14:37:12.318Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "CreateProjectCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
@@ -1059,19 +1082,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "PersistenceExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\PersistenceExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\PersistenceExtensions.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\PersistenceExtensions.cs",
               "RelativeToolTip": "Projects.Persistence\\PersistenceExtensions.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAAC0AAABBAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAIBJwC0AAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-08T23:05:28.741Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "ProjectEntity.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectEntity.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\Models\\ProjectEntity.cs",
@@ -1083,7 +1106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Project.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Entities\\Project.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Entities\\Project.cs",
@@ -1095,7 +1118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "GetProjectsByFilterQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Queries\\GetProjectsByFilter\\GetProjectsByFilterQueryHandler.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Queries\\GetProjectsByFilter\\GetProjectsByFilterQueryHandler.cs",
@@ -1107,7 +1130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "AddMemberCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
@@ -1119,19 +1142,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "ProjectEntityConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Configurations\\ProjectEntityConfiguration.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\Configurations\\ProjectEntityConfiguration.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Configurations\\ProjectEntityConfiguration.cs",
               "RelativeToolTip": "Projects.Persistence\\Configurations\\ProjectEntityConfiguration.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAADEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAEBVwDEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T15:43:10.94Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "ProjectsDbContext.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\ProjectsDbContext.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\Data\\ProjectsDbContext.cs",
@@ -1143,39 +1166,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
-              "RelativeDocumentMoniker": "Projects.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
-              "RelativeToolTip": "Projects.Api\\Program.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAIwGwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T14:17:40.152Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "UserReadRepository.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\UserReadRepository.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\Repositories\\UserReadRepository.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\UserReadRepository.cs",
               "RelativeToolTip": "Projects.Persistence\\Repositories\\UserReadRepository.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAIBJwDUAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAIBZwDUAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-12T15:53:30.521Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "InfrastructureExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAIwF4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T19:01:03.591Z"
             },
             {
               "$type": "Document",
@@ -1329,7 +1328,7 @@
               "RelativeDocumentMoniker": "Projects.Persistence\\Data\\Queries\\ProjectQueryService.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\Queries\\ProjectQueryService.cs",
               "RelativeToolTip": "Projects.Persistence\\Data\\Queries\\ProjectQueryService.cs",
-              "ViewState": "AgIAAOkAAAAAAAAAAIBJwPkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAOYAAAAAAAAAAIBZwPkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-09T11:48:42.011Z"
             },
@@ -1437,7 +1436,7 @@
               "RelativeDocumentMoniker": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
               "RelativeToolTip": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAIBJwGAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAMBcwGAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-28T00:13:32.182Z"
             },
@@ -1581,7 +1580,7 @@
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
               "RelativeToolTip": "Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAIBJwAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIBZwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-26T11:47:45.45Z"
             },
@@ -1641,7 +1640,7 @@
               "RelativeDocumentMoniker": "Projects.Api\\ApiExtensions.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\ApiExtensions.cs",
               "RelativeToolTip": "Projects.Api\\ApiExtensions.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAABQwDgAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA6wDgAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-29T21:55:01.855Z"
             },
@@ -1677,7 +1676,7 @@
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\RemoveMember\\RemoveMemberCommandHandler.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\RemoveMember\\RemoveMemberCommandHandler.cs",
               "RelativeToolTip": "Projects.Application\\Projects\\Commands\\RemoveMember\\RemoveMemberCommandHandler.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAIBJwEQAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAACUAAAAAAAAAAIBZwEQAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-26T12:03:56.438Z"
             },
@@ -1833,7 +1832,7 @@
               "RelativeDocumentMoniker": "Projects.Infrastructure\\Services\\UserService.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Services\\UserService.cs",
               "RelativeToolTip": "Projects.Infrastructure\\Services\\UserService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAIBJwCEAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAIBZwCEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-26T13:50:32.337Z"
             },
@@ -2325,7 +2324,7 @@
               "RelativeDocumentMoniker": "Projects.Persistence\\Specifications\\ProjectsByFilterSpec.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Specifications\\ProjectsByFilterSpec.cs",
               "RelativeToolTip": "Projects.Persistence\\Specifications\\ProjectsByFilterSpec.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAIBZwFoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAACBjwFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-08T16:39:08.413Z"
             },
@@ -2373,7 +2372,7 @@
               "RelativeDocumentMoniker": "Projects.Persistence\\Specifications\\ProjectFullByIdSpec.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Specifications\\ProjectFullByIdSpec.cs",
               "RelativeToolTip": "Projects.Persistence\\Specifications\\ProjectFullByIdSpec.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAIBZwBEAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAACBjwBEAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-26T22:22:47.566Z"
             },
@@ -2433,7 +2432,7 @@
               "RelativeDocumentMoniker": "Projects.Domain\\ValueObjects\\Category.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\ValueObjects\\Category.cs",
               "RelativeToolTip": "Projects.Domain\\ValueObjects\\Category.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAOBvwDUAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAACBzwDUAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T17:20:05.395Z"
             },
@@ -3045,7 +3044,7 @@
               "RelativeDocumentMoniker": "..\\frontend\\public\\css\\styles.css",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\frontend\\public\\css\\styles.css",
               "RelativeToolTip": "..\\frontend\\public\\css\\styles.css",
-              "ViewState": "AgIAAAMAAAAAAAAAAFB2wAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIB5wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-07-31T04:29:40.568Z"
             },
@@ -3153,7 +3152,7 @@
               "RelativeDocumentMoniker": "Projects.Persistence\\Migrations\\ProjectsDbContextModelSnapshot.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Migrations\\ProjectsDbContextModelSnapshot.cs",
               "RelativeToolTip": "Projects.Persistence\\Migrations\\ProjectsDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAHB4wAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAKB7wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-28T09:55:11.517Z"
             },
@@ -3189,7 +3188,7 @@
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Downloads\\swagger.json",
               "ToolTip": "C:\\Users\\volod\\Downloads\\swagger.json",
               "RelativeToolTip": "..\\..\\..\\..\\Downloads\\swagger.json",
-              "ViewState": "AgIAAPQFAAAAAAAAAMB9wCgGAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAPAFAAAAAAAAAACBwCgGAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-13T13:59:51.059Z"
             },
