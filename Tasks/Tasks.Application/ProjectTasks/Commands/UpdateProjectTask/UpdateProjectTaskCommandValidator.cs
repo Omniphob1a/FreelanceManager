@@ -29,14 +29,6 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 				.Must(d => d == null || d > DateTime.UtcNow)
 				.WithMessage("Due date must be in the future.");
 
-			RuleFor(x => x.HourlyRate)
-				.Must(rate => rate == null || rate >= 0)
-				.WithMessage("Hourly rate must be greater than or equal to 0.");
-
-			RuleFor(x => x.Currency)
-				.Must(c => string.IsNullOrEmpty(c) || c.Length == 3)
-				.WithMessage("Currency code must be exactly 3 characters.");
-
 			RuleFor(x => x.Priority)
 				.InclusiveBetween(0, 2) 
 				.WithMessage("Priority must be between 0 and 2.");

@@ -13,7 +13,7 @@ namespace Tasks.Domain.Aggregate.Root
 	public class ProjectTask : EntityBase
 	{
 		public Guid Id { get; }
-		public Guid ProjectId { get; }
+		public Guid ProjectId { get; private set; }
 		public string Title { get; private set; }
 		public string? Description { get; private set; }
 		public Guid? AssigneeId { get; private set; }
@@ -22,7 +22,6 @@ namespace Tasks.Domain.Aggregate.Root
 		public TaskPriority Priority { get; private set; }
 		public DateTime? DueDate { get; private set; }
 		public bool IsBillable { get; private set; }
-		public Money? HourlyRate { get; private set; }
 		public DateTime CreatedAt { get; }
 		public DateTime UpdatedAt { get; private set; }
 		public TimeSpan TimeEstimated { get; private set; }
@@ -69,7 +68,6 @@ namespace Tasks.Domain.Aggregate.Root
 			Guid reporterId,
 			Guid? assigneeId = null,
 			bool isBillable = false,
-			Money? hourlyRate = null,
 			TaskPriority priority = TaskPriority.Medium,
 			TimeSpan? timeEstimated = null,
 			DateTime? dueDate = null
@@ -87,7 +85,6 @@ namespace Tasks.Domain.Aggregate.Root
 			);
 
 			task.IsBillable = isBillable;
-			task.HourlyRate = isBillable ? hourlyRate : null;
 			task.TimeEstimated = timeEstimated ?? TimeSpan.Zero;
 			task.DueDate = dueDate;
 
@@ -102,12 +99,12 @@ namespace Tasks.Domain.Aggregate.Root
 		}
 
 		public void UpdateDetails(
+			Guid projectId,
 			string title,
 			string? description,
 			TimeSpan? timeEstimated,
 			DateTime? dueDate,
 			bool isBillable,
-			Money? hourlyRate,
 			TaskPriority priority,
 			Guid? assigneeId = null
 		)
@@ -115,12 +112,12 @@ namespace Tasks.Domain.Aggregate.Root
 			if (string.IsNullOrWhiteSpace(title))
 				throw new ArgumentException("Title is required.", nameof(title));
 
+			ProjectId = projectId;
 			Title = title;
 			Description = description;
 			TimeEstimated = timeEstimated ?? TimeSpan.Zero;
 			DueDate = dueDate;
 			IsBillable = isBillable;
-			HourlyRate = isBillable ? hourlyRate : null;
 			Priority = priority;
 
 			if (assigneeId != null)
@@ -165,16 +162,7 @@ namespace Tasks.Domain.Aggregate.Root
 			UpdatedAt = DateTime.UtcNow;
 			AddDomainEvent(new TaskStartedDomainEvent(Id));
 		}
-		
-		public void Reopen()
-		{
-			if (Status != ProjectTaskStatus.Completed)
-				throw new InvalidOperationException("Only completed tasks can be reopened.");
-
-			Status = ProjectTaskStatus.ToDo;
-			UpdatedAt = DateTime.UtcNow;
-			// AddDomainEvent(new TaskReopenedDomainEvent(Id));
-		}
+	
 
 		public void AddComment(Comment comment)
 		{
@@ -219,7 +207,6 @@ namespace Tasks.Domain.Aggregate.Root
 			TaskPriority priority,
 			DateTime? dueDate,
 			bool isBillable,
-			Money? hourlyRate,
 			DateTime createdAt,
 			DateTime updatedAt,
 			TimeSpan timeEstimated,
@@ -232,11 +219,9 @@ namespace Tasks.Domain.Aggregate.Root
 			task.Priority = priority;
 			task.DueDate = dueDate;
 			task.IsBillable = isBillable;
-			task.HourlyRate = hourlyRate;
 			task.UpdatedAt = updatedAt;
 			task.TimeEstimated = timeEstimated;
 			task.IsBillable = isBillable;
-			task.HourlyRate = isBillable ? hourlyRate : null;
 
 			if (timeEntries != null)
 				task._timeEntries.AddRange(timeEntries.Select(te => te)); 

@@ -68,9 +68,6 @@ namespace Tasks.Application.ProjectTasks.Commands.CreateProjectTask
 				   request.ReporterId,
 				   request.AssigneeId,
 				   request.IsBillable,
-				   request.HourlyRate.HasValue && request.IsBillable
-					   ? Money.From(request.HourlyRate.Value, request.Currency ?? "USD")
-					   : null,
 				   (TaskPriority)request.Priority,
 				   request.TimeEstimated,
 				   request.DueDate

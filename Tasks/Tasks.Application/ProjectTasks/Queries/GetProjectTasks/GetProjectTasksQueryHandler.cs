@@ -43,6 +43,7 @@ namespace Tasks.Application.ProjectTasks.Queries.GetTasks
 				_logger.LogWarning("Filter is null");
 				return Result.Fail<PaginatedResult<TaskListItemDto>>("Filter cannot be null");
 			}
+
 			if (request.paginationInfo == null)
 			{
 				_logger.LogWarning("PaginationInfo is null");
@@ -65,13 +66,8 @@ namespace Tasks.Application.ProjectTasks.Queries.GetTasks
 				var dtos = _mapper.Map<List<TaskListItemDto>>(paginatedResult.Items);
 				_logger.LogInformation("Handler → после маппинга {Count} DTO", dtos.Count);
 
-				var updatedPaginationInfo = new PaginationInfo(
-					paginatedResult.Pagination.TotalItems,
-					request.paginationInfo.ItemsPerPage,
-					request.paginationInfo.ActualPage
-				);
+				var paginatedResultDto = new PaginatedResult<TaskListItemDto>(dtos, paginatedResult.Pagination);
 
-				var paginatedResultDto = new PaginatedResult<TaskListItemDto>(dtos, updatedPaginationInfo);
 				return paginatedResultDto;
 			}
 			catch (Exception ex)

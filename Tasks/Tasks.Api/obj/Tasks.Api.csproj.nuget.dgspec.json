@@ -63,6 +63,22 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "HotChocolate": {
+              "target": "Package",
+              "version": "[15.1.11, )"
+            },
+            "HotChocolate.AspNetCore": {
+              "target": "Package",
+              "version": "[15.1.11, )"
+            },
+            "HotChocolate.Data": {
+              "target": "Package",
+              "version": "[15.1.11, )"
+            },
+            "HotChocolate.Types": {
+              "target": "Package",
+              "version": "[15.1.11, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.8, )"

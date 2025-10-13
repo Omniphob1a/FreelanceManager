@@ -6,6 +6,10 @@ let currentFilters = {};
 let allProjects = [];
 let taskOwnershipFilter = 'all'; // 'all', 'assigned', 'reported'
 let currentUserId = null;
+let currentPage = 1;
+let itemsPerPage = 10;
+let totalTasksCount = 0;
+let totalPages = 1;
 
 
 export async function initTasksPage() {
@@ -15,14 +19,8 @@ export async function initTasksPage() {
     // Получаем ID текущего пользователя
     try {
       const user = await UserAPI.getProfile();
-      console.log('User profile response:', user);
-      
       currentUserId = user.id || user.userId || user.userID || user.Id;
-      console.log('Extracted currentUserId:', currentUserId);
-      
-      if (!currentUserId) {
-        console.warn('No user ID found in profile response. Available keys:', Object.keys(user));
-      }
+      console.log('Current user ID:', currentUserId);
     } catch (error) {
       console.error('Failed to get current user profile:', error);
       currentUserId = null;
@@ -33,9 +31,13 @@ export async function initTasksPage() {
     if (loader) loader.classList.remove('hidden');
     
     await loadProjectsForFilter();
+    
+    // Инициализируем пагинацию ДО применения фильтров
+    initializePagination();
+    
     await applyFilters();
     
-    // Инициализация всех обработчиков фильтрации
+    // Инициализация всех обработчиков
     setupAllFilters();
     setupFlatpickrReposition();
     setupExpandableFilters();
@@ -47,7 +49,7 @@ export async function initTasksPage() {
         initAllDatePickers();
     }, 100);
     
-    console.log('Tasks page initialized. Current user ID:', currentUserId);
+    console.log('Tasks page initialized');
   } catch (error) {
     console.error('Failed to initialize tasks page:', error);
     showToast('Failed to initialize tasks page', 'error');
@@ -56,6 +58,105 @@ export async function initTasksPage() {
     const loader = document.getElementById('tasksLoader');
     if (loader) loader.classList.add('hidden');
   }
+}
+
+function initializePagination() {
+    console.log('Initializing pagination...');
+    
+    // Сбросим состояние пагинации
+    currentPage = 1;
+    itemsPerPage = 10;
+    totalTasksCount = 0;
+    totalPages = 1;
+    
+    // Настроим обработчики
+    setupPagination();
+    
+    // Обновим UI
+    updatePagination();
+    
+    console.log('Pagination initialized');
+}
+
+function updatePagination() {
+    const tasksShowing = document.getElementById('tasksShowing');
+    const tasksTotal = document.getElementById('tasksTotal');
+    const prevPageBtn = document.getElementById('prevPageBtn');
+    const nextPageBtn = document.getElementById('nextPageBtn');
+    
+    console.log('Updating pagination UI:', {
+        currentPage,
+        totalPages,
+        totalTasksCount
+    });
+    
+    if (tasksShowing) {
+        const startItem = (currentPage - 1) * itemsPerPage + 1;
+        const endItem = Math.min(currentPage * itemsPerPage, totalTasksCount);
+        tasksShowing.textContent = `${startItem}-${endItem}`;
+    }
+    
+    if (tasksTotal) {
+        tasksTotal.textContent = totalTasksCount;
+    }
+    
+    if (prevPageBtn) {
+        prevPageBtn.disabled = currentPage <= 1;
+        console.log('Previous button disabled:', prevPageBtn.disabled);
+    }
+    
+    if (nextPageBtn) {
+        nextPageBtn.disabled = currentPage >= totalPages;
+        console.log('Next button disabled:', nextPageBtn.disabled);
+    }
+}
+// Функция для настройки обработчиков пагинации
+// Добавим более подробное логирование в функции пагинации
+function setupPagination() {
+    const prevPageBtn = document.getElementById('prevPageBtn');
+    const nextPageBtn = document.getElementById('nextPageBtn');
+    
+    console.log('Setting up pagination handlers...');
+    console.log('Prev button:', prevPageBtn);
+    console.log('Next button:', nextPageBtn);
+    console.log('Current page:', currentPage);
+    console.log('Total pages:', totalPages);
+    
+    if (prevPageBtn) {
+        // Удаляем старые обработчики чтобы избежать дублирования
+        prevPageBtn.replaceWith(prevPageBtn.cloneNode(true));
+        const newPrevBtn = document.getElementById('prevPageBtn');
+        
+        newPrevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Previous button clicked. Current page:', currentPage);
+            if (currentPage > 1) {
+                currentPage--;
+                console.log('Loading previous page:', currentPage);
+                applyFilters();
+            } else {
+                console.log('Already on first page');
+            }
+        });
+    }
+    
+    if (nextPageBtn) {
+        // Удаляем старые обработчики чтобы избежать дублирования
+        nextPageBtn.replaceWith(nextPageBtn.cloneNode(true));
+        const newNextBtn = document.getElementById('nextPageBtn');
+        
+        newNextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Next button clicked. Current page:', currentPage, 'Total pages:', totalPages);
+            if (currentPage < totalPages) {
+                currentPage++;
+                console.log('Loading next page:', currentPage);
+                applyFilters();
+            } else {
+                console.log('Already on last page');
+            }
+        });
+    }
 }
 
 function setupQuickFilters() {
@@ -162,111 +263,144 @@ function setupOwnershipFilter() {
 }
 
 async function loadTasks(filters = {}) {
-  try {
-    const loader = document.getElementById('tasksLoader');
-    const noTasksRow = document.getElementById('noTasksRow');
-    
-    if (loader) loader.classList.remove('hidden');
-    if (noTasksRow) noTasksRow.classList.add('hidden');
+    try {
+        console.log('=== LOADING TASKS ===');
+        console.log('Original filters:', filters);
+        
+        const loader = document.getElementById('tasksLoader');
+        const noTasksRow = document.getElementById('noTasksRow');
+        
+        if (loader) loader.classList.remove('hidden');
+        if (noTasksRow) noTasksRow.classList.add('hidden');
 
-    // Преобразуем фильтры в формат, понятный API
+        // Преобразуем фильтры в формат API
+        const apiFilters = mapFiltersToApi(filters);
+
+        // Убедимся, что у нас есть правильные параметры пагинации
+        if (!apiFilters.actualPage) {
+            apiFilters.actualPage = currentPage;
+        }
+        if (!apiFilters.ItemsPerPage) {
+            apiFilters.ItemsPerPage = itemsPerPage;
+        }
+
+        // Добавляем параметры по умолчанию для совместимости с API
+        const defaultParams = {
+            'hasTimeEntries': false,
+            'hasComments': false,
+            'includeTimeEntries': false,
+            'includeComments': false,
+            'sortBy': 'created',
+            'desc': true
+        };
+
+        // Добавляем параметры по умолчанию, если они не установлены
+        Object.keys(defaultParams).forEach(key => {
+            if (apiFilters[key] === undefined) {
+                apiFilters[key] = defaultParams[key];
+            }
+        });
+
+        console.log('Final API filters:', apiFilters);
+        
+        const response = await TaskAPI.getTasks(apiFilters);
+        console.log('API response:', response);
+        
+        currentTasks = response.items || response || [];
+        
+        // Обновляем данные пагинации из ответа
+        if (response.pagination) {
+            totalTasksCount = response.pagination.totalItems || currentTasks.length;
+            itemsPerPage = response.pagination.itemsPerPage || itemsPerPage;
+            currentPage = response.pagination.actualPage || currentPage;
+            totalPages = response.pagination.totalPages || 1;
+            
+            console.log('Pagination data:', {
+                totalTasksCount,
+                itemsPerPage,
+                currentPage,
+                totalPages
+            });
+        } else {
+            // Fallback если пагинации нет в ответе
+            totalTasksCount = currentTasks.length;
+            console.log('No pagination in response, using fallback');
+        }
+        
+        // Обновляем UI
+        renderTasks(currentTasks);
+        updateTaskCounters();
+        updatePagination();
+        
+        // Показываем/скрываем сообщение о отсутствии задач
+        if (currentTasks.length === 0 && noTasksRow) {
+            noTasksRow.classList.remove('hidden');
+        }
+        
+        if (loader) loader.classList.add('hidden');
+        
+        console.log('Tasks loaded successfully');
+    } catch (error) {
+        console.error('Failed to load tasks:', error);
+        showToast('Failed to load tasks', 'error');
+        
+        const loader = document.getElementById('tasksLoader');
+        const noTasksRow = document.getElementById('noTasksRow');
+        if (loader) loader.classList.add('hidden');
+        if (noTasksRow) noTasksRow.classList.remove('hidden');
+    }
+}
+
+// Функция для преобразования имен параметров в формат API
+function mapFiltersToApi(filters) {
     const apiFilters = {};
     
-    // Статус
-    if (filters.status) {
-      apiFilters.status = filters.status;
-    }
+    const parameterMappings = {
+        // Пагинация - ИСПРАВЛЕНО: правильные имена параметров
+        'page': 'actualPage',
+        'pageSize': 'ItemsPerPage',
+        
+        // Основные параметры задач
+        'projectId': 'project',
+        'assigneeId': 'assignee', 
+        'reporterId': 'reporter',
+        'createdBy': 'createdBy',
+        'status': 'status',
+        'priority': 'priority',
+        'search': 'search',
+        'dueFrom': 'dueFrom',
+        'dueTo': 'dueTo',
+        'createdFrom': 'createdFrom',
+        'createdTo': 'createdTo',
+        'updatedFrom': 'updatedFrom',
+        'updatedTo': 'updatedTo',
+        'minEstimatedHours': 'minEstimatedHours',
+        'maxEstimatedHours': 'maxEstimatedHours',
+        'minSpentHours': 'minSpentHours',
+        'maxSpentHours': 'maxSpentHours',
+        'isBillable': 'isBillable',
+        'hasTimeEntries': 'hasTimeEntries',
+        'hasComments': 'hasComments',
+        'overdue': 'overdue',
+        'includeTimeEntries': 'includeTimeEntries',
+        'includeComments': 'includeComments',
+        'sortBy': 'sortBy',
+        'desc': 'desc',
+        
+        // Фильтры владения
+        'OnlyMyTasks': 'onlyMyTasks',
+        'CurrentUserId': 'currentUserId'
+    };
     
-    // Приоритет
-    if (filters.priority) {
-      apiFilters.priority = filters.priority;
-    }
+    Object.keys(filters).forEach(key => {
+        if (filters[key] !== undefined && filters[key] !== null && filters[key] !== '') {
+            const apiKey = parameterMappings[key] || key;
+            apiFilters[apiKey] = filters[key];
+            console.log(`Mapping parameter: ${key} -> ${apiKey} = ${filters[key]}`);
+        }
+    });
     
-    // Проект
-    if (filters.projectId) {
-      apiFilters.project = filters.projectId;
-    }
-    
-    // Ключевое исправление: параметры для фильтрации по владению
-    if (filters.OnlyMyTasks !== undefined) {
-      apiFilters.OnlyMyTasks = filters.OnlyMyTasks;
-    }
-    
-    if (filters.CurrentUserId) {
-      apiFilters.CurrentUserId = filters.CurrentUserId;
-    }
-    
-    // Назначенный пользователь
-    if (filters.AssigneeId) {
-      apiFilters.AssigneeId = filters.AssigneeId;
-    }
-    
-    // Создатель задачи
-    if (filters.ReporterId) {
-      apiFilters.ReporterId = filters.ReporterId;
-    }
-    
-    // Дата от
-    if (filters.dueFrom) {
-      apiFilters.dueFrom = new Date(filters.dueFrom).toISOString();
-    }
-    
-    // Дата до
-    if (filters.dueTo) {
-      const dueToDate = new Date(filters.dueTo);
-      dueToDate.setHours(23, 59, 59, 999);
-      apiFilters.dueTo = dueToDate.toISOString();
-    }
-    
-    // Минимальные часы
-    if (filters.minEstimatedHours) {
-      apiFilters.minEstimatedHours = parseFloat(filters.minEstimatedHours);
-    }
-    
-    // Максимальные часы
-    if (filters.maxEstimatedHours) {
-      apiFilters.maxEstimatedHours = parseFloat(filters.maxEstimatedHours);
-    }
-    
-    // Billable
-    if (filters.isBillable) {
-      apiFilters.isBillable = filters.isBillable === 'true';
-    }
-    
-    // Просроченные
-    if (filters.overdue) {
-      apiFilters.overdue = true;
-    }
-
-    // Поиск
-    if (filters.search) {
-      apiFilters.search = filters.search;
-    }
-
-    console.log('Loading tasks with API filters:', apiFilters);
-    
-    const response = await TaskAPI.getTasks(apiFilters);
-    currentTasks = response.items || response || [];
-    
-    // Обновляем UI
-    renderTasks(currentTasks);
-    updateTaskCounters();
-    
-    // Показываем/скрываем сообщение о отсутствии задач
-    if (currentTasks.length === 0 && noTasksRow) {
-      noTasksRow.classList.remove('hidden');
-    }
-    
-    if (loader) loader.classList.add('hidden');
-  } catch (error) {
-    console.error('Failed to load tasks:', error);
-    showToast('Failed to load tasks', 'error');
-    
-    const loader = document.getElementById('tasksLoader');
-    const noTasksRow = document.getElementById('noTasksRow');
-    if (loader) loader.classList.add('hidden');
-    if (noTasksRow) noTasksRow.classList.remove('hidden');
-  }
+    return apiFilters;
 }
 
 function renderTasks(tasks) {
@@ -702,19 +836,29 @@ async function openTaskModal(taskId) {
         
         // Загружаем основную информацию о задаче
         const task = await TaskAPI.getTaskById(taskId, ['timeEntries']);
-        console.log('Task data received:', task);
+        console.log('Full task data:', task);
         
         // Загружаем информацию о проекте
         if (task.projectId) {
             try {
                 const project = await ProjectAPI.getProjectById(task.projectId);
                 task.projectName = project.title;
+                console.log('Project data:', project);
             } catch (error) {
                 console.error('Failed to load project details:', error);
                 task.projectName = 'Unknown project';
             }
         } else {
             task.projectName = 'No project';
+        }
+        
+        // Получаем данные текущего пользователя для fallback
+        let currentUserData = null;
+        try {
+            currentUserData = await UserAPI.getProfile();
+            console.log('Current user data for fallback:', currentUserData);
+        } catch (error) {
+            console.error('Failed to get current user profile for fallback:', error);
         }
         
         // Загружаем участников проекта для получения информации о reporter и assignee
@@ -731,50 +875,81 @@ async function openTaskModal(taskId) {
                     membersArray = members.value;
                 }
                 
-                // Находим reporter (создателя задачи)
-                const reporterMember = membersArray.find(member => {
-                    if (!member.user) return false;
-                    const memberUserId = member.user.id;
-                    return memberUserId === task.reporterId;
-                });
+                console.log('All project members:', membersArray);
+                console.log('Available member IDs:', membersArray.map(m => m.id));
+                console.log('Available user IDs in members:', membersArray.map(m => m.user?.id));
                 
-                if (reporterMember) {
-                    const user = reporterMember.user;
-                    task.reporterName = user.name || user.userName || user.email || `User ${task.reporterId}`;
-                } else {
-                    task.reporterName = `User ${task.reporterId}`;
-                }
-                
-                // Находим assignee (исполнителя)
-                if (task.assigneeId) {
-                    const assignedMember = membersArray.find(member => {
-                        if (!member.user) return false;
-                        const memberUserId = member.user.id;
-                        return memberUserId === task.assigneeId;
+                // Функция для поиска пользователя по ID в участниках проекта - ИСПРАВЛЕННАЯ
+                const findUserInMembers = (userId, isAssignee = false) => {
+                    if (!userId) return null;
+                    
+                    const member = membersArray.find(m => {
+                        if (!m.user) return false;
+                        
+                        // ДЛЯ ASSIGNEE: ищем по member.id (так как assigneeId - это memberId)
+                        if (isAssignee) {
+                            const memberId = String(m.id);
+                            const targetId = String(userId);
+                            console.log(`Comparing assignee by member ID: ${memberId} === ${targetId}`);
+                            return memberId === targetId;
+                        } 
+                        // ДЛЯ REPORTER: ищем по user.id (так как reporterId - это userId)
+                        else {
+                            const memberUserId = String(m.user.id);
+                            const targetUserId = String(userId);
+                            console.log(`Comparing reporter by user ID: ${memberUserId} === ${targetUserId}`);
+                            return memberUserId === targetUserId;
+                        }
                     });
                     
-                    if (assignedMember) {
-                        const user = assignedMember.user;
-                        task.assigneeName = user.name || user.userName || user.email || `User ${task.assigneeId}`;
+                    return member ? member.user : null;
+                };
+                
+                // Находим reporter (создателя задачи) - ищем по user.id
+                const reporterUser = findUserInMembers(task.reporterId, false);
+                if (reporterUser) {
+                    task.reporterName = reporterUser.login || reporterUser.name || reporterUser.userName || reporterUser.email || `User ${task.reporterId}`;
+                    console.log('Found reporter:', task.reporterName);
+                } else {
+                    // Fallback на текущего пользователя для reporter
+                    if (currentUserData && String(currentUserData.id) === String(task.reporterId)) {
+                        task.reporterName = currentUserData.login || currentUserData.name || currentUserData.userName || currentUserData.email || `User ${task.reporterId}`;
+                    } else {
+                        task.reporterName = `User ${task.reporterId}`;
+                    }
+                    console.log('Reporter not found in project members:', task.reporterName);
+                }
+                
+                // Находим assignee (исполнителя) - ищем по member.id
+                if (task.assigneeId) {
+                    const assigneeUser = findUserInMembers(task.assigneeId, true);
+                    if (assigneeUser) {
+                        task.assigneeName = assigneeUser.login || assigneeUser.name || assigneeUser.userName || assigneeUser.email || `User ${task.assigneeId}`;
+                        console.log('Found assignee:', task.assigneeName);
                     } else {
                         task.assigneeName = `User ${task.assigneeId}`;
+                        console.log('Assignee not found in project members:', task.assigneeName);
                     }
+                } else {
+                    task.assigneeName = 'Unassigned';
                 }
                 
             } catch (error) {
                 console.error('Failed to load project members:', error);
-                task.reporterName = `User ${task.ReporterId}`;
+                // Fallback при ошибке загрузки участников
+                task.reporterName = `User ${task.reporterId}`;
                 if (task.assigneeId) {
                     task.assigneeName = `User ${task.assigneeId}`;
                 }
             }
         } else {
-            task.reporterName = `User ${task.ReporterId}`;
+            // Если проекта нет, используем базовые fallback
+            task.reporterName = `User ${task.reporterId}`;
             if (task.assigneeId) {
                 task.assigneeName = `User ${task.assigneeId}`;
             }
         }
-        initDatePickersInContainer(taskModal);
+        
         // Загружаем комментарии через отдельный endpoint
         const comments = await TaskAPI.getComments(taskId);
         console.log('Comments with author data:', comments);
@@ -788,7 +963,6 @@ async function openTaskModal(taskId) {
         showToast('Failed to load task details', 'error');
     }
 }
-
 function convertHoursToTimeString(hours) {
     if (!hours || hours <= 0) return null;
     
@@ -1031,44 +1205,52 @@ function setupTaskFilters() {
 }
 
 function applyFilters() {
-  console.log('Applying filters with ownership:', taskOwnershipFilter);
-  
-  // Копируем текущие фильтры
-  let filters = { ...currentFilters };
-  
-  // Добавляем фильтры владения на основе taskOwnershipFilter
-  if (currentUserId) {
-    // Всегда добавляем CurrentUserId, если он доступен
-    filters.CurrentUserId = currentUserId;
+    console.log('=== APPLYING FILTERS ===');
+    console.log('Current page:', currentPage);
+    console.log('Total pages:', totalPages);
+    console.log('Ownership filter:', taskOwnershipFilter);
+    console.log('Current filters:', currentFilters);
     
-    switch (taskOwnershipFilter) {
-      case 'all':
-        // Показываем все свои задачи (assigned OR reported)
-        filters.OnlyMyTasks = true;
-        delete filters.AssigneeId;
-        delete filters.ReporterId;
-        break;
+    // Копируем текущие фильтры
+    let filters = { ...currentFilters };
+    
+    // Удаляем старые параметры пагинации чтобы избежать конфликтов
+    delete filters.actualPage;
+    delete filters.ItemsPerPage;
+    delete filters.page;
+    delete filters.pageSize;
+    
+    // Добавляем фильтры владения на основе taskOwnershipFilter
+    if (currentUserId) {
+        filters.CurrentUserId = currentUserId;
         
-      case 'assigned':
-        // Показываем только назначенные на текущего пользователя
-        filters.OnlyMyTasks = false;
-        filters.AssigneeId = currentUserId;
-        delete filters.ReporterId;
-        break;
-        
-      case 'reported':
-        // Показываем только созданные текущим пользователем
-        filters.OnlyMyTasks = false;
-        filters.ReporterId = currentUserId;
-        delete filters.AssigneeId;
-        break;
+        switch (taskOwnershipFilter) {
+            case 'all':
+                filters.OnlyMyTasks = true;
+                delete filters.AssigneeId;
+                delete filters.ReporterId;
+                break;
+            case 'assigned':
+                filters.OnlyMyTasks = false;
+                filters.AssigneeId = currentUserId;
+                delete filters.ReporterId;
+                break;
+            case 'reported':
+                filters.OnlyMyTasks = false;
+                filters.ReporterId = currentUserId;
+                delete filters.AssigneeId;
+                break;
+        }
     }
-  } else {
-    console.warn('No currentUserId available - ownership filters may not work');
-  }
-  
-  // Загружаем задачи с обновленными фильтрами
-  loadTasks(filters);
+    
+    // Добавляем параметры пагинации (они будут преобразованы в actualPage и ItemsPerPage)
+    filters.page = currentPage;
+    filters.pageSize = itemsPerPage;
+    
+    console.log('Final filters with pagination:', filters);
+    
+    // Загружаем задачи с обновленными фильтрами
+    loadTasks(filters);
 }
 
 function setupTaskModalEventListeners(task) {
@@ -1414,7 +1596,6 @@ async function createTaskFromForm(modal) {
     try {
         const formData = new FormData(modal.querySelector('#taskForm'));
         
-        // Получаем projectId
         const projectId = formData.get('projectId');
         if (!projectId) {
             showToast('Please select a project', 'error');
@@ -1422,29 +1603,25 @@ async function createTaskFromForm(modal) {
         }
 
         // Validate estimated hours
-        const estimatedHours = parseFloat(formData.get('estimatedHours'));
-        if (estimatedHours && estimatedHours <= 0) {
-            showToast('Estimated hours must be positive', 'error');
-            return;
-        }
-        if (estimatedHours && estimatedHours > 160) {
-            showToast('Consider breaking down tasks larger than 160 hours', 'warning');
+        const estimatedHoursValue = formData.get('estimatedHours');
+        let timeEstimated = null;
+        
+        if (estimatedHoursValue && !isNaN(parseFloat(estimatedHoursValue))) {
+            const estimatedHours = parseFloat(estimatedHoursValue);
+            if (estimatedHours > 0) {
+                timeEstimated = convertHoursToTimeString(estimatedHours);
+            }
         }
 
-        // Преобразуем часы в формат времени
-        const timeEstimated = convertHoursToTimeString(estimatedHours);
-
-        // Форматируем данные согласно API
+        // Форматируем данные согласно API (без биллинга)
         const taskData = {
             projectId: projectId,
             title: formData.get('title'),
             description: formData.get('description'),
-            timeEstimated: timeEstimated, // Исправлено: используем timeEstimated вместо estimateValue
+            timeEstimated: timeEstimated,
             dueDate: formData.get('dueDate') ? new Date(formData.get('dueDate')).toISOString() : null,
-            isBillable: formData.get('isBillable') === 'on',
-            hourlyRate: parseFloat(formData.get('amount')) || 0, // Исправлено: hourlyRate вместо amount
             priority: parseInt(formData.get('priority')) || 1,
-            assigneeId: formData.get('assigneeId') || null // Добавлено: assigneeId
+            assigneeId: formData.get('assigneeId') || null
         };
 
         // Убираем пустые поля
@@ -1456,17 +1633,19 @@ async function createTaskFromForm(modal) {
 
         console.log('Sending task data:', taskData);
         
-        await TaskAPI.createTask(taskData);
+        const newTask = await TaskAPI.createTask(taskData);
         showToast('Task created successfully');
         document.body.removeChild(modal);
+        
+        // Сразу открываем модальное окно новой задачи
+        if (newTask && newTask.id) {
+            await openTaskModal(newTask.id);
+        }
+        
         await loadTasks(currentFilters);
     } catch (error) {
         console.error('Failed to create task:', error);
-        if (error.message.includes('Project not found')) {
-            showToast('Selected project was not found. Please choose another project.', 'error');
-        } else {
-            showToast('Failed to create task', 'error');
-        }
+        showToast('Failed to create task', 'error');
     }
 }
 
@@ -1873,25 +2052,24 @@ async function updateTaskFromForm(modal, taskId) {
         const formData = new FormData(modal.querySelector('#taskForm'));
         
         // Validate estimated hours
-        const estimatedHours = parseFloat(formData.get('estimatedHours'));
-        if (estimatedHours && estimatedHours <= 0) {
-            showToast('Estimated hours must be positive', 'error');
-            return;
+        const estimatedHoursValue = formData.get('estimatedHours');
+        let timeEstimated = null;
+        
+        if (estimatedHoursValue && !isNaN(parseFloat(estimatedHoursValue))) {
+            const estimatedHours = parseFloat(estimatedHoursValue);
+            if (estimatedHours > 0) {
+                timeEstimated = convertHoursToTimeString(estimatedHours);
+            }
         }
 
-        // Преобразуем часы в формат времени
-        const timeEstimated = convertHoursToTimeString(estimatedHours);
-
-        // Форматируем данные согласно API
+        // Форматируем данные согласно API (без биллинга)
         const taskData = {
             title: formData.get('title'),
             description: formData.get('description'),
-            timeEstimated: timeEstimated, // Исправлено: используем timeEstimated вместо estimateValue
+            timeEstimated: timeEstimated,
             dueDate: formData.get('dueDate') ? new Date(formData.get('dueDate')).toISOString() : null,
-            isBillable: formData.get('isBillable') === 'on',
-            hourlyRate: parseFloat(formData.get('amount')) || 0, // Исправлено: hourlyRate вместо amount
             priority: parseInt(formData.get('priority')) || 1,
-            assigneeId: formData.get('assigneeId') || null // Добавлено: assigneeId
+            assigneeId: formData.get('assigneeId') || null
         };
 
         // Убираем пустые поля
@@ -1918,7 +2096,6 @@ async function updateTaskFromForm(modal, taskId) {
         showToast('Failed to update task', 'error');
     }
 }
-
 async function showAssignTaskModal(taskId) {
     try {
         const task = await TaskAPI.getTaskById(taskId);

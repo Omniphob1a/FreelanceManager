@@ -61,14 +61,12 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 			try
 			{
 				task.UpdateDetails(
+					request.ProjectId,
 					request.Title,
 					request.Description,
 					request.TimeEstimated,
 					request.DueDate,
 					request.IsBillable,
-					request.HourlyRate.HasValue && request.IsBillable
-						? Money.From(request.HourlyRate.Value, request.Currency ?? "USD")
-						: null,
 					(TaskPriority)request.Priority,
 					request.AssigneeId
 				);

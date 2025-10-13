@@ -96,7 +96,6 @@ namespace Tasks.Persistence.Mappings
 				priority: (TaskPriority)entity.Priority,
 				dueDate: entity.DueDate,
 				isBillable: entity.IsBillable,
-				hourlyRate: null, 
 				createdAt: entity.CreatedAt,
 				updatedAt: entity.UpdatedAt,
 				timeEstimated: TimeSpan.FromTicks(entity.TimeEstimatedTicks),

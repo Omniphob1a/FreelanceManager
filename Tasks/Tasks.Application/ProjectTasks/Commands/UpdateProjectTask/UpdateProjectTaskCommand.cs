@@ -10,13 +10,12 @@ namespace Tasks.Application.ProjectTasks.Commands.UpdateProjectTask
 {
 	public record UpdateProjectTaskCommand(
 		Guid TaskId,
+		Guid ProjectId,
 		string Title,
 		string? Description,
 		TimeSpan? TimeEstimated,
 		DateTime? DueDate,
 		bool IsBillable,
-		decimal? HourlyRate,
-		string? Currency,
 		int Priority,
 		Guid? AssigneeId
 	) : IRequest<Result<Unit>>;

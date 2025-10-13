@@ -47,14 +47,30 @@ namespace Tasks.Persistence.Data.Repositories
 
 				var totalItems = await query.CountAsync(cancellationToken);
 
+				var normalizedPage = paginationInfo.NormalizedPage;
+				var normalizedItemsPerPage = paginationInfo.NormalizedItemsPerPage;
+				var totalPages = (int)Math.Ceiling((double)totalItems / normalizedItemsPerPage);
+
+				if (normalizedPage > totalPages && totalPages > 0)
+				{
+					normalizedPage = totalPages;
+				}
+
 				var entities = await query
 					.AsNoTracking()
-					.ApplyPagination(paginationInfo)
+					.Skip((normalizedPage - 1) * normalizedItemsPerPage)
+					.Take(normalizedItemsPerPage)
 					.ToListAsync(cancellationToken);
+
 				_logger.LogInformation("GetAllAsync → из базы пришло {Count} задач", entities.Count);
+
 				var items = _mapper.ToDomainCollection(entities);
 
-				var updatedPaginationInfo = new PaginationInfo(totalItems, paginationInfo.ItemsPerPage, paginationInfo.ActualPage);
+				var updatedPaginationInfo = new PaginationInfo(
+					totalItems,
+					normalizedItemsPerPage,
+					normalizedPage
+				);
 
 				return new PaginatedResult<ProjectTask>(items, updatedPaginationInfo);
 			}
@@ -64,6 +80,7 @@ namespace Tasks.Persistence.Data.Repositories
 				throw;
 			}
 		}
+
 
 
 		public async Task<PaginatedResult<ProjectTask>> GetByAssigneeIdAsync(Guid assigneeId, TaskFilter filter, PaginationInfo paginationInfo, CancellationToken cancellationToken)

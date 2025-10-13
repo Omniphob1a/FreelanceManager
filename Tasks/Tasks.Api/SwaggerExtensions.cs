@@ -1,5 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Path = System.IO.Path;
 
 namespace Projects.Api
 {

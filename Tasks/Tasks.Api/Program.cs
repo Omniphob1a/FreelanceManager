@@ -1,3 +1,4 @@
+// ‘‡ÈÎ: Tasks.Api/Program.cs (ÒÎÓÈ: Api)
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
@@ -10,27 +11,46 @@ using Tasks.Application;
 using Tasks.Infrastructure;
 using Tasks.Persistence;
 using Tasks.Persistence.Data;
-
+using HotChocolate;
+using HotChocolate.AspNetCore;
+using Tasks.Api.GraphQL.Types;
+using Tasks.Api.GraphQL.Queries;
+using Tasks.Api.GraphQL.Mutations;
+using Tasks.Api.GraphQL.DataLoaders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers();
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+// Swagger / OpenAPI
 builder.Services.AddOpenApi();
-builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithJwt();
 
-
+// Logging, HttpContext
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
+
+// Persistence / Infrastructure / Application / Api registrations
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-builder.Services.AddApplication();
 builder.Services.AddApi(builder.Configuration);
+
+builder.Services
+	.AddGraphQLServer()
+	.AllowIntrospection(true)  // ? “¿  œ–ŒŸ≈!
+	.AddQueryType<Query>()
+	.AddMutationType<Mutation>()
+	.AddType<ProjectTaskType>()
+	.AddProjections()
+	.AddFiltering()
+	.AddSorting()
+	.AddDataLoader<UserByIdDataLoader>()
+	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
+
+// CORS
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowFrontend", policy =>
@@ -46,17 +66,27 @@ builder.Services.AddCors(options =>
 			.AllowCredentials();
 	});
 });
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-	var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
-	dbContext.Database.Migrate();
+	try
+	{
+		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
+		// dbContext.Database.Migrate(); 
+	}
+	catch (Exception ex)
+	{
+		var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
+		logger.LogError(ex, "Database migration failed on startup.");
+		throw; 
+	}
 }
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+	app.MapOpenApi();
 }
 
 app.UseSwagger();
@@ -76,11 +106,14 @@ app.UseCookiePolicy(new CookiePolicyOptions
 });
 
 app.UseRouting();
+
 app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 
 app.UseHttpMetrics();
+
+app.MapGraphQL("/graphql");
 
 app.MapControllers();
 
@@ -99,7 +132,7 @@ app.UseExceptionHandler(errorApp =>
 			var error = new
 			{
 				Message = "An unexpected error occurred.",
-				Detail = builder.Environment.IsDevelopment() ? exceptionHandlerPathFeature.Error.ToString() : null
+				Detail = app.Environment.IsDevelopment() ? exceptionHandlerPathFeature.Error.ToString() : null
 			};
 
 			var errorJson = System.Text.Json.JsonSerializer.Serialize(error);

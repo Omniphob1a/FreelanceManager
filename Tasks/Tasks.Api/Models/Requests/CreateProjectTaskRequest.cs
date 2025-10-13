@@ -10,8 +10,6 @@
 		public DateTime? DueDate { get; set; }
 
 		public bool IsBillable { get; set; }
-		public decimal? HourlyRate { get; set; }      
-
 		public int Priority { get; set; }             
 		public Guid? AssigneeId { get; set; }          
 	}

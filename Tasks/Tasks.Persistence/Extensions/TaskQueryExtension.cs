@@ -96,12 +96,8 @@ namespace Tasks.Persistence.Extensions
 
 		public static IQueryable<ProjectTaskEntity> ApplyPagination(this IQueryable<ProjectTaskEntity> query, PaginationInfo paginationInfo)
 		{
-			var page = paginationInfo.ActualPage;
-			if (page < 1) page = 1;
-
-			var pageSize = paginationInfo.ItemsPerPage;
-			if (pageSize < 1) pageSize = 1;
-
+			var page = paginationInfo.NormalizedPage;
+			var pageSize = paginationInfo.NormalizedItemsPerPage;
 
 			query = query
 				.Skip((page - 1) * pageSize)
