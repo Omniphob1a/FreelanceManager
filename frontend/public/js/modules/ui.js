@@ -60,6 +60,7 @@ export function getTaskStatusText(status) {
 
 // Функции для статусов проектов
 export function getStatusClass(status) {
+    status = parseInt(status, 10); // Ensure status is number
     const statusClasses = {
         0: 'bg-gray-100 text-gray-800',    // Draft
         1: 'bg-blue-100 text-blue-800',    // Active
@@ -70,22 +71,22 @@ export function getStatusClass(status) {
 }
 
 export function getStatusText(status) {
+    status = parseInt(status, 10); // Ensure status is number
     const statusTexts = {
         0: 'Draft',
         1: 'Active',
         2: 'Completed',
         3: 'Archived'
     };
-    return statusTexts[status] || 'Draft';
+    return statusTexts[status] || 'Unknown';
 }
 
 export function getStatusHint(status) {
     const hints = {
         0: 'You can add milestones and tags in draft status',
-        1: 'Project is published and accepting applications',
-        2: 'Project is in progress, no structural changes allowed',
-        3: 'Project is completed, read-only mode',
-        4: 'Project is archived, read-only mode'
+        1: 'Project is active and accepting applications',
+        2: 'Project is completed, read-only mode',
+        3: 'Project is archived, read-only mode'
     };
     return hints[status] || '';
 }
@@ -147,9 +148,35 @@ export function getDaysLeft(endDate) {
     
     try {
         const today = new Date();
-        const dueDate = new Date(endDate);
+        today.setHours(0, 0, 0, 0); // Сбрасываем время для точного расчета дней
+        
+        let dueDate;
+        if (typeof endDate === 'string') {
+            // Try to parse ISO format or YYYY-MM-DD
+            dueDate = new Date(endDate.replace(' г.', '').trim()); // Remove ' г.' if present
+            if (isNaN(dueDate.getTime())) {
+                // Try Russian date format: 31 окт. 2025
+                const months = {
+                    'янв': 0, 'фев': 1, 'мар': 2, 'апр': 3, 'май': 4, 'июн': 5,
+                    'июл': 6, 'авг': 7, 'сен': 8, 'окт': 9, 'ноя': 10, 'дек': 11
+                };
+                const parts = endDate.match(/(\d+)\s+(\w+)\.\s+(\d+)/);
+                if (parts) {
+                    const day = parseInt(parts[1]);
+                    const month = months[parts[2].toLowerCase().slice(0,3)];
+                    const year = parseInt(parts[3]);
+                    if (!isNaN(month)) {
+                        dueDate = new Date(year, month, day);
+                    }
+                }
+            }
+        } else {
+            dueDate = new Date(endDate);
+        }
         
         if (isNaN(dueDate.getTime())) return 'Invalid date';
+        
+        dueDate.setHours(0, 0, 0, 0);
         
         const diffTime = dueDate - today;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -157,7 +184,8 @@ export function getDaysLeft(endDate) {
         if (diffDays < 0) return `${Math.abs(diffDays)} days overdue`;
         if (diffDays === 0) return 'Today';
         return `${diffDays} days left`;
-    } catch {
+    } catch (error) {
+        console.error('Error in getDaysLeft:', error);
         return 'Error calculating';
     }
 }

@@ -18,7 +18,8 @@ export async function initProjectForm(queryString = '') {
         flatpickr(dueDateInput, {
             dateFormat: "Y-m-d",
             minDate: "today",
-            static: true
+            static: true,
+            position: 'auto'
         });
     }
     
@@ -35,16 +36,16 @@ export async function initProjectForm(queryString = '') {
         }
     }
     
-    initTagsHandlers(form);
+    if (form) {
+        initTagsHandlers(form);
+        
+        form.addEventListener('submit', handleProjectSubmit);
+    }
     
     if (projectId) {
         document.getElementById('projectFormTitle').textContent = 'Edit Project';
         document.getElementById('submitButtonText').textContent = 'Update Project';
         await loadProjectForEditing(projectId);
-    }
-    
-    if (form) {
-        form.addEventListener('submit', handleProjectSubmit);
     }
     
     // Кнопка отмены

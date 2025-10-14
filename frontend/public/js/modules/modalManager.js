@@ -128,7 +128,130 @@ async function refreshProject() {
     });
   }
 }
+function setupEditHandlers(container, project) {
+  // Edit description
+  const editDescBtn = container.querySelector('#editDescriptionBtn');
+  const descForm = container.querySelector('#editDescriptionForm');
+  const saveDescBtn = container.querySelector('#saveDescriptionBtn');
+  const cancelDescBtn = container.querySelector('#cancelDescriptionBtn');
+  const descInput = container.querySelector('#descriptionInput');
 
+  if (editDescBtn && descForm) {
+    editDescBtn.addEventListener('click', () => {
+      descInput.value = project.description || '';
+      descForm.classList.remove('hidden');
+      container.querySelector('#projectDescription').classList.add('hidden');
+      editDescBtn.classList.add('hidden');
+    });
+
+    cancelDescBtn.addEventListener('click', () => {
+      descForm.classList.add('hidden');
+      container.querySelector('#projectDescription').classList.remove('hidden');
+      editDescBtn.classList.remove('hidden');
+    });
+
+    saveDescBtn.addEventListener('click', async () => {
+      try {
+        await ProjectAPI.updateProject(currentProjectId, { description: descInput.value.trim() });
+        showToast('Description updated');
+        await refreshProject();
+      } catch (error) {
+        showToast('Failed to update description', 'error');
+      }
+    });
+  }
+
+  // Edit budget
+  const editBudgetBtn = container.querySelector('#editBudgetBtn');
+  const budgetForm = container.querySelector('#editBudgetForm');
+  const saveBudgetBtn = container.querySelector('#saveBudgetBtn');
+  const cancelBudgetBtn = container.querySelector('#cancelBudgetBtn');
+  const minBudgetInput = container.querySelector('#minBudgetInput');
+  const maxBudgetInput = container.querySelector('#maxBudgetInput');
+  const currencyInput = container.querySelector('#currencyInput');
+
+  if (editBudgetBtn && budgetForm) {
+    editBudgetBtn.addEventListener('click', () => {
+      minBudgetInput.value = project.budgetMin || '';
+      maxBudgetInput.value = project.budgetMax || '';
+      currencyInput.value = project.currencyCode || 'USD';
+      budgetForm.classList.remove('hidden');
+      container.querySelector('#budgetDisplay').classList.add('hidden');
+      editBudgetBtn.classList.add('hidden');
+    });
+
+    cancelBudgetBtn.addEventListener('click', () => {
+      budgetForm.classList.add('hidden');
+      container.querySelector('#budgetDisplay').classList.remove('hidden');
+      editBudgetBtn.classList.remove('hidden');
+    });
+
+    saveBudgetBtn.addEventListener('click', async () => {
+      const budgetData = {
+        budgetMin: parseFloat(minBudgetInput.value) || null,
+        budgetMax: parseFloat(maxBudgetInput.value) || null,
+        currencyCode: currencyInput.value
+      };
+
+      if (budgetData.budgetMin && budgetData.budgetMax && budgetData.budgetMin > budgetData.budgetMax) {
+        showToast('Min budget cannot be greater than max', 'error');
+        return;
+      }
+
+      try {
+        await ProjectAPI.updateProject(currentProjectId, budgetData);
+        showToast('Budget updated');
+        await refreshProject();
+      } catch (error) {
+        showToast('Failed to update budget', 'error');
+      }
+    });
+  }
+
+  // Edit due date
+  const editDueDateBtn = container.querySelector('#editDueDateBtn');
+  const dueDateForm = container.querySelector('#editDueDateForm');
+  const saveDueDateBtn = container.querySelector('#saveDueDateBtn');
+  const cancelDueDateBtn = container.querySelector('#cancelDueDateBtn');
+  const dueDateInput = container.querySelector('#dueDateInput');
+
+  if (editDueDateBtn && dueDateForm) {
+    editDueDateBtn.addEventListener('click', () => {
+      dueDateInput.value = project.dueDate ? formatDateForInput(project.dueDate) : '';
+      dueDateForm.classList.remove('hidden');
+      container.querySelector('#dueDateDisplay').classList.add('hidden');
+      editDueDateBtn.classList.add('hidden');
+
+      if (flatpickrInstance) flatpickrInstance.destroy();
+      flatpickrInstance = flatpickr(dueDateInput, {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        static: true,
+        position: 'auto'
+      });
+    });
+
+    cancelDueDateBtn.addEventListener('click', () => {
+      dueDateForm.classList.add('hidden');
+      container.querySelector('#dueDateDisplay').classList.remove('hidden');
+      editDueDateBtn.classList.remove('hidden');
+      if (flatpickrInstance) {
+        flatpickrInstance.destroy();
+        flatpickrInstance = null;
+      }
+    });
+
+    saveDueDateBtn.addEventListener('click', async () => {
+      try {
+        await ProjectAPI.updateProject(currentProjectId, { dueDate: dueDateInput.value || null });
+        showToast('Due date updated');
+        await refreshProject();
+      } catch (error) {
+        showToast('Failed to update due date', 'error');
+      }
+    });
+  }
+}
 async function renderProjectModal(project, container) {
   try {
     const res = await fetch('partials/project-detail.html');
@@ -810,7 +933,8 @@ function showAddMilestoneForm(container) {
     flatpickrInstance = flatpickr(dateInput, {
       dateFormat: "Y-m-d",
       minDate: "today",
-      static: true
+      static: true,
+      position: 'auto'
     });
   }
 }
