@@ -28,11 +28,31 @@ namespace Projects.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("AggregateId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AggregateType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HeadersJson")
+                        .HasColumnType("text");
+
                     b.Property<string>("Key")
                         .HasColumnType("text");
 
                     b.Property<string>("LastError")
                         .HasColumnType("text");
+
+                    b.Property<DateTimeOffset?>("NextAttemptAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("OccurredAt")
                         .HasColumnType("timestamp with time zone");
@@ -43,15 +63,17 @@ namespace Projects.Persistence.Migrations
                     b.Property<bool>("Processed")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime?>("ProcessedAt")
+                    b.Property<DateTimeOffset?>("ProcessedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("RetryCount")
                         .HasColumnType("integer");
 
                     b.Property<string>("Topic")
-                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

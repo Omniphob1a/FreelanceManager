@@ -24,23 +24,17 @@ namespace Projects.Application.Projects.Commands.CreateProject
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly ILogger<CreateProjectCommandHandler> _logger;
 		private readonly TagParserService _tagParserService;
-		private readonly IOutboxService _outboxService;
-		private readonly IMapper _mapper;
 
 		public CreateProjectCommandHandler(
 			IProjectRepository repository,
 			IUnitOfWork unitOfWork,
 			ILogger<CreateProjectCommandHandler> logger,
-			TagParserService tagParserService,
-			IOutboxService outboxService,
-			IMapper mapper)
+			TagParserService tagParserService)
 		{
 			_repository = repository;
 			_unitOfWork = unitOfWork;
 			_logger = logger;
 			_tagParserService = tagParserService;
-			_outboxService = outboxService;
-			_mapper = mapper;	
 		}
 
 		public async Task<Result<Guid>> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
@@ -75,12 +69,6 @@ namespace Projects.Application.Projects.Commands.CreateProject
 			{
 				await _repository.AddAsync(project, cancellationToken);
 				_unitOfWork.TrackEntity(project);
-
-				var dto = _mapper.Map<ProjectDto>(project);
-				var topic = "projects";
-				var key = $"{dto.Id}";
-				await _outboxService.Add(dto, topic, key, cancellationToken);
-
 				await _unitOfWork.SaveChangesAsync(cancellationToken);
 			}
 			catch (Exception ex)

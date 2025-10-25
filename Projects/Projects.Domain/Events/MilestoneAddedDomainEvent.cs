@@ -7,5 +7,10 @@ using System.Threading.Tasks;
 
 namespace Projects.Domain.Events
 {
-	public record MilestoneAddedDomainEvent(Guid ProjectId, ProjectMilestone Milestone)	: DomainEvent(ProjectId);
+	public record MilestoneAddedDomainEvent(Guid ProjectId, ProjectMilestone Milestone) : DomainEvent(ProjectId, nameof(Project))
+	{
+		public override string EventType => "projects.milestone.added";
+		public override string? KafkaTopic => "projects";
+		public override string? KafkaKey => ProjectId.ToString();
+	}
 }

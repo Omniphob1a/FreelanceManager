@@ -1,4 +1,5 @@
-﻿using Projects.Domain.ValueObjects;
+﻿using Projects.Domain.Entities;
+using Projects.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Projects.Domain.Events
 {
-	public sealed record TagsAddedDomainEvent(Guid ProjectId, Tag Tag) : DomainEvent(ProjectId);
+	public sealed record TagsAddedDomainEvent(Guid ProjectId, Tag Tag) : DomainEvent(ProjectId, nameof(Project));
 }

@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Projects.Domain.Events
 {
-	public record AttachmentRemovedDomainEvent(Guid ProjectId, ProjectAttachment Attachment)	: DomainEvent(ProjectId);
+	public record AttachmentRemovedDomainEvent(Guid ProjectId, ProjectAttachment Attachment)	: DomainEvent(ProjectId, nameof(Project));
 }

@@ -5166,6 +5166,7 @@
       "Swashbuckle.AspNetCore.SwaggerGen >= 9.0.1",
       "Swashbuckle.AspNetCore.SwaggerUI >= 9.0.1",
       "System.IdentityModel.Tokens.Jwt >= 8.12.1",
+      "prometheus-net >= 8.2.1",
       "prometheus-net.AspNetCore >= 8.2.1"
     ]
   },
@@ -5291,6 +5292,10 @@
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
             "version": "[8.12.1, )"
+          },
+          "prometheus-net": {
+            "target": "Package",
+            "version": "[8.2.1, )"
           },
           "prometheus-net.AspNetCore": {
             "target": "Package",

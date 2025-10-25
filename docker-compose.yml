@@ -21,11 +21,11 @@ services:
       - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
       users-db:
-        condition: service_started
+        condition: service_healthy
       hangfire-db:
-        condition: service_started
+        condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
       kafka:
         condition: service_healthy
 
@@ -49,11 +49,11 @@ services:
       - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
       projects-db:
-        condition: service_started
+        condition: service_healthy
       hangfire-db:
-        condition: service_started
+        condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
       kafka:
         condition: service_healthy
 
@@ -69,18 +69,18 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
-      - ConnectionStrings__ProjectTasksDbContext=Server=projects-db;Port=5432;Database=tasks;User Id=postgres;Password=123;
+      - ConnectionStrings__ProjectTasksDbContext=Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;
       - Kafka__BootstrapServers=kafka:9092
       - Kafka__GroupId=tasks-service
     volumes:
       - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
       projects-db:
-        condition: service_started
+        condition: service_healthy
       hangfire-db:
-        condition: service_started
+        condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
       kafka:
         condition: service_healthy
 
@@ -99,13 +99,13 @@ services:
       - Kafka__BootstrapServers=kafka:9092
     depends_on:
       users-api:
-        condition: service_started
+        condition: service_healthy
       projects-api:
-        condition: service_started
+        condition: service_healthy
       tasks-api:
-        condition: service_started
+        condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
       kafka:
         condition: service_healthy
 
@@ -122,7 +122,7 @@ services:
       - API_URL=http://gateway:8080
     depends_on:
       gateway:
-        condition: service_started
+        condition: service_healthy
 
   # -------------------
   # Hangfire DB
@@ -137,6 +137,11 @@ services:
       - "5434:5432"
     volumes:
       - hangfire_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d hangfire -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   # -------------------
   # Users DB
@@ -151,6 +156,11 @@ services:
       - "5433:5432"
     volumes:
       - users_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d users -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   # -------------------
   # Projects DB
@@ -164,7 +174,50 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - projects_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d projects -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # -------------------
+  # Tasks DB
+  # -------------------
+  tasks-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: tasks
+    ports:
+      - "5435:5432"
+    volumes:
+      - tasks_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d tasks -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # -------------------
+  # Notifications DB
+  # -------------------
+  notifications-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: notifications
+    ports:
+      - "5436:5432"
+    volumes:
+      - notifications_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d notifications -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   # -------------------
   # Redis
@@ -264,7 +317,9 @@ services:
       - prometheus
 
 volumes:
-  pgdata:
+  projects_pgdata:
+  tasks_pgdata:
+  notifications_pgdata:
   users_pgdata:
   hangfire_pgdata:
   redisinsight_data: {}

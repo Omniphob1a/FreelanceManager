@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Копируем решение и проекты из корня контекста (Projects/)
 COPY *.sln ./
 COPY Projects.Application/*.csproj Projects.Application/
 COPY Projects.Domain/*.csproj Projects.Domain/

@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Projects.Domain.Events
 {
-	public record MilestoneRemovedDomainEvent(Guid ProjectId, ProjectMilestone Milestone) : DomainEvent(ProjectId);
+	public record MilestoneRemovedDomainEvent(Guid ProjectId, ProjectMilestone Milestone) : DomainEvent(ProjectId, nameof(Project));
 }

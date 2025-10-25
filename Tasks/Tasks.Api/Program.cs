@@ -74,7 +74,7 @@ using (var scope = app.Services.CreateScope())
 	try
 	{
 		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
-		// dbContext.Database.Migrate(); 
+		dbContext.Database.Migrate(); 
 	}
 	catch (Exception ex)
 	{

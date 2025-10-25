@@ -113,12 +113,13 @@ export const ProjectAPI = {
     }
   },
 
-    async addMember(projectId, login, role) {
-    return fetchAPI(`/api/Projects/${projectId}/add-member`, 'PATCH', { login, role });
+  async addMember(projectId, email, role) {
+    return fetchAPI(`/api/Projects/${projectId}/add-member`, 'PATCH', { email, role });
   },
 
-  async removeMember(projectId, login) {
-    return fetchAPI(`/api/Projects/${projectId}/remove-member`, 'PATCH', { login });
+// FILE: js/api.js — METHOD: ProjectAPI.removeMember
+  async removeMember(projectId, email) {
+    return fetchAPI(`/api/Projects/${projectId}/remove-member`, 'PATCH', { email });
   },
   
   async getProjectMembers(projectId) {
@@ -263,71 +264,22 @@ export const AuthAPI = {
     
 };
 
+// Функции для работы с пользователями
 export const UserAPI = {
-    // --- CREATE ---
-    // Создание нового пользователя (только админ)
-    async createUser(userData) {
-        return fetchAPI('/api/Users', 'POST', userData);
-    },
-
-    // --- READ ---
-    // Получение всех пользователей (только админ)
+    // Получение списка пользователей
     async getUsers() {
         return fetchAPI('/api/Users');
     },
-
-    // Получение пользователя по ID (возвращает PublicUserDto)
-    async getUserById(userId) {
-        return fetchAPI(`/api/Users/${userId}`);
-    },
-
-    // Получение пользователя по логину (только админ)
-    async getUserByLogin(login) {
-        return fetchAPI(`/api/Users/by-login/${encodeURIComponent(login)}`);
-    },
-
-    // Получение пользователя по email (возвращает UserDto, доступно для User)
-    async getUserByEmail(email) {
-        return fetchAPI(`/api/Users/by-email/${encodeURIComponent(email)}`);
-    },
-
-    // Получение пользователей старше определённого возраста (только админ)
-    async getUsersByAge(minAge) {
-        return fetchAPI(`/api/Users/age/${minAge}`);
-    },
-
-    // Получение профиля текущего пользователя
-    async getProfile() {
-        return fetchAPI('/api/Users/get-my-profile', 'POST');
-    },
-
-    // --- UPDATE ---
+    
     // Обновление пользователя
     async updateUser(userId, userData) {
         return fetchAPI(`/api/Users/${userId}`, 'PUT', userData);
     },
 
-    // Изменение пароля пользователя
-    async changePassword(userId, passwordData) {
-        return fetchAPI(`/api/Users/${userId}/password`, 'PUT', passwordData);
-    },
-
-    // Изменение логина пользователя
-    async changeLogin(userId, loginData) {
-        return fetchAPI(`/api/Users/${userId}/login`, 'PUT', loginData);
-    },
-
-    // --- DELETE ---
-    // Удаление пользователя (только админ, можно soft/hard через query)
-    async deleteUser(userId, hard = false) {
-        return fetchAPI(`/api/Users/${userId}?hard=${hard}`, 'DELETE');
-    },
-
-    // --- PATCH ---
-    // Восстановление пользователя (только админ)
-    async restoreUser(userId) {
-        return fetchAPI(`/api/Users/${userId}/restore`, 'PATCH');
+    async getProfile() {
+        return fetchAPI('/api/Users/get-my-profile', 'POST');
     }
+     
 };
 
 // Вспомогательные функции
@@ -370,19 +322,10 @@ export const TaskAPI = {
 
     // Получение задачи по ID
     async getTaskById(taskId, includes = []) {
-    // Создаем URLSearchParams для правильного формирования параметров
-    const params = new URLSearchParams();
-    
-    // Добавляем каждый include как отдельный параметр с одинаковым ключом
-    includes.forEach(include => {
-        params.append('includes', include);
-    });
-    
-    const queryString = params.toString();
-    const url = `/api/ProjectTasks/${taskId}${queryString ? '?' + queryString : ''}`;
-    
-    console.log('Fetching task with URL:', url);
-    return fetchAPI(url);
+        const queryParams = includes.length > 0 
+            ? `?includes=${includes.join(',')}`
+            : '';
+        return fetchAPI(`/api/ProjectTasks/${taskId}${queryParams}`);
     },
 
     // Обновление задачи
@@ -428,21 +371,7 @@ export const TaskAPI = {
     // Добавление комментария
     async addComment(taskId, commentData) {
         return fetchAPI(`/api/ProjectTasks/${taskId}/comments`, 'POST', commentData);
-    },
-    
-    async getComments(taskId) {
-        try {
-            return await fetchAPI(`/api/ProjectTasks/${taskId}/comments`);
-        } catch (error) {
-            console.error('Failed to fetch comments:', error);
-            // Возвращаем пустой массив в случае ошибки
-            return [];
-        }
-    },
-
-    async getProjectMembers(projectId) {
-    return fetchAPI(`/api/ProjectTasks/${projectId}/projectMembers`);
-    },
+    }
 };
 
 export const NotificationAPI = {
@@ -485,8 +414,4 @@ export const ActivityAPI = {
         ];
     }
 };
-
- function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
- }
 

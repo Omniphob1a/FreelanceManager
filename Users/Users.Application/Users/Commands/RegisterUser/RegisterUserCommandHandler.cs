@@ -72,7 +72,7 @@ namespace Users.Application.Users.Commands.RegisterUser
 				}
 
 				// базовая роль для всех
-				user.AddRole(Guid.Parse("b9654606-8b85-4a67-a997-60128896fe4d"), cmd.CreatedBy);
+				user.AddRole(Guid.Parse("5eb8aa01-9c0f-412b-97fa-64c0de9a67d6"), cmd.CreatedBy);
 			}
 			catch (Exception ex)
 			{

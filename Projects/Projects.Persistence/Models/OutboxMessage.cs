@@ -9,13 +9,20 @@ namespace Projects.Persistence.Models
 	public class OutboxMessage
 	{
 		public Guid Id { get; set; } = Guid.NewGuid();
-		public DateTime OccurredAt { get; set; } = DateTime.UtcNow;
-		public string Topic { get; set; } = default!;   
-		public string? Key { get; set; }               
-		public string? Payload { get; set; } = default!; 
+		public Guid EventId { get; set; }
+		public Guid AggregateId { get; set; }
+		public string AggregateType { get; set; } = "";
+		public string EventType { get; set; } = "";
+		public int Version { get; set; } = 1;
+		public string? Topic { get; set; }
+		public string? Key { get; set; }            
+		public string? HeadersJson { get; set; }
+		public string? Payload { get; set; }       
+		public DateTime OccurredAt { get; set; }
 		public bool Processed { get; set; } = false;
-		public DateTime? ProcessedAt { get; set; }
+		public DateTimeOffset? ProcessedAt { get; set; }
 		public int RetryCount { get; set; } = 0;
 		public string? LastError { get; set; }
+		public DateTimeOffset? NextAttemptAt { get; set; } = DateTimeOffset.UtcNow;
 	}
 }
