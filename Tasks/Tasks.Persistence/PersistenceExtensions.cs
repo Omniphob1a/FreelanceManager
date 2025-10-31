@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Tasks.Application.Interfaces;
 using Tasks.Application.Mappings;
 using Tasks.Domain.Interfaces;
+using Tasks.Infrastructure.Persistence;
 using Tasks.Persistence.Data;
 using Tasks.Persistence.Data.Queries;
 using Tasks.Persistence.Data.Repositories;
@@ -45,6 +46,9 @@ namespace Tasks.Persistence
 			services.AddScoped<IMemberReadRepository, MemberReadRepository>();
 			services.AddScoped<IUserReadRepository, UserReadRepository>();
 			services.AddScoped<ICommentReadRepository, CommentReadRepository>();	
+			services.AddScoped<IIncomingEventStore, IncomingEventStore>();
+			services.AddScoped<IIncomingEventRepository, IncomingEventRepository>();
+
 
 			services.AddScoped<IProjectTaskQueryService, ProjectTaskQueryService>();
 			services.AddScoped<IProjectMemberQueryService, ProjectMemberQueryService>();

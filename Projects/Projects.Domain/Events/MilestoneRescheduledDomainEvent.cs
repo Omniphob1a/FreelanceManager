@@ -7,5 +7,10 @@ using System.Threading.Tasks;
 
 namespace Projects.Domain.Events
 {
-	public record MilestoneRescheduledDomainEvent(Guid ProjectId, Guid MilestoneId) : DomainEvent(ProjectId, nameof(Project));
+	public record MilestoneRescheduledDomainEvent(Guid ProjectId, Guid MilestoneId) : DomainEvent(ProjectId, nameof(Project))
+	{
+		public override string EventType => "projects.milestone.rescheduled";
+		public override string? KafkaTopic => "projects";
+		public override string? KafkaKey => $"{ProjectId}-milestone-{MilestoneId}";
+	}
 }

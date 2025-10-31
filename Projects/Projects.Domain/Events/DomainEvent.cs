@@ -18,6 +18,5 @@ namespace Projects.Domain.Events
 		public virtual string? KafkaKey => null;
 		public virtual bool IsTombstone => false;
 		public virtual IReadOnlyDictionary<string, string>? KafkaHeaders => null;
-
 	}
 }

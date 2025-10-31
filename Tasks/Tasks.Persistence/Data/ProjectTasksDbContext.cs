@@ -19,6 +19,8 @@ namespace Tasks.Persistence.Data
 		public DbSet<TimeEntryEntity> TimeEnries { get; set; } = null!;
 		public DbSet<UserReadModel> Users { get; set; } = null!;
 		public DbSet<MemberReadModel> ProjectMembers { get; set; } = null!;
+		public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
+		public DbSet<IncomingEvent> IncomingEvents { get; set; } = null!;
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

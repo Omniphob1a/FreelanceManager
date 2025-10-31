@@ -1,0 +1,551 @@
+# all-infra-apps.yaml
+# Namespace lab assumed (apply with -n lab or include namespace fields)
+---
+# --------------------------
+# Redis
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels: {app: redis}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: redis}
+  template:
+    metadata:
+      labels: {app: redis}
+    spec:
+      containers:
+        - name: redis
+          image: redis:7
+          ports: [{containerPort: 6379}]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector: {app: redis}
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+# --------------------------
+# Zookeeper (single pod)
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+  labels: {app: zookeeper}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: zookeeper}
+  template:
+    metadata:
+      labels: {app: zookeeper}
+    spec:
+      containers:
+        - name: zookeeper
+          image: bitnami/zookeeper:3.8
+          env:
+            - name: ALLOW_ANONYMOUS_LOGIN
+              value: "yes"
+          ports: [{containerPort: 2181}]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+spec:
+  selector: {app: zookeeper}
+  ports:
+    - port: 2181
+      targetPort: 2181
+---
+# --------------------------
+# Kafka (single broker using bitnami)
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+  labels: {app: kafka}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: kafka}
+  template:
+    metadata:
+      labels: {app: kafka}
+    spec:
+      containers:
+        - name: kafka
+          image: bitnami/kafka:3
+          env:
+            - name: KAFKA_BROKER_ID
+              value: "1"
+            - name: KAFKA_CFG_ZOOKEEPER_CONNECT
+              value: "zookeeper:2181"
+            - name: ALLOW_PLAINTEXT_LISTENER
+              value: "yes"
+            - name: KAFKA_CFG_LISTENERS
+              value: PLAINTEXT://:9092
+            - name: KAFKA_CFG_ADVERTISED_LISTENERS
+              value: PLAINTEXT://kafka:9092
+          ports:
+            - containerPort: 9092
+          readinessProbe:
+            tcpSocket:
+              port: 9092
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+spec:
+  selector: {app: kafka}
+  ports:
+    - port: 9092
+      targetPort: 9092
+---
+# --------------------------
+# Temporary Postgres DBs (users, projects, tasks, hangfire)
+# --------------------------
+# Users DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-db
+  labels: {app: users-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: users-db}
+  template:
+    metadata:
+      labels: {app: users-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "users"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-db
+spec:
+  selector: {app: users-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Projects DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projects-db
+  labels: {app: projects-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: projects-db}
+  template:
+    metadata:
+      labels: {app: projects-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "projects"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projects-db
+spec:
+  selector: {app: projects-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Tasks DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-db
+  labels: {app: tasks-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: tasks-db}
+  template:
+    metadata:
+      labels: {app: tasks-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "tasks"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-db
+spec:
+  selector: {app: tasks-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Hangfire DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hangfire-db
+  labels: {app: hangfire-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: hangfire-db}
+  template:
+    metadata:
+      labels: {app: hangfire-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "hangfire"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hangfire-db
+spec:
+  selector: {app: hangfire-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# --------------------------
+# Prometheus (very basic)
+# --------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 10s
+    scrape_configs:
+      - job_name: 'kubernetes'
+        static_configs:
+          - targets: ['localhost:9090']
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  labels: {app: prometheus}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: prometheus}
+  template:
+    metadata:
+      labels: {app: prometheus}
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:latest
+          args: ["--config.file=/etc/prometheus/prometheus.yml"]
+          volumeMounts:
+            - name: config
+              mountPath: /etc/prometheus
+          ports:
+            - containerPort: 9090
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+spec:
+  selector: {app: prometheus}
+  type: NodePort
+  ports:
+    - port: 9090
+      nodePort: 31969
+---
+# --------------------------
+# Grafana (basic)
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  labels: {app: grafana}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: grafana}
+  template:
+    metadata:
+      labels: {app: grafana}
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+spec:
+  selector: {app: grafana}
+  type: NodePort
+  ports:
+    - port: 3000
+      nodePort: 30000
+---
+# --------------------------
+# Gateway (YARP) — single cluster example
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  labels: {app: gateway}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: gateway}
+  template:
+    metadata:
+      labels: {app: gateway}
+    spec:
+      containers:
+        - name: gateway
+          image: fm-gateway:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  selector: {app: gateway}
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32386
+---
+# --------------------------
+# Frontend
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels: {app: frontend}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: frontend}
+  template:
+    metadata:
+      labels: {app: frontend}
+    spec:
+      containers:
+        - name: frontend
+          image: fm-frontend:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: API_URL
+              value: "http://gateway:8080"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  selector: {app: frontend}
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30902
+---
+# --------------------------
+# Apps: users, tasks, projects
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api
+  labels: {app: users-api}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: users-api}
+  template:
+    metadata:
+      labels: {app: users-api}
+    spec:
+      containers:
+        - name: users-api
+          image: fm-users-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__UsersDbContext
+              value: "Server=users-db;Port=5432;Database=users;User Id=postgres;Password=123;"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-api
+spec:
+  selector: {app: users-api}
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-api
+  labels: {app: tasks-api}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: tasks-api}
+  template:
+    metadata:
+      labels: {app: tasks-api}
+    spec:
+      containers:
+        - name: tasks-api
+          image: fm-tasks-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__ProjectTasksDbContext
+              value: "Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-api
+spec:
+  selector: {app: tasks-api}
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projects-api
+  labels: {app: projects-api}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: projects-api}
+  template:
+    metadata:
+      labels: {app: projects-api}
+    spec:
+      containers:
+        - name: projects-api
+          image: fm-projects-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__ProjectsDbContext
+              value: "Server=projects-db;Port=5432;Database=projects;User Id=postgres;Password=123;"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projects-api
+spec:
+  selector: {app: projects-api}
+  ports:
+    - port: 80
+      targetPort: 80

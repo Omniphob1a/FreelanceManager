@@ -6,7 +6,15 @@ export default defineConfig({
   publicDir: resolve(__dirname, 'public'),
   server: {
     port: 3000,
-    open: true,
+    proxy: {
+      // все запросы к /api/... будут проксироваться на бэк на localhost:5000
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/api') // обычно не требуется
+      }
+    }
   },
   build: {
     outDir: resolve(__dirname, 'dist'),
