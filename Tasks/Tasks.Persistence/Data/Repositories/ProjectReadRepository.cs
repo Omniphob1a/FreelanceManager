@@ -60,17 +60,7 @@ namespace Tasks.Persistence.Data.Repositories
 					{
 						Id = p.Id,
 						Title = p.Title,
-						Description = p.Description,
-						OwnerId = p.OwnerId,
-						Category = p.Category,
-						CreatedAt = p.CreatedAt,
-						ExpiresAt = p.ExpiresAt,
-						Status = p.Status,
-						BudgetMin = p.BudgetMin,
-						BudgetMax = p.BudgetMax,
-						CurrencyCode = p.CurrencyCode,
-						Tags = p.Tags,
-						IsExpired = p.IsExpired
+						OwnerId = p.OwnerId
 					})
 					.FirstOrDefaultAsync(ct);
 			}
@@ -96,22 +86,11 @@ namespace Tasks.Persistence.Data.Repositories
 				return await _context.Set<ProjectReadModel>()
 					.AsNoTracking()
 					.Where(p => p.OwnerId == ownerId)
-					.OrderByDescending(p => p.CreatedAt)
 					.Select(p => new ProjectDto
 					{
 						Id = p.Id,
 						Title = p.Title,
-						Description = p.Description,
-						OwnerId = p.OwnerId,
-						Category = p.Category,
-						CreatedAt = p.CreatedAt,
-						ExpiresAt = p.ExpiresAt,
-						Status = p.Status,
-						BudgetMin = p.BudgetMin,
-						BudgetMax = p.BudgetMax,
-						CurrencyCode = p.CurrencyCode,
-						Tags = p.Tags,
-						IsExpired = p.IsExpired
+						OwnerId = p.OwnerId
 					})
 					.ToListAsync(ct);
 			}
@@ -130,22 +109,11 @@ namespace Tasks.Persistence.Data.Repositories
 			{
 				return await _context.Set<ProjectReadModel>()
 					.AsNoTracking()
-					.OrderByDescending(p => p.CreatedAt)
 					.Select(p => new ProjectDto
 					{
 						Id = p.Id,
 						Title = p.Title,
-						Description = p.Description,
-						OwnerId = p.OwnerId,
-						Category = p.Category,
-						CreatedAt = p.CreatedAt,
-						ExpiresAt = p.ExpiresAt,
-						Status = p.Status,
-						BudgetMin = p.BudgetMin,
-						BudgetMax = p.BudgetMax,
-						CurrencyCode = p.CurrencyCode,
-						Tags = p.Tags,
-						IsExpired = p.IsExpired
+						OwnerId = p.OwnerId
 					})
 					.ToListAsync(ct);
 			}

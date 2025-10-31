@@ -8,5 +8,11 @@ using System.Threading.Tasks;
 
 namespace Projects.Domain.Events
 {
-	public sealed record TagsDeletedDomainEvent(Guid ProjectId, Tag Tag) : DomainEvent(ProjectId, nameof(Project));
+	public sealed record TagsDeletedDomainEvent(Guid ProjectId, Tag Tag) : DomainEvent(ProjectId, nameof(Project))
+	{
+		public override string EventType => "projects.tags.removed";
+		public override string? KafkaTopic => "projects";
+		public override string? KafkaKey => ProjectId.ToString();
+		public override bool IsTombstone => true;
+	}
 }

@@ -54,7 +54,8 @@ namespace Projects.Persistence.Common
 				{
 					try
 					{
-						var payload = JsonSerializer.Serialize(ev, ev.GetType(), _jsonOptions);
+						string? payload = ev.IsTombstone ? null : JsonSerializer.Serialize(ev, ev.GetType(), _jsonOptions);
+
 
 						var outbox = new OutboxMessage
 						{

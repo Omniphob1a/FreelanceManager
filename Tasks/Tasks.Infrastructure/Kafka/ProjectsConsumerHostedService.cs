@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using Tasks.Application.Events;
+using Tasks.Application.Interfaces;
 using Tasks.Persistence.Data;
 using Tasks.Persistence.Models.ReadModels;
 
@@ -72,79 +74,21 @@ namespace Tasks.Infrastructure.Kafka
 
 			while (!stoppingToken.IsCancellationRequested)
 			{
+				var cr = _consumer.Consume(ConsumeTimeout);
+				if (cr == null) continue;
+
+				using var scope = _sp.CreateScope();
+				var store = scope.ServiceProvider.GetRequiredService<IIncomingEventStore>();
+
 				try
 				{
-					var cr = _consumer.Consume(ConsumeTimeout);
-					if (cr == null) continue;
-
-					var key = cr.Message?.Key ?? "";
-
-					using var scope = _sp.CreateScope();
-					var db = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
-
-					Guid.TryParse(key, out var projectId);
-
-					if (cr.Message.Value is null)
-					{
-						var entity = await db.Set<ProjectReadModel>()
-							.FindAsync(new object[] { projectId }, stoppingToken);
-						if (entity != null) db.Remove(entity);
-
-						await db.SaveChangesAsync(stoppingToken);
-						SafeCommit(cr);
-						continue;
-					}
-
-					var project = JsonSerializer.Deserialize<ProjectReadModel>(
-						cr.Message.Value,
-						new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-					if (project is null)
-					{
-						_logger.LogWarning("Failed to deserialize project: {Payload}", cr.Message.Value);
-						SafeCommit(cr);
-						continue;
-					}
-
-					var set = db.Set<ProjectReadModel>();
-					var existing = await set.FindAsync(new object[] { project.Id }, stoppingToken);
-
-					if (existing is null)
-					{
-						set.Add(project);
-					}
-					else
-					{
-						existing.Title = project.Title;
-						existing.Description = project.Description;
-						existing.OwnerId = project.OwnerId;
-						existing.Category = project.Category;
-						existing.CreatedAt = project.CreatedAt;
-						existing.ExpiresAt = project.ExpiresAt;
-						existing.Status = project.Status;
-						existing.BudgetMin = project.BudgetMin;
-						existing.BudgetMax = project.BudgetMax;
-						existing.CurrencyCode = project.CurrencyCode;
-						existing.Tags = project.Tags;
-						existing.IsExpired = project.IsExpired;
-					}
-
-					await db.SaveChangesAsync(stoppingToken);
+					await store.SaveAsync(cr.Topic, cr.Message?.Key, cr.Message?.Value, stoppingToken);
 					SafeCommit(cr);
-				}
-				catch (ConsumeException ex)
-				{
-					_logger.LogError(ex, "Kafka consume error; code={Code}, reason={Reason}", ex.Error.Code, ex.Error.Reason);
-					await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken);
-				}
-				catch (OperationCanceledException)
-				{
-
 				}
 				catch (Exception ex)
 				{
-					_logger.LogError(ex, "Projects consumer loop error");
-					try { await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken); } catch { }
+					_logger.LogError(ex, "Failed to save incoming project event");
+					await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken);
 				}
 			}
 		}

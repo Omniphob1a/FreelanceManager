@@ -11,6 +11,6 @@ namespace Projects.Domain.Events
 	{
 		public override string EventType => "projects.milestone.added";
 		public override string? KafkaTopic => "projects";
-		public override string? KafkaKey => ProjectId.ToString();
+		public override string? KafkaKey => $"{ProjectId}-milestone-{Milestone.Id}";
 	}
 }

@@ -352,7 +352,6 @@ C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\st
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\Tasks.Api.csproj.Up2Date
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\Tasks.Api.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\refint\Tasks.Api.dll
@@ -399,3 +398,4 @@ C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Ho
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Microsoft.Extensions.ObjectPool.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\System.IO.Hashing.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Yarp.ReverseProxy.dll
+C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

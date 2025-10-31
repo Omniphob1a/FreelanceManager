@@ -50,7 +50,7 @@ public class Project : EntityBase
 			tags: tags?.ToList() ?? new(),
 			createdAt: DateTime.UtcNow);
 
-		project.AddDomainEvent(new ProjectCreatedDomainEvent(project.Id));
+		project.AddDomainEvent(new ProjectCreatedDomainEvent(project.Id, project.Title, project.OwnerId));
 		return project;
 	}
 
