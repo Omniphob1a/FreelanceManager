@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\usersconsumerhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\usersconsumerhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -207,6 +211,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UsersConsumerHostedService.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAQwCYAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T12:07:55.974Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ConfluentKafkaProducer.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
               "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
@@ -219,7 +236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "UnitOfWork.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Common\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\Common\\UnitOfWork.cs",
@@ -231,7 +248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "ProjectCompletedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
@@ -243,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "InfrastructureExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Infrastructure\\InfrastructureExtensions.cs",
@@ -256,7 +273,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
               "RelativeDocumentMoniker": "Projects.Api\\appsettings.json",
@@ -269,13 +286,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "KafkaSettings.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
               "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
               "RelativeToolTip": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-28T02:28:41.104Z",
               "EditorCaption": ""
@@ -295,7 +312,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "OutboxMessage.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\Models\\OutboxMessage.cs",
@@ -307,7 +324,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ProjectCreatedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
@@ -319,7 +336,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "OutboxPublisherHostedService.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
               "RelativeDocumentMoniker": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
@@ -331,7 +348,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ProjectDto.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectDto.cs",
               "RelativeDocumentMoniker": "Projects.Application\\DTOs\\ProjectDto.cs",
@@ -343,7 +360,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MilestoneRemovedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
@@ -355,7 +372,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Project.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Entities\\Project.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Entities\\Project.cs",
@@ -367,7 +384,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "AddMemberCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
@@ -379,7 +396,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "OutboxService.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxService.cs",
               "RelativeDocumentMoniker": "Projects.Infrastructure\\Outbox\\OutboxService.cs",
@@ -391,7 +408,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "DomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\DomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\DomainEvent.cs",
@@ -403,7 +420,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "PublicUserDto.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\PublicUserDto.cs",
               "RelativeDocumentMoniker": "Projects.Application\\DTOs\\PublicUserDto.cs",
@@ -415,7 +432,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "TagsDeletedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
@@ -427,7 +444,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "TagsAddedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
@@ -439,7 +456,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "ProjectUpdatedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectUpdatedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectUpdatedDomainEvent.cs",
@@ -451,7 +468,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "ProjectPublishedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
@@ -463,7 +480,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "ProjectMemberRoleChangedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
@@ -475,7 +492,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "ProjectMemberRemovedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRemovedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberRemovedDomainEvent.cs",
@@ -487,7 +504,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "ProjectMemberAddedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
@@ -499,7 +516,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "ProjectDeletedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectDeletedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectDeletedDomainEvent.cs",
@@ -511,7 +528,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "MilestoneRescheduledDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneRescheduledDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneRescheduledDomainEvent.cs",
@@ -523,7 +540,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "ProjectArchivedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectArchivedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectArchivedDomainEvent.cs",
@@ -535,7 +552,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "AttachmentAddedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\AttachmentAddedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\AttachmentAddedDomainEvent.cs",
@@ -547,7 +564,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "MilestoneEscalatedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneEscalatedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneEscalatedDomainEvent.cs",
@@ -559,7 +576,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "MilestoneCompletedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneCompletedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneCompletedDomainEvent.cs",
@@ -571,7 +588,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "MilestoneAddedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneAddedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneAddedDomainEvent.cs",
@@ -583,7 +600,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "AttachmentRemovedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\AttachmentRemovedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\AttachmentRemovedDomainEvent.cs",
@@ -595,7 +612,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
               "RelativeDocumentMoniker": "Projects.Api\\Program.cs",
@@ -607,7 +624,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "PersistenceExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\PersistenceExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Persistence\\PersistenceExtensions.cs",
@@ -619,7 +636,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "OutboxPublisher_PublishesTests.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\OutboxPublisher_PublishesTests.cs",
               "RelativeDocumentMoniker": "Projects.IntegrationTests\\OutboxPublisher_PublishesTests.cs",
@@ -631,7 +648,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "TestHelpers.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\TestHelpers.cs",
               "RelativeDocumentMoniker": "Projects.IntegrationTests\\TestHelpers.cs",
@@ -643,7 +660,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "CreateProject_OutboxTests.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\CreateProject_OutboxTests.cs",
               "RelativeDocumentMoniker": "Projects.IntegrationTests\\CreateProject_OutboxTests.cs",
@@ -655,7 +672,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "Projects.Shared.csproj",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Shared\\Projects.Shared.csproj",
               "RelativeDocumentMoniker": "Projects.Shared\\Projects.Shared.csproj",
@@ -667,7 +684,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "CreateProjectCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
@@ -679,7 +696,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "ApiExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\ApiExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Api\\ApiExtensions.cs",
@@ -691,7 +708,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "AssemblyInfo.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\AssemblyInfo.cs",
               "RelativeDocumentMoniker": "Projects.IntegrationTests\\AssemblyInfo.cs",
@@ -703,7 +720,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "CreateProjectCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
@@ -715,7 +732,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\ValueObjects\\Category.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\ValueObjects\\Category.cs",
@@ -727,7 +744,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "ApplicationExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\ApplicationExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Application\\ApplicationExtensions.cs",
@@ -739,7 +756,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 45,
               "Title": "TagParserService.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Services\\TagParserService.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Services\\TagParserService.cs",
