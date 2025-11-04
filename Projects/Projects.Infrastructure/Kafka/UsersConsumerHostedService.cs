@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using static Dapper.SqlMapper;
 
 namespace Users.Infrastructure.Kafka
 {
@@ -41,7 +42,11 @@ namespace Users.Infrastructure.Kafka
 				GroupId = _settings.GroupId,
 				AutoOffsetReset = AutoOffsetReset.Earliest,
 				EnableAutoCommit = false,
-				EnablePartitionEof = false
+				EnablePartitionEof = false,
+				SecurityProtocol = Enum.Parse<SecurityProtocol>(_settings.SecurityProtocol),
+				SaslMechanism = Enum.Parse<SaslMechanism>(_settings.SaslMechanism),
+				SaslUsername = _settings.SaslUsername,
+				SaslPassword = _settings.SaslPassword
 			};
 
 			_consumer = new ConsumerBuilder<string, string?>(cfg)
