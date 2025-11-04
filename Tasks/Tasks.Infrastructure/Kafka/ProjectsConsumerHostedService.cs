@@ -33,6 +33,10 @@ namespace Tasks.Infrastructure.Kafka
 
 		public override Task StartAsync(CancellationToken cancellationToken)
 		{
+			var effectiveGroup = string.IsNullOrWhiteSpace(_settings.GroupId)
+				? $"tasks-{Topic}-{Guid.NewGuid():n}".Substring(0, 20)
+				: _settings.GroupId;
+
 			var cfg = new ConsumerConfig
 			{
 				BootstrapServers = _settings.BootstrapServers,
