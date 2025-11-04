@@ -17,7 +17,11 @@ namespace Projects.Infrastructure.Kafka
 			{
 				BootstrapServers = settings.BootstrapServers,
 				Acks = Acks.All,
-				EnableIdempotence = settings.Options.EnableIdempotence
+				EnableIdempotence = settings.Options.EnableIdempotence,
+				SecurityProtocol = Enum.Parse<SecurityProtocol>(settings.SecurityProtocol),
+				SaslMechanism = Enum.Parse<SaslMechanism>(settings.SaslMechanism),
+				SaslUsername = settings.SaslUsername,
+				SaslPassword = settings.SaslPassword
 			};
 
 			_producer = new ProducerBuilder<string, string>(cfg).Build();

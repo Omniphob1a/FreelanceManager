@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\outbox\\outboxpublisherhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -190,7 +190,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -206,67 +206,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
-              "RelativeDocumentMoniker": "Projects.Api\\appsettings.json",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
-              "RelativeToolTip": "Projects.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-28T02:28:56.153Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "KafkaSettings.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T02:28:41.104Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ConfluentKafkaProducer.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
               "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
               "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-28T02:28:12.253Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ConfluentConfigOptions.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T02:26:29.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "OutboxMessage.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
-              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\OutboxMessage.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
-              "RelativeToolTip": "Projects.Persistence\\Models\\OutboxMessage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:44:13.687Z",
               "EditorCaption": ""
             },
             {
@@ -295,6 +243,70 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InfrastructureExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAADwv1QAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T04:37:58.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Projects.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
+              "RelativeToolTip": "Projects.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-28T02:28:56.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "KafkaSettings.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T02:28:41.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ConfluentConfigOptions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T02:26:29.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OutboxMessage.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\OutboxMessage.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\OutboxMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:44:13.687Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
               "Title": "ProjectCreatedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
@@ -303,8 +315,7 @@
               "RelativeToolTip": "Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:44:56.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T06:44:56.153Z"
             },
             {
               "$type": "Document",
@@ -316,21 +327,7 @@
               "RelativeToolTip": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAswDYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:41:54.582Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "InfrastructureExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAgwGAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T04:37:58.442Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T06:41:54.582Z"
             },
             {
               "$type": "Document",
@@ -354,8 +351,7 @@
               "RelativeToolTip": "Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:45:02.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T06:45:02.519Z"
             },
             {
               "$type": "Document",
