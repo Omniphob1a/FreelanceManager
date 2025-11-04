@@ -42,16 +42,17 @@ namespace Tasks.Infrastructure
 
 
 
+			services.AddHostedService<OutboxPublisherHostedService>();
+			services.AddHostedService<MembersConsumerHostedService>();
+			services.AddHostedService<ProjectsConsumerHostedService>();
+			services.AddHostedService<UsersConsumerHostedService>();
+
 			var kafkaSection = configuration.GetSection("Kafka");
 			var kafkaSettings = kafkaSection.Get<KafkaSettings>() ?? new KafkaSettings();
 			services.AddSingleton(kafkaSettings);
 			services.Configure<KafkaSettings>(kafkaSection);
 			services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(kafkaSettings));
 
-			services.AddHostedService<OutboxPublisherHostedService>();
-			services.AddHostedService<MembersConsumerHostedService>();
-			services.AddHostedService<ProjectsConsumerHostedService>();
-			services.AddHostedService<UsersConsumerHostedService>();
 
 			services.AddScoped<IIncomingEventProcessor, ProjectEventsProcessor>();
 			services.AddHostedService<IncomingEventsProcessorHostedService>();
