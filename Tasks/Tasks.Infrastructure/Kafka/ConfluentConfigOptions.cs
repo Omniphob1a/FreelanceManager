@@ -9,6 +9,6 @@ namespace Tasks.Infrastructure.Kafka
 	public class ConfluentConfigOptions
 	{
 		public string Acks { get; init; } = "all";
-		public bool EnableIdempotence { get; init; } = true;
+		public bool EnableIdempotence { get; init; } = false;
 	}
 }
