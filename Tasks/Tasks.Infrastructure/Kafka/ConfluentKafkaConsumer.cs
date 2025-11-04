@@ -18,7 +18,11 @@ namespace Tasks.Infrastructure.Kafka
 				BootstrapServers = settings.BootstrapServers,
 				GroupId = groupId,
 				AutoOffsetReset = AutoOffsetReset.Earliest,
-				EnableAutoCommit = true
+				EnableAutoCommit = true,
+				SecurityProtocol = Enum.Parse<SecurityProtocol>(settings.SecurityProtocol),
+				SaslMechanism = Enum.Parse<SaslMechanism>(settings.SaslMechanism),
+				SaslUsername = settings.SaslUsername,
+				SaslPassword = settings.SaslPassword
 			};
 
 			_consumer = new ConsumerBuilder<string, string>(cfg).Build();
