@@ -32,13 +32,17 @@ namespace Tasks.Infrastructure.Kafka
 
 		public override Task StartAsync(CancellationToken cancellationToken)
 		{
+
 			var effectiveGroup = string.IsNullOrWhiteSpace(_settings.GroupId)
 				? $"tasks-{Topic}-{Guid.NewGuid():n}".Substring(0, 20)
 				: _settings.GroupId;
 
-			_logger.LogInformation("Producer effective: Bootstrap={Bootstrap}, User={User}, EnableIdempotence={EnableIdempotence}, TransactionalId={TransactionalId}, ClientId={ClientId}",
-				_settings.BootstrapServers, _settings.SaslUsername, _settings.Options?.EnableIdempotence);
-			
+			_logger.LogInformation(
+				"Producer effective: Bootstrap={Bootstrap}, User={User}, EnableIdempotence={EnableIdempotence}",
+				_settings.BootstrapServers,
+				_settings.SaslUsername,
+				_settings.Options?.EnableIdempotence);
+
 			var cfg = new ConsumerConfig
 			{
 				BootstrapServers = _settings.BootstrapServers,
