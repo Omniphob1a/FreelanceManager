@@ -20,6 +20,9 @@ using Tasks.Api.GraphQL.DataLoaders;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5006"; // локально слушаем 5006
+builder.WebHost.UseUrls($"http://*:{port}");
+
 // Add services to the container.
 builder.Services.AddControllers();
 
@@ -40,7 +43,7 @@ builder.Services.AddApi(builder.Configuration);
 
 builder.Services
 	.AddGraphQLServer()
-	.AllowIntrospection(true)  // ? ТАК ПРОЩЕ!
+	.AllowIntrospection(true)  
 	.AddQueryType<Query>()
 	.AddMutationType<Mutation>()
 	.AddType<ProjectTaskType>()
@@ -50,7 +53,7 @@ builder.Services
 	.AddDataLoader<UserByIdDataLoader>()
 	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
 
-// CORS
+
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowFrontend", policy =>
