@@ -1,15 +1,13 @@
-// File: Tasks.Api/Program.cs
+// Tasks.Api/Program.cs
 using HotChocolate;
 using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 using Projects.Api;
 using Prometheus;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Reflection;
 using Tasks.Api;
 using Tasks.Api.GraphQL.DataLoaders;
@@ -23,46 +21,38 @@ using Tasks.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ----------------- PORT / binding setup -----------------
+// ----------------- Получаем PORT от платформы (Render) -----------------
 var portEnv = Environment.GetEnvironmentVariable("PORT");
-if (string.IsNullOrEmpty(portEnv))
+if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var port))
 {
-	// Render usually supplies PORT automatically. Fallback for local runs.
-	portEnv = "10000";
-	Console.WriteLine("[DEBUG] PORT env not set, using fallback 10000 (local)");
+	// Явно сказать среде, куда слушать (полезно, если платформа смотрит на ASPNETCORE_URLS)
+	Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
+
+	// Настроим Kestrel напрямую (дополнительно)
+	builder.WebHost.ConfigureKestrel(options =>
+	{
+		options.ListenAnyIP(port); // 0.0.0.0:PORT
+	});
+	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port}) and ASPNETCORE_URLS=http://0.0.0.0:{port}");
 }
-
-if (!int.TryParse(portEnv, out var port))
+else
 {
-	throw new Exception($"Invalid PORT value: {portEnv}");
+	Console.WriteLine("[DEBUG] PORT env not set or invalid — using default Kestrel configuration");
 }
-
-// Ensure ASPNETCORE_URLS set programmatically to avoid mismatch
-Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
-
-// Basic bind logs
-Console.WriteLine($"[BIND-INFO] Effective PORT: {port}");
-Console.WriteLine($"[BIND-INFO] ASPNETCORE_URLS = {Environment.GetEnvironmentVariable("ASPNETCORE_URLS")}");
-Console.WriteLine($"[BIND-INFO] ASPNETCORE_ENVIRONMENT = {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? builder.Environment.EnvironmentName}");
-
-// Configure Kestrel and UseUrls as double insurance
-builder.WebHost.ConfigureKestrel(options =>
-{
-	options.ListenAnyIP(port); // 0.0.0.0:PORT
-});
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-
-Console.WriteLine($"[BIND-INFO] Kestrel configured to ListenAnyIP({port}) and UseUrls(http://0.0.0.0:{port})");
 
 // ----------------- Services -----------------
 builder.Services.AddControllers();
+
+// Swagger / OpenAPI
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithJwt();
 
+// Logging, HttpContext
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
 
+// Persistence / Infrastructure / Application / Api registrations
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
@@ -87,24 +77,18 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ----------------- Minimal middleware config (keeps your middlewares) -----------------
+// ----------------- Ранний health endpoint и минимальные маппинги -----------------
+// Регистрируем маленький маршрут /health, который ответит сразу — это помогает платформе видеть, что сервис живёт
+app.MapGet("/health", () => Results.Text("OK"));
+
+// Статические метрики/прометеус и минимальные маппинги — тоже делаем до долгой инициализации
 app.UseRouting();
 app.UseCors("AllowFrontend");
-
-app.UseCookiePolicy(new CookiePolicyOptions
-{
-	MinimumSameSitePolicy = SameSiteMode.Strict,
-	HttpOnly = HttpOnlyPolicy.None,
-	Secure = CookieSecurePolicy.Always
-});
-
-app.UseAuthorization();
 app.UseHttpMetrics();
-
-app.MapControllers();
 app.MapMetrics();
+app.MapControllers();
 
-// Swagger
+// Swagger UI (не мешает)
 if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
@@ -116,7 +100,16 @@ app.UseSwaggerUI(c =>
 	c.RoutePrefix = "swagger";
 });
 
-// Global exception handler (same as before)
+// Cookie policy, auth и т.д. — регистрируем middleware
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+	MinimumSameSitePolicy = SameSiteMode.Strict,
+	HttpOnly = HttpOnlyPolicy.None,
+	Secure = CookieSecurePolicy.Always
+});
+app.UseAuthorization();
+
+// Global exception handler — оставляем как у вас
 app.UseExceptionHandler(errorApp =>
 {
 	errorApp.Run(async context =>
@@ -139,103 +132,51 @@ app.UseExceptionHandler(errorApp =>
 	});
 });
 
-app.MapGet("/", () => "OK");
-
-// ----------------- Start host early so port is bound ASAP -----------------
+// ----------------- ВАЖНО: старт хоста до длительной работы -----------------
+// StartAsync откроет сокеты и поднимет web host, но не заблокирует поток навсегда.
+// Render будет сканить контейнер и увидит открытый порт, даже если дальше идут миграции.
 try
 {
-	// Start listening (non-blocking); this opens sockets so Render's scanner can see them.
-	Console.WriteLine("[BIND-INFO] Starting host (StartAsync) to ensure sockets are bound before long startup work...");
-	var startTask = app.StartAsync();
+	Console.WriteLine("[INFO] Starting host (StartAsync) to bind sockets early...");
 
-	// Wait a short time for start to complete binding (but don't block forever)
-	var completed = Task.WhenAny(startTask, Task.Delay(TimeSpan.FromSeconds(8))).Result;
-	if (completed == startTask && startTask.IsCompletedSuccessfully)
-	{
-		Console.WriteLine("[BIND-INFO] Host StartAsync completed quickly.");
-	}
-	else
-	{
-		Console.WriteLine("[BIND-INFO] StartAsync did not complete within timeout; server may still be binding in background.");
-	}
-
-	// Log IServerAddressesFeature (may be empty when using ListenAnyIP, but try)
-	var addressesFeature = app.Services.GetService(typeof(IServerAddressesFeature)) as IServerAddressesFeature;
-	if (addressesFeature != null && addressesFeature.Addresses != null && addressesFeature.Addresses.Count > 0)
-	{
-		Console.WriteLine("[BIND-INFO] Server listening addresses (IServerAddressesFeature):");
-		foreach (var addr in addressesFeature.Addresses)
-			Console.WriteLine($"[BIND-INFO]  - {addr}");
-	}
-	else
-	{
-		Console.WriteLine("[BIND-INFO] IServerAddressesFeature reports NO addresses (this is expected when Kestrel configured programmatically).");
-	}
-
-	// Extra network diagnostics
-	try
-	{
-		Console.WriteLine("[NET-STATE] Network interfaces:");
-		foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
-		{
-			try
-			{
-				Console.WriteLine($"[NET-STATE] - {ni.Name} ({ni.OperationalStatus})");
-				foreach (var addr in ni.GetIPProperties().UnicastAddresses)
-				{
-					Console.WriteLine($"[NET-STATE]   -> {addr.Address}");
-				}
-			}
-			catch { /* continue */ }
-		}
-
-		var ipProps = IPGlobalProperties.GetIPGlobalProperties();
-		var listeners = ipProps.GetActiveTcpListeners();
-		Console.WriteLine("[NET-STATE] Active TCP listeners:");
-		foreach (var l in listeners)
-			Console.WriteLine($"[NET-STATE]  - {l.Address}:{l.Port}");
-
-		var conns = ipProps.GetActiveTcpConnections();
-		Console.WriteLine("[NET-STATE] Active TCP connections (sample):");
-		foreach (var c in conns.Take(20))
-			Console.WriteLine($"[NET-STATE]  - {c.LocalEndPoint} -> {c.RemoteEndPoint} ({c.State})");
-	}
-	catch (Exception ex)
-	{
-		Console.WriteLine("[NET-STATE] Failed to enumerate Tcp listeners/connections: " + ex.Message);
-	}
+	await app.StartAsync();
+	Console.WriteLine("[INFO] Host started (sockets should be bound).");
 }
 catch (Exception ex)
 {
-	Console.WriteLine("[ERROR] Exception while starting host: " + ex.ToString());
+	Console.WriteLine($"[ERROR] Failed to start host early: {ex}");
 	throw;
 }
 
-// ----------------- Run DB migrations in background so they don't block port binding -----------------
-_ = Task.Run(async () =>
+// ----------------- Выполняем тяжелую инициализацию после биндинга -----------------
+// Синхронные миграции — выполняем уже после StartAsync, чтобы сокет был виден платформе
+using (var scope = app.Services.CreateScope())
 {
 	try
 	{
-		Console.WriteLine("[MIGRATE] Starting DB migrations in background...");
-		using var scope = app.Services.CreateScope();
 		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
+		Console.WriteLine("[INFO] Running database migrations...");
 		dbContext.Database.Migrate();
-		Console.WriteLine("[MIGRATE] DB migrations completed.");
+		Console.WriteLine("[INFO] Database migrations completed.");
 	}
 	catch (Exception ex)
 	{
-		// Log but don't crash the process here (we already started the host and bound sockets).
-		var loggerFactory = app.Services.GetService(typeof(ILoggerFactory)) as ILoggerFactory;
-		loggerFactory?.CreateLogger("Program").LogError(ex, "Background DB migration failed.");
-		Console.WriteLine("[MIGRATE] Background DB migration failed: " + ex.ToString());
+		var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
+		logger.LogError(ex, "Database migration failed on startup.");
+		// Если миграции критичные — корректно останавливаем хост и выбрасываем
+		Console.WriteLine("[ERROR] Migration failed — stopping host.");
+		await app.StopAsync();
+		throw;
 	}
-});
+}
 
-// ----------------- Start any hosted background services are already wired by builder.Build().
-// At this point app has been started, sockets should be bound, Render's scanner can detect port.
-// -----------------
+// Любые background services / подписчики можно также инициализировать здесь (после миграций).
+// Например — ваша инициализация Kafka consumers / Outbox publisher уже зарегистрирована как HostedService и стартует автоматически.
 
-Console.WriteLine($"[INFO] Tasks.Api started (or starting). PORT='{portEnv}' ASPNETCORE_URLS='{Environment.GetEnvironmentVariable("ASPNETCORE_URLS")}'");
+// Зарегистрируем лог стартового порта для удобства
+var effectivePortLog = portEnv ?? Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "unknown";
+Console.WriteLine($"[INFO] Application started. PORT env = '{portEnv ?? "not set"}', ASPNETCORE_URLS = '{Environment.GetEnvironmentVariable("ASPNETCORE_URLS")}'");
 
-// Wait for shutdown (normal blocking run)
+// ----------------- Даем хосту ждать завершения --------------------------------
+// Теперь ждем выключения — хост уже запущен и порт открыт.
 await app.WaitForShutdownAsync();
