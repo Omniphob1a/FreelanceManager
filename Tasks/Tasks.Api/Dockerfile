@@ -22,7 +22,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/publish .
 
-ENV PORT=10001
 EXPOSE $PORT
 
 # ENTRYPOINT запускает миграции и сервис
