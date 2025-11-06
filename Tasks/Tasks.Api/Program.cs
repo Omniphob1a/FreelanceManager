@@ -22,7 +22,6 @@ using Tasks.Persistence.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // ----------------- Получаем PORT от Render -----------------
-var portEnv = Environment.GetEnvironmentVariable("PORT");
 var portStr = Environment.GetEnvironmentVariable("PORT");
 if (string.IsNullOrWhiteSpace(portStr))
 {
@@ -34,12 +33,11 @@ if (!int.TryParse(portStr, out var port))
 	throw new InvalidOperationException($"PORT environment variable is invalid: {portStr}");
 }
 
+// Настраиваем Kestrel на динамический порт Render
 builder.WebHost.ConfigureKestrel(options =>
 {
-	options.Listen(IPAddress.Any, port);
+	options.ListenAnyIP(port);
 });
-
-Console.WriteLine($"[DEBUG] Render PORT env = {portStr}, Kestrel configured for {port}");
 
 Console.WriteLine($"[DEBUG] Render PORT env = {port}, Kestrel configured for {port}");
 
