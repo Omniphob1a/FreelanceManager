@@ -1,4 +1,6 @@
+# ==========================
 # 1. Build stage
+# ==========================
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
@@ -10,21 +12,27 @@ COPY Tasks.Infrastructure/*.csproj Tasks.Infrastructure/
 COPY Tasks.Persistence/*.csproj Tasks.Persistence/
 COPY Tasks.Api/*.csproj Tasks.Api/
 
+# Восстанавливаем зависимости
 RUN dotnet restore Tasks.Api/Tasks.Api.csproj
 
+# Копируем все исходники
 COPY . .
 
+# Публикуем проект
 WORKDIR /src/Tasks.Api
 RUN dotnet publish -c Release -o /app/publish
 
+# ==========================
 # 2. Runtime stage
+# ==========================
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
+
+# Копируем опубликованные файлы из build stage
 COPY --from=build /app/publish .
 
-ARG PORT=10000
-ENV PORT=$PORT
-EXPOSE $PORT
+# EXPOSE полезно для документации, Render использует runtime PORT
+EXPOSE 10000
 
-# ENTRYPOINT запускает миграции и сервис
-ENTRYPOINT ["dotnet", "Tasks.Api.dll"]
+# ENTRYPOINT для Render: подставляем динамический PORT
+ENTRYPOINT ["sh", "-c", "echo [DEBUG] Starting Tasks.Api on port $PORT; ASPNETCORE_URLS=http://0.0.0.0:$PORT dotnet Tasks.Api.dll"]
