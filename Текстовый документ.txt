@@ -1,4 +1,4 @@
-// Ôàéë: Tasks.Api/Program.cs
+// Ð¤Ð°Ð¹Ð»: Tasks.Api/Program.cs
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
@@ -20,21 +20,22 @@ using Tasks.Api.GraphQL.DataLoaders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Ïîëó÷àåì ïîðò Render
+// Render Ð·Ð°Ð´Ð°Ñ‘Ñ‚ Ð¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð¿Ð¾Ñ€Ñ‚ Ñ‡ÐµÑ€ÐµÐ· Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½ÑƒÑŽ Ð¾ÐºÑ€ÑƒÐ¶ÐµÐ½Ð¸Ñ PORT
 var portEnv = Environment.GetEnvironmentVariable("PORT");
 if (string.IsNullOrEmpty(portEnv))
 	throw new Exception("PORT environment variable not set by Render!");
+
 if (!int.TryParse(portEnv, out var port))
 	throw new Exception($"Invalid PORT value: {portEnv}");
 
-// Íàñòðàèâàåì Kestrel íà ïðîñëóøêó Render ïîðòà
+// ÐÐ°ÑÑ‚Ñ€Ð°Ð¸Ð²Ð°ÐµÐ¼ Kestrel Ð½Ð° Ð¿Ñ€Ð¾ÑÐ»ÑƒÑˆÐºÑƒ Render Ð¿Ð¾Ñ€Ñ‚Ð°
 builder.WebHost.ConfigureKestrel(options =>
 {
 	options.ListenAnyIP(port); // 0.0.0.0:PORT
 });
 Console.WriteLine($"[DEBUG] Listening on Render port {port}");
 
-// Add services
+// Add services to the container.
 builder.Services.AddControllers();
 
 // Swagger / OpenAPI
@@ -71,7 +72,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Ñèíõðîííàÿ ìèãðàöèÿ ÁÄ
+// Ð¡Ð¸Ð½Ñ…Ñ€Ð¾Ð½Ð½Ð°Ñ Ð¼Ð¸Ð³Ñ€Ð°Ñ†Ð¸Ñ Ð‘Ð”
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -100,8 +101,7 @@ app.UseSwaggerUI(c =>
 	c.RoutePrefix = "swagger";
 });
 
-app.UseRouting();
-app.UseCors("AllowFrontend");
+app.UseHttpsRedirection();
 
 app.UseCookiePolicy(new CookiePolicyOptions
 {
@@ -110,10 +110,16 @@ app.UseCookiePolicy(new CookiePolicyOptions
 	Secure = CookieSecurePolicy.Always
 });
 
+app.UseRouting();
+
+app.UseCors("AllowFrontend");
+
 app.UseAuthorization();
+
 app.UseHttpMetrics();
 
 app.MapControllers();
+
 app.MapMetrics();
 
 // Global exception handler
@@ -139,7 +145,7 @@ app.UseExceptionHandler(errorApp =>
 	});
 });
 
+Console.WriteLine($"Listening on port: {port}");
 app.MapGet("/", () => "OK");
 
-Console.WriteLine($"[INFO] Application started on port {port}");
 app.Run();
