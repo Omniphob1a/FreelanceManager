@@ -25,7 +25,7 @@ var builder = WebApplication.CreateBuilder(args);
 var portEnv = Environment.GetEnvironmentVariable("PORT");
 var port = !string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var p) ? p : 10000;
 
-builder.WebHost.UseUrls($"http://*:{port}");
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}"); 
 Console.WriteLine($"[DEBUG] Render PORT env = {portEnv}, Kestrel + UseUrls configured for 0.0.0.0:{port}");
 
 // ----------------- Services -----------------

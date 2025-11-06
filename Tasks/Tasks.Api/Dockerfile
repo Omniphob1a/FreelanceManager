@@ -22,8 +22,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# EXPOSE помогает Render и документации
-EXPOSE 10000
+ENV PORT=10001
+EXPOSE $PORT
 
 # ENTRYPOINT запускает миграции и сервис
 ENTRYPOINT ["dotnet", "Tasks.Api.dll"]
