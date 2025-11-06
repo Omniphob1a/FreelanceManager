@@ -134,5 +134,6 @@ app.UseExceptionHandler(errorApp =>
 		}
 	});
 });
+Console.WriteLine($"Listening on port: {port}");
 
 app.Run();
