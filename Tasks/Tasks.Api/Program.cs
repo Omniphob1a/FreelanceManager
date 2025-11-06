@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Projects.Api;
 using Prometheus;
 using System.Net;
+using System.Reflection;
 using Tasks.Api;
 using Tasks.Api.GraphQL.DataLoaders;
 using Tasks.Api.GraphQL.Mutations;
@@ -22,55 +23,52 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ----------------- Получаем PORT от Render -----------------
 var portEnv = Environment.GetEnvironmentVariable("PORT");
-var port = 0;
+var port = !string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var p) ? p : 10000;
 
-if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var parsedPort))
-{
-	port = parsedPort;
-	Console.WriteLine($"[DEBUG] Render PORT env found: {port}");
-
-	// Устанавливаем ASPNETCORE_URLS для Kestrel
-	Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
-
-	builder.WebHost.ConfigureKestrel(options =>
-	{
-		options.ListenAnyIP(port);
-	});
-
-	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port})");
-}
-else
-{
-	Console.WriteLine("[WARNING] PORT env not set or invalid — using default Kestrel configuration");
-}
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+Console.WriteLine($"[DEBUG] Render PORT env = {portEnv}, Kestrel + UseUrls configured for 0.0.0.0:{port}");
 
 // ----------------- Services -----------------
 builder.Services.AddControllers();
+
+// Swagger / OpenAPI
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithJwt();
+
+// Logging, HttpContext
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
+
+// Persistence / Infrastructure / Application / Api registrations
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddApi(builder.Configuration);
 
+// CORS
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowFrontend", policy =>
 	{
-		policy.WithOrigins("http://localhost:8080", "http://localhost:5000", "http://frontend:80")
-			  .AllowAnyMethod()
-			  .AllowAnyHeader()
-			  .AllowCredentials();
+		policy
+			.WithOrigins(
+				"http://localhost:8080",
+				"http://localhost:5000",
+				"http://frontend:80"
+			)
+			.AllowAnyMethod()
+			.AllowAnyHeader()
+			.AllowCredentials();
 	});
 });
 
 var app = builder.Build();
 
-// ----------------- Ранний health endpoint и минимальные маппинги -----------------
+// ----------------- Ранний health endpoint -----------------
 app.MapGet("/health", () => Results.Text("OK"));
+
+// Статические метрики / Prometheus
 app.UseRouting();
 app.UseCors("AllowFrontend");
 app.UseHttpMetrics();
@@ -114,25 +112,14 @@ app.UseExceptionHandler(errorApp =>
 				Message = "An unexpected error occurred.",
 				Detail = app.Environment.IsDevelopment() ? exceptionHandlerPathFeature.Error.ToString() : null
 			};
-			await context.Response.WriteAsJsonAsync(error);
+
+			var errorJson = System.Text.Json.JsonSerializer.Serialize(error);
+			await context.Response.WriteAsync(errorJson);
 		}
 	});
 });
 
-// ----------------- Старт хоста до длительной работы -----------------
-try
-{
-	Console.WriteLine("[INFO] Starting host (StartAsync) to bind sockets early...");
-	await app.StartAsync();
-	Console.WriteLine("[INFO] Host started — sockets bound.");
-}
-catch (Exception ex)
-{
-	Console.WriteLine($"[ERROR] Failed to start host early: {ex}");
-	throw;
-}
-
-// ----------------- Тяжелая инициализация после биндинга -----------------
+// ----------------- Выполняем миграции -----------------
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -147,12 +134,14 @@ using (var scope = app.Services.CreateScope())
 		var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
 		logger.LogError(ex, "Database migration failed on startup.");
 		Console.WriteLine("[ERROR] Migration failed — stopping host.");
-		await app.StopAsync();
 		throw;
 	}
 }
 
-// ----------------- Логируем порт для Render -----------------
-Console.WriteLine($"[INFO] Application started. Listening on port: {port}");
+// ----------------- Background services стартуют автоматически -----------------
 
-await app.WaitForShutdownAsync();
+// Лог стартового порта
+Console.WriteLine($"[INFO] Application starting. Listening on 0.0.0.0:{port}");
+
+// ----------------- Запуск хоста -----------------
+app.Run(); // Блокирующий вызов, Render увидит открытый порт
