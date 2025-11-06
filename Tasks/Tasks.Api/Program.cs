@@ -21,38 +21,32 @@ using Tasks.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ----------------- Handle PORT / ASPNETCORE_URLS robustly -----------------
+// --------- get PORT and configure Kestrel + UseUrls robustly ----------
 var portEnv = Environment.GetEnvironmentVariable("PORT");
 var aspnetcoreUrls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS");
 
-// If PORT exists and is a number — explicitly bind Kestrel to that port (0.0.0.0)
 if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var port))
 {
+	// Bind Kestrel explicitly and also set the server URLs (helps external port scanners)
 	builder.WebHost.ConfigureKestrel(options =>
 	{
-		options.ListenAnyIP(port); // bind to 0.0.0.0:PORT
+		options.ListenAnyIP(port); // 0.0.0.0:PORT
 	});
-	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port}) from PORT env.");
-}
-// If PORT absent but ASPNETCORE_URLS present and contains ${PORT}, try to expand
-else if (!string.IsNullOrEmpty(aspnetcoreUrls) && aspnetcoreUrls.Contains("${PORT}") && !string.IsNullOrEmpty(portEnv))
-{
-	var expanded = aspnetcoreUrls.Replace("${PORT}", portEnv);
-	builder.WebHost.UseUrls(expanded);
-	Console.WriteLine($"[DEBUG] Expanded ASPNETCORE_URLS and UseUrls('{expanded}').");
+	builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port}) and UseUrls(http://0.0.0.0:{port}) from PORT env.");
 }
 else if (!string.IsNullOrEmpty(aspnetcoreUrls))
 {
-	// If ASPNETCORE_URLS is set to a concrete url(s), honor it
+	// If ASPNETCORE_URLS is set to concrete urls (not ${PORT} literal), honor it
 	builder.WebHost.UseUrls(aspnetcoreUrls);
 	Console.WriteLine($"[DEBUG] UseUrls from ASPNETCORE_URLS: '{aspnetcoreUrls}'.");
 }
 else
 {
-	Console.WriteLine("[DEBUG] No explicit PORT / ASPNETCORE_URLS; using default host config.");
+	Console.WriteLine("[DEBUG] No explicit PORT/ASPNETCORE_URLS found; using default hosting config.");
 }
 
-// ----------------- Add services -----------------
+// ----------------- Services -----------------
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
@@ -61,7 +55,6 @@ builder.Services.AddSwaggerWithJwt();
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
 
-// Persistence / Infrastructure / Application / Api registrations
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
@@ -86,7 +79,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ----------------- Migrations -----------------
+// ----------------- Run DB migrations (careful: may delay startup) -----------------
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -114,6 +107,9 @@ app.UseSwaggerUI(c =>
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Freelance Tasks API v1");
 	c.RoutePrefix = "swagger";
 });
+
+// ----- TEMP: отключаем https-редирект на Render (включи, если у тебя TLS настроен) -----
+// app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors("AllowFrontend");
@@ -156,7 +152,6 @@ app.UseExceptionHandler(errorApp =>
 
 app.MapGet("/", () => "OK");
 
-// Final log so we see what we started with
 Console.WriteLine($"[INFO] Tasks.Api starting. PORT='{portEnv ?? "<not set>"}' ASPNETCORE_URLS='{aspnetcoreUrls ?? "<not set>"}'");
 
 app.Run();
