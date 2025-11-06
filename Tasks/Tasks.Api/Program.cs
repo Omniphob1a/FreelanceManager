@@ -21,22 +21,38 @@ using Tasks.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ??????????????? Получаем порт Render ???????????????
+// ----------------- Handle PORT / ASPNETCORE_URLS robustly -----------------
 var portEnv = Environment.GetEnvironmentVariable("PORT");
+var aspnetcoreUrls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS");
+
+// If PORT exists and is a number — explicitly bind Kestrel to that port (0.0.0.0)
 if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var port))
 {
 	builder.WebHost.ConfigureKestrel(options =>
 	{
-		options.ListenAnyIP(port); // Render подхватит нужный порт
+		options.ListenAnyIP(port); // bind to 0.0.0.0:PORT
 	});
-	Console.WriteLine($"[DEBUG] Listening on Render port {port}");
+	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port}) from PORT env.");
+}
+// If PORT absent but ASPNETCORE_URLS present and contains ${PORT}, try to expand
+else if (!string.IsNullOrEmpty(aspnetcoreUrls) && aspnetcoreUrls.Contains("${PORT}") && !string.IsNullOrEmpty(portEnv))
+{
+	var expanded = aspnetcoreUrls.Replace("${PORT}", portEnv);
+	builder.WebHost.UseUrls(expanded);
+	Console.WriteLine($"[DEBUG] Expanded ASPNETCORE_URLS and UseUrls('{expanded}').");
+}
+else if (!string.IsNullOrEmpty(aspnetcoreUrls))
+{
+	// If ASPNETCORE_URLS is set to a concrete url(s), honor it
+	builder.WebHost.UseUrls(aspnetcoreUrls);
+	Console.WriteLine($"[DEBUG] UseUrls from ASPNETCORE_URLS: '{aspnetcoreUrls}'.");
 }
 else
 {
-	Console.WriteLine("[DEBUG] PORT not set, using default Kestrel configuration");
+	Console.WriteLine("[DEBUG] No explicit PORT / ASPNETCORE_URLS; using default host config.");
 }
 
-// ??????????????? Services ???????????????
+// ----------------- Add services -----------------
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
@@ -45,7 +61,7 @@ builder.Services.AddSwaggerWithJwt();
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
 
-// Persistence / Infrastructure / Application / API registrations
+// Persistence / Infrastructure / Application / Api registrations
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
@@ -68,10 +84,9 @@ builder.Services.AddCors(options =>
 	});
 });
 
-
 var app = builder.Build();
 
-// ??????????????? Синхронная миграция БД ???????????????
+// ----------------- Migrations -----------------
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -87,7 +102,7 @@ using (var scope = app.Services.CreateScope())
 	}
 }
 
-// ??????????????? Swagger UI ???????????????
+// ----------------- Swagger -----------------
 if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
@@ -116,7 +131,7 @@ app.UseHttpMetrics();
 app.MapControllers();
 app.MapMetrics();
 
-// ??????????????? Global exception handler ???????????????
+// ----------------- Global exception handler -----------------
 app.UseExceptionHandler(errorApp =>
 {
 	errorApp.Run(async context =>
@@ -141,5 +156,7 @@ app.UseExceptionHandler(errorApp =>
 
 app.MapGet("/", () => "OK");
 
-Console.WriteLine($"[INFO] Tasks.Api started on port {portEnv ?? "default"}");
+// Final log so we see what we started with
+Console.WriteLine($"[INFO] Tasks.Api starting. PORT='{portEnv ?? "<not set>"}' ASPNETCORE_URLS='{aspnetcoreUrls ?? "<not set>"}'");
+
 app.Run();
