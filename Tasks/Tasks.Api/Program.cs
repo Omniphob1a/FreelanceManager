@@ -21,8 +21,15 @@ using Tasks.Api.GraphQL.DataLoaders;
 var builder = WebApplication.CreateBuilder(args);
 
 // »спользуем переменную PORT (Render) или локальный fallback
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5006"; 
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+var portEnv = Environment.GetEnvironmentVariable("PORT");
+int port = 5006;
+if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var p)) port = p;
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+	options.ListenAnyIP(port); // гаранти€ bind на 0.0.0.0 IPv4+IPv6
+});
+Console.WriteLine($"[DEBUG] ConfigureKestrel ListenAnyIP({port})");
 
 // Add services to the container.
 builder.Services.AddControllers();
