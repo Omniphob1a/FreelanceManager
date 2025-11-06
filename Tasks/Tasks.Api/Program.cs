@@ -1,4 +1,4 @@
-// Файл: Tasks.Api/Program.cs (слой: Api)
+// Файл: Tasks.Api/Program.cs
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
@@ -20,7 +20,8 @@ using Tasks.Api.GraphQL.DataLoaders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5006"; // локально слушаем 5006
+// Используем переменную PORT (Render) или локальный fallback
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5006";
 builder.WebHost.UseUrls($"http://*:{port}");
 
 // Add services to the container.
@@ -41,19 +42,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddApi(builder.Configuration);
 
-builder.Services
-	.AddGraphQLServer()
-	.AllowIntrospection(true)  
-	.AddQueryType<Query>()
-	.AddMutationType<Mutation>()
-	.AddType<ProjectTaskType>()
-	.AddProjections()
-	.AddFiltering()
-	.AddSorting()
-	.AddDataLoader<UserByIdDataLoader>()
-	.ModifyRequestOptions(opt => opt.IncludeExceptionDetails = true);
 
-
+// CORS
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowFrontend", policy =>
@@ -72,21 +62,23 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Синхронная миграция БД (оставляем старый вариант)
 using (var scope = app.Services.CreateScope())
 {
 	try
 	{
 		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
-		dbContext.Database.Migrate(); 
+		dbContext.Database.Migrate();
 	}
 	catch (Exception ex)
 	{
 		var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
 		logger.LogError(ex, "Database migration failed on startup.");
-		throw; 
+		throw;
 	}
 }
 
+// Swagger UI
 if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
@@ -116,12 +108,11 @@ app.UseAuthorization();
 
 app.UseHttpMetrics();
 
-app.MapGraphQL("/graphql");
-
 app.MapControllers();
 
 app.MapMetrics();
 
+// Global exception handler
 app.UseExceptionHandler(errorApp =>
 {
 	errorApp.Run(async context =>
