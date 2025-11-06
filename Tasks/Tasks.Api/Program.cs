@@ -1,4 +1,5 @@
-// ‘айл: Tasks.Api/Program.cs
+using HotChocolate;
+using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
@@ -6,8 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Projects.Api;
 using Prometheus;
 using System.Net;
-using System.Net.NetworkInformation;
+using System.Reflection;
 using Tasks.Api;
+using Tasks.Api.GraphQL.DataLoaders;
+using Tasks.Api.GraphQL.Mutations;
+using Tasks.Api.GraphQL.Queries;
+using Tasks.Api.GraphQL.Types;
 using Tasks.Application;
 using Tasks.Infrastructure;
 using Tasks.Persistence;
@@ -15,23 +20,20 @@ using Tasks.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- Configure port robustly ---
-var portEnv = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var port))
+// ??????????????? ѕолучаем порт Render ???????????????
+var portEnv = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+if (!int.TryParse(portEnv, out var port))
 {
-	builder.WebHost.ConfigureKestrel(options =>
-	{
-		options.ListenAnyIP(port);
-	});
-	builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
-	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port}) and UseUrls(http://0.0.0.0:{port})");
-}
-else
-{
-	Console.WriteLine("[DEBUG] PORT not set or invalid - using default hosting config");
+	Console.WriteLine($"[WARN] Invalid PORT='{portEnv}', falling back to 10000");
+	port = 10000;
 }
 
-// --- Services ---
+// ”станавливаем адрес прослушки €вно (и UseUrls дл€ совместимости)
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(port));
+Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port}) and UseUrls(http://0.0.0.0:{port})");
+
+// ??????????????? Services ???????????????
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
@@ -63,21 +65,42 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// --- Minimal routes / health ---
-app.MapGet("/", () => Results.Text("OK"));
-app.MapGet("/health/live", () => Results.Text("alive"));
-app.MapGet("/health/ready", () => Results.Text("ready"));
+// ????????? START the web host (this binds the sockets) ?????????
+await app.StartAsync(); // important Ч binds Kestrel before we run migrations
+Console.WriteLine($"[INFO] App.StartAsync() completed Ч sockets should be bound on port {port}");
 
-// --- Swagger ---
+// ??????????????? —инхронна€ миграци€ Ѕƒ ???????????????
+// ¬ыполним миграции после бинда, чтобы Render точно увидел открытый порт
+try
+{
+	using (var scope = app.Services.CreateScope())
+	{
+		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
+		dbContext.Database.Migrate();
+	}
+	Console.WriteLine("[INFO] Database migrations completed");
+}
+catch (Exception ex)
+{
+	var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
+	logger.LogError(ex, "Database migration failed on startup.");
+	// если миграци€ критична Ч остановим приложение
+	await app.StopAsync();
+	throw;
+}
+
+// ??????????????? Swagger UI ???????????????
+if (app.Environment.IsDevelopment())
+{
+	app.MapOpenApi();
+}
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Freelance Tasks API v1");
 	c.RoutePrefix = "swagger";
 });
-
-// NOTE: temporarily don't force https redirect on Render
-// app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors("AllowFrontend");
@@ -95,7 +118,7 @@ app.UseHttpMetrics();
 app.MapControllers();
 app.MapMetrics();
 
-// Global exception handler
+// ??????????????? Global exception handler ???????????????
 app.UseExceptionHandler(errorApp =>
 {
 	errorApp.Run(async context =>
@@ -118,49 +141,9 @@ app.UseExceptionHandler(errorApp =>
 	});
 });
 
+app.MapGet("/", () => "OK");
 
-// --- START SERVER IMMEDIATELY, THEN run migrations in background ---
-// This is the key change: Start Kestrel (so port is listenable) before heavy migrations.
-await app.StartAsync(); // non-blocking start: server will bind socket now
+Console.WriteLine($"[INFO] Tasks.Api started. PORT='{port}' ASPNETCORE_URLS='{Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "<not set>"}'");
 
-// Log active TCP listeners to help Render debugging
-try
-{
-	var props = IPGlobalProperties.GetIPGlobalProperties();
-	var listeners = props.GetActiveTcpListeners();
-	Console.WriteLine("[DEBUG] Active TCP listeners:");
-	foreach (var l in listeners)
-	{
-		Console.WriteLine($" - {l.Address}:{l.Port}");
-	}
-}
-catch (Exception ex)
-{
-	Console.WriteLine("[DEBUG] Failed to enumerate TCP listeners: " + ex);
-}
-
-// Run DB migrations in background so startup (port binding) is fast and scanner can see port
-_ = Task.Run(() =>
-{
-	try
-	{
-		using (var scope = app.Services.CreateScope())
-		{
-			var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
-			Console.WriteLine("[DEBUG] Running DB migrations (background)...");
-			dbContext.Database.Migrate();
-			Console.WriteLine("[DEBUG] DB migrations finished.");
-		}
-	}
-	catch (Exception ex)
-	{
-		var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
-		logger.LogError(ex, "Database migration failed in background.");
-		// do not rethrow Ч we want the server to stay up for Render's port detection
-	}
-});
-
-// Final info and wait for shutdown
-Console.WriteLine($"[INFO] Tasks.Api started. PORT='{portEnv ?? "<not set>"}' ASPNETCORE_URLS='{Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "<not set>"}'");
-
+// ??????????????? Wait until shutdown ???????????????
 await app.WaitForShutdownAsync();
