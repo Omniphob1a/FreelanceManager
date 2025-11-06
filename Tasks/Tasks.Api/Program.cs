@@ -23,9 +23,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ----------------- Получаем PORT от Render -----------------
 var portEnv = Environment.GetEnvironmentVariable("PORT");
-var port = !string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var p) ? p : 10000;
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}"); 
 Console.WriteLine($"[DEBUG] Render PORT env = {portEnv}, Kestrel + UseUrls configured for 0.0.0.0:{port}");
 
 // ----------------- Services -----------------
