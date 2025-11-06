@@ -1,4 +1,6 @@
 // Файл: Tasks.Api/Program.cs
+using HotChocolate;
+using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
@@ -6,47 +8,44 @@ using Microsoft.EntityFrameworkCore;
 using Projects.Api;
 using Prometheus;
 using System.Net;
+using System.Reflection;
 using Tasks.Api;
+using Tasks.Api.GraphQL.DataLoaders;
+using Tasks.Api.GraphQL.Mutations;
+using Tasks.Api.GraphQL.Queries;
+using Tasks.Api.GraphQL.Types;
 using Tasks.Application;
 using Tasks.Infrastructure;
 using Tasks.Persistence;
 using Tasks.Persistence.Data;
-using HotChocolate;
-using HotChocolate.AspNetCore;
-using Tasks.Api.GraphQL.Types;
-using Tasks.Api.GraphQL.Queries;
-using Tasks.Api.GraphQL.Mutations;
-using Tasks.Api.GraphQL.DataLoaders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Получаем порт Render
+// ??????????????? Получаем порт Render ???????????????
 var portEnv = Environment.GetEnvironmentVariable("PORT");
-if (string.IsNullOrEmpty(portEnv))
-	throw new Exception("PORT environment variable not set by Render!");
-if (!int.TryParse(portEnv, out var port))
-	throw new Exception($"Invalid PORT value: {portEnv}");
-
-// Настраиваем Kestrel на прослушку Render порта
-builder.WebHost.ConfigureKestrel(options =>
+if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var port))
 {
-	options.ListenAnyIP(port); // 0.0.0.0:PORT
-});
-Console.WriteLine($"[DEBUG] Listening on Render port {port}");
+	builder.WebHost.ConfigureKestrel(options =>
+	{
+		options.ListenAnyIP(port); // Render подхватит нужный порт
+	});
+	Console.WriteLine($"[DEBUG] Listening on Render port {port}");
+}
+else
+{
+	Console.WriteLine("[DEBUG] PORT not set, using default Kestrel configuration");
+}
 
-// Add services
+// ??????????????? Services ???????????????
 builder.Services.AddControllers();
-
-// Swagger / OpenAPI
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithJwt();
 
-// Logging, HttpContext
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
 
-// Persistence / Infrastructure / Application / Api registrations
+// Persistence / Infrastructure / Application / API registrations
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
@@ -69,9 +68,10 @@ builder.Services.AddCors(options =>
 	});
 });
 
+
 var app = builder.Build();
 
-// Синхронная миграция БД
+// ??????????????? Синхронная миграция БД ???????????????
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -87,7 +87,7 @@ using (var scope = app.Services.CreateScope())
 	}
 }
 
-// Swagger UI
+// ??????????????? Swagger UI ???????????????
 if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
@@ -116,7 +116,7 @@ app.UseHttpMetrics();
 app.MapControllers();
 app.MapMetrics();
 
-// Global exception handler
+// ??????????????? Global exception handler ???????????????
 app.UseExceptionHandler(errorApp =>
 {
 	errorApp.Run(async context =>
@@ -141,5 +141,5 @@ app.UseExceptionHandler(errorApp =>
 
 app.MapGet("/", () => "OK");
 
-Console.WriteLine($"[INFO] Application started on port {port}");
+Console.WriteLine($"[INFO] Tasks.Api started on port {portEnv ?? "default"}");
 app.Run();
