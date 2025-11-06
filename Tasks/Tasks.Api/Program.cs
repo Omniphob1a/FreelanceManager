@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Projects.Api;
-using Prometheus;
 using System.Net;
 using Tasks.Api;
 using Tasks.Application;
@@ -17,6 +15,8 @@ using Tasks.Api.GraphQL.Types;
 using Tasks.Api.GraphQL.Queries;
 using Tasks.Api.GraphQL.Mutations;
 using Tasks.Api.GraphQL.DataLoaders;
+using Prometheus;
+using Projects.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,9 +33,9 @@ builder.WebHost.ConfigureKestrel(options =>
 {
 	options.ListenAnyIP(port); // 0.0.0.0:PORT
 });
-Console.WriteLine($"[DEBUG] Listening on Render port {port}");
+Console.WriteLine($"[DEBUG] ConfigureKestrel ListenAnyIP({port})");
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllers();
 
 // Swagger / OpenAPI
@@ -72,13 +72,18 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Синхронная миграция БД
+// --- Важно: сначала запускаем Kestrel, чтобы Render увидел открытый порт
+await app.StartAsync();
+Console.WriteLine($"[DEBUG] Kestrel started, now running migrations (if any)");
+
+// Синхронная миграция БД после старта сервера
 using (var scope = app.Services.CreateScope())
 {
 	try
 	{
 		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
 		dbContext.Database.Migrate();
+		Console.WriteLine("[DEBUG] Database migrations applied.");
 	}
 	catch (Exception ex)
 	{
@@ -101,7 +106,8 @@ app.UseSwaggerUI(c =>
 	c.RoutePrefix = "swagger";
 });
 
-app.UseHttpsRedirection();
+// В Render HTTPS обычно не нужен
+// app.UseHttpsRedirection();
 
 app.UseCookiePolicy(new CookiePolicyOptions
 {
@@ -119,7 +125,6 @@ app.UseAuthorization();
 app.UseHttpMetrics();
 
 app.MapControllers();
-
 app.MapMetrics();
 
 // Global exception handler
@@ -145,7 +150,9 @@ app.UseExceptionHandler(errorApp =>
 	});
 });
 
-Console.WriteLine($"Listening on port: {port}");
 app.MapGet("/", () => "OK");
 
-app.Run();
+Console.WriteLine($"Listening on port: {port} (Render)");
+
+// Теперь ждем остановки приложения
+await app.WaitForShutdownAsync();
