@@ -1,7 +1,8 @@
+# 1. Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Копируем решение и проекты из корня контекста (Tasks/)
+# Копируем проекты
 COPY *.sln ./
 COPY Tasks.Application/*.csproj Tasks.Application/
 COPY Tasks.Domain/*.csproj Tasks.Domain/
@@ -16,7 +17,13 @@ COPY . .
 WORKDIR /src/Tasks.Api
 RUN dotnet publish -c Release -o /app/publish
 
+# 2. Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/publish .
+
+# EXPOSE помогает Render и документации
+EXPOSE 10000
+
+# ENTRYPOINT запускает миграции и сервис
 ENTRYPOINT ["dotnet", "Tasks.Api.dll"]
