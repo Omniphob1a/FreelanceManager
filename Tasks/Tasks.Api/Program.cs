@@ -23,10 +23,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ----------------- Получаем PORT от Render -----------------
 var portEnv = Environment.GetEnvironmentVariable("PORT");
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+var port = Environment.GetEnvironmentVariable("PORT");
 
-Console.WriteLine($"[DEBUG] Render PORT env = {portEnv}, Kestrel + UseUrls configured for 0.0.0.0:{port}");
+builder.WebHost.ConfigureKestrel(options =>
+{
+	options.Listen(IPAddress.Any, int.Parse(port));
+});
+
+Console.WriteLine($"[DEBUG] Render PORT env = {port}, Kestrel configured for {port}");
 
 // ----------------- Services -----------------
 builder.Services.AddControllers();
