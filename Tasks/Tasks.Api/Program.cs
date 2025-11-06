@@ -8,7 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Projects.Api;
 using Prometheus;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Tasks.Api;
 using Tasks.Api.GraphQL.DataLoaders;
 using Tasks.Api.GraphQL.Mutations;
@@ -25,15 +28,15 @@ var builder = WebApplication.CreateBuilder(args);
 var portEnv = Environment.GetEnvironmentVariable("PORT");
 if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var port))
 {
-	// Явно сказать среде, куда слушать (полезно, если платформа смотрит на ASPNETCORE_URLS)
-	Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
-
-	// Настроим Kestrel напрямую (дополнительно)
+	// Дополнительная страховка: явно UseUrls (ещё один способ сообщить ASP.NET Core куда слушать)
+	builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 	builder.WebHost.ConfigureKestrel(options =>
 	{
-		options.ListenAnyIP(port); // 0.0.0.0:PORT
+		options.ListenAnyIP(port);
 	});
-	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port}) and ASPNETCORE_URLS=http://0.0.0.0:{port}");
+
+	Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
+	Console.WriteLine($"[DEBUG] Kestrel + UseUrls configured for 0.0.0.0:{port}");
 }
 else
 {
@@ -78,17 +81,14 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // ----------------- Ранний health endpoint и минимальные маппинги -----------------
-// Регистрируем маленький маршрут /health, который ответит сразу — это помогает платформе видеть, что сервис живёт
 app.MapGet("/health", () => Results.Text("OK"));
-
-// Статические метрики/прометеус и минимальные маппинги — тоже делаем до долгой инициализации
 app.UseRouting();
 app.UseCors("AllowFrontend");
 app.UseHttpMetrics();
 app.MapMetrics();
 app.MapControllers();
 
-// Swagger UI (не мешает)
+// Swagger UI
 if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
@@ -100,7 +100,7 @@ app.UseSwaggerUI(c =>
 	c.RoutePrefix = "swagger";
 });
 
-// Cookie policy, auth и т.д. — регистрируем middleware
+// Cookie policy, auth
 app.UseCookiePolicy(new CookiePolicyOptions
 {
 	MinimumSameSitePolicy = SameSiteMode.Strict,
@@ -109,7 +109,7 @@ app.UseCookiePolicy(new CookiePolicyOptions
 });
 app.UseAuthorization();
 
-// Global exception handler — оставляем как у вас
+// Global exception handler
 app.UseExceptionHandler(errorApp =>
 {
 	errorApp.Run(async context =>
@@ -133,13 +133,53 @@ app.UseExceptionHandler(errorApp =>
 });
 
 // ----------------- ВАЖНО: старт хоста до длительной работы -----------------
-// StartAsync откроет сокеты и поднимет web host, но не заблокирует поток навсегда.
-// Render будет сканить контейнер и увидит открытый порт, даже если дальше идут миграции.
 try
 {
 	Console.WriteLine("[INFO] Starting host (StartAsync) to bind sockets early...");
 
 	await app.StartAsync();
+
+	// --- DIAGNOSTИКА биндинга ---
+	Console.WriteLine("[INFO] StartAsync returned — dumping server addresses and network interfaces:");
+
+	// 1) Фактические адреса сервера
+	try
+	{
+		var server = app.Services.GetRequiredService<IServer>();
+		var addressesFeature = server.Features.Get<IServerAddressesFeature>();
+		if (addressesFeature != null)
+		{
+			foreach (var address in addressesFeature.Addresses)
+				Console.WriteLine($"[BIND-ADDR] IServerAddressesFeature says: {address}");
+		}
+		else
+		{
+			Console.WriteLine("[BIND-ADDR] IServerAddressesFeature is null.");
+		}
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine($"[BIND-ADDR] Failed to read IServerAddressesFeature: {ex}");
+	}
+
+	// 2) Сетевые интерфейсы контейнера
+	try
+	{
+		foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
+		{
+			Console.WriteLine($"[NET] Interface: {ni.Name} - {ni.OperationalStatus} - {ni.NetworkInterfaceType}");
+			var props = ni.GetIPProperties();
+			foreach (var ua in props.UnicastAddresses)
+			{
+				Console.WriteLine($"[NET]   IP: {ua.Address}");
+			}
+		}
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine($"[NET] Failed to enumerate network interfaces: {ex}");
+	}
+
 	Console.WriteLine("[INFO] Host started (sockets should be bound).");
 }
 catch (Exception ex)
@@ -149,7 +189,6 @@ catch (Exception ex)
 }
 
 // ----------------- Выполняем тяжелую инициализацию после биндинга -----------------
-// Синхронные миграции — выполняем уже после StartAsync, чтобы сокет был виден платформе
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -163,20 +202,15 @@ using (var scope = app.Services.CreateScope())
 	{
 		var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
 		logger.LogError(ex, "Database migration failed on startup.");
-		// Если миграции критичные — корректно останавливаем хост и выбрасываем
 		Console.WriteLine("[ERROR] Migration failed — stopping host.");
 		await app.StopAsync();
 		throw;
 	}
 }
 
-// Любые background services / подписчики можно также инициализировать здесь (после миграций).
-// Например — ваша инициализация Kafka consumers / Outbox publisher уже зарегистрирована как HostedService и стартует автоматически.
-
-// Зарегистрируем лог стартового порта для удобства
+// ----------------- Лог стартового порта -----------------
 var effectivePortLog = portEnv ?? Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "unknown";
 Console.WriteLine($"[INFO] Application started. PORT env = '{portEnv ?? "not set"}', ASPNETCORE_URLS = '{Environment.GetEnvironmentVariable("ASPNETCORE_URLS")}'");
 
-// ----------------- Даем хосту ждать завершения --------------------------------
-// Теперь ждем выключения — хост уже запущен и порт открыт.
+// ----------------- Ждем завершения хоста -----------------
 await app.WaitForShutdownAsync();
