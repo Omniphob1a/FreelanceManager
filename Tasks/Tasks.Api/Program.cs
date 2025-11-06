@@ -8,10 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Projects.Api;
 using Prometheus;
 using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 using Tasks.Api;
 using Tasks.Api.GraphQL.DataLoaders;
 using Tasks.Api.GraphQL.Mutations;
@@ -24,57 +20,50 @@ using Tasks.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ----------------- Получаем PORT от платформы (Render) -----------------
+// ----------------- Получаем PORT от Render -----------------
 var portEnv = Environment.GetEnvironmentVariable("PORT");
-if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var port))
+var port = 0;
+
+if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var parsedPort))
 {
-	// Дополнительная страховка: явно UseUrls (ещё один способ сообщить ASP.NET Core куда слушать)
-	builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+	port = parsedPort;
+	Console.WriteLine($"[DEBUG] Render PORT env found: {port}");
+
+	// Устанавливаем ASPNETCORE_URLS для Kestrel
+	Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
+
 	builder.WebHost.ConfigureKestrel(options =>
 	{
 		options.ListenAnyIP(port);
 	});
 
-	Environment.SetEnvironmentVariable("ASPNETCORE_URLS", $"http://0.0.0.0:{port}");
-	Console.WriteLine($"[DEBUG] Kestrel + UseUrls configured for 0.0.0.0:{port}");
+	Console.WriteLine($"[DEBUG] Kestrel configured to ListenAnyIP({port})");
 }
 else
 {
-	Console.WriteLine("[DEBUG] PORT env not set or invalid — using default Kestrel configuration");
+	Console.WriteLine("[WARNING] PORT env not set or invalid — using default Kestrel configuration");
 }
 
 // ----------------- Services -----------------
 builder.Services.AddControllers();
-
-// Swagger / OpenAPI
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithJwt();
-
-// Logging, HttpContext
 builder.Services.AddLogging();
 builder.Services.AddHttpContextAccessor();
-
-// Persistence / Infrastructure / Application / Api registrations
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddApi(builder.Configuration);
 
-// CORS
 builder.Services.AddCors(options =>
 {
 	options.AddPolicy("AllowFrontend", policy =>
 	{
-		policy
-			.WithOrigins(
-				"http://localhost:8080",
-				"http://localhost:5000",
-				"http://frontend:80"
-			)
-			.AllowAnyMethod()
-			.AllowAnyHeader()
-			.AllowCredentials();
+		policy.WithOrigins("http://localhost:8080", "http://localhost:5000", "http://frontend:80")
+			  .AllowAnyMethod()
+			  .AllowAnyHeader()
+			  .AllowCredentials();
 	});
 });
 
@@ -100,7 +89,7 @@ app.UseSwaggerUI(c =>
 	c.RoutePrefix = "swagger";
 });
 
-// Cookie policy, auth
+// Cookie policy, auth и т.д.
 app.UseCookiePolicy(new CookiePolicyOptions
 {
 	MinimumSameSitePolicy = SameSiteMode.Strict,
@@ -125,62 +114,17 @@ app.UseExceptionHandler(errorApp =>
 				Message = "An unexpected error occurred.",
 				Detail = app.Environment.IsDevelopment() ? exceptionHandlerPathFeature.Error.ToString() : null
 			};
-
-			var errorJson = System.Text.Json.JsonSerializer.Serialize(error);
-			await context.Response.WriteAsync(errorJson);
+			await context.Response.WriteAsJsonAsync(error);
 		}
 	});
 });
 
-// ----------------- ВАЖНО: старт хоста до длительной работы -----------------
+// ----------------- Старт хоста до длительной работы -----------------
 try
 {
 	Console.WriteLine("[INFO] Starting host (StartAsync) to bind sockets early...");
-
 	await app.StartAsync();
-
-	// --- DIAGNOSTИКА биндинга ---
-	Console.WriteLine("[INFO] StartAsync returned — dumping server addresses and network interfaces:");
-
-	// 1) Фактические адреса сервера
-	try
-	{
-		var server = app.Services.GetRequiredService<IServer>();
-		var addressesFeature = server.Features.Get<IServerAddressesFeature>();
-		if (addressesFeature != null)
-		{
-			foreach (var address in addressesFeature.Addresses)
-				Console.WriteLine($"[BIND-ADDR] IServerAddressesFeature says: {address}");
-		}
-		else
-		{
-			Console.WriteLine("[BIND-ADDR] IServerAddressesFeature is null.");
-		}
-	}
-	catch (Exception ex)
-	{
-		Console.WriteLine($"[BIND-ADDR] Failed to read IServerAddressesFeature: {ex}");
-	}
-
-	// 2) Сетевые интерфейсы контейнера
-	try
-	{
-		foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
-		{
-			Console.WriteLine($"[NET] Interface: {ni.Name} - {ni.OperationalStatus} - {ni.NetworkInterfaceType}");
-			var props = ni.GetIPProperties();
-			foreach (var ua in props.UnicastAddresses)
-			{
-				Console.WriteLine($"[NET]   IP: {ua.Address}");
-			}
-		}
-	}
-	catch (Exception ex)
-	{
-		Console.WriteLine($"[NET] Failed to enumerate network interfaces: {ex}");
-	}
-
-	Console.WriteLine("[INFO] Host started (sockets should be bound).");
+	Console.WriteLine("[INFO] Host started — sockets bound.");
 }
 catch (Exception ex)
 {
@@ -188,7 +132,7 @@ catch (Exception ex)
 	throw;
 }
 
-// ----------------- Выполняем тяжелую инициализацию после биндинга -----------------
+// ----------------- Тяжелая инициализация после биндинга -----------------
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -208,9 +152,7 @@ using (var scope = app.Services.CreateScope())
 	}
 }
 
-// ----------------- Лог стартового порта -----------------
-var effectivePortLog = portEnv ?? Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "unknown";
-Console.WriteLine($"[INFO] Application started. PORT env = '{portEnv ?? "not set"}', ASPNETCORE_URLS = '{Environment.GetEnvironmentVariable("ASPNETCORE_URLS")}'");
+// ----------------- Логируем порт для Render -----------------
+Console.WriteLine($"[INFO] Application started. Listening on port: {port}");
 
-// ----------------- Ждем завершения хоста -----------------
 await app.WaitForShutdownAsync();
