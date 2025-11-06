@@ -20,16 +20,20 @@ using Tasks.Api.GraphQL.DataLoaders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Используем переменную PORT (Render) или локальный fallback
+// Render задаёт обязательный порт через переменную окружения PORT
 var portEnv = Environment.GetEnvironmentVariable("PORT");
-int port = 5006;
-if (!string.IsNullOrEmpty(portEnv) && int.TryParse(portEnv, out var p)) port = p;
+if (string.IsNullOrEmpty(portEnv))
+	throw new Exception("PORT environment variable not set by Render!");
 
+if (!int.TryParse(portEnv, out var port))
+	throw new Exception($"Invalid PORT value: {portEnv}");
+
+// Настраиваем Kestrel на прослушку Render порта
 builder.WebHost.ConfigureKestrel(options =>
 {
-	options.ListenAnyIP(port); // гарантия bind на 0.0.0.0 IPv4+IPv6
+	options.ListenAnyIP(port); // 0.0.0.0:PORT
 });
-Console.WriteLine($"[DEBUG] ConfigureKestrel ListenAnyIP({port})");
+Console.WriteLine($"[DEBUG] Listening on Render port {port}");
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -48,7 +52,6 @@ builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddApi(builder.Configuration);
-
 
 // CORS
 builder.Services.AddCors(options =>
@@ -69,7 +72,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Синхронная миграция БД (оставляем старый вариант)
+// Синхронная миграция БД
 using (var scope = app.Services.CreateScope())
 {
 	try
@@ -141,6 +144,6 @@ app.UseExceptionHandler(errorApp =>
 		}
 	});
 });
-Console.WriteLine($"Listening on port: {port}");
 
+Console.WriteLine($"Listening on port: {port}");
 app.Run();
