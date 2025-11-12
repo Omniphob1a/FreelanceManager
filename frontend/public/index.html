@@ -104,11 +104,20 @@
     </div>
 
     <!-- Toast Notifications -->
-    <div id="toastContainer" class="fixed top-4 right-4 z-50 space-y-2 w-80">
-        <!-- Toasts will be added here dynamically -->
-    </div>
+    <div id="toastContainer" class="fixed top-4 right-4 z-50 space-y-2 w-80"></div>
+
+    <!-- Скрипты -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- runtime env support -->
+    <script>
+        window._env_ = window._env_ || {};
+        // Например, можно задать для локального dev
+        // window._env_.VITE_API_URL = 'https://freelancemanager-gateway.onrender.com';
+    </script>
+
+    <!-- App entry -->
     <script type="module" src="/js/app.js"></script>
 
     <div id="modal-root"></div>
