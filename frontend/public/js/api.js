@@ -1,5 +1,6 @@
 // js/api.js
-// Важно: сначала попробуем import.meta.env (вшито при билде), затем runtime window._env_
+
+// Базовый URL API (Vite injects import.meta.env.VITE_API_URL)
 const API_BASE_URL = import.meta.env.VITE_API_URL || window._env_?.VITE_API_URL || '';
 
 // Общая функция для выполнения запросов
@@ -18,7 +19,6 @@ async function fetchAPI(endpoint, method = 'GET', body = null, headers = {}) {
         options.body = JSON.stringify(body);
     }
     
-    // Детальное логирование запроса
     console.log('=== FETCH API DEBUG ===');
     console.log('URL:', url);
     console.log('Method:', method);
@@ -90,7 +90,9 @@ async function fetchAPI(endpoint, method = 'GET', body = null, headers = {}) {
     }
 }
 
-// Далее — остальные API-обёртки (копируйте из вашего текущего файла без изменений)
+// =====================
+// Project API
+// =====================
 export const ProjectAPI = {
   async getProjects(filters = {}) {
     const queryParams = new URLSearchParams(filters).toString();
@@ -129,8 +131,7 @@ export const ProjectAPI = {
       throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
     }
 
-    if (projectData.budgetMin && projectData.budgetMax && 
-        projectData.budgetMin > projectData.budgetMax) {
+    if (projectData.budgetMin && projectData.budgetMax && projectData.budgetMin > projectData.budgetMax) {
       throw new Error('Min budget cannot be greater than max budget');
     }
 
@@ -150,10 +151,7 @@ export const ProjectAPI = {
   },
 
   async publishProject(projectId, expiresAt) {
-      console.log('Publishing project with data:', { expiresAt });
-      return fetchAPI(`/api/Projects/${projectId}/publish`, 'PATCH', {
-          expiresAt: expiresAt
-      });
+    return fetchAPI(`/api/Projects/${projectId}/publish`, 'PATCH', { expiresAt });
   },
 
   async completeProject(projectId) {
@@ -163,9 +161,7 @@ export const ProjectAPI = {
   async addAttachment(projectId, file) {
     const formData = new FormData();
     formData.append('file', file);
-    return fetchAPI(`/api/Projects/${projectId}/add-attachment`, 'PATCH', formData, {
-      isForm: true,
-    });
+    return fetchAPI(`/api/Projects/${projectId}/add-attachment`, 'PATCH', formData, { isForm: true });
   },
 
   async deleteAttachment(projectId, attachmentId) {
@@ -180,7 +176,6 @@ export const ProjectAPI = {
     if (payload.dueDate && /^\d{4}-\d{2}-\d{2}$/.test(payload.dueDate)) {
         payload.dueDate = new Date(payload.dueDate).toISOString();
     }
-    console.log('Adding milestone with payload:', payload);
     return fetchAPI(`/api/Projects/${projectId}/add-milestone`, 'PATCH', payload);
   },
 
@@ -196,19 +191,11 @@ export const ProjectAPI = {
     if (!guidRegex.test(milestoneId)) {
         throw new Error('milestoneId должен быть валидным GUID');
     }
-    console.log('Отправляем запрос с MilestoneId:', milestoneId);
-    return fetchAPI(
-      `/api/Projects/${projectId}/complete-milestone`,
-      'PATCH',
-      { MilestoneId: milestoneId }
-    );
+    return fetchAPI(`/api/Projects/${projectId}/complete-milestone`, 'PATCH', { MilestoneId: milestoneId });
   },
 
   async rescheduleMilestone(projectId, milestoneId, newDueDate) {
-    return fetchAPI(`/api/Projects/${projectId}/reschedule-milestone`, 'PATCH', {
-      milestoneId,
-      newDueDate,
-    });
+    return fetchAPI(`/api/Projects/${projectId}/reschedule-milestone`, 'PATCH', { milestoneId, newDueDate });
   },
 
   async addTags(projectId, tags) {
@@ -220,4 +207,80 @@ export const ProjectAPI = {
   },
 };
 
-// AuthAPI, UserAPI, TaskAPI и т.д. — копируйте из вашего оригинального файла (не трогал)
+// =====================
+// Auth API
+// =====================
+export const AuthAPI = {
+    async register(userData) { return fetchAPI('/api/Auth/register', 'POST', userData); },
+    async login(credentials) { return fetchAPI('/api/Auth/login', 'POST', credentials); },
+};
+
+// =====================
+// User API
+// =====================
+export const UserAPI = {
+    async getUsers() { return fetchAPI('/api/Users'); },
+    async updateUser(userId, userData) { return fetchAPI(`/api/Users/${userId}`, 'PUT', userData); },
+    async getProfile() { return fetchAPI('/api/Users/get-my-profile', 'POST'); }
+};
+
+// =====================
+// Task API
+// =====================
+export const TaskAPI = {
+    async getTasks(filters = {}) {
+        const queryParams = new URLSearchParams(filters).toString();
+        return fetchAPI(`/api/ProjectTasks?${queryParams}`);
+    },
+    async createTask(taskData) { return fetchAPI('/api/ProjectTasks', 'POST', taskData); },
+    async getTaskById(taskId, includes = []) {
+        const queryParams = includes.length ? `?includes=${includes.join(',')}` : '';
+        return fetchAPI(`/api/ProjectTasks/${taskId}${queryParams}`);
+    },
+    async updateTask(taskId, taskData) { return fetchAPI(`/api/ProjectTasks/${taskId}`, 'PUT', taskData); },
+    async deleteTask(taskId) { return fetchAPI(`/api/ProjectTasks/${taskId}`, 'DELETE'); },
+    async assignTask(taskId, assigneeId) { return fetchAPI(`/api/ProjectTasks/${taskId}/assign`, 'PATCH', { assigneeId }); },
+    async unassignTask(taskId, assigneeId) { return fetchAPI(`/api/ProjectTasks/${taskId}/unassign`, 'PATCH', { assigneeId }); },
+    async startTask(taskId) { return fetchAPI(`/api/ProjectTasks/${taskId}/start`, 'PATCH'); },
+    async completeTask(taskId) { return fetchAPI(`/api/ProjectTasks/${taskId}/complete`, 'PATCH'); },
+    async cancelTask(taskId, reason) { return fetchAPI(`/api/ProjectTasks/${taskId}/cancel`, 'PATCH', { reason }); },
+    async addTimeEntry(taskId, timeEntryData) { return fetchAPI(`/api/ProjectTasks/${taskId}/time-entries`, 'POST', timeEntryData); },
+    async addComment(taskId, commentData) { return fetchAPI(`/api/ProjectTasks/${taskId}/comments`, 'POST', commentData); },
+};
+
+// =====================
+// Notifications
+// =====================
+export const NotificationAPI = {
+    async getNotifications() { return []; },
+    async markAsRead(notificationId) { return true; },
+    async markAllAsRead() { return true; },
+};
+
+// =====================
+// Activity
+// =====================
+export const ActivityAPI = {
+    async getRecentActivities() {
+        return [
+            { id: 1, type: 'completed', project: 'Website Redesign', timestamp: new Date(Date.now() - 2*3600000) },
+            { id: 2, type: 'comment', user: 'John', project: 'Mobile App Development', timestamp: new Date(Date.now() - 5*3600000) }
+        ];
+    }
+};
+
+// =====================
+// Утилиты
+// =====================
+export function formatCurrency(amount, currency = 'USD') {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
+}
+export function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+}
+export function getDaysLeft(endDate) {
+    const today = new Date();
+    const dueDate = new Date(endDate);
+    return Math.ceil((dueDate - today)/(1000*60*60*24));
+}
