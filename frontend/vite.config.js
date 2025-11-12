@@ -7,12 +7,12 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      // все запросы к /api/... будут проксироваться на бэк на localhost:5000
+      // все запросы к /api/... будут проксироваться на бэк
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://localhost:5000', 
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '/api') // обычно не требуется
+        rewrite: (path) => path.replace(/^\/api/, '/api') 
       }
     }
   },
