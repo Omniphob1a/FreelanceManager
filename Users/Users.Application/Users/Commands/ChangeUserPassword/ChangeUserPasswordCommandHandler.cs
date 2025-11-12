@@ -16,12 +16,14 @@ namespace Users.Application.Users.Commands.ChangeUserPassword
 		private readonly IUserRepository _userRepo;
 		private readonly IOutboxService _outboxService;
 		private readonly IMapper _mapper;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public ChangeUserPasswordCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper)
+		public ChangeUserPasswordCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper, IUnitOfWork unitOfWork)
 		{
 			_userRepo = userRepo;
 			_outboxService = outboxService;
 			_mapper = mapper;
+			_unitOfWork = unitOfWork;
 		}
 			
 		public async Task<Result> Handle(ChangeUserPasswordRequest request, CancellationToken ct)
@@ -38,12 +40,11 @@ namespace Users.Application.Users.Commands.ChangeUserPassword
 
 				user.ChangePassword(hash, request.Command.ModifiedBy);
 
-				var dto = _mapper.Map<PublicUserDto>(user);
-				string topic = "users";
-				string key = user.Id.ToString();
-				await _outboxService.Add(dto, topic, key, ct);
-
 				await _userRepo.Update(user, ct);
+				_unitOfWork.TrackEntity(user);
+
+				await _unitOfWork.SaveChangesAsync();
+
 				return Result.Ok();
 			}
 			catch (Exception ex)

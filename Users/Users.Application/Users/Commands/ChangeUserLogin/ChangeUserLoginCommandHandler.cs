@@ -14,12 +14,14 @@ namespace Users.Application.Users.Commands.ChangeUserLogin
 		private readonly IUserRepository _userRepo;
 		private readonly IOutboxService _outboxService;
 		private readonly IMapper _mapper;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public ChangeUserLoginCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper)
+		public ChangeUserLoginCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper, IUnitOfWork unitOfWork)
 		{
 			_userRepo = userRepo;
 			_outboxService = outboxService;
 			_mapper = mapper;
+			_unitOfWork = unitOfWork;
 		}
 			
 
@@ -33,12 +35,12 @@ namespace Users.Application.Users.Commands.ChangeUserLogin
 			{
 				user.ChangeLogin(request.Command.NewLogin, request.Command.ModifiedBy);
 
-				var dto = _mapper.Map<PublicUserDto>(user);
-				string topic = "users";
-				string key = user.Id.ToString();
-				await _outboxService.Add(dto, topic, key, ct);
 
 				await _userRepo.Update(user, ct);
+				_unitOfWork.TrackEntity(user);
+
+				await _unitOfWork.SaveChangesAsync();
+
 				return Result.Ok();
 			}
 			catch (Exception ex)

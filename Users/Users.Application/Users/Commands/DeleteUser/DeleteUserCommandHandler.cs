@@ -9,11 +9,13 @@ namespace Users.Application.Users.Commands.DeleteUser
 	{
 		private readonly IUserRepository _userRepo;
 		private readonly IOutboxService _outboxService;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public DeleteUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService)
+		public DeleteUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IUnitOfWork unitOfWork)
 		{
 			_userRepo = userRepo;
 			_outboxService = outboxService;
+			_unitOfWork = unitOfWork;
 		}
 	
 
@@ -35,11 +37,10 @@ namespace Users.Application.Users.Commands.DeleteUser
 				// Мягкое удаление 
 				user.Delete(cmd.RevokedBy);
 
-				string topic = "users"; 
-				string key = user.Id.ToString();
-				await _outboxService.AddTombstone(topic, key, ct);
 
 				await _userRepo.Update(user, ct);
+				_unitOfWork.TrackEntity(user);
+				await _unitOfWork.SaveChangesAsync();
 				return Result.Ok();
 			}
 			catch (Exception ex)

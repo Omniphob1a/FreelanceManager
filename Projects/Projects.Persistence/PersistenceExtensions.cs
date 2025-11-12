@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Projects.Application.Interfaces;
 using Projects.Application.Mappings;
 using Projects.Domain.Repositories;
+using Projects.Infrastructure.Persistence;
 using Projects.Persistence.Common;
 using Projects.Persistence.Data;
 using Projects.Persistence.Data.Queries;
@@ -41,6 +42,8 @@ namespace Projects.Persistence
 			services.AddSingleton(config);
 			services.AddScoped<IMapper, ServiceMapper>();
 
+			services.AddScoped<IIncomingEventStore, IncomingEventStore>();
+			services.AddScoped<IIncomingEventRepository, IncomingEventRepository>();
 
 			services.AddScoped<IProjectRepository, ProjectRepository>();
 			services.AddScoped<IUserReadRepository, UserReadRepository>();

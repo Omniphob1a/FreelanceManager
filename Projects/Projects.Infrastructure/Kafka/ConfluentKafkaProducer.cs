@@ -1,8 +1,7 @@
 ﻿using Confluent.Kafka;
+using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Projects.Infrastructure.Kafka
@@ -11,19 +10,46 @@ namespace Projects.Infrastructure.Kafka
 	{
 		private readonly IProducer<string, string> _producer;
 
+		// Рekomendую принимать IOptions<KafkaSettings> чтобы DI мог подставить конфигурацию безопасно.
+		public ConfluentKafkaProducer(IOptions<KafkaSettings> options)
+			: this(options?.Value ?? throw new ArgumentNullException(nameof(options)))
+		{
+		}
+
+		// Оставляем "старый" конструктор для тестов / явной передачи настроек
 		public ConfluentKafkaProducer(KafkaSettings settings)
 		{
+			if (settings == null)
+				throw new ArgumentNullException(nameof(settings));
+
+			// безопасный парсинг SecurityProtocol
+			SecurityProtocol securityProtocol = SecurityProtocol.Plaintext;
+			if (!string.IsNullOrWhiteSpace(settings.SecurityProtocol) &&
+				Enum.TryParse<SecurityProtocol>(settings.SecurityProtocol, ignoreCase: true, out var sp))
+			{
+				securityProtocol = sp;
+			}
+
+			// безопасный парсинг SaslMechanism
+			SaslMechanism saslMechanism = SaslMechanism.Plain;
+			if (!string.IsNullOrWhiteSpace(settings.SaslMechanism) &&
+				Enum.TryParse<SaslMechanism>(settings.SaslMechanism, ignoreCase: true, out var sm))
+			{
+				saslMechanism = sm;
+			}
+
 			var cfg = new ProducerConfig
 			{
 				BootstrapServers = settings.BootstrapServers,
 				Acks = Acks.All,
-				EnableIdempotence = settings.Options.EnableIdempotence,
-				SecurityProtocol = Enum.Parse<SecurityProtocol>(settings.SecurityProtocol),
-				SaslMechanism = Enum.Parse<SaslMechanism>(settings.SaslMechanism),
+				EnableIdempotence = settings?.Options?.EnableIdempotence ?? false,
+				SecurityProtocol = securityProtocol,
+				SaslMechanism = saslMechanism,
 				SaslUsername = settings.SaslUsername,
 				SaslPassword = settings.SaslPassword
 			};
 
+			// При отсутствии BootstrapServers можно не строить продьюсер — но здесь мы допускаем пустую строку и дастся ошибка при попытке использовать.
 			_producer = new ProducerBuilder<string, string>(cfg).Build();
 		}
 

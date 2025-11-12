@@ -30,7 +30,7 @@ namespace Users.Application.Users.Commands.RegisterUser
 				.InclusiveBetween(0, 2).WithMessage("Gender must be 0 (Female), 1 (Male) or 2 (Unknown)");
 
 			RuleFor(x => x.Birthday)
-				.LessThanOrEqualTo(DateTime.UtcNow).When(x => x.Birthday.HasValue)
+				.LessThanOrEqualTo(DateTime.UtcNow)
 				.WithMessage("Birthday cannot be in the future.");
 
 			RuleFor(x => x.Email)

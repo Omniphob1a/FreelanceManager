@@ -12,7 +12,7 @@ namespace Users.Application.Users.Commands.UpdateUser
 	public record UpdateUserCommand(
 		string NewName,
 		int NewGender,
-		DateTime? NewBirthday,
+		DateTime NewBirthday,
 		string NewEmail
 	)
 

@@ -12,12 +12,14 @@ namespace Users.Application.Users.Commands.RestoreUser
 		private readonly IUserRepository _userRepo;
 		private readonly IOutboxService _outboxService;
 		private readonly IMapper _mapper;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public RestoreUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper)
+		public RestoreUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper, IUnitOfWork unitOfWork)
 		{
 			_userRepo = userRepo;
 			_outboxService = outboxService;
 			_mapper = mapper;
+			_unitOfWork = unitOfWork;
 		}
 
 		public async Task<Result> Handle(RestoreUserCommand cmd, CancellationToken ct)
@@ -30,12 +32,11 @@ namespace Users.Application.Users.Commands.RestoreUser
 			{
 				user.Restore(cmd.ModifiedBy);
 
-				var dto = _mapper.Map<PublicUserDto>(user);
-				var topic = "users";
-				var key = user.Id.ToString();
-				await _outboxService.Add(dto, topic, key, ct);
-
 				await _userRepo.Update(user, ct);
+				_unitOfWork.TrackEntity(user);
+
+				await _unitOfWork.SaveChangesAsync();
+
 				return Result.Ok();
 			}
 			catch (Exception ex)

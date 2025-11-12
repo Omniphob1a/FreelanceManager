@@ -3,7 +3,6 @@ using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Projects.Persistence.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +13,7 @@ using Tasks.Application.Interfaces;
 using Tasks.Application.Mappings;
 using Tasks.Domain.Interfaces;
 using Tasks.Infrastructure.Persistence;
+using Tasks.Persistence.Common;
 using Tasks.Persistence.Data;
 using Tasks.Persistence.Data.Queries;
 using Tasks.Persistence.Data.Repositories;
@@ -52,6 +52,7 @@ namespace Tasks.Persistence
 
 			services.AddScoped<IProjectTaskQueryService, ProjectTaskQueryService>();
 			services.AddScoped<IProjectMemberQueryService, ProjectMemberQueryService>();
+
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			return services;
 		}

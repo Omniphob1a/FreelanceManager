@@ -2,10 +2,11 @@
 using System.Text.Json;
 using Tasks.Application.Interfaces;
 using Tasks.Domain.Common;
+using Tasks.Domain.Interfaces;
 using Tasks.Persistence.Data;
 using Tasks.Persistence.Models;
 
-namespace Projects.Persistence.Common
+namespace Tasks.Persistence.Common
 {
 	public class UnitOfWork : IUnitOfWork
 	{

@@ -1,6 +1,4 @@
-// Tasks.Api/Program.cs
-using HotChocolate;
-using HotChocolate.AspNetCore;
+// Файл: Tasks.Api/Program.cs
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
@@ -8,40 +6,21 @@ using Microsoft.EntityFrameworkCore;
 using Projects.Api;
 using Prometheus;
 using System.Net;
-using System.Reflection;
 using Tasks.Api;
-using Tasks.Api.GraphQL.DataLoaders;
-using Tasks.Api.GraphQL.Mutations;
-using Tasks.Api.GraphQL.Queries;
-using Tasks.Api.GraphQL.Types;
 using Tasks.Application;
 using Tasks.Infrastructure;
 using Tasks.Persistence;
 using Tasks.Persistence.Data;
+using HotChocolate;
+using HotChocolate.AspNetCore;
+using Tasks.Api.GraphQL.Types;
+using Tasks.Api.GraphQL.Queries;
+using Tasks.Api.GraphQL.Mutations;
+using Tasks.Api.GraphQL.DataLoaders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ----------------- Получаем PORT от Render -----------------
-var portStr = Environment.GetEnvironmentVariable("PORT");
-if (string.IsNullOrWhiteSpace(portStr))
-{
-	throw new InvalidOperationException("PORT environment variable not set! Render requires a dynamic port.");
-}
-
-if (!int.TryParse(portStr, out var port))
-{
-	throw new InvalidOperationException($"PORT environment variable is invalid: {portStr}");
-}
-
-// Настраиваем Kestrel на динамический порт Render
-builder.WebHost.ConfigureKestrel(options =>
-{
-	options.ListenAnyIP(port);
-});
-
-Console.WriteLine($"[DEBUG] Render PORT env = {port}, Kestrel configured for {port}");
-
-// ----------------- Services -----------------
+// Add services to the container.
 builder.Services.AddControllers();
 
 // Swagger / OpenAPI
@@ -78,21 +57,28 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ----------------- Ранний health endpoint -----------------
-app.MapGet("/health", () => Results.Text("OK"));
-
-// Статические метрики / Prometheus
-app.UseRouting();
-app.UseCors("AllowFrontend");
-app.UseHttpMetrics();
-app.MapMetrics();
-app.MapControllers();
+// Синхронная миграция БД
+using (var scope = app.Services.CreateScope())
+{
+	try
+	{
+		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
+		dbContext.Database.Migrate();
+	}
+	catch (Exception ex)
+	{
+		var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
+		logger.LogError(ex, "Database migration failed on startup.");
+		throw;
+	}
+}
 
 // Swagger UI
 if (app.Environment.IsDevelopment())
 {
 	app.MapOpenApi();
 }
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -100,14 +86,25 @@ app.UseSwaggerUI(c =>
 	c.RoutePrefix = "swagger";
 });
 
-// Cookie policy, auth и т.д.
+
 app.UseCookiePolicy(new CookiePolicyOptions
 {
 	MinimumSameSitePolicy = SameSiteMode.Strict,
 	HttpOnly = HttpOnlyPolicy.None,
 	Secure = CookieSecurePolicy.Always
 });
+
+app.UseRouting();
+
+app.UseCors("AllowFrontend");
+
 app.UseAuthorization();
+
+app.UseHttpMetrics();
+
+app.MapControllers();
+
+app.MapMetrics();
 
 // Global exception handler
 app.UseExceptionHandler(errorApp =>
@@ -132,29 +129,4 @@ app.UseExceptionHandler(errorApp =>
 	});
 });
 
-// ----------------- Выполняем миграции -----------------
-using (var scope = app.Services.CreateScope())
-{
-	try
-	{
-		var dbContext = scope.ServiceProvider.GetRequiredService<ProjectTasksDbContext>();
-		Console.WriteLine("[INFO] Running database migrations...");
-		dbContext.Database.Migrate();
-		Console.WriteLine("[INFO] Database migrations completed.");
-	}
-	catch (Exception ex)
-	{
-		var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
-		logger.LogError(ex, "Database migration failed on startup.");
-		Console.WriteLine("[ERROR] Migration failed — stopping host.");
-		throw;
-	}
-}
-
-// ----------------- Background services стартуют автоматически -----------------
-
-// Лог стартового порта
-Console.WriteLine($"[INFO] Application starting. Listening on 0.0.0.0:{port}");
-
-// ----------------- Запуск хоста -----------------
-app.Run(); // Блокирующий вызов, Render увидит открытый порт
+app.Run();

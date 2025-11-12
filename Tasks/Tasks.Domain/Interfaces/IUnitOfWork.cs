@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tasks.Application.Interfaces
+namespace Tasks.Domain.Interfaces
 {
 	public interface IUnitOfWork
 	{

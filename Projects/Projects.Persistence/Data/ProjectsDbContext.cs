@@ -18,7 +18,9 @@ namespace Projects.Persistence.Data
 		public DbSet<ProjectAttachmentEntity> ProjectAttachments { get; set; } = null!;
 		public DbSet<ProjectMemberEntity> ProjectMembers { get; set; } = null!;
 		public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
+		public DbSet<IncomingEvent> IncomingEvents { get; set; } = null!;
 		public DbSet<UserReadModel> Users { get; set; } = null!;
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

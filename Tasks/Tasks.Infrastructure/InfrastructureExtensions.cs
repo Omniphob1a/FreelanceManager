@@ -43,9 +43,9 @@ namespace Tasks.Infrastructure
 
 
 			services.AddHostedService<OutboxPublisherHostedService>();
-			services.AddHostedService<MembersConsumerHostedService>();
 			services.AddHostedService<ProjectsConsumerHostedService>();
 			services.AddHostedService<UsersConsumerHostedService>();
+			services.AddHostedService<MembersConsumerHostedService>();
 
 			var kafkaSection = configuration.GetSection("Kafka");
 			var kafkaSettings = kafkaSection.Get<KafkaSettings>() ?? new KafkaSettings();
@@ -55,6 +55,8 @@ namespace Tasks.Infrastructure
 
 
 			services.AddScoped<IIncomingEventProcessor, ProjectEventsProcessor>();
+			services.AddScoped<IIncomingEventProcessor, UserEventsProcessor>();
+			services.AddScoped<IIncomingEventProcessor, MemberEventsProcessor>();
 			services.AddHostedService<IncomingEventsProcessorHostedService>();
 
 			services.AddScoped<IAuthorizationService, AuthorizationService>();

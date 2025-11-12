@@ -122,7 +122,7 @@ public class Project : EntityBase
 		_tags.Clear();
 		_tags.AddRange(tags.Distinct());
 
-		AddDomainEvent(new ProjectUpdatedDomainEvent(Id));
+		AddDomainEvent(new ProjectUpdatedDomainEvent(Id, Title, OwnerId));
 	}
 
 	public void Delete()

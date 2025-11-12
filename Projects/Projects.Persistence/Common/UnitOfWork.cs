@@ -13,7 +13,7 @@ namespace Projects.Persistence.Common
 	public class UnitOfWork : IUnitOfWork
 	{
 		private readonly ProjectsDbContext _dbContext;
-		private readonly IDomainEventDispatcher _dispatcher; // можно оставить для sync dispatch fallback
+		private readonly IDomainEventDispatcher _dispatcher; 
 		private readonly ILogger<UnitOfWork> _logger;
 		private readonly HashSet<EntityBase> _trackedEntities = new();
 

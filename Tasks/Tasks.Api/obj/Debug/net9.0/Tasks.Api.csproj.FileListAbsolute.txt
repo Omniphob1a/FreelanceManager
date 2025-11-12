@@ -398,4 +398,3 @@ C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Ho
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Microsoft.Extensions.ObjectPool.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\System.IO.Hashing.dll
 C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\bin\Debug\net9.0\Yarp.ReverseProxy.dll
-C:\Users\volod\source\repos\FreelanceManager\Tasks\Tasks.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

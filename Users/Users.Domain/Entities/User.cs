@@ -14,7 +14,7 @@ namespace Users.Domain.Entities
 		public string PasswordHash { get; private set; }
 		public string Name { get; private set; }
 		public int Gender { get; private set; }
-		public DateTime? Birthday { get; private set; }
+		public DateTime Birthday { get; private set; }
 		public bool Admin { get; private set; }
 		public Email Email { get; private set; }
 		public DateTime CreatedAt { get; }
@@ -33,6 +33,7 @@ namespace Users.Domain.Entities
 			string passwordHash,
 			string name,
 			int gender,
+			DateTime birthday,
 			Email email,
 			string createdBy,
 			DateTime createdAtUtc)
@@ -47,6 +48,7 @@ namespace Users.Domain.Entities
 			PasswordHash = passwordHash;
 			Name = name;
 			Gender = gender;
+			Birthday = birthday;
 			Email = email;
 			CreatedBy = createdBy ?? throw new ArgumentNullException(nameof(createdBy));
 			CreatedAt = createdAtUtc;
@@ -60,6 +62,7 @@ namespace Users.Domain.Entities
 			string passwordHash,
 			string name,
 			int gender,
+			DateTime birthday,
 			Email email,
 			string createdBy)
 		{
@@ -69,18 +72,19 @@ namespace Users.Domain.Entities
 				passwordHash,
 				name,
 				gender,
+				birthday,
 				email,
 				createdBy,
 				DateTime.UtcNow);
 
-			user.AddDomainEvent(new UserRegisteredDomainEvent(user.Id, user.Login, user.Email));
+			user.AddDomainEvent(new UserRegisteredDomainEvent(user.Id, user.Login, user.Name, user.Birthday, user.Gender));
 			return user;
 		}
 
 		// ==========================
 		// Update methods
 		// ==========================
-		public void UpdateProfile(string name, int gender, DateTime? birthday, Email email, string modifiedBy)
+		public void UpdateProfile(string name, int gender, DateTime birthday, Email email, string modifiedBy)
 		{
 			if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Name is required.", nameof(name));
 			if (email is null) throw new ArgumentNullException(nameof(email));
@@ -180,7 +184,7 @@ namespace Users.Domain.Entities
 			string passwordHash,
 			string name,
 			int gender,
-			DateTime? birthday,
+			DateTime birthday,
 			bool admin,
 			Email email,
 			string createdBy,
@@ -191,7 +195,7 @@ namespace Users.Domain.Entities
 			string? revokedBy,
 			IEnumerable<Guid>? roleIds)
 		{
-			var user = new User(id, login, passwordHash, name, gender, email, createdBy, createdAt)
+			var user = new User(id, login, passwordHash, name, gender, birthday, email, createdBy, createdAt)
 			{
 				Birthday = birthday,
 				Admin = admin,

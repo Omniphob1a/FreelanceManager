@@ -3,48 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\outbox\\outboxpublisherhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\outbox\\outboxpublisherhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\kafkasettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\usersconsumerhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\usersconsumerhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentkafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\projects\\commands\\createproject\\createprojectcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\projects\\commands\\createproject\\createprojectcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\outbox\\outboxpublisherhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\outbox\\outboxpublisherhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\milestoneremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\milestoneremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectcreateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectcreateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\outboxmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\outboxmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\data\\projectsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\data\\projectsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\domainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,6 +29,174 @@
     {
       "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\common\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\common\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\entities\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectupdateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectupdateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectcreateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectcreateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\controllers\\projectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\controllers\\projectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\models\\requests\\updateprojectrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\models\\requests\\updateprojectrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\models\\requests\\createprojectrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\models\\requests\\createprojectrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\tagsaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\tagsaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\hostedservices\\incomingeventsprocessorhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\hostedservices\\incomingeventsprocessorhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectmemberremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectmemberremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectmemberrolechangeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectmemberrolechangeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectcompleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectcompleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectdeleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectdeleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectmemberaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectmemberaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ED24F6D-4ADA-4911-A4C8-66A6B7889847}|Projects.IntegrationTests\\Projects.IntegrationTests.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.integrationtests\\testhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ED24F6D-4ADA-4911-A4C8-66A6B7889847}|Projects.IntegrationTests\\Projects.IntegrationTests.csproj|solutionrelative:projects.integrationtests\\testhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\common\\pagination\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\common\\pagination\\paginatedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\models\\requests\\deletetagsrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\models\\requests\\deletetagsrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\repositories\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\repositories\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\repositories\\incomingeventstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\repositories\\incomingeventstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\repositories\\incomingeventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\repositories\\incomingeventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\userreadmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\userreadmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\projectmilestoneentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\projectmilestoneentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\projectmemberentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\projectmemberentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\projectentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\projectentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\projectattachmententity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\projectattachmententity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\outboxmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\outboxmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\repositories\\userreadrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\repositories\\userreadrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\models\\incomingevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\models\\incomingevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\usersconsumerhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\usersconsumerhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\infrastructureextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\ikafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\ikafkaproducer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\persistenceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\persistenceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\interfaces\\iincomingeventstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\interfaces\\iincomingeventstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\events\\iincomingeventprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\events\\iincomingeventprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\interfaces\\iincomingeventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\interfaces\\iincomingeventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\dtos\\incomingeventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\dtos\\incomingeventdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\kafka\\confluentconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\milestoneremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\milestoneremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\dtos\\projectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -67,10 +211,6 @@
       "RelativeMoniker": "D:0:0:{58A4C00F-1217-4121-92B4-D2E03F7DA3EE}|Projects.Infrastructure\\Projects.Infrastructure.csproj|solutionrelative:projects.infrastructure\\outbox\\outboxservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectcompleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectcompleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\projects\\commands\\addmember\\addmembercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\projects\\commands\\addmember\\addmembercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -79,36 +219,12 @@
       "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\tagsdeleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\tagsaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\tagsaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectupdateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectupdateddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectpublisheddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectpublisheddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectmemberrolechangeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectmemberrolechangeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectmemberremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectmemberremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectmemberaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectmemberaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\attachmentaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\attachmentaddeddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectdeleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\projectdeleteddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.domain\\events\\projectarchiveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -135,10 +251,6 @@
       "RelativeMoniker": "D:0:0:{69F1E2A0-3031-46CE-A2C4-E473616C73AA}|Projects.Domain\\Projects.Domain.csproj|solutionrelative:projects.domain\\events\\attachmentremoveddomainevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.application\\projects\\commands\\createproject\\createprojectcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5EE6F10F-FBD0-4606-BF38-7EF3B8587CF9}|Projects.Application\\Projects.Application.csproj|solutionrelative:projects.application\\projects\\commands\\createproject\\createprojectcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ED24F6D-4ADA-4911-A4C8-66A6B7889847}|Projects.IntegrationTests\\Projects.IntegrationTests.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.integrationtests\\createproject_outboxtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ED24F6D-4ADA-4911-A4C8-66A6B7889847}|Projects.IntegrationTests\\Projects.IntegrationTests.csproj|solutionrelative:projects.integrationtests\\createproject_outboxtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -151,20 +263,8 @@
       "RelativeMoniker": "D:0:0:{7ED24F6D-4ADA-4911-A4C8-66A6B7889847}|Projects.IntegrationTests\\Projects.IntegrationTests.csproj|solutionrelative:projects.integrationtests\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ED24F6D-4ADA-4911-A4C8-66A6B7889847}|Projects.IntegrationTests\\Projects.IntegrationTests.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.integrationtests\\testhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ED24F6D-4ADA-4911-A4C8-66A6B7889847}|Projects.IntegrationTests\\Projects.IntegrationTests.csproj|solutionrelative:projects.integrationtests\\testhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.api\\apiextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{05B7DB79-CE31-435D-A2E7-AD96C89A3F33}|Projects.Api\\Projects.Api.csproj|solutionrelative:projects.api\\apiextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.persistence\\persistenceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4DDEDACF-3FB8-49EA-A458-2D9AAADF4729}|Projects.Persistence\\Projects.Persistence.csproj|solutionrelative:projects.persistence\\persistenceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{100F87ED-50C9-4287-BE38-032E0A39490C}|Projects.Shared\\Projects.Shared.csproj|c:\\users\\volod\\source\\repos\\freelancemanager\\projects\\projects.shared\\projects.shared.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -210,205 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UsersConsumerHostedService.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAQwCYAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T12:07:55.974Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ConfluentKafkaProducer.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T02:28:12.253Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Common\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "Projects.Persistence\\Common\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Common\\UnitOfWork.cs",
-              "RelativeToolTip": "Projects.Persistence\\Common\\UnitOfWork.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAwwGYAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:40:16.891Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ProjectCompletedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:45:01.521Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "InfrastructureExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\InfrastructureExtensions.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAADwv1QAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T04:37:58.442Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
-              "RelativeDocumentMoniker": "Projects.Api\\appsettings.json",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
-              "RelativeToolTip": "Projects.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-28T02:28:56.153Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "KafkaSettings.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T02:28:41.104Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ConfluentConfigOptions.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T02:26:29.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "OutboxMessage.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
-              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\OutboxMessage.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
-              "RelativeToolTip": "Projects.Persistence\\Models\\OutboxMessage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:44:13.687Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProjectCreatedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:44:56.153Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "OutboxPublisherHostedService.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAswDYAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:41:54.582Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ProjectDto.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectDto.cs",
-              "RelativeDocumentMoniker": "Projects.Application\\DTOs\\ProjectDto.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectDto.cs",
-              "RelativeToolTip": "Projects.Application\\DTOs\\ProjectDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T07:23:34.973Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MilestoneRemovedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:45:02.519Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Project.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Entities\\Project.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Entities\\Project.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Entities\\Project.cs",
-              "RelativeToolTip": "Projects.Domain\\Entities\\Project.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAYwB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-27T14:00:33.397Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "AddMemberCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
-              "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
-              "RelativeToolTip": "Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAiwEcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T07:03:04.497Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "OutboxService.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxService.cs",
-              "RelativeDocumentMoniker": "Projects.Infrastructure\\Outbox\\OutboxService.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxService.cs",
-              "RelativeToolTip": "Projects.Infrastructure\\Outbox\\OutboxService.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAADEAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T07:21:44.433Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "DomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\DomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\DomainEvent.cs",
@@ -416,83 +318,168 @@
               "RelativeToolTip": "Projects.Domain\\Events\\DomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:39:55.651Z"
+              "WhenOpened": "2025-10-26T06:39:55.651Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "PublicUserDto.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\PublicUserDto.cs",
-              "RelativeDocumentMoniker": "Projects.Application\\DTOs\\PublicUserDto.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\PublicUserDto.cs",
-              "RelativeToolTip": "Projects.Application\\DTOs\\PublicUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "ProjectsDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\ProjectsDbContext.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Data\\ProjectsDbContext.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Data\\ProjectsDbContext.cs",
+              "RelativeToolTip": "Projects.Persistence\\Data\\ProjectsDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T07:23:27.334Z"
+              "WhenOpened": "2025-11-09T18:58:50.335Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "TagsDeletedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "CreateProjectCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
+              "RelativeToolTip": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAgwCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:55:08.162Z"
+              "WhenOpened": "2025-10-25T04:23:38.773Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "TagsAddedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ConfluentKafkaProducer.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentKafkaProducer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:54:48.258Z"
+              "WhenOpened": "2025-10-28T02:28:12.253Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 1,
+              "Title": "KafkaSettings.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T02:28:41.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OutboxPublisherHostedService.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAgwEYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:41:54.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Common\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Common\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Common\\UnitOfWork.cs",
+              "RelativeToolTip": "Projects.Persistence\\Common\\UnitOfWork.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAUwA8AAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:40:16.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Project.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Entities\\Project.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Entities\\Project.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Entities\\Project.cs",
+              "RelativeToolTip": "Projects.Domain\\Entities\\Project.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAkwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T14:00:33.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "ProjectUpdatedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectUpdatedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectUpdatedDomainEvent.cs",
               "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectUpdatedDomainEvent.cs",
               "RelativeToolTip": "Projects.Domain\\Events\\ProjectUpdatedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:54:40.673Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ProjectPublishedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:54:21.929Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "ProjectMemberRoleChangedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:53:51.343Z"
+              "WhenOpened": "2025-10-26T06:54:40.673Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 9,
+              "Title": "ProjectCreatedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:44:56.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProjectsController.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Controllers\\ProjectsController.cs",
+              "RelativeDocumentMoniker": "Projects.Api\\Controllers\\ProjectsController.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Controllers\\ProjectsController.cs",
+              "RelativeToolTip": "Projects.Api\\Controllers\\ProjectsController.cs",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAAALgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T19:50:19.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UpdateProjectRequest.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Models\\Requests\\UpdateProjectRequest.cs",
+              "RelativeDocumentMoniker": "Projects.Api\\Models\\Requests\\UpdateProjectRequest.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Models\\Requests\\UpdateProjectRequest.cs",
+              "RelativeToolTip": "Projects.Api\\Models\\Requests\\UpdateProjectRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T19:50:50.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CreateProjectRequest.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Models\\Requests\\CreateProjectRequest.cs",
+              "RelativeDocumentMoniker": "Projects.Api\\Models\\Requests\\CreateProjectRequest.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Models\\Requests\\CreateProjectRequest.cs",
+              "RelativeToolTip": "Projects.Api\\Models\\Requests\\CreateProjectRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T19:50:53.828Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "ProjectMemberRemovedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRemovedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberRemovedDomainEvent.cs",
@@ -500,23 +487,12 @@
               "RelativeToolTip": "Projects.Domain\\Events\\ProjectMemberRemovedDomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:53:30.673Z"
+              "WhenOpened": "2025-10-26T06:53:30.673Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "ProjectMemberAddedDomainEvent.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
-              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
-              "RelativeToolTip": "Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:52:41.984Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 18,
               "Title": "ProjectDeletedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectDeletedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectDeletedDomainEvent.cs",
@@ -528,7 +504,489 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ProjectCompletedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\ProjectCompletedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:45:01.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IncomingEventsProcessorHostedService.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\HostedServices\\IncomingEventsProcessorHostedService.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\HostedServices\\IncomingEventsProcessorHostedService.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\HostedServices\\IncomingEventsProcessorHostedService.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\HostedServices\\IncomingEventsProcessorHostedService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:56:01.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TagsAddedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\TagsAddedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:54:48.258Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProjectMemberRoleChangedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\ProjectMemberRoleChangedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:53:51.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ProjectMemberAddedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\ProjectMemberAddedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:52:41.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Projects.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\appsettings.json",
+              "RelativeToolTip": "Projects.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-28T02:28:56.153Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TestHelpers.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\TestHelpers.cs",
+              "RelativeDocumentMoniker": "Projects.IntegrationTests\\TestHelpers.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\TestHelpers.cs",
+              "RelativeToolTip": "Projects.IntegrationTests\\TestHelpers.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAlwBgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T03:53:28.932Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Services\\UserService.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Services\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:50:58.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "PaginatedResult.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Common\\Pagination\\PaginatedResult.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\Common\\Pagination\\PaginatedResult.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Common\\Pagination\\PaginatedResult.cs",
+              "RelativeToolTip": "Projects.Application\\Common\\Pagination\\PaginatedResult.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:50:56.827Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DeleteTagsRequest.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Models\\Requests\\DeleteTagsRequest.cs",
+              "RelativeDocumentMoniker": "Projects.Api\\Models\\Requests\\DeleteTagsRequest.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Models\\Requests\\DeleteTagsRequest.cs",
+              "RelativeToolTip": "Projects.Api\\Models\\Requests\\DeleteTagsRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:50:56.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ProjectRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\ProjectRepository.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Repositories\\ProjectRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\ProjectRepository.cs",
+              "RelativeToolTip": "Projects.Persistence\\Repositories\\ProjectRepository.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:50:49.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "ProjectMilestoneEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectMilestoneEntity.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\ProjectMilestoneEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectMilestoneEntity.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\ProjectMilestoneEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:41:51.115Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ProjectMemberEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectMemberEntity.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\ProjectMemberEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectMemberEntity.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\ProjectMemberEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:41:52.842Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ProjectEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectEntity.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\ProjectEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectEntity.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\ProjectEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:41:55.231Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 28,
+              "Title": "UserReadModel.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\UserReadModel.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\UserReadModel.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\UserReadModel.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\UserReadModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:41:50.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IncomingEventRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\IncomingEventRepository.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Repositories\\IncomingEventRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\IncomingEventRepository.cs",
+              "RelativeToolTip": "Projects.Persistence\\Repositories\\IncomingEventRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAIwCYAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:58:10.298Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "IncomingEventStore.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\IncomingEventStore.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Repositories\\IncomingEventStore.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\IncomingEventStore.cs",
+              "RelativeToolTip": "Projects.Persistence\\Repositories\\IncomingEventStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:59:33.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ProjectAttachmentEntity.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectAttachmentEntity.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\ProjectAttachmentEntity.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\ProjectAttachmentEntity.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\ProjectAttachmentEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:41:55.74Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "OutboxMessage.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\OutboxMessage.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\OutboxMessage.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\OutboxMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:44:13.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "UserReadRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\UserReadRepository.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Repositories\\UserReadRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Repositories\\UserReadRepository.cs",
+              "RelativeToolTip": "Projects.Persistence\\Repositories\\UserReadRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T22:43:25.59Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "IncomingEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\IncomingEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\Models\\IncomingEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\Models\\IncomingEvent.cs",
+              "RelativeToolTip": "Projects.Persistence\\Models\\IncomingEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:59:03.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "UsersConsumerHostedService.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\UsersConsumerHostedService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T12:07:55.974Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "IKafkaProducer.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\IKafkaProducer.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\IKafkaProducer.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\IKafkaProducer.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\IKafkaProducer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T19:01:42.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "InfrastructureExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\InfrastructureExtensions.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T04:37:58.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "PersistenceExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\PersistenceExtensions.cs",
+              "RelativeDocumentMoniker": "Projects.Persistence\\PersistenceExtensions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\PersistenceExtensions.cs",
+              "RelativeToolTip": "Projects.Persistence\\PersistenceExtensions.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T04:38:14.924Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "IIncomingEventStore.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Interfaces\\IIncomingEventStore.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\Interfaces\\IIncomingEventStore.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Interfaces\\IIncomingEventStore.cs",
+              "RelativeToolTip": "Projects.Application\\Interfaces\\IIncomingEventStore.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:55:00.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IIncomingEventProcessor.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Events\\IIncomingEventProcessor.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\Events\\IIncomingEventProcessor.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Events\\IIncomingEventProcessor.cs",
+              "RelativeToolTip": "Projects.Application\\Events\\IIncomingEventProcessor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:57:35.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "IncomingEventDto.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\IncomingEventDto.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\DTOs\\IncomingEventDto.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\IncomingEventDto.cs",
+              "RelativeToolTip": "Projects.Application\\DTOs\\IncomingEventDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:55:27.95Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "IIncomingEventRepository.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Interfaces\\IIncomingEventRepository.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\Interfaces\\IIncomingEventRepository.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Interfaces\\IIncomingEventRepository.cs",
+              "RelativeToolTip": "Projects.Application\\Interfaces\\IIncomingEventRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T18:55:08.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "ConfluentConfigOptions.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T02:26:29.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Projects.Api\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Projects.Api\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-06T12:37:27.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Projects.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
+              "RelativeToolTip": "Projects.Api\\Program.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAIwHUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T05:01:48.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Dockerfile",
+              "RelativeDocumentMoniker": "Projects.Api\\Dockerfile",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Dockerfile",
+              "RelativeToolTip": "Projects.Api\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-06T13:27:01.198Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "ProjectDto.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectDto.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\DTOs\\ProjectDto.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\ProjectDto.cs",
+              "RelativeToolTip": "Projects.Application\\DTOs\\ProjectDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T07:23:34.973Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "MilestoneRemovedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:45:02.519Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "AddMemberCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
+              "RelativeToolTip": "Projects.Application\\Projects\\Commands\\AddMember\\AddMemberCommandHandler.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAiwEcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T07:03:04.497Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "OutboxService.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxService.cs",
+              "RelativeDocumentMoniker": "Projects.Infrastructure\\Outbox\\OutboxService.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Infrastructure\\Outbox\\OutboxService.cs",
+              "RelativeToolTip": "Projects.Infrastructure\\Outbox\\OutboxService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAADEAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T07:21:44.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "PublicUserDto.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\PublicUserDto.cs",
+              "RelativeDocumentMoniker": "Projects.Application\\DTOs\\PublicUserDto.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\DTOs\\PublicUserDto.cs",
+              "RelativeToolTip": "Projects.Application\\DTOs\\PublicUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T07:23:27.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "TagsDeletedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\TagsDeletedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:55:08.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ProjectPublishedDomainEvent.cs",
+              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
+              "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
+              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
+              "RelativeToolTip": "Projects.Domain\\Events\\ProjectPublishedDomainEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T06:54:21.929Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
               "Title": "MilestoneRescheduledDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneRescheduledDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneRescheduledDomainEvent.cs",
@@ -540,7 +998,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 56,
               "Title": "ProjectArchivedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\ProjectArchivedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\ProjectArchivedDomainEvent.cs",
@@ -552,7 +1010,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 55,
               "Title": "AttachmentAddedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\AttachmentAddedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\AttachmentAddedDomainEvent.cs",
@@ -564,7 +1022,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 58,
               "Title": "MilestoneEscalatedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneEscalatedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneEscalatedDomainEvent.cs",
@@ -576,7 +1034,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 59,
               "Title": "MilestoneCompletedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneCompletedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneCompletedDomainEvent.cs",
@@ -588,7 +1046,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 60,
               "Title": "MilestoneAddedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\MilestoneAddedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\MilestoneAddedDomainEvent.cs",
@@ -600,7 +1058,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 61,
               "Title": "AttachmentRemovedDomainEvent.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\Events\\AttachmentRemovedDomainEvent.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\Events\\AttachmentRemovedDomainEvent.cs",
@@ -612,31 +1070,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
-              "RelativeDocumentMoniker": "Projects.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\Program.cs",
-              "RelativeToolTip": "Projects.Api\\Program.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAABoAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T05:01:48.065Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "PersistenceExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\PersistenceExtensions.cs",
-              "RelativeDocumentMoniker": "Projects.Persistence\\PersistenceExtensions.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Persistence\\PersistenceExtensions.cs",
-              "RelativeToolTip": "Projects.Persistence\\PersistenceExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T04:38:14.924Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 63,
               "Title": "OutboxPublisher_PublishesTests.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\OutboxPublisher_PublishesTests.cs",
               "RelativeDocumentMoniker": "Projects.IntegrationTests\\OutboxPublisher_PublishesTests.cs",
@@ -648,19 +1082,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "TestHelpers.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\TestHelpers.cs",
-              "RelativeDocumentMoniker": "Projects.IntegrationTests\\TestHelpers.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\TestHelpers.cs",
-              "RelativeToolTip": "Projects.IntegrationTests\\TestHelpers.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAgwEUAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T03:53:28.932Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 62,
               "Title": "CreateProject_OutboxTests.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\CreateProject_OutboxTests.cs",
               "RelativeDocumentMoniker": "Projects.IntegrationTests\\CreateProject_OutboxTests.cs",
@@ -672,7 +1094,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 66,
               "Title": "Projects.Shared.csproj",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Shared\\Projects.Shared.csproj",
               "RelativeDocumentMoniker": "Projects.Shared\\Projects.Shared.csproj",
@@ -684,19 +1106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "CreateProjectCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
-              "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
-              "ToolTip": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
-              "RelativeToolTip": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommandHandler.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAADgvyUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T04:23:38.773Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 65,
               "Title": "ApiExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Api\\ApiExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Api\\ApiExtensions.cs",
@@ -708,7 +1118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 64,
               "Title": "AssemblyInfo.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.IntegrationTests\\AssemblyInfo.cs",
               "RelativeDocumentMoniker": "Projects.IntegrationTests\\AssemblyInfo.cs",
@@ -720,7 +1130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 67,
               "Title": "CreateProjectCommand.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Projects\\Commands\\CreateProject\\CreateProjectCommand.cs",
@@ -732,7 +1142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 68,
               "Title": "Category.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Domain\\ValueObjects\\Category.cs",
               "RelativeDocumentMoniker": "Projects.Domain\\ValueObjects\\Category.cs",
@@ -744,7 +1154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 69,
               "Title": "ApplicationExtensions.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\ApplicationExtensions.cs",
               "RelativeDocumentMoniker": "Projects.Application\\ApplicationExtensions.cs",
@@ -756,7 +1166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 70,
               "Title": "TagParserService.cs",
               "DocumentMoniker": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Projects\\Projects.Application\\Services\\TagParserService.cs",
               "RelativeDocumentMoniker": "Projects.Application\\Services\\TagParserService.cs",

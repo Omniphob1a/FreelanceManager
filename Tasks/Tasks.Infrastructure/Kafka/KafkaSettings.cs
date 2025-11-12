@@ -8,7 +8,7 @@ namespace Tasks.Infrastructure.Kafka
 {
 	public class KafkaSettings
 	{
-		public string BootstrapServers { get; set; } = string.Empty;
+		public string BootstrapServers { get; set; }
 		public string GroupId { get; set; } = string.Empty;
 		public string AutoOffsetReset { get; set; } = "Earliest";
 		public bool EnableAutoCommit { get; set; } = false;
@@ -16,6 +16,7 @@ namespace Tasks.Infrastructure.Kafka
 		public string SaslMechanism { get; set; } = string.Empty;
 		public string SaslUsername { get; set; } = string.Empty;
 		public string SaslPassword { get; set; } = string.Empty;
+		public string? SslCaLocation { get; set; }
 		public ConfluentConfigOptions Options { get; init; } = new();
 
 	}

@@ -15,12 +15,14 @@ namespace Users.Application.Users.Commands.UpdateUser
 		private readonly IUserRepository _userRepo;
 		private readonly IOutboxService _outboxService;
 		private readonly IMapper _mapper;
+		private readonly IUnitOfWork _unitOfWork;
 
-		public UpdateUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper)
+		public UpdateUserCommandHandler(IUserRepository userRepo, IOutboxService outboxService, IMapper mapper, IUnitOfWork unitOfWork)
 		{
 			_outboxService = outboxService;
 			_userRepo = userRepo;
 			_mapper = mapper;
+			_unitOfWork = unitOfWork;
 		}
 
 		public async Task<Result> Handle(UpdateUserRequest request, CancellationToken ct)
@@ -41,12 +43,11 @@ namespace Users.Application.Users.Commands.UpdateUser
 					request.Command.ModifiedBy
 				);
 
-				var dto = _mapper.Map<PublicUserDto>(user);
-				var topic = "users";
-				var key = user.Id.ToString();
-				await _outboxService.Add(dto, topic, key, ct);
-
 				await _userRepo.Update(user, ct);
+				_unitOfWork.TrackEntity(user);
+
+				await _unitOfWork.SaveChangesAsync();
+
 				return Result.Ok();
 			}
 			catch (Exception ex)

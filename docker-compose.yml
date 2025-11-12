@@ -15,8 +15,12 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__UsersDbContext=Server=users-db;Port=5432;Database=users;User Id=postgres;Password=123;
       - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
-      - Kafka__BootstrapServers=kafka:9092
-      - Kafka__GroupId=users-service
+      - Kafka__BootstrapServers=d42dfhmc4cape6v45eh0.any.eu-central-1.mpx.prd.cloud.redpanda.com:9092
+      - Kafka__SecurityProtocol=SaslSsl
+      - Kafka__SaslMechanism=ScramSha256
+      - Kafka__SaslUsername=Vladimir3
+      - Kafka__SaslPassword=Namoembestijemmoulenerouje2424
+      - Kafka__SslCaLocation=/etc/ssl/certs/ca-certificates.crt
     volumes:
       - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
@@ -43,8 +47,12 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__ProjectsDbContext=Server=projects-db;Port=5432;Database=projects;User Id=postgres;Password=123;
       - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
-      - Kafka__BootstrapServers=kafka:9092
-      - Kafka__GroupId=projects-service
+      - Kafka__BootstrapServers=d42dfhmc4cape6v45eh0.any.eu-central-1.mpx.prd.cloud.redpanda.com:9092
+      - Kafka__SecurityProtocol=SaslSsl
+      - Kafka__SaslMechanism=ScramSha256
+      - Kafka__SaslUsername=Vladimir
+      - Kafka__SaslPassword=nTwiV3sjtEuqzEZd9FQ3qMUhSuhOLJ
+      - Kafka__SslCaLocation=/etc/ssl/certs/ca-certificates.crt
     volumes:
       - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
@@ -65,24 +73,23 @@ services:
       context: ./Tasks
       dockerfile: Tasks.Api/Dockerfile
     ports:
-      - "5003:8080"
+      - "5003:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__ProjectTasksDbContext=Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;
-      - Kafka__BootstrapServers=kafka:9092
-      - Kafka__GroupId=tasks-service
+      - Kafka__BootstrapServers=d42dfhmc4cape6v45eh0.any.eu-central-1.mpx.prd.cloud.redpanda.com:9092
+      - Kafka__SecurityProtocol=SaslSsl
+      - Kafka__SaslMechanism=ScramSha256
+      - Kafka__SaslUsername=Vladimir2
+      - Kafka__SaslPassword=Namoembestijemmoulenerouje2424
+      - Kafka__SslCaLocation=/etc/ssl/certs/ca-certificates.crt
     volumes:
       - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
     depends_on:
-      projects-db:
+      tasks-db:
         condition: service_healthy
-      hangfire-db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      kafka:
-        condition: service_healthy
+
 
   # -------------------
   # Gateway

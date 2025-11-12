@@ -28,7 +28,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Tasks.Infrastructure.Services;
-using Users.Infrastructure.Kafka;
 
 namespace Projects.Infrastructure
 {
@@ -86,7 +85,7 @@ namespace Projects.Infrastructure
 			services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
 			services.AddScoped<IFileStorage, S3FileStorage>();
 
-			services.AddHostedService<UsersConsumerHostedService>();
+			//services.AddHostedService<UsersConsumerHostedService>();
 
 			services.AddHostedService<OutboxPublisherHostedService>();
 			var kafkaSection = configuration.GetSection("Kafka");

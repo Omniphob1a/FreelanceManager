@@ -2,11 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
-using Tasks.Application.Events;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Tasks.Application.Interfaces;
-using Tasks.Persistence.Data;
-using Tasks.Persistence.Models.ReadModels;
 
 namespace Tasks.Infrastructure.Kafka
 {
@@ -17,93 +16,233 @@ namespace Tasks.Infrastructure.Kafka
 		private readonly KafkaSettings _settings;
 
 		private IConsumer<string, string?>? _consumer;
+		private string? _effectiveGroup;
 
 		private const string Topic = "projects";
-		private static readonly TimeSpan ConsumeTimeout = TimeSpan.FromMilliseconds(500);
+		private static readonly TimeSpan ConsumeTimeout = TimeSpan.FromMilliseconds(1000);
 
 		public ProjectsConsumerHostedService(
 			ILogger<ProjectsConsumerHostedService> logger,
 			IServiceProvider sp,
 			KafkaSettings settings)
 		{
-			_logger = logger;
-			_sp = sp;
-			_settings = settings;
+			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			_sp = sp ?? throw new ArgumentNullException(nameof(sp));
+			_settings = settings ?? new KafkaSettings();
 		}
 
 		public override Task StartAsync(CancellationToken cancellationToken)
 		{
-			_logger.LogInformation(
-				"Producer effective: Bootstrap={Bootstrap}, User={User}, EnableIdempotence={EnableIdempotence}",
-				_settings.BootstrapServers,
-				_settings.SaslUsername,
-				_settings.Options?.EnableIdempotence);
-			var effectiveGroup = string.IsNullOrWhiteSpace(_settings.GroupId)
+			_effectiveGroup = string.IsNullOrWhiteSpace(_settings.GroupId)
 				? $"tasks-{Topic}-{Guid.NewGuid():n}".Substring(0, 20)
 				: _settings.GroupId;
 
-			var cfg = new ConsumerConfig
-			{
-				BootstrapServers = _settings.BootstrapServers,
-				GroupId = _settings.GroupId,
-				AutoOffsetReset = AutoOffsetReset.Earliest,
-				EnableAutoCommit = false,
-				EnablePartitionEof = false,
-				SecurityProtocol = Enum.Parse<SecurityProtocol>(_settings.SecurityProtocol),
-				SaslMechanism = Enum.Parse<SaslMechanism>(_settings.SaslMechanism),
-				SaslUsername = _settings.SaslUsername,
-				SaslPassword = _settings.SaslPassword
-			};
-
-			_consumer = new ConsumerBuilder<string, string?>(cfg)
-				.SetErrorHandler((_, e) =>
-					_logger.LogError("Kafka consumer error: {Reason} (code: {Code})", e.Reason, e.Code))
-				.SetPartitionsAssignedHandler((c, partitions) =>
-					_logger.LogInformation("Partitions assigned: {@Partitions}", partitions))
-				.SetPartitionsRevokedHandler((c, partitions) =>
-					_logger.LogInformation("Partitions revoked: {@Partitions}", partitions))
-				.Build();
-
+			_logger.LogInformation("Projects consumer group = {Group} (consumer will be created in ExecuteAsync)", _effectiveGroup);
 			return base.StartAsync(cancellationToken);
 		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 		{
+			// Не блокируем StartAsync — даём хосту завершить старт
+			await Task.Yield();
+
+			// Короткая пауза, чтобы другие HostedServices/миграции успели отработать.
+			// Это снижает шанс коллизий на старте (особенно при внешних зависимостях).
+			try { await Task.Delay(TimeSpan.FromMilliseconds(200), stoppingToken); } catch { /* ignore */ }
+
+			var cfg = BuildConsumerConfig();
+
+			// Попытка создать consumer с ретраями, чтобы Host стартовал даже если Kafka временно недоступна.
+			var attempt = 0;
+			while (!stoppingToken.IsCancellationRequested)
+			{
+				try
+				{
+					_consumer = new ConsumerBuilder<string, string?>(cfg)
+						.SetErrorHandler((_, e) =>
+							_logger.LogError("Kafka consumer error: {Reason} (code: {Code})", e.Reason, e.Code))
+						.SetPartitionsAssignedHandler((c, partitions) =>
+						{
+							_logger.LogInformation("Partitions assigned: {@Partitions}", partitions);
+						})
+						.SetPartitionsRevokedHandler((c, partitions) =>
+						{
+							_logger.LogInformation("Partitions revoked: {@Partitions}", partitions);
+						})
+						.SetLogHandler((c, logMessage) =>
+						{
+							_logger.LogDebug("librdkafka {Level}/{Name}: {Message}", logMessage.Level, logMessage.Name, logMessage.Message);
+						})
+						.Build();
+
+					_logger.LogInformation("Projects consumer created; group = {Group}", _effectiveGroup);
+					break;
+				}
+				catch (Exception ex)
+				{
+					attempt++;
+					_logger.LogError(ex, "Failed to create Kafka consumer — retrying in 5s (attempt {Attempt})", attempt);
+					try { await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken); } catch { /* ignore cancellation */ }
+				}
+			}
+
 			if (_consumer == null)
 			{
-				_logger.LogError("Consumer was not initialized");
+				_logger.LogError("Consumer was not created; ExecuteAsync exiting.");
 				return;
 			}
 
 			try
 			{
-				_consumer.Subscribe(Topic);
-				_logger.LogInformation("Projects consumer subscribed to {Topic}", Topic);
-			}
-			catch (Exception ex)
-			{
-				_logger.LogError(ex, "Failed to subscribe to topic {Topic}.", Topic);
-			}
-
-			while (!stoppingToken.IsCancellationRequested)
-			{
-				var cr = _consumer.Consume(ConsumeTimeout);
-				if (cr == null) continue;
-
-				using var scope = _sp.CreateScope();
-				var store = scope.ServiceProvider.GetRequiredService<IIncomingEventStore>();
-
 				try
 				{
-					await store.SaveAsync(cr.Topic, cr.Message?.Key, cr.Message?.Value, stoppingToken);
-					SafeCommit(cr);
+					_consumer.Subscribe(Topic);
+					_logger.LogInformation("Projects consumer subscribed to {Topic}", Topic);
 				}
 				catch (Exception ex)
 				{
-					_logger.LogError(ex, "Failed to save incoming project event");
-					await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken);
+					_logger.LogError(ex, "Failed to subscribe to topic {Topic}. Subscription will be retried inside loop.", Topic);
+				}
+
+				// Основной loop: используем cancellation-aware Consume, если он доступен.
+				while (!stoppingToken.IsCancellationRequested)
+				{
+					// Если consumer не подписан (например, Subscribe выбросил), пробуем подписаться снова.
+					if (_consumer.Subscription == null || _consumer.Subscription.Count == 0)
+					{
+						try
+						{
+							_consumer.Subscribe(Topic);
+						}
+						catch (Exception ex)
+						{
+							_logger.LogWarning(ex, "Retry subscribe failed; backing off 2s");
+							try { await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken); } catch { }
+							continue;
+						}
+					}
+
+					try
+					{
+						ConsumeResult<string, string?>? cr = null;
+
+						// Prefer cancellation-aware Consume if supported: this will throw OperationCanceledException on cancellation.
+						// Confluent.Kafka has overload Consume(CancellationToken) on modern versions; use it if available.
+						try
+						{
+							// call via dynamic to gracefully fallback on older client without this overload
+							// (this avoids compile-time conditionals; if overload missing, dynamic will throw and we'll fallback).
+							dynamic dyn = _consumer;
+							cr = dyn.Consume(stoppingToken);
+						}
+						catch
+						{
+							// fallback to timeout-based Consume
+							cr = _consumer.Consume(ConsumeTimeout);
+						}
+
+						if (cr == null) continue;
+
+						using var scope = _sp.CreateScope();
+						var store = scope.ServiceProvider.GetRequiredService<IIncomingEventStore>();
+
+						try
+						{
+							// сохраняем (твоя логика)
+							await store.SaveAsync(cr.Topic, cr.Message?.Key, cr.Message?.Value, stoppingToken);
+
+							// коммитим безопасно
+							SafeCommit(cr);
+						}
+						catch (Exception ex)
+						{
+							_logger.LogError(ex, "Failed to save incoming project event; will wait and continue");
+							try { await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken); } catch { /* ignore */ }
+						}
+					}
+					catch (ConsumeException ex)
+					{
+						_logger.LogError(ex, "Kafka consume error; code={Code}, reason={Reason}", ex.Error?.Code, ex.Error?.Reason);
+						try { await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken); } catch { }
+					}
+					catch (OperationCanceledException)
+					{
+						// корректный shutdown
+						break;
+					}
+					catch (Exception ex)
+					{
+						_logger.LogError(ex, "Projects consumer loop error");
+						try { await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken); } catch { }
+					}
 				}
 			}
+			finally
+			{
+				if (_consumer != null)
+				{
+					try
+					{
+						_logger.LogInformation("Closing Kafka consumer...");
+						_consumer.Close(); // попытка корректного выхода из группы и commit
+					}
+					catch (Exception ex)
+					{
+						_logger.LogWarning(ex, "Error while closing Kafka consumer");
+					}
+					finally
+					{
+						_consumer.Dispose();
+						_consumer = null;
+					}
+				}
+			}
+		}
+
+		private ConsumerConfig BuildConsumerConfig()
+		{
+			var effectiveGroup = _effectiveGroup ?? (_settings.GroupId ?? $"tasks-{Topic}-{Guid.NewGuid():n}".Substring(0, 20));
+
+			var cfg = new ConsumerConfig
+			{
+				BootstrapServers = _settings.BootstrapServers,
+				GroupId = effectiveGroup,
+				AutoOffsetReset = AutoOffsetReset.Earliest,
+				EnableAutoCommit = false,
+				EnablePartitionEof = false,
+
+				// Таймауты / устойчивость — разумные значения
+				SessionTimeoutMs = 30000,
+				HeartbeatIntervalMs = 10000,
+				ReconnectBackoffMs = 1000,
+				ReconnectBackoffMaxMs = 10000,
+				StatisticsIntervalMs = 60000,
+				MaxPollIntervalMs = 300000
+			};
+
+			// Безопасно парсим SecurityProtocol / SaslMechanism (если не заданы — не устанавливаем)
+			if (!string.IsNullOrWhiteSpace(_settings.SecurityProtocol) &&
+				Enum.TryParse<SecurityProtocol>(_settings.SecurityProtocol, true, out var secProto))
+			{
+				cfg.SecurityProtocol = secProto;
+			}
+
+			if (!string.IsNullOrWhiteSpace(_settings.SaslMechanism) &&
+				Enum.TryParse<SaslMechanism>(_settings.SaslMechanism, true, out var saslMech))
+			{
+				cfg.SaslMechanism = saslMech;
+			}
+
+			if (!string.IsNullOrWhiteSpace(_settings.SaslUsername)) cfg.SaslUsername = _settings.SaslUsername;
+			if (!string.IsNullOrWhiteSpace(_settings.SaslPassword)) cfg.SaslPassword = _settings.SaslPassword;
+
+			// опции, которые могут отсутствовать в типизированном API — ставим через Set
+			try { if (!string.IsNullOrWhiteSpace(_settings.SslCaLocation)) cfg.Set("ssl.ca.location", _settings.SslCaLocation); } catch { }
+			try { cfg.Set("socket.keepalive.enable", "true"); } catch { }
+			try { cfg.Set("request.timeout.ms", "60000"); } catch { }
+			try { cfg.Set("enable.auto.offset.store", "false"); } catch { } // управлять коммитами вручную
+
+			return cfg;
 		}
 
 		private void SafeCommit(ConsumeResult<string, string?> cr)
@@ -125,7 +264,7 @@ namespace Tasks.Infrastructure.Kafka
 			{
 				try { _consumer.Close(); }
 				catch (Exception ex) { _logger.LogWarning(ex, "Error while closing Kafka consumer"); }
-				finally { _consumer.Dispose(); }
+				finally { _consumer.Dispose(); _consumer = null; }
 			}
 			base.Dispose();
 		}

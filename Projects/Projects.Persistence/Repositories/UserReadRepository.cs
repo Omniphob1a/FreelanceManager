@@ -60,7 +60,7 @@ namespace Projects.Persistence.Data.Repositories
 
 			try
 			{
-				return await _context.Users
+				return await _context.Set<UserReadModel>()
 					.AsNoTracking()
 					.Where(u => userIds.Contains(u.Id))
 					.Select(u => new PublicUserDto

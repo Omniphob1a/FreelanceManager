@@ -20,19 +20,22 @@ namespace Users.Application.Users.Commands.RegisterUser
 		private readonly IJwtTokenGenerator _jwtGen;
 		private readonly IOutboxService _outboxService;
 		private readonly IMapper _mapper;
+		private readonly IUnitOfWork _unitOfWork;
 
 		public RegisterUserCommandHandler(
 			IUserRepository userRepo,
 			IJwtTokenGenerator jwtGen,
 			IRoleRepository roleRepo,
 			IOutboxService outboxService,
-			IMapper mapper)
+			IMapper mapper,
+			IUnitOfWork unitOfWork)
 		{
 			_userRepo = userRepo;
 			_jwtGen = jwtGen;
 			_roleRepo = roleRepo;
 			_outboxService = outboxService;
 			_mapper = mapper;
+			_unitOfWork = unitOfWork;
 		}
 
 		public async Task<Result<AuthenticationResult>> Handle(
@@ -43,9 +46,7 @@ namespace Users.Application.Users.Commands.RegisterUser
 				SHA256.Create()
 					  .ComputeHash(Encoding.UTF8.GetBytes(cmd.Password)));
 
-			DateTime? birthdayUtc = cmd.Birthday.HasValue
-				? DateTime.SpecifyKind(cmd.Birthday.Value, DateTimeKind.Utc)
-				: (DateTime?)null;
+			DateTime birthdayUtc = DateTime.SpecifyKind(cmd.Birthday, DateTimeKind.Utc);
 
 			var emailObj = new Email(cmd.Email);
 
@@ -57,14 +58,10 @@ namespace Users.Application.Users.Commands.RegisterUser
 					passwordHash: hash,
 					name: cmd.Name,
 					gender: cmd.Gender,
+					birthday: birthdayUtc,
 					email: emailObj,
 					createdBy: cmd.CreatedBy
 				);
-
-				if (birthdayUtc.HasValue)
-				{
-					user.UpdateProfile(cmd.Name, cmd.Gender, birthdayUtc, emailObj, cmd.CreatedBy);
-				}
 
 				if (cmd.IsAdmin)
 				{
@@ -79,13 +76,6 @@ namespace Users.Application.Users.Commands.RegisterUser
 				return Result.Fail(new Error(ex.Message));
 			}
 
-
-
-			var dto = _mapper.Map<PublicUserDto>(user);
-			var topic = "users";
-			var key = user.Id.ToString();
-			await _outboxService.Add(dto, topic, key, ct);
-
 			await _userRepo.Add(user, ct);
 
 			var roleNames = await _roleRepo.GetRoleNamesByIds(user.RoleIds, ct);
@@ -94,6 +84,10 @@ namespace Users.Application.Users.Commands.RegisterUser
 				user.Id,
 				user.Login,
 				roleNames);
+
+			_unitOfWork.TrackEntity(user);
+			await _unitOfWork.SaveChangesAsync();
+
 
 			return Result.Ok(new AuthenticationResult
 			{

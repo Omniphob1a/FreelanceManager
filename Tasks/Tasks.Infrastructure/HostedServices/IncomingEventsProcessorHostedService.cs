@@ -46,7 +46,7 @@ namespace Tasks.Infrastructure.HostedServices
 					{
 						try
 						{
-							var handler = processors.FirstOrDefault(p => p.SupportedEventTypes.Contains(ev.EventType));
+							var handler = processors.FirstOrDefault(p => p.SupportedEventTypes.Any(prefix => ev.EventType.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)));
 							if (handler == null)
 							{
 								_logger.LogWarning("No handler for {EventType}", ev.EventType);

@@ -28,11 +28,15 @@ RUN dotnet publish -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 
+# Устанавливаем корневые сертификаты, чтобы путь /etc/ssl/certs/ca-certificates.crt существовал
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
 # Копируем опубликованные файлы из build stage
 COPY --from=build /app/publish .
 
-# EXPOSE полезно для документации, Render использует runtime PORT
-EXPOSE 10000
+# Документируем порт (в compose вы пробрасываете 80)
+EXPOSE 80
 
-# ENTRYPOINT для Render: подставляем динамический PORT
-ENTRYPOINT ["sh", "-c", "echo [DEBUG] Starting Tasks.Api on port $PORT; ASPNETCORE_URLS=http://0.0.0.0:$PORT dotnet Tasks.Api.dll"]
+ENTRYPOINT ["dotnet", "Tasks.Api.dll"]

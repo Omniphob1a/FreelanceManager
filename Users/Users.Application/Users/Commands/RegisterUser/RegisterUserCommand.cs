@@ -9,7 +9,7 @@ namespace Users.Application.Users.Commands.RegisterUser
 	string Password,
 	string Name,
 	int Gender,
-	DateTime? Birthday,
+	DateTime Birthday,
 	string Email,
 	bool IsAdmin,
 	string CreatedBy

@@ -12,6 +12,6 @@ namespace Tasks.Persistence.Models.ReadModels
 		public string Name { get; set; } = "";
 		public string Login { get; set; } = "";
 		public int Gender { get; set; }
-		public DateTime? Birthday { get; set; }
+		public DateTime Birthday { get; set; }
 	}
 }

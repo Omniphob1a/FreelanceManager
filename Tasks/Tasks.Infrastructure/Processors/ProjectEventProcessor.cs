@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Tasks.Application.DTOs;
 using Tasks.Application.Events;
 using Tasks.Persistence.Data;
@@ -13,10 +13,10 @@ namespace Tasks.Infrastructure.Processors
 {
 	public class ProjectEventsProcessor : IIncomingEventProcessor
 	{
-		public IReadOnlyCollection<string> SupportedEventTypes { get; } =
-			new[] { "projects.created", "projects.updated", "projects.deleted" };
-
 		private readonly ProjectTasksDbContext _db;
+
+		public IReadOnlyCollection<string> SupportedEventTypes { get; } =
+			new[] { "projects.created", "projects.updated", "projects.removed" };
 
 		public ProjectEventsProcessor(ProjectTasksDbContext db) => _db = db;
 
@@ -25,15 +25,54 @@ namespace Tasks.Infrastructure.Processors
 			if (string.IsNullOrWhiteSpace(incoming.Payload))
 				throw new InvalidOperationException("Empty payload");
 
-			var raw = JsonSerializer.Deserialize<ProjectPayload>(incoming.Payload!, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-			if (raw == null) throw new InvalidOperationException("Invalid payload");
+			using var doc = JsonDocument.Parse(incoming.Payload!);
+			var root = doc.RootElement;
+
+			// 🔥 AggregateId нужно получить обязательно
+			Guid aggregateId;
+
+			if (root.TryGetProperty("aggregateId", out var aggProp) &&
+				aggProp.ValueKind == JsonValueKind.String &&
+				Guid.TryParse(aggProp.GetString(), out var parsedAgg))
+			{
+				aggregateId = parsedAgg;
+			}
+			else if (root.TryGetProperty("projectId", out var projProp) &&
+					 projProp.ValueKind == JsonValueKind.String &&
+					 Guid.TryParse(projProp.GetString(), out var parsedProj))
+			{
+				aggregateId = parsedProj;
+			}
+			else
+			{
+				throw new InvalidOperationException("AggregateId missing");
+			}
+
+			// 🔥 Флаги удаления
+			bool isDelete = false;
+
+			if (incoming.IsTombstone)
+				isDelete = true;
+
+			if (root.TryGetProperty("isTombstone", out var tomb) &&
+				tomb.ValueKind == JsonValueKind.True)
+			{
+				isDelete = true;
+			}
+
+			if (root.TryGetProperty("eventType", out var evt) &&
+				evt.ValueKind == JsonValueKind.String &&
+				evt.GetString()!.EndsWith("deleted", StringComparison.OrdinalIgnoreCase))
+			{
+				isDelete = true;
+			}
 
 			await using var tx = await _db.Database.BeginTransactionAsync(ct);
 
 			var projects = _db.Set<ProjectReadModel>();
-			var existing = await projects.FindAsync(new object?[] { raw.AggregateId }, ct);
+			var existing = await projects.FindAsync(new object?[] { aggregateId }, ct);
 
-			if (incoming.IsTombstone || raw.IsTombstone || (raw.EventType?.EndsWith("deleted") == true))
+			if (isDelete)
 			{
 				if (existing != null)
 					projects.Remove(existing);
@@ -42,33 +81,57 @@ namespace Tasks.Infrastructure.Processors
 			{
 				if (existing == null)
 				{
-					projects.Add(new ProjectReadModel
+					string title = "";
+					Guid ownerId = Guid.Empty;
+
+					if (root.TryGetProperty("title", out var titleProp) &&
+						titleProp.ValueKind == JsonValueKind.String)
+						title = titleProp.GetString() ?? "";
+
+					if (root.TryGetProperty("ownerId", out var ownerProp) &&
+						ownerProp.ValueKind == JsonValueKind.String &&
+						Guid.TryParse(ownerProp.GetString(), out var parsedOwner))
+						ownerId = parsedOwner;
+
+					await projects.AddAsync(new ProjectReadModel
 					{
-						Id = raw.AggregateId,
-						Title = raw.Title ?? "",
-						OwnerId = raw.OwnerId,
-					});
+						Id = aggregateId,
+						Title = title,
+						OwnerId = ownerId
+					}, ct);
 				}
 				else
 				{
-					var needUpdate = false;
+					bool updated = false;
 
-					if (!string.Equals(existing.Title, raw.Title ?? "", StringComparison.Ordinal))
+					if (root.TryGetProperty("title", out var titleProp))
 					{
-						existing.Title = raw.Title ?? "";
-						needUpdate = true;
+						if (titleProp.ValueKind == JsonValueKind.String)
+						{
+							var newTitle = titleProp.GetString() ?? "";
+							if (!string.Equals(existing.Title, newTitle, StringComparison.Ordinal))
+							{
+								existing.Title = newTitle;
+								updated = true;
+							}
+						}
 					}
 
-					if (existing.OwnerId != raw.OwnerId)
+					if (root.TryGetProperty("ownerId", out var ownerProp))
 					{
-						existing.OwnerId = raw.OwnerId;
-						needUpdate = true;
+						if (ownerProp.ValueKind == JsonValueKind.String &&
+							Guid.TryParse(ownerProp.GetString(), out var newOwner))
+						{
+							if (existing.OwnerId != newOwner)
+							{
+								existing.OwnerId = newOwner;
+								updated = true;
+							}
+						}
 					}
 
-					if (needUpdate)
-					{
-						_db.Update(existing); 
-					}
+					if (updated)
+						_db.Update(existing);
 				}
 			}
 
@@ -81,18 +144,6 @@ namespace Tasks.Infrastructure.Processors
 
 			await _db.SaveChangesAsync(ct);
 			await tx.CommitAsync(ct);
-		}
-
-
-		private class ProjectPayload
-		{
-			public Guid AggregateId { get; set; }
-			public Guid ProjectId { get; set; }
-			public string? Title { get; set; }
-			public Guid OwnerId { get; set; }
-			public string? EventType { get; set; }
-			public int Version { get; set; }
-			public bool IsTombstone { get; set; }
 		}
 	}
 }

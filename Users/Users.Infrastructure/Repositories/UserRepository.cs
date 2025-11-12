@@ -34,7 +34,6 @@ namespace Users.Infrastructure.Repositories
 		{
 			var userData = _mapper.Map<UserData>(user);
 			await _context.Users.AddAsync(userData, cancellationToken);
-			await _context.SaveChangesAsync(cancellationToken);
 		}
 
 		public async Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken)
@@ -117,7 +116,6 @@ namespace Users.Infrastructure.Repositories
 			
 			_mapper.Map(user, userData);
 
-			await _context.SaveChangesAsync(cancellationToken);
 		}
 
 		public async Task Delete(Guid id, CancellationToken cancellationToken)
@@ -130,7 +128,6 @@ namespace Users.Infrastructure.Repositories
 			{
 				_context.UserRoles.RemoveRange(user.UserRoles);
 				_context.Users.Remove(user);
-				await _context.SaveChangesAsync(cancellationToken);
 			}
 		}
 
@@ -155,8 +152,7 @@ namespace Users.Infrastructure.Repositories
 			var query = _context.Users
 				.AsNoTracking()
 				.Where(u => u.RevokedOn == null
-							&& u.Birthday.HasValue
-							&& u.Birthday.Value <= cutoffDate)
+							&& u.Birthday <= cutoffDate)
 				.Include(u => u.UserRoles);
 
 			var users = await query

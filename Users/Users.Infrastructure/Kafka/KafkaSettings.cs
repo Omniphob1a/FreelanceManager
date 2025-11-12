@@ -9,6 +9,14 @@ namespace Users.Infrastructure.Kafka
 	public class KafkaSettings
 	{
 		public string BootstrapServers { get; init; } = "localhost:9092";
+		public string GroupId { get; set; } = string.Empty;
+		public string AutoOffsetReset { get; set; } = "Earliest";
+		public bool EnableAutoCommit { get; set; } = false;
+		public string SecurityProtocol { get; set; } = string.Empty;
+		public string SaslMechanism { get; set; } = string.Empty;
+		public string SaslUsername { get; set; } = string.Empty;
+		public string SaslPassword { get; set; } = string.Empty;
+		public string? SslCaLocation { get; set; }
 		public ConfluentConfigOptions Options { get; init; } = new();
 	}
 }

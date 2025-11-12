@@ -22,7 +22,7 @@ namespace Users.Application.Users.Commands.UpdateUser
 				.InclusiveBetween(0, 2).WithMessage("Gender must be 0 (Female), 1 (Male) or 2 (Unknown)");
 
 			RuleFor(x => x.NewBirthday)
-				.LessThanOrEqualTo(DateTime.UtcNow).When(x => x.NewBirthday.HasValue)
+				.LessThanOrEqualTo(DateTime.UtcNow)
 				.WithMessage("Birthday cannot be in the future.");
 
 			RuleFor(x => x.ModifiedBy)

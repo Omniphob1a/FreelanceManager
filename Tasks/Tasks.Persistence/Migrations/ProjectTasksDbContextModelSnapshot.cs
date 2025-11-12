@@ -263,7 +263,7 @@ namespace Tasks.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime?>("Birthday")
+                    b.Property<DateTime>("Birthday")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Gender")

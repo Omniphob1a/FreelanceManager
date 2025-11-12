@@ -16,6 +16,7 @@ namespace Projects.Infrastructure.Kafka
 		public string SaslMechanism { get; set; } = string.Empty;
 		public string SaslUsername { get; set; } = string.Empty;
 		public string SaslPassword { get; set; } = string.Empty;
+		public string? SslCaLocation { get; set; }
 		public ConfluentConfigOptions Options { get; init; } = new();
 
 	}

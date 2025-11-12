@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Tasks.Infrastructure.Events;
 using Users.Application.Interfaces;
 using Users.Application.Mappings;
 using Users.Domain.Interfaces.Repositories;
@@ -15,6 +16,7 @@ using Users.Infrastructure.Data;
 using Users.Infrastructure.Kafka;
 using Users.Infrastructure.Outbox;
 using Users.Infrastructure.Repositories;
+using Users.Persistence.Common;
 
 public static class InfrastructureExtensions
 {
@@ -60,6 +62,9 @@ public static class InfrastructureExtensions
 		services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(settings));
 
 		services.AddScoped<IOutboxService, OutboxService>();
+
+		services.AddScoped<IUnitOfWork, UnitOfWork>();
+		services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
 
 		services.AddHttpContextAccessor();
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Projects.Domain.Events
 {
-	public record ProjectUpdatedDomainEvent(Guid ProjectId) : DomainEvent(ProjectId, nameof(Project))
+	public record ProjectUpdatedDomainEvent(Guid ProjectId, string Title, Guid OwnerId) : DomainEvent(ProjectId, nameof(Project))
 	{
 		public override string EventType => "projects.updated";
 		public override string? KafkaTopic => "projects";
