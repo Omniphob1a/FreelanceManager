@@ -14,6 +14,11 @@ namespace Notifications.Persistence.Configurations
 		public void Configure(EntityTypeBuilder<NotificationEntity> builder)
 		{
 			builder.HasKey(n => n.Id);
+
+			builder.HasMany(n => n.Deliveries)
+				   .WithOne()
+				   .HasForeignKey(d => d.NotificationId)
+				   .OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

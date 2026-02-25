@@ -3292,6 +3292,7 @@
       "Microsoft.EntityFrameworkCore.Relational >= 9.0.10",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.10",
       "Notifications.Application >= 1.0.0",
+      "Notifications.Domain >= 1.0.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.4"
     ]
   },
@@ -3329,6 +3330,9 @@
           "projectReferences": {
             "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Application\\Notifications.Application.csproj": {
               "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Application\\Notifications.Application.csproj"
+            },
+            "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Domain\\Notifications.Domain.csproj": {
+              "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Domain\\Notifications.Domain.csproj"
             }
           }
         }

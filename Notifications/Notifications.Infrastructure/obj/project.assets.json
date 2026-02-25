@@ -1310,6 +1310,7 @@
           "Microsoft.EntityFrameworkCore": "9.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "9.0.10",
           "Notifications.Application": "1.0.0",
+          "Notifications.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "compile": {

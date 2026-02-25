@@ -1,0 +1,16 @@
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\bin\Debug\net9.0\Notifications.Application.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\bin\Debug\net9.0\Notifications.Application.dll
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\bin\Debug\net9.0\Notifications.Application.pdb
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\bin\Debug\net9.0\Notifications.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\bin\Debug\net9.0\Notifications.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.csproj.AssemblyReference.cache
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.sourcelink.json
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifica.6CD97F3A.Up2Date
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.dll
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\refint\Notifications.Application.dll
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\Notifications.Application.pdb
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Application\obj\Debug\net9.0\ref\Notifications.Application.dll

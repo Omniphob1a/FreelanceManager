@@ -41,7 +41,6 @@ namespace Notifications.Domain.Aggregates.Root
 
 			var n = new Notification(eventId, userId, templateKey, payload);
 
-			// Формируем DeliveryInfo из текущих (еще нет) deliveries — это удобно, если Create сразу создаёт deliveries
 			var deliveries = n.Deliveries.Select(d => new DeliveryInfo(d.Id, d.Channel, d.ScheduledAt)).ToArray();
 
 			n.AddDomainEvent(new NotificationCreatedDomainEvent(

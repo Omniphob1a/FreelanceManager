@@ -1,0 +1,12 @@
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\bin\Debug\net9.0\Notifications.Domain.deps.json
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\bin\Debug\net9.0\Notifications.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\bin\Debug\net9.0\Notifications.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\Notifications.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\Notifications.Domain.AssemblyInfoInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\Notifications.Domain.AssemblyInfo.cs
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\Notifications.Domain.csproj.CoreCompileInputs.cache
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\Notifications.Domain.sourcelink.json
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\Notifications.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\refint\Notifications.Domain.dll
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\Notifications.Domain.pdb
+C:\Users\volod\source\repos\FreelanceManager\Notifications\Notifications.Domain\obj\Debug\net9.0\ref\Notifications.Domain.dll

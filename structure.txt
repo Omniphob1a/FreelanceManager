@@ -1,0 +1,1171 @@
+Ñòðóêòóðà ïàïîê
+Ñåðèéíûé íîìåð òîìà: E6A1-41B6
+C:.
+¦   .gitignore
+¦   build-all.ps1
+¦   compose.bat
+¦   deploy.ps1
+¦   docker-compose.yml
+¦   manifestsall.yaml
+¦   ns-app.json
+¦   package-lock.json
+¦   prometheus.yml
+¦   structure.txt
+¦   
++---.github
+¦   L---workflows
+¦           docker-build.yml
+¦           
++---frontend
+¦   ¦   .dockerignore
+¦   ¦   .env.development
+¦   ¦   .env.production
+¦   ¦   build.log
+¦   ¦   Dockerfile
+¦   ¦   package-lock.json
+¦   ¦   package.json
+¦   ¦   tailwind.config.js
+¦   ¦   vite.config.js
+¦   ¦   
+¦   +---dist
+¦   ¦   ¦   index.html
+¦   ¦   ¦   
+¦   ¦   +---assets
+¦   ¦   ¦       main-CpTgWc4Y.css
+¦   ¦   ¦       
+¦   ¦   +---css
+¦   ¦   ¦       styles.css
+¦   ¦   ¦       
+¦   ¦   +---js
+¦   ¦   ¦   ¦   api.js
+¦   ¦   ¦   ¦   app.js
+¦   ¦   ¦   ¦   main.js
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   L---modules
+¦   ¦   ¦           auth.js
+¦   ¦   ¦           charts.js
+¦   ¦   ¦           dashboard.js
+¦   ¦   ¦           dashboardFilters.js
+¦   ¦   ¦           dashboardStats.js
+¦   ¦   ¦           eventListeners.js
+¦   ¦   ¦           modalManager.js
+¦   ¦   ¦           notifications.js
+¦   ¦   ¦           profile.js
+¦   ¦   ¦           projectForm.js
+¦   ¦   ¦           projects.js
+¦   ¦   ¦           routing.js
+¦   ¦   ¦           taskManagement.js
+¦   ¦   ¦           tasks.js
+¦   ¦   ¦           ui.js
+¦   ¦   ¦           
+¦   ¦   L---partials
+¦   ¦           assign-task-modal.html
+¦   ¦           dashboard.html
+¦   ¦           login.html
+¦   ¦           notifications.html
+¦   ¦           profile.html
+¦   ¦           project-detail.html
+¦   ¦           project-form.html
+¦   ¦           projects.html
+¦   ¦           register.html
+¦   ¦           task-form.html
+¦   ¦           tasks.html
+¦   ¦           time-entry-modal.html
+¦   ¦           
+¦   ¦   ¦       
+¦   ¦ ¦   L---public
+¦       ¦   index.html
+¦       ¦   
+¦       +---css
+¦       ¦       styles.css
+¦       ¦       
+¦       +---js
+¦       ¦   ¦   api.js
+¦       ¦   ¦   app.js
+¦       ¦   ¦   
+¦       ¦   L---modules
+¦       ¦           auth.js
+¦       ¦           charts.js
+¦       ¦           dashboard.js
+¦       ¦           dashboardFilters.js
+¦       ¦           dashboardStats.js
+¦       ¦           eventListeners.js
+¦       ¦           modalManager.js
+¦       ¦           notifications.js
+¦       ¦           profile.js
+¦       ¦           projectForm.js
+¦       ¦           projects.js
+¦       ¦           routing.js
+¦       ¦           tasks.js
+¦       ¦           ui.js
+¦       ¦           
+¦       L---partials
+¦               assign-task-modal.html
+¦               dashboard.html
+¦               login.html
+¦               notifications.html
+¦               profile.html
+¦               project-detail.html
+¦               project-form.html
+¦               projects.html
+¦               register.html
+¦               task-form.html
+¦               tasks.html
+¦               time-entry-modal.html
+¦               
++---Gateway
+¦   ¦   .dockerignore
+¦   ¦   Dockerfile
+¦   ¦   Gateway.sln
+¦   ¦   
+¦   L---Gateway
+¦       ¦   appsettings.Development.json
+¦       ¦   appsettings.json
+¦       ¦   Dockerfile
+¦       ¦   Gateway.csproj
+¦       ¦   Gateway.csproj.user
+¦       ¦   Program.cs
+¦       ¦   
+¦       ¦               
+¦       
++---Notifications
+¦   ¦   Notifications.sln
+¦   ¦   
+¦   +---Notifications.Api
+¦   ¦   ¦   appsettings.Development.json
+¦   ¦   ¦   appsettings.json
+¦   ¦   ¦   Notifications.Api.csproj
+¦   ¦   ¦   Notifications.Api.csproj.user
+¦   ¦   ¦   Notifications.Api.http
+¦   ¦   ¦   Program.cs
+¦   ¦   ¦   
+¦   ¦   +---Controllers
+¦   ¦   ¦       WeatherForecastController.cs
+¦   ¦   ¦       
+¦   ¦           
+¦   +---Notifications.Application
+¦   ¦   ¦   ApplicationExtensions.cs
+¦   ¦   ¦   Notifications.Application.csproj
+¦   ¦   ¦   
+¦   ¦   +---DTOs
+¦   ¦   ¦       PublicUserDto.cs
+¦   ¦   ¦       
+¦   ¦   +---Interfaces
+¦   ¦   ¦       IUserReadRepository.cs
+¦   ¦   ¦       
+¦   ¦   +---Notifications
+¦   ¦   ¦   +---Commands
+¦   ¦   ¦   ¦   +---CreateNotification
+¦   ¦   ¦   ¦   ¦       CreateNotificationCommand.cs
+¦   ¦   ¦   ¦   ¦       CreateNotificationCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       CreateNotificationCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   L---SendNotification
+¦   ¦   ¦   ¦           SendNotificationCommand.cs
+¦   ¦   ¦   ¦           SendNotificationCommandHandler.cs
+¦   ¦   ¦   ¦           SendNotificationCommandValidator.cs
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   L---Queries
+¦   +---Notifications.Domain
+¦   ¦   ¦   Notifications.Domain.csproj
+¦   ¦   ¦   
+¦   ¦   +---Aggregates
+¦   ¦   ¦   L---Notification
+¦   ¦   ¦       +---Entities
+¦   ¦   ¦       ¦       NotificationDelivery.cs
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---Enums
+¦   ¦   ¦       ¦       DeliveryStatus.cs
+¦   ¦   ¦       ¦       NotificationChannel.cs
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---Events
+¦   ¦   ¦       ¦       DeliveryDeadDomainEvent.cs
+¦   ¦   ¦       ¦       DeliveryFailedDomainEvent.cs
+¦   ¦   ¦       ¦       DeliveryInfo.cs
+¦   ¦   ¦       ¦       DeliveryScheduledDomainEvent.cs
+¦   ¦   ¦       ¦       DeliverySendingDomainEvent.cs
+¦   ¦   ¦       ¦       DeliverySentDomainEvent.cs
+¦   ¦   ¦       ¦       NotificationCanceledDomainEvent.cs
+¦   ¦   ¦       ¦       NotificationCreatedDomainEvent.cs
+¦   ¦   ¦       ¦       NotificationReadDomainEvent.cs
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       L---Root
+¦   ¦   ¦               Notification.cs
+¦   ¦   ¦               
+¦   ¦   +---Common
+¦   ¦   ¦       AggregateRoot.cs
+¦   ¦   ¦       DomainEvent.cs
+¦   ¦   ¦       ValueObject.cs
+¦   ¦   ¦       
+¦   ¦   +---Exceptions
+¦   ¦   ¦       DomainException.cs
+¦   ¦   ¦       
+¦   ¦   +---Interfaces
+¦   ¦   ¦       IDomainEvent.cs
+¦   ¦   ¦       IDomainEventDispatcher.cs
+¦   ¦   ¦       INotificationRepository.cs
+¦   ¦   ¦       IUnitOfWork.cs
+¦   ¦   ¦       
+¦   +---Notifications.Infrastructure
+¦   ¦   ¦   InfrastructureExtensions.cs
+¦   ¦   ¦   Notifications.Infrastructure.csproj
+¦   ¦   ¦   
+¦   ¦   +---Kafka
+¦   ¦   ¦       KafkaSettings.cs
+¦   ¦   ¦       UsersConsumerHostedService.cs
+¦   ¦   ¦       
+¦   L---Notifications.Persistence
+¦       ¦   Notifications.Persistence.csproj
+¦       ¦   PersistenceExtensions.cs
+¦       ¦   
+¦       +---Configurations
+¦       ¦       NotificationEntityConfiguration.cs
+¦       ¦       
+¦       +---Data
+¦       ¦   ¦   NotificationsDbContext.cs
+¦       ¦   ¦   
+¦       ¦   L---Repositories
+¦       ¦           NotificationRepository.cs
+¦       ¦           UserReadRepository.cs
+¦       ¦           
+¦       +---Models
+¦       ¦   +---Entities
+¦       ¦   ¦       NotificationEntity.cs
+¦       ¦   ¦       
+¦       ¦   L---ReadModels
+¦       ¦           UserReadModel.cs
+¦   ¦   .dockerignore
+¦   ¦   Dockerfile
+¦   ¦   Projects.sln
+¦   ¦   
+¦   +---Projects.Api
+¦   ¦   ¦   .dockerignore
+¦   ¦   ¦   ApiExtensions.cs
+¦   ¦   ¦   appsettings.Development.json
+¦   ¦   ¦   appsettings.json
+¦   ¦   ¦   Dockerfile
+¦   ¦   ¦   Program.cs
+¦   ¦   ¦   Projects.Api.csproj
+¦   ¦   ¦   Projects.Api.csproj.user
+¦   ¦   ¦   Projects.Api.http
+¦   ¦   ¦   SwaggerExtensions.cs
+¦   ¦   ¦   
+¦   ¦   ¦                   
+¦   ¦   +---Controllers
+¦   ¦   ¦       ProjectsController.cs
+¦   ¦   ¦       
+¦   ¦   +---Models
+¦   ¦   ¦   L---Requests
+¦   ¦   ¦           AddAttachmentRequest.cs
+¦   ¦   ¦           AddMemberRequest.cs
+¦   ¦   ¦           AddMilestoneRequest.cs
+¦   ¦   ¦           AddTagsRequest.cs
+¦   ¦   ¦           CompleteMilestoneRequest.cs
+¦   ¦   ¦           CreateProjectRequest.cs
+¦   ¦   ¦           DeleteAttachmentRequest.cs
+¦   ¦   ¦           DeleteTagsRequest.cs
+¦   ¦   ¦           PublishProjectRequest.cs
+¦   ¦   ¦           RemoveMemberRequest.cs
+¦   ¦   ¦           RescheduleMilestoneRequest.cs
+¦   ¦   ¦           UpdateProjectRequest.cs
+¦   ¦   ¦           
+¦   ¦           
+¦   +---Projects.Application
+¦   ¦   ¦   ApplicationExtensions.cs
+¦   ¦   ¦   Projects.Application.csproj
+¦   ¦   ¦   
+¦   ¦   ¦               
+¦   ¦   +---Common
+¦   ¦   ¦   +---Abstractions
+¦   ¦   ¦   ¦       ICachebleQuery.cs
+¦   ¦   ¦   ¦       ICacheService.cs
+¦   ¦   ¦   ¦       IFileStorage.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Behaviors
+¦   ¦   ¦   ¦       CachingBehavior.cs
+¦   ¦   ¦   ¦       ValidationBehavior.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Cache
+¦   ¦   ¦   ¦       CacheKeys.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Filters
+¦   ¦   ¦   ¦       ProjectFilter.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Notifications
+¦   ¦   ¦   ¦       DomainEventNotification.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   L---Pagination
+¦   ¦   ¦           PaginatedResult.cs
+¦   ¦   ¦           PaginationInfo.cs
+¦   ¦   ¦           
+¦   ¦   +---DTOs
+¦   ¦   ¦       ProjectAttachmentDto.cs
+¦   ¦   ¦       ProjectDto.cs
+¦   ¦   ¦       ProjectMemberDto.cs
+¦   ¦   ¦       ProjectMemberReadDto.cs
+¦   ¦   ¦       ProjectMilestoneDto.cs
+¦   ¦   ¦       PublicUserDto.cs
+¦   ¦   ¦       UserDto.cs
+¦   ¦   ¦       
+¦   ¦   +---Interfaces
+¦   ¦   ¦       IAuthorizationService.cs
+¦   ¦   ¦       IBackgroundJobManager.cs
+¦   ¦   ¦       ICurrentUserService.cs
+¦   ¦   ¦       IDomainEventDispatcher.cs
+¦   ¦   ¦       IOutboxService.cs
+¦   ¦   ¦       IProjectMemberQueryService.cs
+¦   ¦   ¦       IProjectQueryService.cs
+¦   ¦   ¦       IUnitOfWork.cs
+¦   ¦   ¦       IUserReadRepository.cs
+¦   ¦   ¦       IUserService.cs
+¦   ¦   ¦       
+¦   ¦   +---Jobs
+¦   ¦   ¦       ArchiveOutOfDateProjectsJob.cs
+¦   ¦   ¦       EscalateOutOfDateMilestonesJob.cs
+¦   ¦   ¦       
+¦   ¦   +---Mappings
+¦   ¦   ¦       ProjectAttachmentMappingConfiguration.cs
+¦   ¦   ¦       ProjectDtoMappingConfiguration.cs
+¦   ¦   ¦       ProjectMilestoneMappingConfiguration.cs
+¦   ¦   ¦       
+¦   ¦   ¦                   
+¦   ¦   +---Projects
+¦   ¦   ¦   +---Commands
+¦   ¦   ¦   ¦   +---AddAttachment
+¦   ¦   ¦   ¦   ¦       AddAttachmentCommand.cs
+¦   ¦   ¦   ¦   ¦       AddAttachmentCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       AddAttachmentCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---AddMember
+¦   ¦   ¦   ¦   ¦       AddMemberCommand.cs
+¦   ¦   ¦   ¦   ¦       AddMemberCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       AddMemberCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---AddMilestone
+¦   ¦   ¦   ¦   ¦       AddMilestoneCommand.cs
+¦   ¦   ¦   ¦   ¦       AddMilestoneCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       AddMilestoneCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---AddTags
+¦   ¦   ¦   ¦   ¦       AddTagsCommand.cs
+¦   ¦   ¦   ¦   ¦       AddTagsCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       AddTagsCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---ArchiveProject
+¦   ¦   ¦   ¦   ¦       ArchiveProjectCommand.cs
+¦   ¦   ¦   ¦   ¦       ArchiveProjectCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       ArchiveProjectCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---ChangeMemberRole
+¦   ¦   ¦   ¦   ¦       ChangeMemberRoleCommand.cs
+¦   ¦   ¦   ¦   ¦       ChangeMemberRoleCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       ChangeMemberRoleCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---CompleteMilestone
+¦   ¦   ¦   ¦   ¦       CompleteMilestoneCommand.cs
+¦   ¦   ¦   ¦   ¦       CompleteMilestoneCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---CompleteProject
+¦   ¦   ¦   ¦   ¦       CompleteProjectCommand.cs
+¦   ¦   ¦   ¦   ¦       CompleteProjectCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       CompleteProjectCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---CreateProject
+¦   ¦   ¦   ¦   ¦       CreateProjectCommand.cs
+¦   ¦   ¦   ¦   ¦       CreateProjectCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       CreateProjectCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---DeleteAttachment
+¦   ¦   ¦   ¦   ¦       DeleteAttachmentCommand.cs
+¦   ¦   ¦   ¦   ¦       DeleteAttachmentCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---DeleteMilestone
+¦   ¦   ¦   ¦   ¦       DeleteMilestoneCommand.cs
+¦   ¦   ¦   ¦   ¦       DeleteMilestoneCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---DeleteProject
+¦   ¦   ¦   ¦   ¦       DeleteProjectCommand.cs
+¦   ¦   ¦   ¦   ¦       DeleteProjectCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---DeleteTags
+¦   ¦   ¦   ¦   ¦       DeleteTagsCommand.cs
+¦   ¦   ¦   ¦   ¦       DeleteTagsCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       DeleteTagsCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---EscalateMilestone
+¦   ¦   ¦   ¦   ¦       EscalateMilestoneCommand.cs
+¦   ¦   ¦   ¦   ¦       EscalateMilestoneCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---PublishProject
+¦   ¦   ¦   ¦   ¦       PublishProjectCommand.cs
+¦   ¦   ¦   ¦   ¦       PublishProjectCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       PublishProjectCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---RemoveMember
+¦   ¦   ¦   ¦   ¦       RemoveMemberCommand.cs
+¦   ¦   ¦   ¦   ¦       RemoveMemberCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       RemoveMemberCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---RescheduleAllMilestones
+¦   ¦   ¦   ¦   ¦       RescheduleAllMilestonesCommand.cs
+¦   ¦   ¦   ¦   ¦       RescheduleAllMilestonesCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   +---RescheduleSingleMilestone
+¦   ¦   ¦   ¦   ¦       RescheduleSingleMilestoneCommand.cs
+¦   ¦   ¦   ¦   ¦       RescheduleSingleMilestoneCommandHandler.cs
+¦   ¦   ¦   ¦   ¦       RescheduleSingleMilestoneCommandValidator.cs
+¦   ¦   ¦   ¦   ¦       
+¦   ¦   ¦   ¦   L---UpdateProject
+¦   ¦   ¦   ¦           UpdateProjectCommand.cs
+¦   ¦   ¦   ¦           UpdateProjectCommandHandler.cs
+¦   ¦   ¦   ¦           UpdateProjectCommandValidator.cs
+¦   ¦   ¦   ¦           
+¦   ¦   ¦   +---EventHandlers
+¦   ¦   ¦   ¦       AttachmentAddedEventHandler.cs
+¦   ¦   ¦   ¦       AttachmentRemovedEventHandler.cs
+¦   ¦   ¦   ¦       MilestoneAddedEventHandler.cs
+¦   ¦   ¦   ¦       MilestoneCompletedEventHandler.cs
+¦   ¦   ¦   ¦       MilestoneEscalatedEventHandler.cs
+¦   ¦   ¦   ¦       MilestoneRemovedEventHandler.cs
+¦   ¦   ¦   ¦       ProjectArchivedEventHandler.cs
+¦   ¦   ¦   ¦       ProjectCompletedEventHandler.cs
+¦   ¦   ¦   ¦       ProjectCreatedEventHandler.cs
+¦   ¦   ¦   ¦       ProjectDeletedEventHandler.cs
+¦   ¦   ¦   ¦       ProjectPublishedEventHandler.cs
+¦   ¦   ¦   ¦       ProjectUpdatedEventHandler.cs
+¦   ¦   ¦   ¦       TagsAddedEventHandler.cs
+¦   ¦   ¦   ¦       TagsDeletedEventHandler.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   L---Queries
+¦   ¦   ¦       +---GetFullProjectById
+¦   ¦   ¦       ¦       GetFullProjectByIdQuery.cs
+¦   ¦   ¦       ¦       GetFullProjectByIdQueryHandler.cs
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---GetProjectById
+¦   ¦   ¦       ¦       GetProjectByIdQuery.cs
+¦   ¦   ¦       ¦       GetProjectByIdQueryHandler.cs
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       +---GetProjectMembers
+¦   ¦   ¦       ¦       GetProjectMembersQuery.cs
+¦   ¦   ¦       ¦       GetProjectMembersQueryHandler.cs
+¦   ¦   ¦       ¦       
+¦   ¦   ¦       L---GetProjectsByFilter
+¦   ¦   ¦               GetProjectsByFilterQuery.cs
+¦   ¦   ¦               GetProjectsByFilterQueryHandler.cs
+¦   ¦   ¦               
+¦   ¦   L---Services
+¦   ¦           TagParserService.cs
+¦   ¦           
+¦   +---Projects.Domain
+¦   ¦   ¦   Projects.Domain.csproj
+¦   ¦   ¦   
+¦   ¦   ¦               
+¦   ¦   +---Common
+¦   ¦   ¦       EntityBase.cs
+¦   ¦   ¦       ValueObject.cs
+¦   ¦   ¦       
+¦   ¦   +---Entities
+¦   ¦   ¦       Project.cs
+¦   ¦   ¦       ProjectAttachment.cs
+¦   ¦   ¦       ProjectMember.cs
+¦   ¦   ¦       ProjectMilestone.cs
+¦   ¦   ¦       
+¦   ¦   +---Enums
+¦   ¦   ¦       ProjectStatus.cs
+¦   ¦   ¦       
+¦   ¦   +---Events
+¦   ¦   ¦       AttachmentAddedDomainEvent.cs
+¦   ¦   ¦       AttachmentRemovedDomainEvent.cs
+¦   ¦   ¦       DomainEvent.cs
+¦   ¦   ¦       MilestoneAddedDomainEvent.cs
+¦   ¦   ¦       MilestoneCompletedDomainEvent.cs
+¦   ¦   ¦       MilestoneEscalatedDomainEvent.cs
+¦   ¦   ¦       MilestoneRemovedDomainEvent.cs
+¦   ¦   ¦       MilestoneRescheduledDomainEvent.cs
+¦   ¦   ¦       ProjectArchivedDomainEvent.cs
+¦   ¦   ¦       ProjectCompletedDomainEvent.cs
+¦   ¦   ¦       ProjectCreatedDomainEvent.cs
+¦   ¦   ¦       ProjectDeletedDomainEvent.cs
+¦   ¦   ¦       ProjectMemberAddedDomainEvent.cs
+¦   ¦   ¦       ProjectMemberRemovedDomainEvent.cs
+¦   ¦   ¦       ProjectMemberRoleChangedDomainEvent.cs
+¦   ¦   ¦       ProjectPublishedDomainEvent.cs
+¦   ¦   ¦       ProjectUpdatedDomainEvent.cs
+¦   ¦   ¦       TagsAddedDomainEvent.cs
+¦   ¦   ¦       TagsDeletedDomainEvent.cs
+¦   ¦   ¦       
+¦   ¦   +---Exceptions
+¦   ¦   ¦       DomainException.cs
+¦   ¦   ¦       
+¦   ¦   +---Interfaces
+¦   ¦   ¦       IDomainEvent.cs
+¦   ¦   ¦       IProjectRepository.cs
+¦   ¦   ¦       
+¦   ¦   ¦                   
+¦   ¦   L---ValueObjects
+¦   ¦           Budget.cs
+¦   ¦           Category.cs
+¦   ¦           CurrencyCode.cs
+¦   ¦           Tag.cs
+¦   ¦           
+¦   +---Projects.Infrastructure
+¦   ¦   ¦   InfrastructureExtensions.cs
+¦   ¦   ¦   Projects.Infrastructure.csproj
+¦   ¦   ¦   
+¦   ¦   ¦               
+¦   ¦   +---Caching
+¦   ¦   ¦       RedisCacheService.cs
+¦   ¦   ¦       
+¦   ¦   +---DTOs
+¦   ¦   ¦       UserSnapshotDto.cs
+¦   ¦   ¦       
+¦   ¦   +---Events
+¦   ¦   ¦       DomainEventDispatcher.cs
+¦   ¦   ¦       
+¦   ¦   +---FileStorage
+¦   ¦   ¦       S3FileStorage.cs
+¦   ¦   ¦       
+¦   ¦   +---Hangfire
+¦   ¦   ¦       BackgroundJobManager.cs
+¦   ¦   ¦       HangfireInitializer.cs
+¦   ¦   ¦       
+¦   ¦   +---Kafka
+¦   ¦   ¦       ConfluentConfigOptions.cs
+¦   ¦   ¦       ConfluentKafkaProducer.cs
+¦   ¦   ¦       IKafkaProducer.cs
+¦   ¦   ¦       KafkaSettings.cs
+¦   ¦   ¦       UsersConsumerHostedService.cs
+¦   ¦   ¦                   
+¦   ¦   +---Options
+¦   ¦   ¦       S3Options.cs
+¦   ¦   ¦       
+¦   ¦   +---Outbox
+¦   ¦   ¦       OutboxPublisherHostedService.cs
+¦   ¦   ¦       OutboxService.cs
+¦   ¦   ¦       
+¦   ¦   L---Services
+¦   ¦           AuthorizationService.cs
+¦   ¦           CurrentUserService.cs
+¦   ¦           UserService.cs
+¦   ¦           
+¦   ¦                       
+¦   +---Projects.Persistence
+¦   ¦   ¦   PersistenceExtensions.cs
+¦   ¦   ¦   Projects.Persistence.csproj
+¦   ¦   ¦   
+¦   ¦   ¦               
+¦   ¦   +---Common
+¦   ¦   ¦       UnitOfWork.cs
+¦   ¦   ¦       
+¦   ¦   +---Configurations
+¦   ¦   ¦       ProjectAttachmentEntityConfiguration.cs
+¦   ¦   ¦       ProjectEntityConfiguration.cs
+¦   ¦   ¦       ProjectMemberEntityConfiguration.cs
+¦   ¦   ¦       ProjectMilestoneEntityConfiguration.cs
+¦   ¦   ¦       
+¦   ¦   +---Data
+¦   ¦   ¦   ¦   ProjectsDbContext.cs
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   L---Queries
+¦   ¦   ¦           ProjectMemberQueryService.cs
+¦   ¦   ¦           ProjectQueryService.cs
+¦   ¦   ¦           
+¦   ¦   +---Mappings
+¦   ¦   ¦       ProjectAttachmentMappingConfiguration.cs
+¦   ¦   ¦       ProjectMappingConfiguration.cs
+¦   ¦   ¦       ProjectMemberMappingConfiguration.cs
+¦   ¦   ¦       ProjectMilestoneMappingConfiguration.cs
+¦   ¦   ¦       
+¦   ¦   ¦       
+¦   ¦   +---Models
+¦   ¦   ¦       OutboxMessage.cs
+¦   ¦   ¦       ProjectAttachmentEntity.cs
+¦   ¦   ¦       ProjectEntity.cs
+¦   ¦   ¦       ProjectMemberEntity.cs
+¦   ¦   ¦       ProjectMilestoneEntity.cs
+¦   ¦   ¦       UserReadModel.cs
+¦   ¦   ¦                   
+¦   ¦   +---Repositories
+¦   ¦   ¦       ProjectRepository.cs
+¦   ¦   ¦       UserReadRepository.cs
+¦   ¦   ¦       
+¦   ¦   L---Specifications
+¦   ¦           AllProjectsSpec.cs
+¦   ¦           ProjectByIdSpec.cs
+¦   ¦           ProjectByIdWithAttachmentsSpec.cs
+¦   ¦           ProjectByIdWithMembersSpec.cs
+¦   ¦           ProjectByIdWithMilestonesSpec.cs
+¦   ¦           ProjectFullByIdSpec.cs
+¦   ¦           ProjectsByFilterSpec.cs
+¦   ¦           ProjectsOutOfDateSpec.cs
+¦   ¦                 
+¦                           
++---Tasks
+¦   ¦   .dockerignore
+¦   ¦   Dockerfile
+¦   ¦   Tasks.sln
+¦   ¦   
+¦   ¦       
+¦   +---Tasks.Api
+¦   ¦   ¦   .dockerignore
+¦   ¦   ¦   ApiExtensions.cs
+¦   ¦   ¦   appsettings.Development.json
+¦   ¦   ¦   appsettings.json
+¦   ¦   ¦   Dockerfile
+¦   ¦   ¦   Program.cs
+¦   ¦   ¦   SwaggerExtensions.cs
+¦   ¦   ¦   Tasks.Api.csproj
+¦   ¦   ¦   Tasks.Api.csproj.user
+¦   ¦   ¦   Tasks.http
+¦   ¦   ¦   
+¦   ¦   ¦                   
+¦   ¦   +---Controllers
+¦   ¦   ¦       ProjectTasksController.cs
+¦   ¦   ¦       
+¦   ¦   ¦           
+¦   ¦   +---Models
+¦   ¦   ¦   L---Requests
+¦   ¦   ¦           AddCommentRequest.cs
+¦   ¦   ¦           AddTimeEntryRequest.cs
+¦   ¦   ¦           AssignTaskRequest.cs
+¦   ¦   ¦           CancelTaskRequest.cs
+¦   ¦   ¦           CreateProjectTaskRequest.cs
+¦   ¦   ¦           UnassignTaskRequest.cs
+¦   ¦   ¦           UpdateProjectTaskRequest.cs
+¦   ¦   ¦           
+¦   ¦           
+¦   +---Tasks.Application
+¦   ¦   ¦   ApplicationExtensions.cs
+¦   ¦   ¦   Tasks.Application.csproj
+¦   ¦   ¦   
+¦   ¦   ¦               
+¦   ¦   +---Common
+¦   ¦   ¦   ¦   TaskIncludeOptions.cs
+¦   ¦   ¦   ¦   
+¦   ¦   ¦   +---Behaviors
+¦   ¦   ¦   ¦       CachingBehavior.cs
+¦   ¦   ¦   ¦       ValidationBehavior.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Cache
+¦   ¦   ¦   ¦       CacheKeyBuilder.cs
+¦   ¦   ¦   ¦       CacheKeys.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Filters
+¦   ¦   ¦   ¦       ProjectTaskFilter.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Notifications
+¦   ¦   ¦   ¦       DomainEventNotification.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   L---Pagination
+¦   ¦   ¦           PaginatedResult.cs
+¦   ¦   ¦           PaginationInfo.cs
+¦   ¦   ¦           
+¦   ¦   +---DTOs
+¦   ¦   ¦       CommentDto.cs
+¦   ¦   ¦       CommentReadDto.cs
+¦   ¦   ¦       IncomingEventDto.cs
+¦   ¦   ¦       MemberDto.cs
+¦   ¦   ¦       ProjectDto.cs
+¦   ¦   ¦       ProjectMemberReadDto.cs
+¦   ¦   ¦       ProjectTaskDto.cs
+¦   ¦   ¦       PublicUserDto.cs
+¦   ¦   ¦       TaskListItemDto.cs
+¦   ¦   ¦       TimeEntryDto.cs
+¦   ¦   ¦       
+¦   ¦   +---Events
+¦   ¦   ¦       IIncomingEventProcessor.cs
+¦   ¦   ¦       ProjectEvent.cs
+¦   ¦   ¦       
+¦   ¦   +---Interfaces
+¦   ¦   ¦       IAuthorizationService.cs
+¦   ¦   ¦       ICacheableQuery.cs
+¦   ¦   ¦       ICacheService.cs
+¦   ¦   ¦       ICommentReadRepository.cs
+¦   ¦   ¦       IIncomingEventRepository.cs
+¦   ¦   ¦       IIncomingEventStore.cs
+¦   ¦   ¦       IMemberReadRepository.cs
+¦   ¦   ¦       IProjectMemberQueryService.cs
+¦   ¦   ¦       IProjectReadRepository.cs
+¦   ¦   ¦       IProjectService.cs
+¦   ¦   ¦       IProjectTaskQueryService.cs
+¦   ¦   ¦       IUserReadRepository.cs
+¦   ¦   ¦       
+¦   ¦   +---Mappings
+¦   ¦   ¦       ProjectTaskDtoMappingConfiguration.cs
+¦   ¦   ¦       TimeEntryDtoMappingConfiguration.cs
+¦   ¦   ¦       
+¦   ¦   ¦                   
+¦   ¦   L---ProjectTasks
+¦   ¦       +---Commands
+¦   ¦       ¦   +---AddComment
+¦   ¦       ¦   ¦       AddCommentCommand.cs
+¦   ¦       ¦   ¦       AddCommentCommandHandler.cs
+¦   ¦       ¦   ¦       AddCommentCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---AssignProjectTask
+¦   ¦       ¦   ¦       AssignProjectTaskCommand.cs
+¦   ¦       ¦   ¦       AssignProjectTaskCommandHandler.cs
+¦   ¦       ¦   ¦       AssignProjectTaskCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---CancelProjectTask
+¦   ¦       ¦   ¦       CancelProjectTaskCommand.cs
+¦   ¦       ¦   ¦       CancelProjectTaskCommandHandler.cs
+¦   ¦       ¦   ¦       CancelProjectTaskCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---CompleteProjectTask
+¦   ¦       ¦   ¦       CompleteProjectTaskCommand.cs
+¦   ¦       ¦   ¦       CompleteProjectTaskCommandHandler.cs
+¦   ¦       ¦   ¦       CompleteProjectTaskCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---CreateProjectTask
+¦   ¦       ¦   ¦       CreateProjectTaskCommand.cs
+¦   ¦       ¦   ¦       CreateProjectTaskCommandHandler.cs
+¦   ¦       ¦   ¦       CreateProjectTaskCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---DeleteProjectTask
+¦   ¦       ¦   ¦       DeleteProjectTaskCommand.cs
+¦   ¦       ¦   ¦       DeleteProjectTaskCommandHandler.cs
+¦   ¦       ¦   ¦       DeleteProjectTaskCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---LogTime
+¦   ¦       ¦   ¦       LogTimeCommand.cs
+¦   ¦       ¦   ¦       LogTimeCommandHandler.cs
+¦   ¦       ¦   ¦       LogTimeCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---StartProjectTask
+¦   ¦       ¦   ¦       StartProjectTaskCommand.cs
+¦   ¦       ¦   ¦       StartProjectTaskCommandHandler.cs
+¦   ¦       ¦   ¦       StartProjectTaskCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   +---UnassignProjectTask
+¦   ¦       ¦   ¦       UnassignProjectTaskCommand.cs
+¦   ¦       ¦   ¦       UnassignProjectTaskCommandHandler.cs
+¦   ¦       ¦   ¦       UnassignProjectTaskCommandValidator.cs
+¦   ¦       ¦   ¦       
+¦   ¦       ¦   L---UpdateProjectTask
+¦   ¦       ¦           UpdateProjectTaskCommand.cs
+¦   ¦       ¦           UpdateProjectTaskCommandHandler.cs
+¦   ¦       ¦           UpdateProjectTaskCommandValidator.cs
+¦   ¦       ¦           
+¦   ¦       +---EventHandlers
+¦   ¦       ¦       CommentAddedEventHandler.cs
+¦   ¦       ¦       LoggedTimeEventHandler.cs
+¦   ¦       ¦       TaskAssignedEventHandler.cs
+¦   ¦       ¦       TaskCanceledEventHandler.cs
+¦   ¦       ¦       TaskCompletedEventHandler.cs
+¦   ¦       ¦       TaskCreatedEventHandler.cs
+¦   ¦       ¦       TaskDeletedEventHandler.cs
+¦   ¦       ¦       TaskStartedEventHandler.cs
+¦   ¦       ¦       TaskUnassignedEventHandler.cs
+¦   ¦       ¦       TaskUpdatedEventHandler.cs
+¦   ¦       ¦       
+¦   ¦       L---Queries
+¦   ¦           +---GetCommentsByTaskId
+¦   ¦           ¦       GetCommentsByTaskIdQuery.cs
+¦   ¦           ¦       GetCommentsByTaskIdQueryHandler.cs
+¦   ¦           ¦       
+¦   ¦           +---GetProjectMembers
+¦   ¦           ¦       GetProjectMembersQuery.cs
+¦   ¦           ¦       GetProjectMembersQueryHandler.cs
+¦   ¦           ¦       
+¦   ¦           +---GetProjectTaskById
+¦   ¦           ¦       GetProjectTaskByIdQuery.cs
+¦   ¦           ¦       GetProjectTaskByIdQueryHandler.cs
+¦   ¦           ¦       
+¦   ¦           +---GetProjectTasks
+¦   ¦           ¦       GetProjectTasksQuery.cs
+¦   ¦           ¦       GetProjectTasksQueryHandler.cs
+¦   ¦           ¦       
+¦   ¦           L---GetProjectTasksByProjectId
+¦   ¦                   GetProjectTasksByProjectIdQuery.cs
+¦   ¦                   GetProjectTasksByProjectIdQueryHandler.cs
+¦   ¦                   
+¦   +---Tasks.Domain
+¦   ¦   ¦   Tasks.Domain.csproj
+¦   ¦   ¦   
+¦   ¦   +---Aggregate
+¦   ¦   ¦   +---Entities
+¦   ¦   ¦   ¦       Comment.cs
+¦   ¦   ¦   ¦       TimeEntry.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Enums
+¦   ¦   ¦   ¦       ProjectTaskStatus.cs
+¦   ¦   ¦   ¦       TaskPriority.cs
+¦   ¦   ¦   ¦       WorkUnit.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Events
+¦   ¦   ¦   ¦       CommentAddedDomainEvent.cs
+¦   ¦   ¦   ¦       DomainEvent.cs
+¦   ¦   ¦   ¦       TaskAssignedDomainEvent.cs
+¦   ¦   ¦   ¦       TaskCanceledDomainEvent.cs
+¦   ¦   ¦   ¦       TaskCompletedDomainEvent.cs
+¦   ¦   ¦   ¦       TaskCreatedDomainEvent.cs
+¦   ¦   ¦   ¦       TaskDeletedDomainEvent.cs
+¦   ¦   ¦   ¦       TaskStartedDomainEvent.cs
+¦   ¦   ¦   ¦       TaskUnassignedDomainEvent.cs
+¦   ¦   ¦   ¦       TaskUpdatedDomainEvent.cs
+¦   ¦   ¦   ¦       TimeEntryAddedDomainEvent.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   +---Root
+¦   ¦   ¦   ¦       ProjectTask.cs
+¦   ¦   ¦   ¦       
+¦   ¦   ¦   L---ValueObjects
+¦   ¦   ¦           Money.cs
+¦   ¦   ¦           TimeRange.cs
+¦   ¦   ¦           WorkEstimate.cs
+¦   ¦   ¦           
+¦   ¦   ¦               
+¦   ¦   +---Common
+¦   ¦   ¦       EntityBase.cs
+¦   ¦   ¦       ValueObject.cs
+¦   ¦   ¦       
+¦   ¦   +---Exceptions
+¦   ¦   ¦       DomainException.cs
+¦   ¦   ¦       
+¦   ¦   +---Interfaces
+¦   ¦   ¦       ICurrentUserService.cs
+¦   ¦   ¦       IDomainEvent.cs
+¦   ¦   ¦       IDomainEventDispatcher.cs
+¦   ¦   ¦       IProjectTaskRepository.cs
+¦   ¦   ¦       IUnitOfWork.cs
+¦   ¦   ¦       
+¦   ¦                       
+¦   +---Tasks.Infrastructure
+¦   ¦   ¦   InfrastructureExtensions.cs
+¦   ¦   ¦   Tasks.Infrastructure.csproj
+¦   ¦   ¦   
+¦   ¦   ¦               
+¦   ¦   +---Caching
+¦   ¦   ¦       RedisCacheService.cs
+¦   ¦   ¦       
+¦   ¦   +---DTOs
+¦   ¦   ¦       ProjectMemberDto.cs
+¦   ¦   ¦       
+¦   ¦   +---Events
+¦   ¦   ¦       DomainEventDispatcher.cs
+¦   ¦   ¦       
+¦   ¦   +---HostedServices
+¦   ¦   ¦       IncomingEventsProcessorHostedService.cs
+¦   ¦   ¦       
+¦   ¦   +---Kafka
+¦   ¦   ¦       ConfluentConfigOptions.cs
+¦   ¦   ¦       ConfluentKafkaConsumer.cs
+¦   ¦   ¦       ConfluentKafkaProducer.cs
+¦   ¦   ¦       IKafkaConsumer.cs
+¦   ¦   ¦       IKafkaProducer.cs
+¦   ¦   ¦       KafkaSettings.cs
+¦   ¦   ¦       MembersConsumerHostedService.cs
+¦   ¦   ¦       ProjectsConsumerHostedService.cs
+¦   ¦   ¦       UsersConsumerHostedService.cs
+¦   ¦   ¦       
+¦   ¦   +---obj
+¦   ¦   ¦   ¦   project.assets.json
+¦   ¦   ¦   ¦   project.nuget.cache
+¦   ¦   ¦   ¦   Tasks.Infrastructure.csproj.nuget.dgspec.json
+¦   ¦   ¦   ¦   Tasks.Infrastructure.csproj.nuget.g.props
+¦   ¦   ¦   ¦   Tasks.Infrastructure.csproj.nuget.g.targets
+¦   ¦   ¦   ¦   
+¦   ¦   ¦                   
+¦   ¦   +---Outbox
+¦   ¦   ¦       OutboxPublisherHostedService.cs
+¦   ¦   ¦       
+¦   ¦   +---Processors
+¦   ¦   ¦       ProjectEventProcessor.cs
+¦   ¦   ¦       
+¦   ¦   L---Services
+¦   ¦           AuthorizationService.cs
+¦   ¦           CurrentUserService.cs
+¦   ¦           ProjectService.cs
+¦   ¦           
+¦   L---Tasks.Persistence
+¦       ¦   PersistenceExtensions.cs
+¦       ¦   Tasks.Persistence.csproj
+¦       ¦   
+¦       ¦               
+¦       +---Common
+¦       ¦       UnitOfWork.cs
+¦       ¦       
+¦       +---Configurations
+¦       ¦       CommentEntityConfiguration.cs
+¦       ¦       MemberReadModelEntityConfiguration.cs
+¦       ¦       ProjectReadModelEntityConfiguration.cs
+¦       ¦       ProjectTaskEntityConfiguration.cs
+¦       ¦       TimeEntryEntityConfiguration.cs
+¦       ¦       UserReadModelEntityConfiguration.cs
+¦       ¦       
+¦       +---Data
+¦       ¦   ¦   ProjectTasksDbContext.cs
+¦       ¦   ¦   
+¦       ¦   +---Queries
+¦       ¦   ¦       ProjectMemberQueryService.cs
+¦       ¦   ¦       ProjectTaskQueryService.cs
+¦       ¦   ¦       
+¦       ¦   L---Repositories
+¦       ¦           CommentReadRepository.cs
+¦       ¦           IncomingEventRepository.cs
+¦       ¦           IncomingEventStore.cs
+¦       ¦           MemberReadRepository.cs
+¦       ¦           ProjectReadRepository.cs
+¦       ¦           ProjectTaskRepository.cs
+¦       ¦           UserReadRepository.cs
+¦       ¦           
+¦       +---Extensions
+¦       ¦       TaskQueryExtension.cs
+¦       ¦       
+¦       +---Mappings
+¦       ¦       CommentMapper.cs
+¦       ¦       ProjectTaskMapper.cs
+¦       ¦       TimeEntryMapper.cs
+¦       ¦       
+¦       ¦       
+¦       +---Models
+¦       ¦   ¦   CommentEntity.cs
+¦       ¦   ¦   OutboxMessage.cs
+¦       ¦   ¦   ProjectTaskEntity.cs
+¦       ¦   ¦   TimeEntryEntity.cs
+¦       ¦   ¦   
+¦       ¦   L---ReadModels
+¦       ¦           IncomingEvent.cs
+¦       ¦           MemberReadModel.cs
+¦       ¦           ProjectReadModel.cs
+¦       ¦           UserReadModel.cs
+¦       ¦           
+L---Users
+    ¦   .dockerignore
+    ¦   Dockerfile
+    ¦   Users.sln
+    ¦   
+    ¦       
+    +---Users.Api
+    ¦   ¦   .dockerignore
+    ¦   ¦   ApiExtensions.cs
+    ¦   ¦   appsettings.Development.json
+    ¦   ¦   appsettings.json
+    ¦   ¦   docker-compose.yml
+    ¦   ¦   Dockerfile
+    ¦   ¦   Program.cs
+    ¦   ¦   Users.Api.csproj
+    ¦   ¦   Users.Api.csproj.user
+    ¦   ¦   
+    ¦   ¦                   
+    ¦   +---Controllers
+    ¦   ¦       AuthController.cs
+    ¦   ¦       RolesController.cs
+    ¦   ¦       UsersController.cs
+    ¦   ¦       
+    ¦   +---Models
+    ¦   ¦   L---Requests
+    ¦   ¦           CreateRoleRequest.cs
+    ¦   ¦           ReplacePermissionsRequest.cs
+    ¦           
+    +---Users.Application
+    ¦   ¦   ApplicationExtensions.cs
+    ¦   ¦   Users.Application.csproj
+    ¦   ¦   Users.Application.csproj.user
+    ¦   ¦               
+    ¦   +---Contracts
+    ¦   ¦       ChangeUserLoginRequest.cs
+    ¦   ¦       ChangeUserPasswordRequest.cs
+    ¦   ¦       UpdateUserRequest.cs
+    ¦   ¦       
+    ¦   +---DTOs
+    ¦   ¦       PublicUserDto.cs
+    ¦   ¦       RoleDto.cs
+    ¦   ¦       UserDto.cs
+    ¦   ¦       
+    ¦   +---Interfaces
+    ¦   ¦       IJwtTokenGenerator.cs
+    ¦   ¦       IOutboxService.cs
+    ¦   ¦       
+    ¦   +---Mappings
+    ¦   ¦       PublicUserDtoMappingConfiguration.cs
+    ¦   ¦       UserDtoMappingConfiguration.cs 
+    ¦   +---Responses
+    ¦   ¦       AuthenticationResult.cs
+    ¦   ¦       
+    ¦   +---Roles
+    ¦   ¦   +---Commands
+    ¦   ¦   ¦   +---AddPermissionToRole
+    ¦   ¦   ¦   ¦       AddPermissionToRoleCommand.cs
+    ¦   ¦   ¦   ¦       AddPermissionToRoleCommandHandler.cs
+    ¦   ¦   ¦   ¦       AddPermissionToRoleCommandValidator.cs
+    ¦   ¦   ¦   ¦       
+    ¦   ¦   ¦   +---CreateRole
+    ¦   ¦   ¦   ¦       CreateRoleCommand.cs
+    ¦   ¦   ¦   ¦       CreateRoleCommandHandler.cs
+    ¦   ¦   ¦   ¦       CreateRoleCommandValidator.cs
+    ¦   ¦   ¦   ¦       
+    ¦   ¦   ¦   +---DeleteRole
+    ¦   ¦   ¦   ¦       DeleteRoleCommand.cs
+    ¦   ¦   ¦   ¦       DeleteRoleCommandHandler.cs
+    ¦   ¦   ¦   ¦       
+    ¦   ¦   ¦   L---RemovePermissionFromRole
+    ¦   ¦   ¦           RemovePermissionFromRoleCommand.cs
+    ¦   ¦   ¦           RemovePermissionFromRoleCommandHandler.cs
+    ¦   ¦   ¦           
+    ¦   ¦   L---Queries
+    ¦   ¦       +---GetRoleById
+    ¦   ¦       ¦       GetRoleByIdQuery.cs
+    ¦   ¦       ¦       GetRoleByIdQueryHandler.cs
+    ¦   ¦       ¦       
+    ¦   ¦       L---ListRoles
+    ¦   ¦               ListRolesQuery.cs
+    ¦   ¦               ListRolesQueryHandler.cs
+    ¦   ¦               
+    ¦   L---Users
+    ¦       +---Commands
+    ¦       ¦   +---ChangeUserLogin
+    ¦       ¦   ¦       ChangeUserLoginCommand.cs
+    ¦       ¦   ¦       ChangeUserLoginCommandHandler.cs
+    ¦       ¦   ¦       ChangeUserLoginCommandValidator.cs
+    ¦       ¦   ¦       
+    ¦       ¦   +---ChangeUserPassword
+    ¦       ¦   ¦       ChangeUserPasswordCommand.cs
+    ¦       ¦   ¦       ChangeUserPasswordCommandHandler.cs
+    ¦       ¦   ¦       ChangeUserPasswordCommandValidator.cs
+    ¦       ¦   ¦       
+    ¦       ¦   +---DeleteUser
+    ¦       ¦   ¦       DeleteUserCommand.cs
+    ¦       ¦   ¦       DeleteUserCommandHandler.cs
+    ¦       ¦   ¦       DeleteUserCommandValidator.cs
+    ¦       ¦   ¦       
+    ¦       ¦   +---RegisterUser
+    ¦       ¦   ¦       RegisterUserCommand.cs
+    ¦       ¦   ¦       RegisterUserCommandHandler.cs
+    ¦       ¦   ¦       RegisterUserCommandValidator.cs
+    ¦       ¦   ¦       
+    ¦       ¦   +---RestoreUser
+    ¦       ¦   ¦       RestoreUserCommand.cs
+    ¦       ¦   ¦       RestoreUserCommandHandler.cs
+    ¦       ¦   ¦       RestoreUserCommandValidator.cs
+    ¦       ¦   ¦       
+    ¦       ¦   L---UpdateUser
+    ¦       ¦           UpdateUserCommand.cs
+    ¦       ¦           UpdateUserCommandHandler.cs
+    ¦       ¦           UpdateUserCommandValidator.cs
+    ¦       ¦           
+    ¦       L---Queries
+    ¦           +---AuthenticateUser
+    ¦           ¦       AuthenticateUserQuery.cs
+    ¦           ¦       AuthenticateUserQueryHandler.cs
+    ¦           ¦       
+    ¦           +---GetAllActiveUsers
+    ¦           ¦       GetAllActiveUsersQuery.cs
+    ¦           ¦       GetAllActiveUsersQueryHandler.cs
+    ¦           ¦       
+    ¦           +---GetCurrentUser
+    ¦           +---GetUserByCredentials
+    ¦           ¦       GetUserByCredentialsQuery.cs
+    ¦           ¦       GetUserByCredentialsQueryHandler.cs
+    ¦           ¦       
+    ¦           +---GetUserByEmail
+    ¦           ¦       GetUserByEmailQuery.cs
+    ¦           ¦       GetUserByEmailQueryHandler.cs
+    ¦           ¦       
+    ¦           +---GetUserById
+    ¦           ¦       GetUserByIdQuery.cs
+    ¦           ¦       GetUserByIdQueryHandler.cs
+    ¦           ¦       
+    ¦           +---GetUserByLogin
+    ¦           ¦       GetUserByLoginQuery.cs
+    ¦           ¦       GetUsersByLoginQueryHandler.cs
+    ¦           ¦       
+    ¦           L---GetUsersByAge
+    ¦                   GetUsersByAgeQuery.cs
+    ¦                   GetUsersByAgeQueryHandler.cs
+    ¦                   
+    +---Users.Domain
+    ¦   ¦   Users.Domain.csproj
+    ¦   ¦   Users.Domain.csproj.user
+    ¦   ¦   
+    ¦   ¦               
+    ¦   +---Common
+    ¦   ¦       EntityBase.cs
+    ¦   ¦       ValueObject.cs
+    ¦   ¦       
+    ¦   +---Entities
+    ¦   ¦       Role.cs
+    ¦   ¦       User.cs
+    ¦   ¦       
+    ¦   +---Events
+    ¦   ¦       DomainEvent.cs
+    ¦   ¦       UserDeletedDomainEvent.cs
+    ¦   ¦       UserLoginChangedDomainEvent.cs
+    ¦   ¦       UserPasswordChangedDomainEvent.cs
+    ¦   ¦       UserProfileUpdatedDomainEvent.cs
+    ¦   ¦       UserRegisteredDomainEvent.cs
+    ¦   ¦       UserRestoredDomainEvent.cs
+    ¦   ¦       UserRoleAddedDomainEvent.cs
+    ¦   ¦       UserRoleRemovedDomainEvent.cs
+    ¦   ¦       
+    ¦   +---Interfaces
+    ¦   ¦   ¦   IDomainEvent.cs
+    ¦   ¦   ¦   
+    ¦   ¦   L---Repositories
+    ¦   ¦           IPermissionRepository.cs
+    ¦   ¦           IRoleRepository.cs
+    ¦   ¦           IUserRepository.cs
+    ¦   ¦           
+    ¦   L---ValueObjects
+    ¦           Email.cs
+    ¦           Permission.cs
+    ¦           
+    L---Users.Infrastructure
+        ¦   dotnet
+        ¦   InfrastructureExtensions.cs
+        ¦   Users.Infrastructure.csproj
+        ¦   Users.Infrastructure.csproj.user
+        ¦   
+        +---Auth
+        ¦       AuthorizePermissionAttribute.cs
+        ¦       JwtSettings.cs
+        ¦       JwtTokenGenerator.cs
+        ¦       PermissionHandler.cs
+        ¦       PermissionPolicyProvider.cs
+        ¦       PermissionRequirment.cs
+        ¦       
+        ¦               
+        +---Configurations
+        ¦       PermissionConfiguration.cs
+        ¦       RoleConfiguration.cs
+        ¦       RolePermissionConfiguration.cs
+        ¦       UserConfiguration.cs
+        ¦       UserRoleConfiguration.cs
+        ¦       
+        +---Data
+        ¦       UsersDbContext.cs
+        ¦       
+        +---Kafka
+        ¦       ConfluentConfigOptions.cs
+        ¦       ConfluentKafkaProducer.cs
+        ¦       IKafkaProducer.cs
+        ¦       KafkaSettings.cs
+        ¦       
+        +---Mappings
+        ¦       RoleMappingConfiguration.cs
+        ¦       UserMappingConfiguration.cs
+        ¦       
+        +---Migrations
+        ¦       20250517081230_AdminSeeded.cs
+        ¦       20250517081230_AdminSeeded.Designer.cs
+        ¦       20250911215611_KafkaCommunicationIntegrated.cs
+        ¦       20250911215611_KafkaCommunicationIntegrated.Designer.cs
+        ¦       UsersDbContextModelSnapshot.cs
+        ¦       
+        +---Models
+        ¦       OutboxMessage.cs
+        ¦       PermissionEntity.cs
+        ¦       RoleEntity.cs
+        ¦       RolePermissionEntity.cs
+        ¦       UserData.cs
+        ¦       UserRoleEntity.cs
+        ¦       
+        +---Outbox
+        ¦       OutboxPublisherHostedService.cs
+        ¦       OutboxService.cs
+        ¦       
+        L---Repositories
+                PermissionRepository.cs
+                RoleRepository.cs
+                UserRepository.cs
+                

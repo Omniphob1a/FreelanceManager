@@ -7,20 +7,22 @@ using System.Threading.Tasks;
 
 namespace Notifications.Persistence.Models.Entities
 {
-	public class NotificationEntity
+	public partial class NotificationEntity
 	{
-		public Guid Id { get; }
-		public Guid EventId { get; set; }
+		public Guid Id { get; set; } 
+
+		public Guid? EventId { get; set; }
+
 		public Guid UserId { get; set; }
-		public int Channel { get; set; } = 0;
-		public string TemplateKey { get; set; } = null!;
-		public string? Payload { get; set; }
-		public int Status { get; set; } = 0;
-		public int Attempts { get; set; } = 0;
-		public DateTimeOffset? ScheduledAt { get; set; }
+
+		public string TemplateKey { get; set; } 
+
+		public string? PayloadRaw { get; set; }
+		public string? PayloadRendered { get; set; }
+
 		public DateTimeOffset CreatedAt { get; set; } 
-		public DateTimeOffset? SentAt { get; set; }
 		public DateTimeOffset? ReadAt { get; set; }
-		public string? LastError { get; set; }
+		public List<NotificationDeliveryEntity> Deliveries { get; set; } = new();
+		public bool IsTombstone { get; set; } = false;
 	}
 }

@@ -214,8 +214,7 @@
               "RelativeToolTip": "Projects.Api\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-28T02:28:56.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-28T02:28:56.153Z"
             },
             {
               "$type": "Document",
@@ -227,8 +226,7 @@
               "RelativeToolTip": "Projects.Infrastructure\\Kafka\\KafkaSettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T02:28:41.104Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-28T02:28:41.104Z"
             },
             {
               "$type": "Document",
@@ -253,8 +251,7 @@
               "RelativeToolTip": "Projects.Infrastructure\\Kafka\\ConfluentConfigOptions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-28T02:26:29.941Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-28T02:26:29.941Z"
             },
             {
               "$type": "Document",
@@ -266,8 +263,7 @@
               "RelativeToolTip": "Projects.Persistence\\Models\\OutboxMessage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:44:13.687Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T06:44:13.687Z"
             },
             {
               "$type": "Document",
@@ -303,8 +299,7 @@
               "RelativeToolTip": "Projects.Domain\\Events\\ProjectCreatedDomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:44:56.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T06:44:56.153Z"
             },
             {
               "$type": "Document",
@@ -316,8 +311,7 @@
               "RelativeToolTip": "Projects.Infrastructure\\Outbox\\OutboxPublisherHostedService.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAswDYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:41:54.582Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T06:41:54.582Z"
             },
             {
               "$type": "Document",
@@ -329,8 +323,7 @@
               "RelativeToolTip": "Projects.Infrastructure\\InfrastructureExtensions.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAgwGAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T04:37:58.442Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T04:37:58.442Z"
             },
             {
               "$type": "Document",
@@ -354,8 +347,7 @@
               "RelativeToolTip": "Projects.Domain\\Events\\MilestoneRemovedDomainEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T06:45:02.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T06:45:02.519Z"
             },
             {
               "$type": "Document",

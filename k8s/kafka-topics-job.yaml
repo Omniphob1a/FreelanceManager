@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-kafka-topics
+  namespace: fm-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: create-topics
+        image: confluentinc/cp-kafka:7.5.0
+        command:
+        - sh
+        - -c
+        - |
+          set -e
+          # ждем пока kafka будет готова
+          until kafka-broker-api-versions --bootstrap-server kafka:9092 >/dev/null 2>&1; do
+            echo "Waiting kafka..."
+            sleep 3
+          done
+          kafka-topics --bootstrap-server kafka:9092 --create --topic projects-topic --partitions 1 --replication-factor 1 || true
+          kafka-topics --bootstrap-server kafka:9092 --create --topic users-topic --partitions 1 --replication-factor 1 || true
+          kafka-topics --bootstrap-server kafka:9092 --create --topic tasks-topic --partitions 1 --replication-factor 1 || true
+      restartPolicy: OnFailure

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api
+  namespace: fm-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: users-api
+  template:
+    metadata:
+      labels:
+        app: users-api
+    spec:
+      containers:
+      - name: users-api
+        image: fm/users:local
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ConnectionStrings__UsersDbContext
+          value: "Server=users-db;Port=5432;Database=users;User Id=postgres;Password=123;"
+        - name: Hangfire__Storage__ConnectionString
+          value: "Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;"
+        - name: Kafka__BootstrapServers
+          value: "kafka:9092"
+        - name: Kafka__GroupId
+          value: "users-service"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 8
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-api
+  namespace: fm-app
+spec:
+  selector:
+    app: users-api
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP

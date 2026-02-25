@@ -194,6 +194,9 @@
             "projectReferences": {
               "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Application\\Notifications.Application.csproj": {
                 "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Application\\Notifications.Application.csproj"
+              },
+              "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Domain\\Notifications.Domain.csproj": {
+                "projectPath": "C:\\Users\\volod\\source\\repos\\FreelanceManager\\Notifications\\Notifications.Domain\\Notifications.Domain.csproj"
               }
             }
           }

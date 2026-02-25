@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hangfire-db
+  namespace: fm-app
+spec:
+  serviceName: "hangfire-db"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hangfire-db
+  template:
+    metadata:
+      labels:
+        app: hangfire-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "123"
+        - name: POSTGRES_DB
+          value: "hangfire"
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "pg_isready -U postgres -d hangfire -h localhost"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: pgdata
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: pgdata
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hangfire-db
+  namespace: fm-app
+spec:
+  selector:
+    app: hangfire-db
+  ports:
+  - port: 5432
+    targetPort: 5432
+  type: ClusterIP

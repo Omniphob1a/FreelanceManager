@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tasks.Application.Interfaces;
+using Tasks.Domain.Interfaces;
 
 namespace Notifications.Application.Notifications.Commands.CreateNotification
 {
@@ -64,10 +64,9 @@ namespace Notifications.Application.Notifications.Commands.CreateNotification
 				notification = Notification.Create(
 					request.EventId,
 					request.UserId,
-					(NotificationChannel)request.Channel,
 					request.TemplateKey,
-					request.Payload
-				);
+					request.Payload);
+
 			}
 			catch (DomainException ex)
 			{

@@ -8,9 +8,13 @@ using System.Threading.Tasks;
 
 namespace Notifications.Application.Notifications.Commands.SendNotification
 {
-	public class SendNotificationCommandHandler : IRequestHandler<SendNotificationCommand, Result<Guid>>
+	public class SendNotificationCommandHandler : IRequestHandler<SendNotificationCommand, Result<Unit>>
 	{
-		public async Task<Result<Guid>> Handle(SendNotificationCommand request, CancellationToken cancellationToken)
+		public SendNotificationCommandHandler()
+		{
+		}
+
+		public async Task<Result<Unit>> Handle(SendNotificationCommand request, CancellationToken cancellationToken)
 		{
 			throw new NotImplementedException();
 		}

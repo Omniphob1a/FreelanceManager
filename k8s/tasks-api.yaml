@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-api
+  namespace: fm-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tasks-api
+  template:
+    metadata:
+      labels:
+        app: tasks-api
+    spec:
+      containers:
+      - name: tasks-api
+        image: fm/tasks:local
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ASPNETCORE_URLS
+          value: "http://+:8080"
+        - name: ConnectionStrings__ProjectTasksDbContext
+          value: "Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;"
+        - name: Kafka__BootstrapServers
+          value: "kafka:9092"
+        - name: Kafka__GroupId
+          value: "tasks-service"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 8
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-api
+  namespace: fm-app
+spec:
+  selector:
+    app: tasks-api
+  ports:
+  - port: 8080
+    targetPort: 8080
+  type: ClusterIP

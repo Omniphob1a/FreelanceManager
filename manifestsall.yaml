@@ -1,0 +1,482 @@
+# ============================
+# Namespace
+# ============================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app
+
+---
+
+# ============================
+# Secrets
+# ============================
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+  namespace: app
+type: Opaque
+data:
+  username: cG9zdGdyZXM=   # "postgres"
+  password: MTIz           # "123"
+
+---
+
+# ============================
+# Postgres Deployments + Services
+# ============================
+
+# Projects DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projects-db
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projects-db
+  template:
+    metadata:
+      labels:
+        app: projects-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              value: projects
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+          ports:
+            - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projects-db
+  namespace: app
+spec:
+  selector:
+    app: projects-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+
+# Tasks DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-db
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasks-db
+  template:
+    metadata:
+      labels:
+        app: tasks-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              value: tasks
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+          ports:
+            - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-db
+  namespace: app
+spec:
+  selector:
+    app: tasks-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+
+# Users DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-db
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-db
+  template:
+    metadata:
+      labels:
+        app: users-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              value: users
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+          ports:
+            - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-db
+  namespace: app
+spec:
+  selector:
+    app: users-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+
+---
+
+# ============================
+# Kafka + Zookeeper
+# ============================
+# Zookeeper
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+        - name: zookeeper
+          image: bitnami/zookeeper:latest
+          env:
+            - name: ALLOW_ANONYMOUS_LOGIN
+              value: "yes"
+          ports:
+            - containerPort: 2181
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+  namespace: app
+spec:
+  selector:
+    app: zookeeper
+  ports:
+    - port: 2181
+      targetPort: 2181
+
+# Kafka
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+        - name: kafka
+          image: bitnami/kafka:latest
+          env:
+            - name: KAFKA_BROKER_ID
+              value: "1"
+            - name: KAFKA_ZOOKEEPER_CONNECT
+              value: zookeeper:2181
+            - name: KAFKA_LISTENERS
+              value: PLAINTEXT://:9092
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: PLAINTEXT://kafka:9092
+            - name: ALLOW_PLAINTEXT_LISTENER
+              value: "yes"
+          ports:
+            - containerPort: 9092
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+  namespace: app
+spec:
+  selector:
+    app: kafka
+  ports:
+    - port: 9092
+      targetPort: 9092
+
+---
+
+# ============================
+# API Deployments (подправлены переменные)
+# ============================
+
+# Projects API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projects-api
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projects-api
+  template:
+    metadata:
+      labels:
+        app: projects-api
+    spec:
+      containers:
+        - name: projects-api
+          image: freelance/projects-api:dev
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: projects-db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+            - name: KAFKA_BROKER
+              value: kafka:9092
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projects-api
+  namespace: app
+spec:
+  selector:
+    app: projects-api
+  ports:
+    - port: 80
+      targetPort: 80
+
+# Users API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-api
+  template:
+    metadata:
+      labels:
+        app: users-api
+    spec:
+      containers:
+        - name: users-api
+          image: freelance/users-api:dev
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: users-db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+            - name: KAFKA_BROKER
+              value: kafka:9092
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-api
+  namespace: app
+spec:
+  selector:
+    app: users-api
+  ports:
+    - port: 80
+      targetPort: 80
+
+# Tasks API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-api
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasks-api
+  template:
+    metadata:
+      labels:
+        app: tasks-api
+    spec:
+      containers:
+        - name: tasks-api
+          image: freelance/tasks-api:dev
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: tasks-db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
+            - name: KAFKA_BROKER
+              value: kafka:9092
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-api
+  namespace: app
+spec:
+  selector:
+    app: tasks-api
+  ports:
+    - port: 80
+      targetPort: 80
+
+# Gateway
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+        - name: gateway
+          image: freelance/gateway:dev
+          ports:
+            - containerPort: 80
+          env:
+            - name: KAFKA_BROKER
+              value: kafka:9092
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+  namespace: app
+spec:
+  selector:
+    app: gateway
+  ports:
+    - port: 80
+      targetPort: 80
+  type: NodePort
+
+# Frontend
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: freelance/frontend:dev
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: app
+spec:
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+  type: NodePort

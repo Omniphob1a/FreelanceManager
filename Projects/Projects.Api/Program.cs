@@ -73,13 +73,14 @@ app.UseCookiePolicy(new CookiePolicyOptions
 
 app.UseRouting();
 app.UseCors("AllowFrontend");
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseHangfireDashboard("/mydashboard", new DashboardOptions
 {
 	DashboardTitle = "Projects Jobs Dashboard",
 	StatsPollingInterval = 5000 // Обновление статистики каждые 5 сек
 });
-app.UseAuthentication();
-app.UseAuthorization();
 app.UseExceptionHandler(errorApp =>
 {
 	errorApp.Run(async context =>
