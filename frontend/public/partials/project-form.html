@@ -1,7 +1,7 @@
 <!-- partials/project-form.html -->
 <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl mx-auto transition-all duration-300 hover:shadow-xl">
     <h2 class="text-2xl font-semibold text-gray-900 mb-6 border-b pb-2" id="projectFormTitle">
-        Create New Project
+        Создать проект
     </h2>
     
     <form id="projectForm" class="space-y-6">
@@ -10,70 +10,70 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="md:col-span-2">
-                <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Project Title*</label>
+                <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Название проекта*</label>
                 <input type="text" id="title" name="title" required 
                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
             </div>
             
             <div class="md:col-span-2">
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description*</label>
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Описание*</label>
                 <textarea id="description" name="description" rows="4" required
                           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"></textarea>
             </div>
             
             <div>
-                <label for="dueDate" class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+                <label for="dueDate" class="block text-sm font-medium text-gray-700 mb-1">Срок</label>
                 <input type="text" id="dueDate" name="dueDate" 
                        class="date-input w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 cursor-pointer bg-white"
-                       placeholder="Click to select date"
+                       placeholder="Нажмите, чтобы выбрать дату"
                        readonly="readonly">
-                <p class="text-xs text-gray-500 mt-1">Click the field to open calendar</p>
+                <p class="text-xs text-gray-500 mt-1">Нажмите на поле для открытия календаря</p>
             </div>
             
             <div>
-                <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category*</label>
+                <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Категория*</label>
                 <select id="category" name="category" required
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
-                    <option value="">Select Category</option>
-                    <option value="design">Design</option>
-                    <option value="development">Development</option>
-                    <option value="frontend">Frontend</option>
-                    <option value="backend">Backend</option>
-                    <option value="fullstack">Fullstack</option>
+                    <option value="">Выберите категорию</option>
+                    <option value="design">Дизайн</option>
+                    <option value="development">Разработка</option>
+                    <option value="frontend">Фронтенд</option>
+                    <option value="backend">Бэкенд</option>
+                    <option value="fullstack">Фулстек</option>
                     <!-- Add more categories as needed -->
                 </select>
             </div>
             
             <div>
-                <label for="budgetMin" class="block text-sm font-medium text-gray-700 mb-1">Minimum Budget</label>
-                <input type="number" id="budgetMin" name="budgetMin" min="0" placeholder="e.g., 1000"
+                <label for="budgetMin" class="block text-sm font-medium text-gray-700 mb-1">Минимальный бюджет</label>
+                <input type="number" id="budgetMin" name="budgetMin" min="0" placeholder="Например: 1000"
                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
             </div>
             
             <div>
-                <label for="budgetMax" class="block text-sm font-medium text-gray-700 mb-1">Maximum Budget</label>
-                <input type="number" id="budgetMax" name="budgetMax" min="0" placeholder="e.g., 5000"
+                <label for="budgetMax" class="block text-sm font-medium text-gray-700 mb-1">Максимальный бюджет</label>
+                <input type="number" id="budgetMax" name="budgetMax" min="0" placeholder="Например: 5000"
                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
             </div>
             
             <div>
-                <label for="currency" class="block text-sm font-medium text-gray-700 mb-1">Currency</label>
+                <label for="currency" class="block text-sm font-medium text-gray-700 mb-1">Валюта</label>
                 <select id="currency" name="currency"
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
+                    <option value="RUB">RUB</option>
                     <!-- Add more currencies as needed -->
                 </select>
             </div>
             
             <div class="md:col-span-2">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Tags</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Теги</label>
                 <div class="flex items-center space-x-2 mb-2">
-                    <input type="text" id="tagInput" placeholder="Add a tag and press Enter"
+                    <input type="text" id="tagInput" placeholder="Введите тег и нажмите Enter"
                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <button type="button" id="addTagBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                        Add
+                        Добавить
                     </button>
                 </div>
                 <div id="tagsContainer" class="flex flex-wrap gap-2 mt-2"></div>
@@ -84,10 +84,10 @@
         <!-- Buttons -->
         <div class="flex justify-end space-x-3">
             <button type="button" class="cancel-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-all duration-200">
-                Cancel
+                Отмена
             </button>
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all duration-200">
-                <span id="submitButtonText">Create Project</span>
+                <span id="submitButtonText">Создать проект</span>
             </button>
         </div>
     </form>

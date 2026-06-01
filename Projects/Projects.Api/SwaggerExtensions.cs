@@ -13,7 +13,6 @@ namespace Projects.Api
 				{
 					Version = "v1",
 					Title = "Freelance Projects API",
-					Description = "API для управления проектами фрилансеров",
 				});
 
 				options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

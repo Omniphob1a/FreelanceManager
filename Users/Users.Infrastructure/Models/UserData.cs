@@ -19,5 +19,7 @@ namespace Users.Infrastructure.Models
 		public DateTime? RevokedOn { get; set; } = default!;
 		public string? RevokedBy { get; set; } = default!;
 		public ICollection<UserRoleEntity> UserRoles { get; set; } = new List<UserRoleEntity>();
+		public int RegisteredObjects { get; set; } = 0;
+
 	}
 }

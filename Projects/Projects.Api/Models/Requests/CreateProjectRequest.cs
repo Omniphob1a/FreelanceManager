@@ -9,5 +9,6 @@
 		public string CurrencyCode { get; set; } = default!;
 		public string Category { get; set; } = default!;
 		public List<string> Tags { get; set; } = new();
+		public Guid? ConfirmedByUserId { get; set; }
 	}
 }

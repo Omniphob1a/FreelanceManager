@@ -28,9 +28,10 @@ namespace Projects.Application.Projects.EventHandlers
 		{
 			var e = notification.DomainEvent;
 
-			_logger.LogInformation("Project updated {ProjectId}", e.ProjectId);
+			_logger.LogInformation("Project updated {ProjectId}. Invalidating related caches.", e.ProjectId);
 
 			await _cache.RemoveAsync(CacheKeys.Project(e.ProjectId), cancellationToken);
+			await _cache.RemoveByPrefixAsync(CacheKeys.FilteredProjectListPrefix, cancellationToken);
 		}
 	}
 

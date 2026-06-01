@@ -1,4 +1,17 @@
 import { formatCurrency } from '../api.js';
+import { localizeRuntimeText } from './localization.js';
+
+/** Одна буква для «аватара» без фото (задачи, списки). */
+export function userInitialsLetter(displayName) {
+    const t = String(displayName ?? '').trim();
+    return t.length ? t[0].toUpperCase() : '?';
+}
+
+export function letterAvatarMarkup(label, sizeClasses = 'h-8 w-8') {
+    const letter = userInitialsLetter(label);
+    const safe = letter.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return `<div class="${sizeClasses} rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-semibold shrink-0" aria-hidden="true">${safe}</div>`;
+}
 
 export function showToast(message, type = 'success') {
     const toastContainer = document.getElementById('toastContainer');
@@ -9,14 +22,19 @@ export function showToast(message, type = 'success') {
         const parts = message.split(':');
         if (parts.length > 2) displayMessage = parts.slice(2).join(':').trim();
     }
+    if (typeof displayMessage === 'string') {
+        displayMessage = localizeRuntimeText(displayMessage);
+    }
     
     const toast = document.createElement('div');
-    toast.className = `p-4 rounded-md shadow-md text-white ${
-        type === 'success' ? 'bg-green-500' : 'bg-red-500'
-    } mb-2 transition-all duration-300`;
+    const bg =
+        type === 'success' ? 'bg-green-500' : type === 'info' ? 'bg-blue-500' : 'bg-red-500';
+    const icon =
+        type === 'success' ? 'check-circle' : type === 'info' ? 'info-circle' : 'exclamation-circle';
+    toast.className = `p-4 rounded-md shadow-md text-white ${bg} mb-2 transition-all duration-300`;
     toast.innerHTML = `
         <div class="flex items-center">
-            <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle mr-3"></i>
+            <i class="fas fa-${icon} mr-3"></i>
             <span>${displayMessage}</span>
             <button class="ml-4 text-white hover:text-gray-200 close-toast">
                 <i class="fas fa-times"></i>
@@ -50,12 +68,12 @@ export function getTaskStatusClass(status) {
 
 export function getTaskStatusText(status) {
     const texts = {
-        0: 'To Do',
-        1: 'In Progress',
-        2: 'Completed',
-        3: 'Cancelled'
+        0: 'К выполнению',
+        1: 'В работе',
+        2: 'Завершена',
+        3: 'Отменена'
     };
-    return texts[status] || 'Unknown';
+    return texts[status] || 'Неизвестно';
 }
 
 // Функции для статусов проектов
@@ -73,20 +91,20 @@ export function getStatusClass(status) {
 export function getStatusText(status) {
     status = parseInt(status, 10); // Ensure status is number
     const statusTexts = {
-        0: 'Draft',
-        1: 'Active',
-        2: 'Completed',
-        3: 'Archived'
+        0: 'Черновик',
+        1: 'Активный',
+        2: 'Завершен',
+        3: 'Архив'
     };
-    return statusTexts[status] || 'Unknown';
+    return statusTexts[status] || 'Неизвестно';
 }
 
 export function getStatusHint(status) {
     const hints = {
-        0: 'You can add milestones and tags in draft status',
-        1: 'Project is active and accepting applications',
-        2: 'Project is completed, read-only mode',
-        3: 'Project is archived, read-only mode'
+        0: 'В черновике можно менять параметры проекта',
+        1: 'Проект активен',
+        2: 'Проект завершен, только просмотр',
+        3: 'Проект в архиве, только просмотр'
     };
     return hints[status] || '';
 }
@@ -104,12 +122,12 @@ export function getPriorityClass(priority) {
 
 export function getPriorityText(priority) {
     const texts = {
-        0: 'Low',
-        1: 'Medium',
-        2: 'High',
-        3: 'Urgent'
+        0: 'Низкий',
+        1: 'Средний',
+        2: 'Высокий',
+        3: 'Срочный'
     };
-    return texts[priority] || 'Unknown';
+    return texts[priority] || 'Неизвестно';
 }
 
 // Общие вспомогательные функции
@@ -126,7 +144,7 @@ export function formatBudget(project) {
     if (project.budgetMin && project.budgetMax) {
         return `${formatCurrency(project.budgetMin, project.currency)} - ${formatCurrency(project.budgetMax, project.currency)}`;
     }
-    return 'Budget not set';
+    return 'Бюджет не указан';
 }
 
 export function formatDate(dateString) {
@@ -137,14 +155,14 @@ export function formatDate(dateString) {
         if (isNaN(date.getTime())) return '-';
         
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return date.toLocaleDateString(undefined, options);
+        return date.toLocaleDateString('ru-RU', options);
     } catch {
         return '-';
     }
 }
 
 export function getDaysLeft(endDate) {
-    if (!endDate) return 'No due date';
+    if (!endDate) return 'Срок не указан';
     
     try {
         const today = new Date();
@@ -174,19 +192,19 @@ export function getDaysLeft(endDate) {
             dueDate = new Date(endDate);
         }
         
-        if (isNaN(dueDate.getTime())) return 'Invalid date';
+        if (isNaN(dueDate.getTime())) return 'Некорректная дата';
         
         dueDate.setHours(0, 0, 0, 0);
         
         const diffTime = dueDate - today;
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
         
-        if (diffDays < 0) return `${Math.abs(diffDays)} days overdue`;
-        if (diffDays === 0) return 'Today';
-        return `${diffDays} days left`;
+        if (diffDays < 0) return `Просрочено на ${Math.abs(diffDays)} дн.`;
+        if (diffDays === 0) return 'Сегодня';
+        return `Осталось ${diffDays} дн.`;
     } catch (error) {
         console.error('Error in getDaysLeft:', error);
-        return 'Error calculating';
+        return 'Ошибка расчета';
     }
 }
 
@@ -246,11 +264,11 @@ export function formatActivityTime(timestamp) {
     const diffMs = now - new Date(timestamp);
     const diffMins = Math.floor(diffMs / 60000);
     
-    if (diffMins < 1) return 'Just now';
-    if (diffMins < 60) return `${diffMins} minutes ago`;
+    if (diffMins < 1) return 'Только что';
+    if (diffMins < 60) return `${diffMins} мин назад`;
     
     const diffHours = Math.floor(diffMins / 60);
-    if (diffHours < 24) return `${diffHours} hours ago`;
+    if (diffHours < 24) return `${diffHours} ч назад`;
     
     return formatDate(timestamp);
 }

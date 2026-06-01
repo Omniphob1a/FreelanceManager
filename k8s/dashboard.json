@@ -1,0 +1,37 @@
+{
+  "dashboard": {
+    "title": "YARP Load Balancer Demo",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "Users API Requests",
+        "targets": [
+          {
+            "expr": "http_requests_total{uri=~\"/users-api.*\"}",
+            "legendFormat": "users-api"
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "Tasks API Requests",
+        "targets": [
+          {
+            "expr": "http_requests_total{uri=~\"/tasks-api.*\"}",
+            "legendFormat": "tasks-api"
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "Projects API Requests",
+        "targets": [
+          {
+            "expr": "http_requests_total{uri=~\"/projects-api.*\"}",
+            "legendFormat": "projects-api"
+          }
+        ]
+      }
+    ]
+  }
+}

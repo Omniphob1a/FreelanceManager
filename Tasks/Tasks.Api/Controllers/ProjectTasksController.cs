@@ -1,4 +1,4 @@
-﻿using Mapster;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +12,7 @@ using Tasks.Application.ProjectTasks.Commands.AddComment;
 using Tasks.Application.ProjectTasks.Commands.AddTimeEntry;
 using Tasks.Application.ProjectTasks.Commands.AssignProjectTask;
 using Tasks.Application.ProjectTasks.Commands.CancelProjectTask;
+using Tasks.Application.ProjectTasks.Commands.CompleteProjectTask;
 using Tasks.Application.ProjectTasks.Commands.CreateProjectTask;
 using Tasks.Application.ProjectTasks.Commands.DeleteProjectTask;
 using Tasks.Application.ProjectTasks.Commands.StartProjectTask;
@@ -308,7 +309,7 @@ namespace Tasks.Api.Controllers
 			if (taskId == Guid.Empty)
 				return BadRequest(new { errors = new[] { "TaskId is required." } });
 
-			var command = new StartProjectTaskCommand(taskId);
+			var command = new CompleteProjectTaskCommand(taskId);
 			var result = await _mediator.Send(command, ct);
 
 			if (result.IsFailed)
@@ -332,14 +333,14 @@ namespace Tasks.Api.Controllers
 		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<IActionResult> CancelTask(Guid taskId, [FromBody] CancelTaskRequest request, CancellationToken ct)
+		public async Task<IActionResult> CancelTask(Guid taskId, [FromBody] CancelTaskRequest? request, CancellationToken ct)
 		{
 			_logger.LogInformation("Received request to cancel task {TaskId} by user {UserId}", taskId, _currentUserService.UserId);
 
 			if (taskId == Guid.Empty)
 				return BadRequest(new { errors = new[] { "TaskId is required." } });
 
-			if (string.IsNullOrWhiteSpace(request.Reason))
+			if (request == null || string.IsNullOrWhiteSpace(request.Reason))
 				return BadRequest(new { errors = new[] { "Reason is required." } });
 
 			var command = new CancelProjectTaskCommand(taskId, request.Reason);

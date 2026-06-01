@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-config
+  namespace: lab
+data:
+  appsettings.json: |
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft": "Warning",
+          "Yarp": "Debug"
+        }
+      },
+      "JwtSettings": {
+        "Issuer": "MyApi",
+        "Audience": "Users",
+        "SecretKey": "testKeytestKeytestKey123123123123",
+        "ExpiryMinutes": 6000
+      },
+      "ReverseProxy": {
+        "Routes": {
+          "authRoute": { "ClusterId": "usersCluster", "Match": { "Path": "/api/Auth/{**catch-all}" } },
+          "roles": { "ClusterId": "usersCluster", "Match": { "Path": "/api/Roles/{**catch-all}" } },
+          "usersRoute": { "ClusterId": "usersCluster", "Match": { "Path": "/api/Users/{**catch-all}" } },
+          "projectsRoute": { "ClusterId": "projectsCluster", "Match": { "Path": "/api/Projects/{**catch-all}" } },
+          "tasksRoute": { "ClusterId": "tasksCluster", "Match": { "Path": "/api/ProjectTasks/{**catch-all}" } }
+        },
+        "Clusters": {
+          "usersCluster": {
+            "LoadBalancingPolicy": "RoundRobin",
+            "Destinations": {
+              "users1": { "Address": "http://10.244.0.213:8080" },
+              "users2": { "Address": "http://10.244.0.214:8080" },
+              "users3": { "Address": "http://10.244.0.197:8080" }
+            },
+            "HttpRequest": { "ActivityTimeout": "00:01:00" }
+          },
+          "projectsCluster": {
+            "Destinations": { "projectsDestination": { "Address": "http://projects-api:80" } },
+            "HttpRequest": { "ActivityTimeout": "00:01:00" }
+          },
+          "tasksCluster": {
+            "Destinations": { "tasksDestination": { "Address": "http://tasks-api:8080" } },
+            "HttpRequest": { "ActivityTimeout": "00:01:00" }
+          }
+        }
+      }
+    }

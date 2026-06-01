@@ -54,7 +54,8 @@ namespace Projects.Application.Projects.Commands.CreateProject
 					request.OwnerId,
 					new Budget(request.BudgetMin, request.BudgetMax, CurrencyCode.From(request.CurrencyCode)),
 					Category.From(request.Category),
-					tagsResult.Value
+					tagsResult.Value,
+					request.ConfirmedByUserId // <-- передаём сюда
 				);
 
 				_logger.LogInformation("CreatedAt for project: {CreatedAt}", project.CreatedAt);

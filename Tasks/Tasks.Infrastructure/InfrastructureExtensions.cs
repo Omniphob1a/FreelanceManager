@@ -40,8 +40,6 @@ namespace Tasks.Infrastructure
 				client.BaseAddress = new Uri("http://gateway:8080/api/");
 			});
 
-
-
 			services.AddHostedService<OutboxPublisherHostedService>();
 			services.AddHostedService<ProjectsConsumerHostedService>();
 			services.AddHostedService<UsersConsumerHostedService>();

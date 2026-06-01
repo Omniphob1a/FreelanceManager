@@ -4,6 +4,9 @@ import { showToast, formatCategory } from './ui.js';
 import { loadPage } from './routing.js';
 import { removeProjectFromUI, updateProjectInUI } from './projects.js';
 import { formatDate, getStatusClass, getStatusText, formatBudget, getStatusHint, getFileIconClass, formatFileSize } from './ui.js';
+import { localizeRuntimeText, applyLocalization } from './localization.js';
+
+const t = (value) => localizeRuntimeText(value);
 
 let currentModal = null;
 let currentProjectId = null;
@@ -23,19 +26,19 @@ export async function openProjectModal(projectId) {
     overlay.onclick = closeProjectModal;
 
     const container = document.createElement('div');
-    container.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl z-50 w-11/12 max-w-4xl max-h-[90vh] overflow-auto';
+    container.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-2xl z-50 w-11/12 max-w-6xl max-h-[99vh] overflow-hidden';
     container.onclick = e => e.stopPropagation();
 
     modalRoot.append(overlay, container);
     container.innerHTML = `<div class="text-center p-8">
       <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
-      <p class="mt-4 text-gray-600">Loading project details...</p>
+      <p class="mt-4 text-gray-600">${t('Loading project details...')}</p>
     </div>`;
 
     const project = await ProjectAPI.getProjectById(projectId);
 
      if (!project) {
-        showToast('Project not found', 'error');
+        showToast(t('Project not found'), 'error');
         closeProjectModal();
         return;
      }
@@ -46,11 +49,11 @@ export async function openProjectModal(projectId) {
     currentModal = { overlay, container };
   } catch (err) {
     console.error('Failed to open project modal:', err);
-    let errorMessage = 'Failed to load project details';
+    let errorMessage = t('Failed to load project details');
     if (err.status === 404) {
-      errorMessage = 'Project not found';
+      errorMessage = t('Project not found');
     }
-    showToast('Failed to load project details', 'error');
+    showToast(errorMessage, 'error');
     closeProjectModal();
   }
 }
@@ -80,13 +83,13 @@ async function refreshProject() {
     const container = currentModal.container;
     const statusElements = container.querySelectorAll('#projectStatus, #projectStatusBadge');
     statusElements.forEach(el => {
-      el.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+      el.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${t('Updating...')}`;
     });
     
     const project = await ProjectAPI.getProjectById(currentProjectId);
     
     if (!project) {
-      showToast('Project not found', 'error');
+      showToast(t('Project not found'), 'error');
       closeProjectModal();
       return;
     }
@@ -117,13 +120,13 @@ async function refreshProject() {
     
   } catch (error) {
     console.error('Failed to refresh project:', error);
-    showToast('Failed to refresh project data', 'error');
+    showToast(t('Failed to refresh project data'), 'error');
     
     // Восстанавливаем статус элементы в случае ошибки
     const container = currentModal.container;
     const statusElements = container.querySelectorAll('#projectStatus, #projectStatusBadge');
     statusElements.forEach(el => {
-      el.textContent = 'Error loading';
+      el.textContent = t('Error loading');
       el.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800';
     });
   }
@@ -153,10 +156,10 @@ function setupEditHandlers(container, project) {
     saveDescBtn.addEventListener('click', async () => {
       try {
         await ProjectAPI.updateProject(currentProjectId, { description: descInput.value.trim() });
-        showToast('Description updated');
+        showToast(t('Description updated'));
         await refreshProject();
       } catch (error) {
-        showToast('Failed to update description', 'error');
+        showToast(t('Failed to update description'), 'error');
       }
     });
   }
@@ -194,16 +197,16 @@ function setupEditHandlers(container, project) {
       };
 
       if (budgetData.budgetMin && budgetData.budgetMax && budgetData.budgetMin > budgetData.budgetMax) {
-        showToast('Min budget cannot be greater than max', 'error');
+        showToast(t('Min budget cannot be greater than max'), 'error');
         return;
       }
 
       try {
         await ProjectAPI.updateProject(currentProjectId, budgetData);
-        showToast('Budget updated');
+        showToast(t('Budget updated'));
         await refreshProject();
       } catch (error) {
-        showToast('Failed to update budget', 'error');
+        showToast(t('Failed to update budget'), 'error');
       }
     });
   }
@@ -244,10 +247,10 @@ function setupEditHandlers(container, project) {
     saveDueDateBtn.addEventListener('click', async () => {
       try {
         await ProjectAPI.updateProject(currentProjectId, { dueDate: dueDateInput.value || null });
-        showToast('Due date updated');
+        showToast(t('Due date updated'));
         await refreshProject();
       } catch (error) {
-        showToast('Failed to update due date', 'error');
+        showToast(t('Failed to update due date'), 'error');
       }
     });
   }
@@ -260,8 +263,8 @@ async function renderProjectModal(project, container) {
     container.innerHTML = html;
 
     // Fill project data
-    container.querySelector('#projectTitle').textContent = project.title || 'Untitled Project';
-    container.querySelector('#projectDescription').textContent = project.description || 'No description provided';
+    container.querySelector('#projectTitle').textContent = project.title || t('Untitled Project');
+    container.querySelector('#projectDescription').textContent = project.description || t('No description provided');
     
     // Calculate and display progress based on milestones
     const progress = calculateProjectProgress(project);
@@ -289,7 +292,7 @@ async function renderProjectModal(project, container) {
         const expires = new Date(project.expiresAt);
         const diff = Math.ceil((expires - new Date()) / 86400000);
         let txt = formatDate(project.expiresAt);
-        txt += diff > 0 ? ` (${diff} days left)` : diff === 0 ? ' (Today)' : ` (${Math.abs(diff)} days ago)`;
+        txt += diff > 0 ? ` (${diff} ${t('days left')})` : diff === 0 ? ` (${t('Today')})` : ` (${Math.abs(diff)} ${t('days ago')})`;
         expiresEl.textContent = txt;
       } else {
         expiresEl.textContent = '-';
@@ -314,6 +317,7 @@ async function renderProjectModal(project, container) {
     
     // Initialize compact date pickers
     initializeCompactDatePickers(container);
+    applyLocalization(container);
   } catch (err) {
     console.error('Error rendering project modal:', err);
     // ... остальная часть обработки ошибок
@@ -431,9 +435,9 @@ function setupTeamManagement(container, project) {
                         <i class="fas fa-user text-gray-400"></i>
                     </div>
                     <div>
-                        <h4 class="font-medium text-gray-800">${member.user?.name || 'Unknown User'}</h4>
-                        <p class="text-sm text-gray-500">${member.user?.login || 'No login'} • ${member.role}</p>
-                        ${member.user?.birthday ? `<p class="text-xs text-gray-400">Birthday: ${formatDate(member.user.birthday)}</p>` : ''}
+            <h4 class="font-medium text-gray-800">${member.user?.name || t('Unknown User')}</h4>
+            <p class="text-sm text-gray-500">${member.user?.login || t('No login')} • ${member.role}</p>
+            ${member.user?.birthday ? `<p class="text-xs text-gray-400">${t('Birthday')}: ${formatDate(member.user.birthday)}</p>` : ''}
                     </div>
                 </div>
                 <button class="remove-member-btn text-red-600 hover:text-red-800 p-2" data-login="${member.user?.login}">
@@ -446,7 +450,7 @@ function setupTeamManagement(container, project) {
         teamMembersContainer.querySelectorAll('.remove-member-btn').forEach(btn => {
             btn.addEventListener('click', async () => {
                 const login = btn.dataset.login;
-                if (confirm(`Remove ${login} from project?`)) {
+                if (confirm(`${t('Remove')} ${login} ${t('from project?')}`)) {
                     try {
                         await ProjectAPI.removeMember(project.id, login);
                         showToast('Member removed successfully');
@@ -516,12 +520,12 @@ function setupActionButtons(container, project) {
       if (isVisible) {
         // Hide form
         publishForm.classList.add('hidden');
-        publishBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Publish Project';
+        publishBtn.innerHTML = `<i class="fas fa-paper-plane mr-2"></i> ${t('Publish Project')}`;
         publishBtn.classList.remove('bg-blue-700');
       } else {
         // Show form
         publishForm.classList.remove('hidden');
-        publishBtn.innerHTML = '<i class="fas fa-times mr-2"></i> Cancel';
+        publishBtn.innerHTML = `<i class="fas fa-times mr-2"></i> ${t('Cancel')}`;
         publishBtn.classList.add('bg-blue-700');
         
         // Initialize date picker
@@ -540,7 +544,7 @@ function setupActionButtons(container, project) {
   if (cancelPublishBtn && publishForm) {
     cancelPublishBtn.addEventListener('click', () => {
       publishForm.classList.add('hidden');
-      publishBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Publish Project';
+      publishBtn.innerHTML = `<i class="fas fa-paper-plane mr-2"></i> ${t('Publish Project')}`;
       publishBtn.classList.remove('bg-blue-700');
     });
   }
@@ -550,7 +554,7 @@ function setupActionButtons(container, project) {
     const dateInput = container.querySelector('#publishDateInput');
     
     if (!dateInput.value) {
-      showToast('Please select expiration date', 'error');
+      showToast(t('Please select expiration date'), 'error');
       return;
     }
 
@@ -561,51 +565,51 @@ function setupActionButtons(container, project) {
     try {
       btn.disabled = true;
       spinner.classList.remove('hidden');
-      text.textContent = 'Publishing...';
+      text.textContent = t('Publishing...');
       
       await ProjectAPI.publishProject(project.id, dateInput.value);
-      showToast('Project published successfully');
+      showToast(t('Project published successfully'));
       
       // Hide form and reset
       publishForm.classList.add('hidden');
-      publishBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Publish Project';
+      publishBtn.innerHTML = `<i class="fas fa-paper-plane mr-2"></i> ${t('Publish Project')}`;
       publishBtn.classList.remove('bg-blue-700');
       
       await refreshProject();
     } catch (error) {
       console.error('Publish error:', error);
-      let errorMessage = 'Failed to publish project';
+      let errorMessage = t('Failed to publish project');
       if (error.status === 400) {
-        errorMessage = 'Invalid request. Please check the expiration date.';
+        errorMessage = t('Invalid request. Please check the expiration date.');
       } else if (error.status === 404) {
-        errorMessage = 'Project not found';
+        errorMessage = t('Project not found');
       }
       showToast(errorMessage, 'error');
     } finally {
       btn.disabled = false;
       spinner.classList.add('hidden');
-      text.textContent = 'Publish';
+      text.textContent = t('Publish');
     }
   });
 }
 
   // Остальные кнопки (delete, complete, archive) остаются без изменений
   container.querySelector('#deleteProjectBtn')?.addEventListener('click', async () => {
-    if (confirm('Are you sure you want to delete this project?')) {
+    if (confirm(t('Are you sure you want to delete this project?'))) {
       const btn = container.querySelector('#deleteProjectBtn');
       const originalText = btn.innerHTML;
       
       try {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Deleting...';
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${t('Deleting...')}`;
         btn.disabled = true;
         
         await ProjectAPI.deleteProject(project.id);
         closeProjectModal();
         removeProjectFromUI(project.id);
-        showToast('Project deleted successfully');
+        showToast(t('Project deleted successfully'));
       } catch (error) {
         console.error('Delete error:', error);
-        showToast('Failed to delete project', 'error');
+        showToast(t('Failed to delete project'), 'error');
         btn.innerHTML = originalText;
         btn.disabled = false;
       }
@@ -613,25 +617,25 @@ function setupActionButtons(container, project) {
   });
 
   container.querySelector('#completeProjectBtn')?.addEventListener('click', async () => {
-    if (confirm('Mark this project as completed?')) {
+    if (confirm(t('Mark this project as completed?'))) {
       const btn = container.querySelector('#completeProjectBtn');
       const originalText = btn.innerHTML;
       
       try {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Completing...';
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${t('Completing...')}`;
         btn.disabled = true;
         
         await ProjectAPI.completeProject(project.id);
-        showToast('Project marked as completed');
+        showToast(t('Project marked as completed'));
         await refreshProject();
         
       } catch (error) {
         console.error('Complete error:', error);
-        let errorMessage = 'Failed to complete project';
+        let errorMessage = t('Failed to complete project');
         if (error.status === 400) {
-          errorMessage = 'Invalid request. Project may not be in the correct status.';
+          errorMessage = t('Invalid request. Project may not be in the correct status.');
         } else if (error.status === 404) {
-          errorMessage = 'Project not found';
+          errorMessage = t('Project not found');
         }
         showToast(errorMessage, 'error');
       } finally {
@@ -642,20 +646,20 @@ function setupActionButtons(container, project) {
   });
 
   container.querySelector('#archiveProjectBtn')?.addEventListener('click', async () => {
-    if (confirm('Archive this project?')) {
+    if (confirm(t('Archive this project?'))) {
       const btn = container.querySelector('#archiveProjectBtn');
       const originalText = btn.innerHTML;
       
       try {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Archiving...';
+        btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${t('Archiving...')}`;
         btn.disabled = true;
         
         await ProjectAPI.archiveProject(project.id);
-        showToast('Project archived');
+        showToast(t('Project archived'));
         await refreshProject();
       } catch (error) {
         console.error('Archive error:', error);
-        showToast('Failed to archive project', 'error');
+        showToast(t('Failed to archive project'), 'error');
       } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
@@ -672,20 +676,20 @@ function showPublishForm(container, project) {
     form.id = 'publishFormContainer';
     form.className = 'bg-blue-50 rounded-xl p-5 mb-6 border border-blue-200';
     form.innerHTML = `
-        <h4 class="font-semibold text-gray-800 mb-4">Publish Project</h4>
+        <h4 class="font-semibold text-gray-800 mb-4">${t('Publish Project')}</h4>
         <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Expiration Date*</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">${t('Expiration Date')}*</label>
             <input type="text" id="publishDateInput" 
                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg">
         </div>
         <div class="flex justify-end space-x-3">
             <button id="cancelPublishBtn" 
                     class="px-4 py-2.5 text-gray-600 hover:bg-gray-100 rounded-lg">
-                Cancel
+                ${t('Cancel')}
             </button>
             <button id="confirmPublishBtn" 
                     class="px-4 py-2.5 bg-green-500 text-white rounded-lg hover:bg-green-600">
-                <span class="button-text">Publish</span>
+                <span class="button-text">${t('Publish')}</span>
                 <i class="fas fa-spinner fa-spin ml-2 hidden"></i>
             </button>
         </div>
@@ -710,14 +714,14 @@ function showPublishForm(container, project) {
     
     const date = form.querySelector('#publishDateInput').value;
     if (!date) {
-        showToast('Please select expiration date', 'error');
+        showToast(t('Please select expiration date'), 'error');
         return;
     }
     
     // Показываем загрузку
     btn.disabled = true;
     spinner.classList.remove('hidden');
-    text.textContent = 'Publishing...';
+    text.textContent = t('Publishing...');
     
     try {
         // Проверяем, что дата валидна
@@ -736,27 +740,27 @@ function showPublishForm(container, project) {
         console.log('Publishing project with date:', isoDate);
         
         await ProjectAPI.publishProject(project.id, isoDate);
-        showToast('Project published successfully');
+        showToast(t('Project published successfully'));
         form.remove();
         await refreshProject();
     } catch (error) {
         console.error('Publish error:', error);
-        let errorMessage = 'Failed to publish project';
+        let errorMessage = t('Failed to publish project');
         if (error.message.includes('Invalid date')) {
-            errorMessage = 'Please select a valid date';
+            errorMessage = t('Please select a valid date');
         } else if (error.message.includes('future')) {
-            errorMessage = 'Expiration date must be in the future';
+            errorMessage = t('Expiration date must be in the future');
         } else if (error.status === 400) {
-            errorMessage = 'Invalid request. Please check the expiration date.';
+            errorMessage = t('Invalid request. Please check the expiration date.');
         } else if (error.status === 404) {
-            errorMessage = 'Project not found';
+            errorMessage = t('Project not found');
         }
         showToast(errorMessage, 'error');
     } finally {
         // Возвращаем кнопку в исходное состояние
         btn.disabled = false;
         spinner.classList.add('hidden');
-        text.textContent = 'Publish';
+        text.textContent = t('Publish');
     }
 });
 }
@@ -785,14 +789,14 @@ function setupDescriptionEditor(container, project) {
   saveDescBtn.addEventListener('click', async () => {
     const newDesc = descTextarea.value.trim();
     if (!newDesc) {
-      showToast('Description cannot be empty', 'error');
+      showToast(t('Description cannot be empty'), 'error');
       return;
     }
 
     const originalText = saveDescBtn.innerHTML;
     
     try {
-      saveDescBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Saving...';
+      saveDescBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${t('Saving...')}`;
       saveDescBtn.disabled = true;
       
       // ИСПРАВЛЕНО: Отправляем все обязательные поля, не только описание
@@ -820,18 +824,18 @@ function setupDescriptionEditor(container, project) {
       descEditor.classList.add('hidden');
       editDescBtn.classList.remove('hidden');
       
-      showToast('Description updated successfully');
+      showToast(t('Description updated successfully'));
       
     } catch (error) {
       console.error('Update description error:', error);
-      let errorMessage = 'Failed to update description';
+      let errorMessage = t('Failed to update description');
       
       if (error.message.includes('validation errors')) {
-        errorMessage = 'Please fill all required fields correctly';
+        errorMessage = t('Please fill all required fields correctly');
       } else if (error.status === 400) {
-        errorMessage = 'Invalid data provided';
+        errorMessage = t('Invalid data provided');
       } else if (error.status === 404) {
-        errorMessage = 'Project not found';
+        errorMessage = t('Project not found');
       }
       
       showToast(errorMessage, 'error');
@@ -860,11 +864,11 @@ function setupAttachments(container, project) {
 
     try {
       await ProjectAPI.addAttachment(currentProjectId, file);
-      showToast('Attachment uploaded');
+      showToast(t('Attachment uploaded'));
       e.target.value = '';
       await refreshProject();
     } catch (error) {
-      showToast('Failed to upload attachment', 'error');
+      showToast(t('Failed to upload attachment'), 'error');
       e.target.value = '';
     }
   });
@@ -875,7 +879,7 @@ function renderAttachments(container, attachments) {
   if (!attachmentsContainer) return;
 
   if (!attachments || attachments.length === 0) {
-    attachmentsContainer.innerHTML = '<div class="text-center py-8 text-gray-500 col-span-full">No attachments yet</div>';
+    attachmentsContainer.innerHTML = `<div class="text-center py-8 text-gray-500 col-span-full">${t('No attachments yet')}</div>`;
     return;
   }
 
@@ -915,17 +919,17 @@ function setupMilestones(container, project) {
     const dueDate = container.querySelector('#milestoneDueDateInput').value;
     
     if (!title || !dueDate) {
-      showToast('Please fill all required fields', 'error');
+      showToast(t('Please fill all required fields'), 'error');
       return;
     }
 
     try {
       await ProjectAPI.addMilestone(currentProjectId, { title, dueDate });
-      showToast('Milestone added');
+      showToast(t('Milestone added'));
       container.querySelector('#milestoneFormContainer').classList.add('hidden');
       await refreshProject();
     } catch (error) {
-      showToast('Failed to add milestone', 'error');
+      showToast(t('Failed to add milestone'), 'error');
     }
   });
 
@@ -939,7 +943,7 @@ function renderMilestones(container, milestones) {
   if (!milestonesContainer) return;
 
   if (!milestones || milestones.length === 0) {
-    milestonesContainer.innerHTML = '<div class="text-center py-4 text-gray-500">No milestones added</div>';
+    milestonesContainer.innerHTML = `<div class="text-center py-4 text-gray-500">${t('No milestones added')}</div>`;
     return;
   }
 
@@ -956,14 +960,14 @@ function renderMilestones(container, milestones) {
       <div class="flex-grow">
         <div class="flex justify-between items-start">
           <div>
-            <h4 class="font-semibold text-gray-800">${milestone.title || 'Untitled Milestone'}</h4>
+            <h4 class="font-semibold text-gray-800">${milestone.title || t('Untitled Milestone')}</h4>
             <div class="flex items-center mt-1">
               <span class="text-xs text-gray-500 mr-3">
                 <i class="far fa-calendar mr-1"></i>
-                ${milestone.isCompleted ? 'Completed' : 'Due'}: ${formatDate(milestone.dueDate)}
+                ${milestone.isCompleted ? t('Completed') : t('Due')}: ${formatDate(milestone.dueDate)}
               </span>
               <span class="text-xs px-2 py-1 ${milestone.isCompleted ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} rounded-full">
-                ${milestone.isCompleted ? 'Completed' : 'Pending'}
+                ${milestone.isCompleted ? t('Completed') : t('Pending')}
               </span>
             </div>
           </div>
@@ -984,18 +988,18 @@ function renderMilestones(container, milestones) {
       
       try {
         await ProjectAPI.completeMilestone(currentProjectId, { milestoneId });
-        showToast('Milestone completed');
+        showToast(t('Milestone completed'));
         await refreshProject();
       } catch (error) {
         console.error('Error completing milestone:', error);
         
-        let errorMessage = 'Failed to complete milestone';
+        let errorMessage = t('Failed to complete milestone');
         if (error.status === 404) {
-          errorMessage = 'Milestone or project not found';
+          errorMessage = t('Milestone or project not found');
         } else if (error.status === 400) {
-          errorMessage = 'Invalid request - milestone may already be completed';
+          errorMessage = t('Invalid request - milestone may already be completed');
         } else if (error.status === 403) {
-          errorMessage = 'You do not have permission to complete this milestone';
+          errorMessage = t('You do not have permission to complete this milestone');
         }
         
         showToast(errorMessage, 'error');
@@ -1037,11 +1041,11 @@ function setupTags(container, project) {
 
     try {
       await ProjectAPI.addTags(currentProjectId, [tag]);
-      showToast('Tag added');
+      showToast(t('Tag added'));
       tagInput.value = '';
       await refreshProject();
     } catch (error) {
-      showToast('Failed to add tag', 'error');
+      showToast(t('Failed to add tag'), 'error');
     }
   });
 
@@ -1058,7 +1062,7 @@ function renderTags(container, tags) {
   if (!tagsContainer) return;
 
   if (!tags || tags.length === 0) {
-    tagsContainer.innerHTML = '<div class="text-sm text-gray-500 w-full">No tags added</div>';
+    tagsContainer.innerHTML = `<div class="text-sm text-gray-500 w-full">${t('No tags added')}</div>`;
     return;
   }
 
@@ -1073,13 +1077,13 @@ function renderTags(container, tags) {
 
   tagsContainer.querySelectorAll('.delete-tag-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
-      if (confirm(`Remove tag "${btn.dataset.tag}"?`)) {
+      if (confirm(`${t('Remove tag')} "${btn.dataset.tag}"?`)) {
         try {
           await ProjectAPI.deleteTags(currentProjectId, [btn.dataset.tag]);
-          showToast('Tag removed');
+          showToast(t('Tag removed'));
           await refreshProject();
         } catch (error) {
-          showToast('Failed to remove tag', 'error');
+          showToast(t('Failed to remove tag'), 'error');
         }
       }
     });

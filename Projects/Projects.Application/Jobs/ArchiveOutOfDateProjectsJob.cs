@@ -1,4 +1,5 @@
 ﻿// Application/Jobs/ArchiveOutOfDateProjectsJob.cs
+using Hangfire;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Projects.Application.Interfaces;
@@ -22,6 +23,7 @@ namespace Projects.Application.Jobs
 			_logger = logger;
 		}
 
+		[DisableConcurrentExecution(timeoutInSeconds: 1800)]
 		public async Task ExecuteAsync() 
 		{
 			try
@@ -35,7 +37,7 @@ namespace Projects.Application.Jobs
 					return;
 				}
 
-				foreach (var project in projects)
+				foreach (var project in projects.Take(25))
 				{
 					await _mediator.Send(new ArchiveProjectCommand(project.Id));
 					_logger.LogInformation($"Archived project {project.Id}.");

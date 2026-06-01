@@ -1,93 +1,93 @@
-// js/api.js
+/** База API: из .env (VITE_API_URL), по умолчанию локальный gateway. */
+const API_BASE_URL = String(import.meta.env?.VITE_API_URL ?? 'http://localhost:5000').replace(/\/$/, '');
+/** Docker / cold start: запас по времени для локальной разработки */
+const REQUEST_TIMEOUT_MS = 30000;
 
-// Базовый URL API (Vite injects import.meta.env.VITE_API_URL)
-const API_BASE_URL = 'https://freelancemanager-gateway.onrender.com';
+function toQueryString(filters = {}) {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+        if (value === undefined || value === null || value === '') return;
+        if (Array.isArray(value)) {
+            value.forEach((item) => {
+                if (item !== undefined && item !== null && item !== '') {
+                    params.append(key, String(item));
+                }
+            });
+            return;
+        }
+        params.append(key, String(value));
+    });
+    return params.toString();
+}
 
+function createApiError(method, endpoint, status, message) {
+    const error = new Error(`API ${method} ${endpoint} failed: ${status} - ${message}`);
+    error.status = status;
+    return error;
+}
 
-// Общая функция для выполнения запросов
 async function fetchAPI(endpoint, method = 'GET', body = null, headers = {}) {
     const url = `${API_BASE_URL}${endpoint}`;
-    
     const token = localStorage.getItem('token');
-    if (token) headers['Authorization'] = `Bearer ${token}`;
+    const requestHeaders = { ...headers };
 
-    const options = { method, headers, credentials: 'include' };
+    if (token) requestHeaders.Authorization = `Bearer ${token}`;
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+    const options = {
+        method,
+        headers: requestHeaders,
+        credentials: 'include',
+        signal: controller.signal
+    };
 
     if (body instanceof FormData) {
         options.body = body;
-    } else if (body) {
-        headers['Content-Type'] = 'application/json';
+    } else if (body !== null && body !== undefined) {
+        requestHeaders['Content-Type'] = 'application/json';
         options.body = JSON.stringify(body);
     }
-    
-    console.log('=== FETCH API DEBUG ===');
-    console.log('URL:', url);
-    console.log('Method:', method);
-    console.log('Headers:', headers);
-    console.log('Body:', body);
-    console.log('Options:', options);
-    
+
     try {
         const response = await fetch(url, options);
-        
-        console.log('Response status:', response.status);
-        console.log('Response ok:', response.ok);
-        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
 
         if (!response.ok) {
             let errorText = await response.text();
-            console.log('Error response text:', errorText);
-            
-            try {
-                const errorJson = JSON.parse(errorText);
-                console.log('Parsed error JSON:', errorJson);
-                
-                if (errorJson.errors && errorJson.errors.length > 0) {
-                    errorText = errorJson.errors.join(', ');
-                } else if (errorJson.message) {
-                    errorText = errorJson.message;
+            if (errorText) {
+                try {
+                    const errorJson = JSON.parse(errorText);
+                    if (Array.isArray(errorJson.errors)) {
+                        errorText = errorJson.errors.join(', ');
+                    } else if (errorJson.message) {
+                        errorText = errorJson.message;
+                    }
+                } catch {
+                    // Keep original text when response is not JSON.
                 }
-            } catch (parseError) {
-                console.log('Failed to parse error as JSON:', parseError);
             }
-            
-            const error = new Error(`API ${method} ${endpoint} failed: ${response.status} - ${errorText}`);
-            error.status = response.status;
-            console.log('Throwing error:', error);
-            throw error;
+            throw createApiError(method, endpoint, response.status, errorText || 'Unknown API error');
         }
 
-        if (response.status === 204) {
-            console.log('204 No Content response');
-            return null;
+        if (response.status === 204) return null;
+
+        const text = await response.text();
+        if (!text) return null;
+
+        try {
+            return JSON.parse(text);
+        } catch {
+            return text;
         }
-        
-        const responseText = await response.text();
-        console.log('Response text:', responseText);
-        
-        if (responseText) {
-            try {
-                const result = JSON.parse(responseText);
-                console.log('Parsed response JSON:', result);
-                return result;
-            } catch (parseError) {
-                console.log('Failed to parse response as JSON:', parseError);
-                return responseText;
-            }
-        }
-        
-        console.log('Empty response body');
-        return null;
-        
     } catch (error) {
-        console.error('=== FETCH ERROR ===');
-        console.error('Network error:', error);
-        console.error('Error stack:', error.stack);
-        
+        if (error.name === 'AbortError') {
+            throw createApiError(method, endpoint, 408, 'Request timeout');
+        }
         if (!error.status) error.status = 0;
         throw error;
     } finally {
-        console.log('=== FETCH API DEBUG END ===');
+        window.clearTimeout(timeoutId);
     }
 }
 
@@ -96,7 +96,7 @@ async function fetchAPI(endpoint, method = 'GET', body = null, headers = {}) {
 // =====================
 export const ProjectAPI = {
   async getProjects(filters = {}) {
-    const queryParams = new URLSearchParams(filters).toString();
+    const queryParams = toQueryString(filters);
     return fetchAPI(`/api/Projects?${queryParams}`);
   },
 
@@ -112,8 +112,8 @@ export const ProjectAPI = {
     }
   },
 
-  async addMember(projectId, email, role) {
-    return fetchAPI(`/api/Projects/${projectId}/add-member`, 'PATCH', { email, role });
+  async addMember(projectId, login, role) {
+    return fetchAPI(`/api/Projects/${projectId}/add-member`, 'PATCH', { login, role });
   },
 
   async removeMember(projectId, email) {
@@ -125,7 +125,7 @@ export const ProjectAPI = {
   },
 
   async createProject(projectData) {
-    const requiredFields = ['title', 'description', 'ownerId', 'category'];
+    const requiredFields = ['title', 'description', 'category'];
     const missingFields = requiredFields.filter(field => !projectData[field]);
     
     if (missingFields.length > 0) {
@@ -181,7 +181,7 @@ export const ProjectAPI = {
   },
 
   async deleteMilestone(projectId, milestoneId) {
-    return fetchAPI(`/api/Projects/${projectId}/delete-milestone`, 'PATCH', { attachmentId: milestoneId });
+    return fetchAPI(`/api/Projects/${projectId}/delete-milestone`, 'PATCH', { milestoneId });
   },
 
   async completeMilestone(projectId, { milestoneId }) {
@@ -219,10 +219,43 @@ export const AuthAPI = {
 // =====================
 // User API
 // =====================
+
+/** Нормализация ответа Users API (camelCase / PascalCase, единый id для фронта). */
+export function normalizeUserDto(raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const u = raw;
+    const idRaw = u.id ?? u.Id;
+    if (idRaw === undefined || idRaw === null || idRaw === '') return null;
+    const id = String(idRaw);
+    const rolesRaw = u.roles ?? u.Roles;
+    const roles = Array.isArray(rolesRaw) ? rolesRaw.map(String) : [];
+    return {
+        id,
+        login: String(u.login ?? u.Login ?? ''),
+        name: String(u.name ?? u.Name ?? ''),
+        email: String(u.email ?? u.Email ?? ''),
+        gender: Number(u.gender ?? u.Gender ?? 2),
+        birthday: u.birthday ?? u.Birthday ?? null,
+        createdAt: u.createdAt ?? u.CreatedAt ?? null,
+        modifiedOn: u.modifiedOn ?? u.ModifiedOn ?? null,
+        admin: Boolean(u.admin ?? u.Admin ?? false),
+        roles,
+        permissions: Array.isArray(u.permissions ?? u.Permissions)
+            ? (u.permissions ?? u.Permissions).map(String)
+            : [],
+    };
+}
+
 export const UserAPI = {
     async getUsers() { return fetchAPI('/api/Users'); },
     async updateUser(userId, userData) { return fetchAPI(`/api/Users/${userId}`, 'PUT', userData); },
-    async getProfile() { return fetchAPI('/api/Users/get-my-profile', 'POST'); }
+    async changePassword(userId, newPassword) {
+        return fetchAPI(`/api/Users/${userId}/password`, 'PUT', { newPassword });
+    },
+    async getProfile() {
+        const raw = await fetchAPI('/api/Users/get-my-profile', 'POST');
+        return normalizeUserDto(raw);
+    },
 };
 
 // =====================
@@ -230,13 +263,17 @@ export const UserAPI = {
 // =====================
 export const TaskAPI = {
     async getTasks(filters = {}) {
-        const queryParams = new URLSearchParams(filters).toString();
+        const queryParams = toQueryString(filters);
         return fetchAPI(`/api/ProjectTasks?${queryParams}`);
     },
     async createTask(taskData) { return fetchAPI('/api/ProjectTasks', 'POST', taskData); },
     async getTaskById(taskId, includes = []) {
         const queryParams = includes.length ? `?includes=${includes.join(',')}` : '';
-        return fetchAPI(`/api/ProjectTasks/${taskId}${queryParams}`);
+        const task = await fetchAPI(`/api/ProjectTasks/${taskId}${queryParams}`);
+        if (!task) {
+            throw createApiError('GET', `/api/ProjectTasks/${taskId}${queryParams}`, 404, 'Task not found');
+        }
+        return task;
     },
     async updateTask(taskId, taskData) { return fetchAPI(`/api/ProjectTasks/${taskId}`, 'PUT', taskData); },
     async deleteTask(taskId) { return fetchAPI(`/api/ProjectTasks/${taskId}`, 'DELETE'); },
@@ -247,6 +284,8 @@ export const TaskAPI = {
     async cancelTask(taskId, reason) { return fetchAPI(`/api/ProjectTasks/${taskId}/cancel`, 'PATCH', { reason }); },
     async addTimeEntry(taskId, timeEntryData) { return fetchAPI(`/api/ProjectTasks/${taskId}/time-entries`, 'POST', timeEntryData); },
     async addComment(taskId, commentData) { return fetchAPI(`/api/ProjectTasks/${taskId}/comments`, 'POST', commentData); },
+    async getComments(taskId) { return fetchAPI(`/api/ProjectTasks/${taskId}/comments`); },
+    async getProjectMembers(projectId) { return fetchAPI(`/api/ProjectTasks/${projectId}/projectMembers`); },
 };
 
 // =====================
@@ -279,9 +318,4 @@ export function formatCurrency(amount, currency = 'USD') {
 export function formatDate(dateString) {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
-}
-export function getDaysLeft(endDate) {
-    const today = new Date();
-    const dueDate = new Date(endDate);
-    return Math.ceil((dueDate - today)/(1000*60*60*24));
 }

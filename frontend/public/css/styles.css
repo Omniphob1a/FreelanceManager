@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .sidebar {
     transition: all 0.3s ease;
 }
@@ -849,6 +853,38 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
+.project-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.project-title {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+    line-height: 1.25;
+}
+
+.project-title-dashboard {
+    display: -webkit-box;
+    min-height: 2.5em;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.project-title-grid {
+    display: -webkit-box;
+    min-height: 3.75em;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
 /* ===== VIEW TOGGLE BUTTONS ===== */
 #gridViewBtn.active,
 #listViewBtn.active {
@@ -1037,7 +1073,7 @@ select:focus-visible {
 .filters-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 28px rgba(14,30,37,0.07);
-  background-color: #fbfdff; /
+  background-color: #fbfdff;
 }
 
 .filters-btn:active { transform: translateY(0); }
@@ -1193,6 +1229,31 @@ select:focus-visible {
 .filter-card input.filter-status + span:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+/* ---- Select readability fixes (budget/tasks filters + language switch) ---- */
+select:not([multiple]) {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #64748b 50%), linear-gradient(135deg, #64748b 50%, transparent 50%);
+    background-position: calc(100% - 15px) calc(50% - 3px), calc(100% - 10px) calc(50% - 3px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2.6rem !important;
+}
+
+#filtersPanel select,
+#quickPriorityFilter,
+#filterProject,
+#filterBillable,
+#statusChartRange,
+#deadlineChartRange {
+    padding-right: 2.75rem !important;
+}
+
+/* Keep project overview visually denser to avoid unnecessary scroll */
+.project-detail #overviewTab .bg-white.rounded-xl {
+    padding: 0.9rem;
 }
 
 /* состояние выбранного чипа */
@@ -1882,4 +1943,30 @@ body {
   .empty-state-description {
     color: var(--color-gray-700);
   }
+}
+
+/* Language switch + select controls */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7280' d='M1.41.59 6 5.17 10.59.59 12 2 6 8 0 2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 0.65rem;
+  padding-right: 2rem !important;
+}
+
+select[multiple] {
+  background-image: none;
+  padding-right: 0.75rem !important;
+}
+
+.input-icon {
+  left: 0.65rem;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.filter-input.pl-10 {
+  padding-left: 2.4rem !important;
 }

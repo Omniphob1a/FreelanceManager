@@ -1,11 +1,9 @@
 ﻿// Application/Jobs/ArchiveOutOfDateProjectsJob.cs
+using Hangfire;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Projects.Application.Interfaces;
-using Projects.Application.Projects.Commands.ArchiveProject;
 using Projects.Application.Projects.Commands.EscalateMilestone;
-using Projects.Application.Projects.Commands.RescheduleAllMilestones;
-using Projects.Application.Projects.Commands.RescheduleMilestone;
 
 namespace Projects.Application.Jobs
 {
@@ -25,23 +23,26 @@ namespace Projects.Application.Jobs
 			_logger = logger;
 		}
 
+		[DisableConcurrentExecution(timeoutInSeconds: 1800)]
 		public async Task ExecuteAsync()
 		{
 			try
 			{
 				_logger.LogInformation("Starting EscalateOutOfDateMilestonesJob...");
-				var projects = await _projectQueryService.GetAllAsync();
+				var projects = await _projectQueryService.GetProjectsWithOutOfDateMilestonesAsync(
+					DateTime.UtcNow,
+					take: 25,
+					CancellationToken.None);
 
 				if (projects?.Any() != true)
 				{
-					_logger.LogInformation("No projects found.");
+					_logger.LogInformation("No overdue milestones found.");
 					return;
 				}
 
 				foreach (var project in projects)
 				{
 					await _mediator.Send(new EscalateMilestoneCommand(project.Id));
-					await _mediator.Send(new RescheduleAllMilestonesCommand(project.Id, TimeSpan.FromDays(3)));
 					_logger.LogInformation($"Milestones escalated in project {project.Id}.");
 				}
 			}

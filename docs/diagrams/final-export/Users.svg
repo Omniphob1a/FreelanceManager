@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2850" height="1150" viewBox="0 0 2850 1150">
+<rect width="100%" height="100%" fill="white"/>
+<rect x="40" y="18" width="300" height="38" rx="3" fill="#cfe8ff" stroke="#222"/>
+<text x="190" y="43" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#111">API</text>
+<rect x="420" y="18" width="590" height="38" rx="3" fill="#fff0bd" stroke="#222"/>
+<text x="715" y="43" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#111">Application</text>
+<rect x="1090" y="18" width="560" height="38" rx="3" fill="#dff4df" stroke="#222"/>
+<text x="1370" y="43" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#111">Domain</text>
+<rect x="1730" y="18" width="370" height="38" rx="3" fill="#eadff8" stroke="#222"/>
+<text x="1915" y="43" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#111">Persistence</text>
+<rect x="2180" y="18" width="590" height="38" rx="3" fill="#f8dfd8" stroke="#222"/>
+<text x="2475" y="43" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#111">Infrastructure</text>
+<polyline points="300.0,185.0 430.0,185.0 430.0,150.0 560.0,150.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="300.0,425.0 430.0,425.0 430.0,180.0 560.0,180.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="190.0,620.0 190.0,415.0 680.0,415.0 680.0,210.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="670.0,355.0 685.0,355.0 685.0,335.0 700.0,335.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="670.0,555.0 685.0,555.0 685.0,550.0 700.0,550.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="670.0,750.0 685.0,750.0 685.0,750.0 700.0,750.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="900.0,335.0 1120.0,335.0 1120.0,700.0 1340.0,700.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="900.0,550.0 1120.0,550.0 1120.0,750.0 1340.0,750.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="900.0,750.0 1120.0,750.0 1120.0,877.5 1340.0,877.5" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="1146.7,360.0 1146.7,380.0 1435.0,380.0 1435.0,400.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="1795.0,360.0 1795.0,305.0 1753.3,305.0 1753.3,250.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="1795.0,560.0 1795.0,405.0 1836.7,405.0 1836.7,250.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="2100.0,610.0 2010.0,610.0 2010.0,783.3 1920.0,783.3" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="2100.0,760.0 2010.0,760.0 2010.0,826.7 1920.0,826.7" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="1670.0,400.0 1595.0,400.0 1595.0,725.0 1520.0,725.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="1670.0,600.0 1595.0,600.0 1595.0,877.5 1520.0,877.5" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="2210.0,260.0 2210.0,235.0 2210.0,235.0 2210.0,210.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="2210.0,570.0 2210.0,545.0 2210.0,545.0 2210.0,520.0" fill="none" stroke="#222" stroke-width="1.2" stroke-dasharray="7 5"/>
+<polyline points="1233.3,360.0 1233.3,415.0 1180.0,415.0 1180.0,470.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1180.0,630.0 1180.0,680.0 1180.0,680.0 1180.0,730.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1320.0,230.0 1345.0,230.0 1345.0,165.0 1370.0,165.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<rect x="80" y="130" width="220" height="110" rx="2" fill="#cfe8ff" stroke="#222"/>
+<text x="190" y="146" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;контроллер&gt;&gt;</text>
+<text x="190" y="164" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">AuthController</text>
+<line x1="80" y1="182" x2="300" y2="182" stroke="#333"/>
+<text x="86" y="195" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Register()</text>
+<text x="86" y="209" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Login()</text>
+<rect x="80" y="360" width="220" height="130" rx="2" fill="#cfe8ff" stroke="#222"/>
+<text x="190" y="376" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;контроллер&gt;&gt;</text>
+<text x="190" y="394" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">UsersController</text>
+<line x1="80" y1="412" x2="300" y2="412" stroke="#333"/>
+<text x="86" y="425" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+GetById()</text>
+<text x="86" y="439" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Update()</text>
+<text x="86" y="453" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Delete()</text>
+<text x="86" y="467" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Restore()</text>
+<rect x="80" y="620" width="220" height="120" rx="2" fill="#cfe8ff" stroke="#222"/>
+<text x="190" y="636" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;контроллер&gt;&gt;</text>
+<text x="190" y="654" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">RolesController</text>
+<line x1="80" y1="672" x2="300" y2="672" stroke="#333"/>
+<text x="86" y="685" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+CreateRole()</text>
+<text x="86" y="699" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+ListRoles()</text>
+<text x="86" y="713" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+AddPermission()</text>
+<rect x="560" y="120" width="240" height="90" rx="2" fill="#fff0bd" stroke="#222"/>
+<text x="680" y="136" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;интерфейс&gt;&gt;</text>
+<text x="680" y="154" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">IMediator</text>
+<line x1="560" y1="172" x2="800" y2="172" stroke="#333"/>
+<text x="566" y="185" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Send()</text>
+<rect x="460" y="285" width="210" height="140" rx="2" fill="#fff0bd" stroke="#222"/>
+<text x="565" y="301" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;команда&gt;&gt;</text>
+<text x="565" y="319" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">RegisterUserCommand</text>
+<line x1="460" y1="337" x2="670" y2="337" stroke="#333"/>
+<text x="466" y="350" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Login: string</text>
+<text x="466" y="364" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Password: string</text>
+<text x="466" y="378" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Name: string</text>
+<text x="466" y="392" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Email: string</text>
+<rect x="700" y="285" width="200" height="100" rx="2" fill="#fff0bd" stroke="#222"/>
+<text x="800" y="301" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;обработчик&gt;&gt;</text>
+<text x="800" y="319" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">RegisterUserCommandHandler</text>
+<line x1="700" y1="337" x2="900" y2="337" stroke="#333"/>
+<text x="706" y="350" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Handle()</text>
+<rect x="460" y="500" width="210" height="110" rx="2" fill="#fff0bd" stroke="#222"/>
+<text x="565" y="516" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;запрос&gt;&gt;</text>
+<text x="565" y="534" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">AuthenticateUserQuery</text>
+<line x1="460" y1="552" x2="670" y2="552" stroke="#333"/>
+<text x="466" y="565" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Login: string</text>
+<text x="466" y="579" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Password: string</text>
+<rect x="700" y="500" width="200" height="100" rx="2" fill="#fff0bd" stroke="#222"/>
+<text x="800" y="516" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;обработчик&gt;&gt;</text>
+<text x="800" y="534" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="#111">AuthenticateUserQueryHandler</text>
+<line x1="700" y1="552" x2="900" y2="552" stroke="#333"/>
+<text x="706" y="565" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Handle()</text>
+<rect x="460" y="700" width="210" height="100" rx="2" fill="#fff0bd" stroke="#222"/>
+<text x="565" y="716" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;команда&gt;&gt;</text>
+<text x="565" y="734" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">CreateRoleCommand</text>
+<line x1="460" y1="752" x2="670" y2="752" stroke="#333"/>
+<text x="466" y="765" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Name: string</text>
+<rect x="700" y="700" width="200" height="100" rx="2" fill="#fff0bd" stroke="#222"/>
+<text x="800" y="716" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;обработчик&gt;&gt;</text>
+<text x="800" y="734" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">CreateRoleCommandHandler</text>
+<line x1="700" y1="752" x2="900" y2="752" stroke="#333"/>
+<text x="706" y="765" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Handle()</text>
+<rect x="1060" y="100" width="260" height="260" rx="2" fill="#dff4df" stroke="#222"/>
+<text x="1190" y="116" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;сущность&gt;&gt;</text>
+<text x="1190" y="134" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">User</text>
+<line x1="1060" y1="152" x2="1320" y2="152" stroke="#333"/>
+<text x="1066" y="165" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Id: Guid</text>
+<text x="1066" y="179" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Login: string</text>
+<text x="1066" y="193" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+PasswordHash: string</text>
+<text x="1066" y="207" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Name: string</text>
+<text x="1066" y="221" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Birthday: DateTime</text>
+<text x="1066" y="235" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Email: Email</text>
+<line x1="1060" y1="249" x2="1320" y2="249" stroke="#333"/>
+<text x="1066" y="262" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Register()</text>
+<text x="1066" y="276" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+UpdateProfile()</text>
+<text x="1066" y="290" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+ChangePassword()</text>
+<text x="1066" y="304" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Delete()</text>
+<text x="1066" y="318" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Restore()</text>
+<text x="1066" y="332" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+AddRole()</text>
+<rect x="1060" y="470" width="240" height="160" rx="2" fill="#dff4df" stroke="#222"/>
+<text x="1180" y="486" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;сущность&gt;&gt;</text>
+<text x="1180" y="504" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">Role</text>
+<line x1="1060" y1="522" x2="1300" y2="522" stroke="#333"/>
+<text x="1066" y="535" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Id: Guid</text>
+<text x="1066" y="549" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Name: string</text>
+<text x="1066" y="563" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+PermissionIds: ICollection&lt;Guid&gt;</text>
+<line x1="1060" y1="577" x2="1300" y2="577" stroke="#333"/>
+<text x="1066" y="590" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+AddPermission()</text>
+<text x="1066" y="604" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+RemovePermission()</text>
+<rect x="1060" y="730" width="240" height="95" rx="2" fill="#dff4df" stroke="#222"/>
+<text x="1180" y="746" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;value object&gt;&gt;</text>
+<text x="1180" y="764" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">Permission</text>
+<line x1="1060" y1="782" x2="1300" y2="782" stroke="#333"/>
+<text x="1066" y="795" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Name: string</text>
+<rect x="1370" y="120" width="130" height="90" rx="2" fill="#dff4df" stroke="#222"/>
+<text x="1435" y="136" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;value object&gt;&gt;</text>
+<text x="1435" y="154" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">Email</text>
+<line x1="1370" y1="172" x2="1500" y2="172" stroke="#333"/>
+<text x="1376" y="185" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Value: string</text>
+<rect x="1360" y="400" width="150" height="170" rx="2" fill="#dff4df" stroke="#222"/>
+<text x="1435" y="416" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;события&gt;&gt;</text>
+<text x="1435" y="434" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">DomainEvent</text>
+<line x1="1360" y1="452" x2="1510" y2="452" stroke="#333"/>
+<text x="1366" y="465" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+UserRegisteredDomainEvent</text>
+<text x="1366" y="479" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+UserDeletedDomainEvent</text>
+<text x="1366" y="493" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+UserRoleAddedDomainEvent</text>
+<text x="1366" y="507" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+UserProfileUpdatedDomainEvent</text>
+<rect x="1340" y="650" width="180" height="150" rx="2" fill="#dff4df" stroke="#222"/>
+<text x="1430" y="666" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;интерфейс&gt;&gt;</text>
+<text x="1430" y="684" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">IUserRepository</text>
+<line x1="1340" y1="702" x2="1520" y2="702" stroke="#333"/>
+<text x="1346" y="715" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Add()</text>
+<text x="1346" y="729" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+GetById()</text>
+<text x="1346" y="743" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+GetByLogin()</text>
+<text x="1346" y="757" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Update()</text>
+<text x="1346" y="771" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Delete()</text>
+<rect x="1340" y="815" width="180" height="125" rx="2" fill="#dff4df" stroke="#222"/>
+<text x="1430" y="831" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;интерфейс&gt;&gt;</text>
+<text x="1430" y="849" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">IRoleRepository</text>
+<line x1="1340" y1="867" x2="1520" y2="867" stroke="#333"/>
+<text x="1346" y="880" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Add()</text>
+<text x="1346" y="894" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+GetById()</text>
+<text x="1346" y="908" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+ListAll()</text>
+<text x="1346" y="922" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Update()</text>
+<rect x="1670" y="120" width="250" height="130" rx="2" fill="#eadff8" stroke="#222"/>
+<text x="1795" y="136" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;EF Core&gt;&gt;</text>
+<text x="1795" y="154" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">UsersDbContext</text>
+<line x1="1670" y1="172" x2="1920" y2="172" stroke="#333"/>
+<text x="1676" y="185" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Users</text>
+<text x="1676" y="199" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Roles</text>
+<text x="1676" y="213" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Permissions</text>
+<text x="1676" y="227" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+OutboxMessages</text>
+<rect x="1670" y="360" width="250" height="80" rx="2" fill="#eadff8" stroke="#222"/>
+<text x="1795" y="376" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;репозиторий&gt;&gt;</text>
+<text x="1795" y="394" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">UserRepository</text>
+<rect x="1670" y="560" width="250" height="80" rx="2" fill="#eadff8" stroke="#222"/>
+<text x="1795" y="576" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;репозиторий&gt;&gt;</text>
+<text x="1795" y="594" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">RoleRepository</text>
+<rect x="1670" y="740" width="250" height="130" rx="2" fill="#eadff8" stroke="#222"/>
+<text x="1795" y="756" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;модель БД&gt;&gt;</text>
+<text x="1795" y="774" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">OutboxMessage</text>
+<line x1="1670" y1="792" x2="1920" y2="792" stroke="#333"/>
+<text x="1676" y="805" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+EventType: string</text>
+<text x="1676" y="819" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Topic: string</text>
+<text x="1676" y="833" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Payload: string</text>
+<text x="1676" y="847" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Processed: bool</text>
+<rect x="2100" y="120" width="220" height="90" rx="2" fill="#f8dfd8" stroke="#222"/>
+<text x="2210" y="136" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;интерфейс&gt;&gt;</text>
+<text x="2210" y="154" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">IJwtTokenGenerator</text>
+<line x1="2100" y1="172" x2="2320" y2="172" stroke="#333"/>
+<text x="2106" y="185" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+GenerateToken()</text>
+<rect x="2100" y="260" width="220" height="80" rx="2" fill="#f8dfd8" stroke="#222"/>
+<text x="2210" y="276" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;сервис&gt;&gt;</text>
+<text x="2210" y="294" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">JwtTokenGenerator</text>
+<rect x="2100" y="420" width="220" height="100" rx="2" fill="#f8dfd8" stroke="#222"/>
+<text x="2210" y="436" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;интерфейс&gt;&gt;</text>
+<text x="2210" y="454" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">IOutboxService</text>
+<line x1="2100" y1="472" x2="2320" y2="472" stroke="#333"/>
+<text x="2106" y="485" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+Add()</text>
+<text x="2106" y="499" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">+AddTombstone()</text>
+<rect x="2100" y="570" width="220" height="80" rx="2" fill="#f8dfd8" stroke="#222"/>
+<text x="2210" y="586" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;сервис&gt;&gt;</text>
+<text x="2210" y="604" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">OutboxService</text>
+<rect x="2100" y="720" width="220" height="80" rx="2" fill="#f8dfd8" stroke="#222"/>
+<text x="2210" y="736" font-family="Arial" font-size="10" font-weight="normal" text-anchor="middle" fill="#111">&lt;&lt;фоновый сервис&gt;&gt;</text>
+<text x="2210" y="754" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#111">OutboxPublisherHostedService</text>
+<polyline points="549.0,156.1 560.0,150.0 549.0,143.9" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="549.0,186.1 560.0,180.0 549.0,173.9" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="686.0,221.0 680.0,210.0 674.0,221.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="689.0,341.1 700.0,335.0 689.0,328.9" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="689.0,556.0 700.0,550.0 689.0,544.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="689.0,756.0 700.0,750.0 689.0,744.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1329.0,706.0 1340.0,700.0 1329.0,694.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1329.0,756.0 1340.0,750.0 1329.0,744.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1329.0,883.5 1340.0,877.5 1329.0,871.5" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1429.0,389.0 1435.0,400.0 1441.0,389.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1759.4,261.0 1753.3,250.0 1747.3,261.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1842.7,261.0 1836.7,250.0 1830.6,261.0" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1931.0,777.3 1920.0,783.3 1931.0,789.4" fill="none" stroke="#222" stroke-width="1.2"/>
+<polyline points="1931.0,820.6 1920.0,826.7 1931.0,832.7" fill="none" stroke="#222" stroke-width="1.2"/>
+<polygon points="1520.0,725.0 1533.0,715.9 1533.0,734.1" fill="white" stroke="#222" stroke-width="1.2"/>
+<polygon points="1520.0,877.5 1533.0,868.4 1533.0,886.6" fill="white" stroke="#222" stroke-width="1.2"/>
+<polygon points="2210.0,210.0 2219.1,223.0 2200.9,223.0" fill="white" stroke="#222" stroke-width="1.2"/>
+<polygon points="2210.0,520.0 2219.1,533.0 2200.9,533.0" fill="white" stroke="#222" stroke-width="1.2"/>
+<text x="1238" y="374" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">0..*</text>
+<text x="1185" y="484" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">0..*</text>
+<text x="1185" y="644" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">0..*</text>
+<text x="1185" y="744" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">0..*</text>
+<polygon points="1320.0,230.0 1311.0,223.4 1302.0,230.0 1311.0,236.6" fill="#111" stroke="#111" stroke-width="1.2"/>
+<text x="1325" y="244" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">1</text>
+<text x="1375" y="179" font-family="Arial" font-size="10" font-weight="normal" text-anchor="start" fill="#111">1</text>
+</svg>

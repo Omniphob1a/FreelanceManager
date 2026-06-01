@@ -8,6 +8,7 @@ namespace Users.Domain.Interfaces.Repositories
 		Task Add(User user, CancellationToken cancellationToken);
 		Task<User> GetByEmail(string email, CancellationToken cancellationToken);
 		Task<User> GetByLogin(string login, CancellationToken cancellationToken);
+		Task<User> GetByName(string name, CancellationToken cancellationToken);
 		Task<User> GetById(Guid id, CancellationToken cancellationToken);
 		Task<IEnumerable<User>> ListActive(CancellationToken cancellationToken);
 		Task<IEnumerable<User>> ListByAge(int minAge, CancellationToken cancellationToken);

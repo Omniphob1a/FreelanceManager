@@ -84,6 +84,15 @@ namespace Projects.Persistence.Common
 				// Сохраняем агрегаты + outbox записи в одной транзакции
 				var result = await _dbContext.SaveChangesAsync(ct);
 
+				try
+				{
+					await _dispatcher.DispatchAsync(eventsToPersist, ct);
+				}
+				catch (Exception ex)
+				{
+					_logger.LogError(ex, "Domain event handlers failed after SaveChanges. Data was saved; cache may be stale.");
+				}
+
 				// Очистка domain events и tracked set
 				foreach (var agg in _trackedEntities)
 					agg.ClearDomainEvents();

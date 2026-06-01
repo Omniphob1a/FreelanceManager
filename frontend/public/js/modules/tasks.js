@@ -1,5 +1,8 @@
 import { TaskAPI, ProjectAPI, UserAPI, formatDate } from '/js/api.js';
-import { showToast, getPriorityClass, getPriorityText, getTaskStatusClass, getTaskStatusText, getDaysLeft, getDaysLeftNumber } from '/js/modules/ui.js';
+import { showToast, getPriorityClass, getPriorityText, getTaskStatusClass, getTaskStatusText, getDaysLeft, getDaysLeftNumber, letterAvatarMarkup } from '/js/modules/ui.js';
+import { localizeRuntimeText, applyLocalization } from '/js/modules/localization.js';
+
+const t = (value) => localizeRuntimeText(value);
 
 let currentTasks = [];
 let currentFilters = {};
@@ -10,6 +13,48 @@ let currentPage = 1;
 let itemsPerPage = 10;
 let totalTasksCount = 0;
 let totalPages = 1;
+
+function unwrapMembersResponse(members) {
+    if (Array.isArray(members)) return members;
+    if (members && Array.isArray(members.items)) return members.items;
+    if (members && Array.isArray(members.value)) return members.value;
+    if (members && Array.isArray(members.Value)) return members.Value;
+    return [];
+}
+
+function getMemberUser(member) {
+    return member?.user || member?.User || member || null;
+}
+
+function getMemberId(member) {
+    return member?.id || member?.Id || null;
+}
+
+function getMemberUserId(member) {
+    const user = getMemberUser(member);
+    return member?.userId || member?.UserId || user?.id || user?.Id || null;
+}
+
+function getUserLogin(user) {
+    return user?.login || user?.Login || user?.userName || user?.UserName || '';
+}
+
+function getMemberLogin(member) {
+    return getUserLogin(getMemberUser(member));
+}
+
+function getMemberOptionText(member) {
+    return getMemberLogin(member) || t('No login');
+}
+
+function findMemberByAnyId(membersArray, id) {
+    if (!id) return null;
+    const targetId = String(id);
+    return membersArray.find(member =>
+        String(getMemberId(member)) === targetId ||
+        String(getMemberUserId(member)) === targetId
+    ) || null;
+}
 
 
 export async function initTasksPage() {
@@ -446,14 +491,14 @@ function createTaskTableRow(task) {
           <i class="fas fa-tasks text-blue-600"></i>
         </div>
         <div>
-          <div class="text-sm font-medium text-gray-900">${task.title || 'No title'}</div>
-          <div class="text-sm text-gray-500 truncate max-w-xs">${task.description || 'No description'}</div>
+          <div class="text-sm font-medium text-gray-900">${task.title || t('No title')}</div>
+          <div class="text-sm text-gray-500 truncate max-w-xs">${task.description || t('No description')}</div>
         </div>
       </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
       <div class="text-sm ${isOverdue ? 'text-red-600 font-medium' : isDueSoon ? 'text-orange-600' : 'text-gray-500'}">
-        ${task.dueDate ? formatDate(task.dueDate) : 'No due date'}
+        ${task.dueDate ? formatDate(task.dueDate) : t('No due date')}
       </div>
       ${task.dueDate ? `<div class="text-xs ${isOverdue ? 'text-red-500' : isDueSoon ? 'text-orange-500' : 'text-gray-400'}">${getDaysLeft(task.dueDate)}</div>` : ''}
     </td>
@@ -472,13 +517,13 @@ function createTaskTableRow(task) {
     </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
       <div class="flex space-x-2">
-        <button class="view-task-btn text-blue-600 hover:text-blue-900 p-1 rounded" title="View Details">
+        <button class="view-task-btn text-blue-600 hover:text-blue-900 p-1 rounded" title="${t('View Details')}">
           <i class="fas fa-eye"></i>
         </button>
-        <button class="edit-task-btn text-gray-600 hover:text-gray-900 p-1 rounded" title="Edit">
+        <button class="edit-task-btn text-gray-600 hover:text-gray-900 p-1 rounded" title="${t('Edit')}">
           <i class="fas fa-edit"></i>
         </button>
-        <button class="delete-task-btn text-red-600 hover:text-red-900 p-1 rounded" title="Delete">
+        <button class="delete-task-btn text-red-600 hover:text-red-900 p-1 rounded" title="${t('Delete')}">
           <i class="fas fa-trash"></i>
         </button>
       </div>
@@ -704,7 +749,7 @@ function updateFilterCounter() {
 
 async function loadProjectsForFilter() {
   try {
-    const response = await ProjectAPI.getProjects({ pageSize: 100 });
+    const response = await ProjectAPI.getProjects({ page: 1, pageSize: 50, includeMilestones: false, includeAttachments: false });
     allProjects = response.items || response || [];
     
     const projectFilter = document.getElementById('filterProject');
@@ -817,10 +862,8 @@ function createTaskElement(task) {
         </div>
         ${task.assigneeEmail ? `
         <div class="mt-2 flex items-center">
-            <div class="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden mr-2">
-                <img src="https://ui-avatars.com/api/?name=${task.assigneeEmail}&background=random" alt="${task.assigneeEmail}">
-            </div>
-            <span class="text-xs text-gray-500">${task.assigneeEmail}</span>
+            ${letterAvatarMarkup(task.assigneeEmail, 'w-6 h-6 text-[10px]')}
+            <span class="text-xs text-gray-500 ml-2">${task.assigneeEmail}</span>
         </div>
         ` : ''}
     `;
@@ -837,6 +880,12 @@ async function openTaskModal(taskId) {
         // Загружаем основную информацию о задаче
         const task = await TaskAPI.getTaskById(taskId, ['timeEntries']);
         console.log('Full task data:', task);
+
+        if (!task) {
+            showToast(t('Task not found'), 'error');
+            await loadTasks({ ...currentFilters, page: currentPage, pageSize: itemsPerPage });
+            return;
+        }
         
         // Загружаем информацию о проекте
         if (task.projectId) {
@@ -865,69 +914,41 @@ async function openTaskModal(taskId) {
         if (task.projectId) {
             try {
                 const members = await ProjectAPI.getProjectMembers(task.projectId);
-                let membersArray = [];
-                
-                if (Array.isArray(members)) {
-                    membersArray = members;
-                } else if (members && Array.isArray(members.items)) {
-                    membersArray = members.items;
-                } else if (members && Array.isArray(members.value)) {
-                    membersArray = members.value;
-                }
+                let membersArray = unwrapMembersResponse(members);
                 
                 console.log('All project members:', membersArray);
                 console.log('Available member IDs:', membersArray.map(m => m.id));
                 console.log('Available user IDs in members:', membersArray.map(m => m.user?.id));
                 
                 // Функция для поиска пользователя по ID в участниках проекта - ИСПРАВЛЕННАЯ
-                const findUserInMembers = (userId, isAssignee = false) => {
-                    if (!userId) return null;
-                    
-                    const member = membersArray.find(m => {
-                        if (!m.user) return false;
-                        
-                        // ДЛЯ ASSIGNEE: ищем по member.id (так как assigneeId - это memberId)
-                        if (isAssignee) {
-                            const memberId = String(m.id);
-                            const targetId = String(userId);
-                            console.log(`Comparing assignee by member ID: ${memberId} === ${targetId}`);
-                            return memberId === targetId;
-                        } 
-                        // ДЛЯ REPORTER: ищем по user.id (так как reporterId - это userId)
-                        else {
-                            const memberUserId = String(m.user.id);
-                            const targetUserId = String(userId);
-                            console.log(`Comparing reporter by user ID: ${memberUserId} === ${targetUserId}`);
-                            return memberUserId === targetUserId;
-                        }
-                    });
-                    
-                    return member ? member.user : null;
+                const findUserInMembers = (userId) => {
+                    const member = findMemberByAnyId(membersArray, userId);
+                    return member ? getMemberUser(member) : null;
                 };
                 
                 // Находим reporter (создателя задачи) - ищем по user.id
                 const reporterUser = findUserInMembers(task.reporterId, false);
                 if (reporterUser) {
-                    task.reporterName = reporterUser.login || reporterUser.name || reporterUser.userName || reporterUser.email || `User ${task.reporterId}`;
+                    task.reporterName = getUserLogin(reporterUser) || t('No login');
                     console.log('Found reporter:', task.reporterName);
                 } else {
                     // Fallback на текущего пользователя для reporter
                     if (currentUserData && String(currentUserData.id) === String(task.reporterId)) {
-                        task.reporterName = currentUserData.login || currentUserData.name || currentUserData.userName || currentUserData.email || `User ${task.reporterId}`;
+                        task.reporterName = getUserLogin(currentUserData) || t('No login');
                     } else {
-                        task.reporterName = `User ${task.reporterId}`;
+                        task.reporterName = t('No login');
                     }
                     console.log('Reporter not found in project members:', task.reporterName);
                 }
                 
                 // Находим assignee (исполнителя) - ищем по member.id
                 if (task.assigneeId) {
-                    const assigneeUser = findUserInMembers(task.assigneeId, true);
+                    const assigneeUser = findUserInMembers(task.assigneeId);
                     if (assigneeUser) {
-                        task.assigneeName = assigneeUser.login || assigneeUser.name || assigneeUser.userName || assigneeUser.email || `User ${task.assigneeId}`;
+                        task.assigneeName = getUserLogin(assigneeUser) || t('No login');
                         console.log('Found assignee:', task.assigneeName);
                     } else {
-                        task.assigneeName = `User ${task.assigneeId}`;
+                        task.assigneeName = t('No login');
                         console.log('Assignee not found in project members:', task.assigneeName);
                     }
                 } else {
@@ -937,16 +958,16 @@ async function openTaskModal(taskId) {
             } catch (error) {
                 console.error('Failed to load project members:', error);
                 // Fallback при ошибке загрузки участников
-                task.reporterName = `User ${task.reporterId}`;
+                task.reporterName = t('No login');
                 if (task.assigneeId) {
-                    task.assigneeName = `User ${task.assigneeId}`;
+                    task.assigneeName = t('No login');
                 }
             }
         } else {
             // Если проекта нет, используем базовые fallback
-            task.reporterName = `User ${task.reporterId}`;
+            task.reporterName = t('No login');
             if (task.assigneeId) {
-                task.assigneeName = `User ${task.assigneeId}`;
+                task.assigneeName = t('No login');
             }
         }
         
@@ -960,7 +981,7 @@ async function openTaskModal(taskId) {
         renderTaskModal(task);
     } catch (error) {
         console.error('Failed to load task details:', error);
-        showToast('Failed to load task details', 'error');
+    showToast(t('Failed to load task details'), 'error');
     }
 }
 function convertHoursToTimeString(hours) {
@@ -1019,7 +1040,7 @@ function renderTaskModal(task) {
     modal.innerHTML = `
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-screen overflow-y-auto">
             <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
-                <h3 class="text-xl font-semibold text-gray-900">Task Details</h3>
+                <h3 class="text-xl font-semibold text-gray-900">${t('Task Details')}</h3>
                 <button class="close-task-modal text-gray-400 hover:text-gray-500">
                     <i class="fas fa-times"></i>
                 </button>
@@ -1027,52 +1048,52 @@ function renderTaskModal(task) {
             
             <div class="p-6">
                 <div class="mb-6">
-                    <h4 class="text-lg font-semibold text-gray-900 mb-2">${task.title || 'No title'}</h4>
-                    <p class="text-gray-700">${task.description || 'No description'}</p>
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">${task.title || t('No title')}</h4>
+                    <p class="text-gray-700">${task.description || t('No description')}</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <h5 class="font-medium text-gray-900 mb-3">Details</h5>
+                        <h5 class="font-medium text-gray-900 mb-3">${t('Details')}</h5>
                         <div class="space-y-2">
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Project:</span>
-                                <span class="text-sm font-medium">${task.projectName || 'No project'}</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Project:')}</span>
+                                <span class="text-sm font-medium">${task.projectName || t('No project')}</span>
                             </div>
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Status:</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Status:')}</span>
                                 <span class="text-sm font-medium ${getTaskStatusClass(task.status)} px-2 py-1 rounded-full">
                                     ${getTaskStatusText(task.status)}
                                 </span>
                             </div>
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Priority:</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Priority:')}</span>
                                 <span class="text-sm font-medium ${getPriorityClass(task.priority)} px-2 py-1 rounded-full">
                                     ${getPriorityText(task.priority)}
                                 </span>
                             </div>
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Due Date:</span>
-                                <span class="text-sm font-medium">${task.dueDate ? formatDate(task.dueDate) : 'Not set'}</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Due Date:')}</span>
+                                <span class="text-sm font-medium">${task.dueDate ? formatDate(task.dueDate) : t('Not set')}</span>
                             </div>
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Estimated Hours:</span>
-                                <span class="text-sm font-medium">${task.timeEstimatedTicks ? `${(task.timeEstimatedTicks / 36000000000).toFixed(1)}h` : 'Not estimated'}</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Estimated Hours:')}</span>
+                                <span class="text-sm font-medium">${task.timeEstimatedTicks ? `${(task.timeEstimatedTicks / 36000000000).toFixed(1)}h` : t('Not estimated')}</span>
                             </div>
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Billable:</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Billable:')}</span>
                                 <span class="text-sm font-medium flex items-center">
                                     ${task.isBillable ? 
-                                        '<i class="fas fa-check-circle text-green-500 mr-2"></i> Yes' : 
-                                        '<i class="fas fa-times-circle text-gray-400 mr-2"></i> No'
+                                        `<i class="fas fa-check-circle text-green-500 mr-2"></i> ${t('Yes')}` : 
+                                        `<i class="fas fa-times-circle text-gray-400 mr-2"></i> ${t('No')}`
                                     }
                                 </span>
                             </div>
                             ${task.isBillable ? `
                                 <div class="flex">
-                                    <span class="text-sm text-gray-500 w-32">Hourly Rate:</span>
+                                    <span class="text-sm text-gray-500 w-32">${t('Hourly Rate:')}</span>
                                     <span class="text-sm font-medium">
-                                        ${task.hourlyRate ? `${task.hourlyRate} ${task.currency || 'USD'}` : 'Not set'}
+                                        ${task.hourlyRate ? `${task.hourlyRate} ${task.currency || 'USD'}` : t('Not set')}
                                     </span>
                                 </div>
                             ` : ''}
@@ -1080,95 +1101,95 @@ function renderTaskModal(task) {
                     </div>
                     
                     <div>
-                        <h5 class="font-medium text-gray-900 mb-3">People</h5>
+                        <h5 class="font-medium text-gray-900 mb-3">${t('People')}</h5>
                         <div class="space-y-2">
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Assignee:</span>
-                                <span class="text-sm font-medium">${task.assigneeName || 'Unassigned'}</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Assignee:')}</span>
+                                <span class="text-sm font-medium">${task.assigneeName || t('Unassigned')}</span>
                             </div>
                             <div class="flex">
-                                <span class="text-sm text-gray-500 w-32">Reporter:</span>
-                                <span class="text-sm font-medium">${task.reporterName || 'Unknown'}</span>
+                                <span class="text-sm text-gray-500 w-32">${t('Reporter:')}</span>
+                                <span class="text-sm font-medium">${task.reporterName || t('Unknown')}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="mb-6">
-                    <h5 class="font-medium text-gray-900 mb-3">Actions</h5>
+                    <h5 class="font-medium text-gray-900 mb-3">${t('Actions')}</h5>
                     <div class="flex flex-wrap gap-2">
                         ${task.status === 0 ? `
                             <button class="assign-task-btn px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700">
-                                <i class="fas fa-user-plus mr-2"></i> Assign
+                                <i class="fas fa-user-plus mr-2"></i> ${t('Assign')}
                             </button>
                             <button class="start-task-btn px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
-                                <i class="fas fa-play mr-2"></i> Start
+                                <i class="fas fa-play mr-2"></i> ${t('Start')}
                             </button>
                         ` : ''}
                         ${task.status === 1 ? `
                             <button class="complete-task-btn px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700">
-                                <i class="fas fa-check-circle mr-2"></i> Complete
+                                <i class="fas fa-check-circle mr-2"></i> ${t('Complete')}
                             </button>
                         ` : ''}
                         ${task.status !== 3 ? `
                             <button class="cancel-task-btn px-4 py-2 bg-red-100 text-red-600 text-sm font-medium rounded-md hover:bg-red-200">
-                                <i class="fas fa-ban mr-2"></i> Cancel
+                                <i class="fas fa-ban mr-2"></i> ${t('Cancel')}
                             </button>
                         ` : ''}
                         <button class="edit-task-btn px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700">
-                            <i class="fas fa-edit mr-2"></i> Edit
+                            <i class="fas fa-edit mr-2"></i> ${t('Edit')}
                         </button>
                         <button class="delete-task-btn px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700">
-                            <i class="fas fa-trash-alt mr-2"></i> Delete
+                            <i class="fas fa-trash-alt mr-2"></i> ${t('Delete')}
                         </button>
                     </div>
                 </div>
                 
                 <div class="mb-6">
-                    <h5 class="font-medium text-gray-900 mb-3">Time Entries</h5>
+                    <h5 class="font-medium text-gray-900 mb-3">${t('Time Entries')}</h5>
                     <div class="space-y-2" id="timeEntriesContainer">
                         ${task.timeEntries && task.timeEntries.length > 0 ? 
                             task.timeEntries.map(entry => `
                                 <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
                                     <div>
                                         <span class="text-sm font-medium">${formatTimeEntryDate(entry.startedAt)}</span>
-                                        <span class="text-xs text-gray-500 ml-2">${entry.description || 'No description'}</span>
+                                        <span class="text-xs text-gray-500 ml-2">${entry.description || t('No description')}</span>
                                     </div>
                                     <span class="text-sm font-medium">${formatTimeEntryDuration(entry.duration)}</span>
                                 </div>
                             `).join('') : 
-                            '<p class="text-sm text-gray-500">No time entries</p>'
+                            `<p class="text-sm text-gray-500">${t('No time entries')}</p>`
                         }
                     </div>
                     <button class="add-time-entry-btn mt-3 px-3 py-1 bg-blue-100 text-blue-600 text-sm rounded-md hover:bg-blue-200">
-                        <i class="fas fa-plus mr-1"></i> Add Time Entry
+                        <i class="fas fa-plus mr-1"></i> ${t('Add Time Entry')}
                     </button>
                 </div>
                 
                 <div>
-                    <h5 class="font-medium text-gray-900 mb-3">Comments</h5>
+                    <h5 class="font-medium text-gray-900 mb-3">${t('Comments')}</h5>
                     <div class="space-y-4" id="commentsContainer">
                         ${task.comments && task.comments.length > 0 ? 
                             task.comments.map(comment => `
                                 <div class="flex">
                                     <div class="flex-shrink-0 mr-3">
-                                        <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=${comment.author?.name || comment.author?.login || 'Unknown'}&background=random" alt="${comment.author?.name || 'Author'}">
+                                        ${letterAvatarMarkup(comment.author?.name || comment.author?.login || comment.Author?.name || comment.Author?.login || 'Unknown')}
                                     </div>
                                     <div class="bg-gray-50 p-3 rounded-lg flex-1">
                                         <div class="flex justify-between">
-                                            <span class="text-sm font-medium">${comment.author?.name || comment.author?.login || 'Unknown User'}</span>
-                                            <span class="text-xs text-gray-500">${formatDate(comment.createdAt)}</span>
+                                            <span class="text-sm font-medium">${comment.author?.name || comment.author?.login || comment.Author?.name || comment.Author?.login || t('Unknown User')}</span>
+                                            <span class="text-xs text-gray-500">${formatDate(comment.createdAt ?? comment.CreatedAt)}</span>
                                         </div>
-                                        <p class="text-sm mt-1">${comment.text}</p>
+                                        <p class="text-sm mt-1">${comment.text ?? comment.Text ?? ''}</p>
                                     </div>
                                 </div>
                             `).join('') : 
-                            '<p class="text-sm text-gray-500">No comments</p>'
+                            `<p class="text-sm text-gray-500">${t('No comments')}</p>`
                         }
                     </div>
                     
                     <div class="mt-4 flex">
-                        <input type="text" placeholder="Add a comment..." class="comment-input flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" placeholder="${t('Add a comment...')}" class="comment-input flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <button class="add-comment-btn px-4 py-2 bg-blue-600 text-white rounded-r-md hover:bg-blue-700">
                             <i class="fas fa-paper-plane"></i>
                         </button>
@@ -1178,6 +1199,8 @@ function renderTaskModal(task) {
         </div>
     `;
     
+    applyLocalization(modal);
+
     // Добавляем обработчики событий
     setupTaskModalEventListeners(task);
     modal.classList.remove('hidden');
@@ -1226,9 +1249,10 @@ function applyFilters() {
         
         switch (taskOwnershipFilter) {
             case 'all':
-                filters.OnlyMyTasks = true;
+                filters.OnlyMyTasks = false;
                 delete filters.AssigneeId;
                 delete filters.ReporterId;
+                delete filters.CurrentUserId;
                 break;
             case 'assigned':
                 filters.OnlyMyTasks = false;
@@ -1350,19 +1374,19 @@ async function addCommentToTask(taskId, modal) {
             commentsContainer.innerHTML = comments.map(comment => `
                 <div class="flex">
                     <div class="flex-shrink-0 mr-3">
-                        <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=${comment.author?.name || comment.author?.login || 'Unknown'}&background=random" alt="${comment.author?.name || 'Author'}">
+                        ${letterAvatarMarkup(comment.author?.name || comment.author?.login || comment.Author?.name || comment.Author?.login || 'Unknown')}
                     </div>
                     <div class="bg-gray-50 p-3 rounded-lg flex-1">
                         <div class="flex justify-between">
-                            <span class="text-sm font-medium">${comment.author?.name || comment.author?.login || 'Unknown User'}</span>
-                            <span class="text-xs text-gray-500">${formatDate(comment.createdAt)}</span>
+                            <span class="text-sm font-medium">${comment.author?.name || comment.author?.login || comment.Author?.name || comment.Author?.login || 'Unknown User'}</span>
+                            <span class="text-xs text-gray-500">${formatDate(comment.createdAt ?? comment.CreatedAt)}</span>
                         </div>
-                        <p class="text-sm mt-1">${comment.text}</p>
+                        <p class="text-sm mt-1">${comment.text ?? comment.Text ?? ''}</p>
                     </div>
                 </div>
             `).join('');
         } else {
-            commentsContainer.innerHTML = '<p class="text-sm text-gray-500">No comments</p>';
+      commentsContainer.innerHTML = `<p class="text-sm text-gray-500">${t('No comments')}</p>`;
         }
     } catch (error) {
         console.error('Failed to add comment:', error);
@@ -1411,7 +1435,7 @@ function updateTaskCounters() {
 async function showCreateTaskModal() {
     try {
         // Получаем проекты с обработкой пагинации
-        const projectsResponse = await ProjectAPI.getProjects();
+        const projectsResponse = await ProjectAPI.getProjects({ page: 1, pageSize: 50, includeMilestones: false, includeAttachments: false });
         const projects = projectsResponse.items || projectsResponse;
         
         // Проверяем, что projects - массив
@@ -1492,14 +1516,7 @@ async function showCreateTaskModal() {
                         assigneeSelect.appendChild(unassignedOption);
                         
                         // Обрабатываем разные форматы ответа
-                        let membersArray = [];
-                        if (Array.isArray(members)) {
-                            membersArray = members;
-                        } else if (members && Array.isArray(members.items)) {
-                            membersArray = members.items;
-                        } else if (members && Array.isArray(members.value)) {
-                            membersArray = members.value;
-                        }
+                        let membersArray = unwrapMembersResponse(members);
                         
                         // Добавляем участников проекта
                         if (membersArray.length > 0) {
@@ -1507,27 +1524,9 @@ async function showCreateTaskModal() {
                                 const option = document.createElement('option');
                                 
                                 // Получаем ID пользователя из разных возможных форматов
-                                const memberId = member.userId || member.id || member.userID;
+                                const memberId = getMemberUserId(member);
                                 option.value = memberId;
-                                
-                                // Получаем информацию о пользователе
-                                const user = member.user || member;
-                                const userName = user.name || user.userName || user.fullName;
-                                const userEmail = user.email || user.userEmail;
-                                
-                                // Формируем текст для отображения
-                                let displayText = '';
-                                if (userName && userEmail) {
-                                    displayText = `${userName} (${userEmail})`;
-                                } else if (userName) {
-                                    displayText = userName;
-                                } else if (userEmail) {
-                                    displayText = userEmail;
-                                } else {
-                                    displayText = `User ${memberId}`;
-                                }
-                                
-                                option.textContent = displayText;
+                                option.textContent = getMemberOptionText(member);
                                 assigneeSelect.appendChild(option);
                             });
                         } else {
@@ -1652,7 +1651,7 @@ async function createTaskFromForm(modal) {
 async function showEditTaskModal(task) {
     try {
         // Получаем проекты с обработкой пагинации
-        const projectsResponse = await ProjectAPI.getProjects();
+        const projectsResponse = await ProjectAPI.getProjects({ page: 1, pageSize: 50, includeMilestones: false, includeAttachments: false });
         const projects = projectsResponse.items || projectsResponse;
         
         // Проверяем, что projects - массив
@@ -1735,14 +1734,7 @@ async function showEditTaskModal(task) {
                     assigneeSelect.appendChild(unassignedOption);
                     
                     // Обрабатываем разные форматы ответа
-                    let membersArray = [];
-                    if (Array.isArray(members)) {
-                        membersArray = members;
-                    } else if (members && Array.isArray(members.items)) {
-                        membersArray = members.items;
-                    } else if (members && Array.isArray(members.value)) {
-                        membersArray = members.value;
-                    }
+                    let membersArray = unwrapMembersResponse(members);
                     
                     // Добавляем участников проекта
                     if (membersArray.length > 0) {
@@ -1750,28 +1742,10 @@ async function showEditTaskModal(task) {
                             const option = document.createElement('option');
                             
                             // Получаем ID пользователя из разных возможных форматов
-                            const memberId = member.userId || member.id || member.userID;
+                            const memberId = getMemberUserId(member);
                             option.value = memberId;
-                            
-                            // Получаем информацию о пользователе
-                            const user = member.user || member;
-                            const userName = user.name || user.userName || user.fullName;
-                            const userEmail = user.email || user.userEmail;
-                            
-                            // Формируем текст для отображения
-                            let displayText = '';
-                            if (userName && userEmail) {
-                                displayText = `${userName} (${userEmail})`;
-                            } else if (userName) {
-                                displayText = userName;
-                            } else if (userEmail) {
-                                displayText = userEmail;
-                            } else {
-                                displayText = `User ${memberId}`;
-                            }
-                            
-                            option.textContent = displayText;
-                            option.selected = memberId === task.assigneeId;
+                            option.textContent = getMemberOptionText(member);
+                            option.selected = String(memberId) === String(task.assigneeId) || String(getMemberId(member)) === String(task.assigneeId);
                             assigneeSelect.appendChild(option);
                         });
                     } else {
@@ -1820,14 +1794,7 @@ async function showEditTaskModal(task) {
                 assigneeSelect.appendChild(unassignedOption);
                 
                 // Обрабатываем разные форматы ответа
-                let membersArray = [];
-                if (Array.isArray(members)) {
-                    membersArray = members;
-                } else if (members && Array.isArray(members.items)) {
-                    membersArray = members.items;
-                } else if (members && Array.isArray(members.value)) {
-                    membersArray = members.value;
-                }
+                let membersArray = unwrapMembersResponse(members);
                 
                 // Добавляем участников проекта
                 if (membersArray.length > 0) {
@@ -1835,27 +1802,9 @@ async function showEditTaskModal(task) {
                         const option = document.createElement('option');
                         
                         // Получаем ID пользователя из разных возможных форматов
-                        const memberId = member.userId || member.id || member.userID;
+                        const memberId = getMemberUserId(member);
                         option.value = memberId;
-                        
-                        // Получаем информацию о пользователе
-                        const user = member.user || member;
-                        const userName = user.name || user.userName || user.fullName;
-                        const userEmail = user.email || user.userEmail;
-                        
-                        // Формируем текст для отображения
-                        let displayText = '';
-                        if (userName && userEmail) {
-                            displayText = `${userName} (${userEmail})`;
-                        } else if (userName) {
-                            displayText = userName;
-                        } else if (userEmail) {
-                            displayText = userEmail;
-                        } else {
-                            displayText = `User ${memberId}`;
-                        }
-                        
-                        option.textContent = displayText;
+                        option.textContent = getMemberOptionText(member);
                         assigneeSelect.appendChild(option);
                     });
                 } else {
@@ -2106,7 +2055,7 @@ async function showAssignTaskModal(taskId) {
         }
         
         // Загружаем участников проекта
-        const members = await TaskAPI.getProjectMembers(task.projectId);
+        const members = await ProjectAPI.getProjectMembers(task.projectId);
         console.log('Project members:', members);
         
         const modal = document.createElement('div');
@@ -2143,51 +2092,25 @@ async function showAssignTaskModal(taskId) {
         assigneeSelect.appendChild(unassignedOption);
         
         // Обрабатываем разные форматы ответа
-        let membersArray = [];
-        if (Array.isArray(members)) {
-            membersArray = members;
-        } else if (members && Array.isArray(members.items)) {
-            membersArray = members.items;
-        } else if (members && Array.isArray(members.value)) {
-            membersArray = members.value;
-        }
+        let membersArray = unwrapMembersResponse(members);
         
         console.log('Processed members array:', membersArray);
         
         // Добавляем участников проекта с отображением имени и email - ИСПРАВЛЕНИЕ: используем user.id
         if (membersArray.length > 0) {
             membersArray.forEach(member => {
-                // Пропускаем участников без объекта user
-                if (!member.user) {
+                const user = getMemberUser(member);
+                if (!user) {
                     console.warn('Member without user object found:', member);
                     return;
                 }
                 
                 const option = document.createElement('option');
                 
-                // ИСПРАВЛЕНИЕ: Используем member.user.id вместо member.userId
-                const userId = member.user.id;
+                const userId = getMemberUserId(member);
                 option.value = userId;
-                
-                // Получаем информацию о пользователе
-                const user = member.user;
-                const userName = user.name || user.userName || user.fullName;
-                const userEmail = user.email || user.userEmail;
-                
-                // Формируем текст для отображения
-                let displayText = '';
-                if (userName && userEmail) {
-                    displayText = `${userName} (${userEmail})`;
-                } else if (userName) {
-                    displayText = userName;
-                } else if (userEmail) {
-                    displayText = userEmail;
-                } else {
-                    displayText = `User ${userId}`;
-                }
-                
-                option.textContent = displayText;
-                option.selected = userId === task.assigneeId;
+                option.textContent = getMemberOptionText(member);
+                option.selected = String(userId) === String(task.assigneeId) || String(getMemberId(member)) === String(task.assigneeId);
                 assigneeSelect.appendChild(option);
             });
         } else {
@@ -2323,9 +2246,10 @@ async function showAddTimeEntryModal(taskId) {
 }
 
 function showCancelTaskModal(taskId) {
-    const reason = prompt('Please enter reason for cancellation:');
-    if (reason === null) return;
-    
+    const reasonRaw = prompt('Please enter reason for cancellation:');
+    if (reasonRaw === null) return;
+    const reason = reasonRaw.trim() || 'Cancelled by user';
+
     TaskAPI.cancelTask(taskId, reason)
         .then(() => {
             showToast('Task cancelled successfully');

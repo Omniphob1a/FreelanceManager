@@ -16,6 +16,7 @@ namespace Projects.Application.Projects.Commands.CreateProject
 		decimal? BudgetMax,
 		string CurrencyCode,
 		string Category,
-		List<string> Tags
+		List<string> Tags,
+		Guid? ConfirmedByUserId    
 	) : IRequest<Result<Guid>>;
 }

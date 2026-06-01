@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Projects.Application.Interfaces;
-using Projects.Infrastructure.Kafka;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -80,29 +79,15 @@ namespace Projects.Infrastructure.Kafka
 
 			try
 			{
-				try
-				{
-					_consumer.Subscribe(Topic);
-					_logger.LogInformation("Users consumer subscribed to {Topic}", Topic);
-				}
-				catch (Exception ex)
-				{
-					_logger.LogError(ex, "Failed to subscribe to topic {Topic}. Subscription will be retried inside loop.", Topic);
-				}
+				_consumer.Subscribe(Topic);
+				_logger.LogInformation("Users consumer subscribed to {Topic}", Topic);
 
 				while (!stoppingToken.IsCancellationRequested)
 				{
-					if (_consumer.Subscription == null || _consumer.Subscription.Count == 0)
-					{
-						try { _consumer.Subscribe(Topic); }
-						catch (Exception ex) { _logger.LogWarning(ex, "Retry subscribe failed; backing off 2s"); try { await Task.Delay(2000, stoppingToken); } catch { } continue; }
-					}
-
 					try
 					{
 						ConsumeResult<string, string?>? cr = null;
 						try { dynamic dyn = _consumer; cr = dyn.Consume(stoppingToken); } catch { cr = _consumer.Consume(ConsumeTimeout); }
-
 						if (cr == null) continue;
 
 						using var scope = _sp.CreateScope();
@@ -159,21 +144,10 @@ namespace Projects.Infrastructure.Kafka
 				ReconnectBackoffMs = 1000,
 				ReconnectBackoffMaxMs = 10000,
 				StatisticsIntervalMs = 60000,
-				MaxPollIntervalMs = 300000
+				MaxPollIntervalMs = 300000,
+				SecurityProtocol = SecurityProtocol.Plaintext // Только PLAINTEXT
 			};
 
-			if (!string.IsNullOrWhiteSpace(_settings.SecurityProtocol) &&
-				Enum.TryParse<SecurityProtocol>(_settings.SecurityProtocol, true, out var secProto))
-				cfg.SecurityProtocol = secProto;
-
-			if (!string.IsNullOrWhiteSpace(_settings.SaslMechanism) &&
-				Enum.TryParse<SaslMechanism>(_settings.SaslMechanism, true, out var saslMech))
-				cfg.SaslMechanism = saslMech;
-
-			if (!string.IsNullOrWhiteSpace(_settings.SaslUsername)) cfg.SaslUsername = _settings.SaslUsername;
-			if (!string.IsNullOrWhiteSpace(_settings.SaslPassword)) cfg.SaslPassword = _settings.SaslPassword;
-
-			try { if (!string.IsNullOrWhiteSpace(_settings.SslCaLocation)) cfg.Set("ssl.ca.location", _settings.SslCaLocation); } catch { }
 			try { cfg.Set("socket.keepalive.enable", "true"); } catch { }
 			try { cfg.Set("request.timeout.ms", "60000"); } catch { }
 			try { cfg.Set("enable.auto.offset.store", "false"); } catch { }

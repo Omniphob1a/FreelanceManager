@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin
+    id="fml.classdiagrams"
+    name="Freelance Manager Class Diagrams"
+    provider="Codex"
+    class="fml.vp.ClassDiagramPlugin">
+    <runtime>
+        <library path="lib/fml-classdiagrams.jar"/>
+    </runtime>
+</plugin>

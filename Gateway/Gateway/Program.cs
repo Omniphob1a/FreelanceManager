@@ -1,87 +1,125 @@
+ï»¿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Yarp.ReverseProxy;
-using System.Text;
+using Prometheus;
 using Yarp.ReverseProxy.Transforms;
-using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// --- JWT ---
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var issuer = jwtSettings["Issuer"];
 var audience = jwtSettings["Audience"];
 var secretKey = jwtSettings["SecretKey"];
 
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
 builder.Services.AddAuthentication(options =>
 {
-	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(options =>
 {
-	options.RequireHttpsMetadata = true;
-	options.SaveToken = true;
+    options.RequireHttpsMetadata = true;
+    options.SaveToken = true;
 
-	options.TokenValidationParameters = new TokenValidationParameters
-	{
-		ValidateIssuer = true,
-		ValidateAudience = true,
-		ValidateIssuerSigningKey = true,
-		ValidateLifetime = true,
-		ValidIssuer = issuer,
-		ValidAudience = audience,
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
-		RoleClaimType = "role",
-	};
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidateLifetime = true,
+        ValidIssuer = issuer,
+        ValidAudience = audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+        RoleClaimType = "role",
+    };
 });
+
+// --- CORS ---
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("AllowFrontend", policy =>
-	{
-		policy
-			.WithOrigins(
-				"http://localhost:8080",   // ôðîíòåíä âíóòðè Docker ïðè ïðîáðîñå 8080
-				"http://localhost:5000"    // ôðîíòåíä ëîêàëüíî ÷åðåç gateway
-			)
-			.AllowAnyHeader()
-			.AllowAnyMethod()
-			.AllowCredentials();
-	});
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+            "http://localhost:8080",
+            "http://localhost:5000"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
 });
-builder.Services.AddReverseProxy()
-	.LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
-	.AddTransforms(builderContext =>
-	{
-		builderContext.AddRequestTransform(transformContext =>
-		{
-			if (transformContext.HttpContext.Request.Headers.TryGetValue("Authorization", out var authHeaderValues))
-			{
-				var authHeaderString = authHeaderValues.ToString();
 
-				if (!string.IsNullOrEmpty(authHeaderString) && authHeaderString.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
-				{
-					if (AuthenticationHeaderValue.TryParse(authHeaderString, out var authHeaderValue))
-					{
-						transformContext.ProxyRequest.Headers.Authorization = authHeaderValue;
-					}
-				}
-			}
-			return ValueTask.CompletedTask;
-		});
-	});
+// --- Authorization ---
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("GatewayPolicy", policy =>
+    {
+        policy.RequireAssertion(context =>
+        {
+            if (context.Resource is HttpContext httpCtx)
+            {
+                var path = httpCtx.Request.Path;
+                if (path.StartsWithSegments("/api/Auth", StringComparison.OrdinalIgnoreCase))
+                    return true;
 
-builder.Services.AddAuthorization();
+                return context.User?.Identity?.IsAuthenticated == true;
+            }
+
+            return context.User?.Identity?.IsAuthenticated == true;
+        });
+    });
+});
+
+// --- YARP ---
+builder.Services
+    .AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+    .AddTransforms(transformBuilder =>
+    {
+        transformBuilder.AddRequestTransform(transformContext =>
+        {
+            if (transformContext.HttpContext.Request.Headers.TryGetValue("Authorization", out var authHeaderValues))
+            {
+                var authHeaderString = authHeaderValues.ToString();
+
+                if (!string.IsNullOrEmpty(authHeaderString) &&
+                    authHeaderString.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (AuthenticationHeaderValue.TryParse(authHeaderString, out var authHeaderValue))
+                        transformContext.ProxyRequest.Headers.Authorization = authHeaderValue;
+                }
+            }
+
+            return ValueTask.CompletedTask;
+        });
+    });
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
 app.UseRouting();
 
-// âîò çäåñü âêëþ÷àåì CORS
+// Ð”ÐÐÐœ Ð¼ÐµÑ‚Ñ€Ð¸ÐºÐ¸ HTTP/Kestrel
+app.UseHttpMetrics();
+
+// !!! ÐÐ°Ð´Ñ‘Ð¶Ð½Ð¾ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€ÑƒÐµÐ¼ endpoint Ñ‡ÐµÑ€ÐµÐ· endpoint routing:
+app.MapMetrics("/metrics");
+
+// Ð·Ð°Ñ‚ÐµÐ¼ pipeline
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapReverseProxy();
+// Map reverse proxy â€” Ð¾Ð½ Ð½Ðµ Ð±ÑƒÐ´ÐµÑ‚ Ð¿ÐµÑ€ÐµÑ…Ð²Ð°Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒ /metrics
+app.MapReverseProxy()
+   .RequireAuthorization("GatewayPolicy");
+
+app.MapGet("/health", () => Results.Ok("healthy"));
+app.MapGet("/metrics-check", () => Results.Text("metrics ok"));
 
 app.Run();

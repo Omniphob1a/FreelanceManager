@@ -29,6 +29,9 @@ public class Project : EntityBase
 	public IReadOnlyCollection<Tag> Tags => _tags.AsReadOnly();
 	private readonly List<ProjectMember> _members = new();
 	public IReadOnlyCollection<ProjectMember> Members => _members.AsReadOnly();
+	public Guid? ConfirmedByUserId { get; set; }  
+	public DateTime? ConfirmedAt { get; set; }    
+	public string? ConfirmationInfo { get; set; }
 
 	public static Project CreateDraft(
 		string title,
@@ -36,7 +39,9 @@ public class Project : EntityBase
 		Guid ownerId,
 		Budget budget,
 		Category category,
-		IEnumerable<Tag> tags)
+		IEnumerable<Tag> tags,
+		Guid? confirmedByUserId = null   // <-- NEW optional param
+	)
 	{
 		Validate(title, description, ownerId, budget, category);
 
@@ -51,8 +56,21 @@ public class Project : EntityBase
 			createdAt: DateTime.UtcNow);
 
 		project.AddDomainEvent(new ProjectCreatedDomainEvent(project.Id, project.Title, project.OwnerId));
+
+		// если при создании указали пользователя для подтверждения — создавать событие запроса подтверждения
+		if (confirmedByUserId.HasValue)
+		{
+			// добавляем доменное событие, которое UnitOfWork сериализует в Outbox
+			project.AddDomainEvent(new ProjectConfirmRequestedDomainEvent(project.Id, confirmedByUserId.Value));
+			// также опционально можно сохранить поле ConfirmedByUserId чтобы понимать кто будет подтверждать
+			project.ConfirmedByUserId = confirmedByUserId;
+			// initial placeholder so DB constraint won't fail — можно оставить null if column nullable
+			project.ConfirmationInfo = project.ConfirmationInfo ?? string.Empty;
+		}
+
 		return project;
 	}
+
 
 	public static Project Restore(
 		Guid id,
@@ -109,8 +127,8 @@ public class Project : EntityBase
 	   Category category,
 	   IEnumerable<Tag> tags)
 	{
-		if (Status != ProjectStatus.Draft)
-			throw new InvalidOperationException("Only draft projects can be updated.");
+		if (Status is ProjectStatus.Completed or ProjectStatus.Archived)
+			throw new InvalidOperationException("Completed or archived projects cannot be updated.");
 
 		Validate(title, description, OwnerId, budget, category);
 

@@ -11,13 +11,10 @@ namespace Projects.Application.Projects.Commands.UpdateProject
 	{
 		public UpdateProjectCommandValidator() 
 		{
-			const string titlePattern = "^[A-Za-z0-9 ]+$";
-
 			RuleFor(x => x.ProjectId).NotEmpty();
 			RuleFor(x => x.Title)
 				.NotEmpty().WithMessage("Title is required.")
-				.Length(3, 40).WithMessage("Title must be between 3 and 40 characters.")
-				.Matches(titlePattern).WithMessage("Title can only contain letters, numbers, and spaces.");
+				.Length(3, 40).WithMessage("Title must be between 3 and 40 characters.");
 			RuleFor(x => x.Description).MaximumLength(1000);
 			RuleFor(x => x.BudgetMin).GreaterThanOrEqualTo(0);
 			RuleFor(x => x.CurrencyCode).NotEmpty();

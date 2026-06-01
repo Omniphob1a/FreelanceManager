@@ -81,7 +81,8 @@ public class CreateProject_OutboxTests : IAsyncLifetime
 				BudgetMax: 200,
 				CurrencyCode: "USD",
 				Category: "development",
-				Tags: tags
+				Tags: tags,
+				ConfirmedByUserId: Guid.NewGuid()
 			);
 
 			_output.WriteLine("=== Act: handling CreateProjectCommand ===");
@@ -97,13 +98,17 @@ public class CreateProject_OutboxTests : IAsyncLifetime
 			projectEntity.Should().NotBeNull();
 			_output.WriteLine("Project entity found in DB.");
 
-			var outbox = await db.OutboxMessages.FirstOrDefaultAsync(o => o.AggregateId == projectId);
-			outbox.Should().NotBeNull();
-			_output.WriteLine($"Outbox message created: EventType={outbox!.EventType}, Topic={outbox.Topic}");
-			outbox!.Processed.Should().BeFalse();
-			outbox.EventType.Should().NotBeNullOrEmpty();
-			outbox.Topic.Should().Be("projects");
-			outbox.Payload.Should().NotBeNull();
+			var outboxMessages = await db.OutboxMessages
+				.Where(o => o.AggregateId == projectId)
+				.ToListAsync();
+			outboxMessages.Should().NotBeEmpty();
+
+			var outbox = outboxMessages.First();
+			_output.WriteLine($"Outbox message created: EventType={outbox.EventType}, Topic={outbox.Topic}");
+			outboxMessages.Should().OnlyContain(o => !o.Processed);
+			outboxMessages.Should().Contain(o => o.EventType.StartsWith("projects."));
+			outboxMessages.Should().OnlyContain(o => !string.IsNullOrWhiteSpace(o.Topic));
+			outboxMessages.Should().OnlyContain(o => o.Payload != null);
 			_output.WriteLine("✅ Outbox message validated successfully.");
 		}
 	}

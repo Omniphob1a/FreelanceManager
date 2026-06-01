@@ -20,6 +20,7 @@ namespace Projects.Application.Interfaces
 		Task<List<ProjectMemberReadDto>> GetMembersAsync(Guid projectId, CancellationToken ct);
 		Task<Project> GetFullProjectByIdAsync(Guid id, CancellationToken ct);
 		Task<List<Project>> GetOutOfDateProjectsAsync(DateTime thresholdDate);
+		Task<List<Project>> GetProjectsWithOutOfDateMilestonesAsync(DateTime thresholdDate, int take, CancellationToken ct);
 		Task<List<Project>> GetAllAsync();
 	}
 }

@@ -1,9 +1,13 @@
 // modules/projects.js
-import { ProjectAPI, getDaysLeft } from '../api.js';
+import { ProjectAPI } from '../api.js';
+import { getDaysLeft } from './ui.js';
 import { getCurrentUser } from './auth.js';
 import { showToast } from './ui.js';
 import { openProjectModal } from './modalManager.js';
 import { formatDate, getStatusClass, getStatusText, formatBudget } from './ui.js';
+import { localizeRuntimeText } from './localization.js';
+
+const t = (value) => localizeRuntimeText(value);
 
 export let currentProjects = [];
 
@@ -93,7 +97,7 @@ export async function loadProjects(params = {}) {
         const requestParams = {
             ownerId: user.id,
             sort: '-createdAt',
-            includeMilestones: true, // Важно для прогресса
+            includeMilestones: Boolean(params.includeMilestones),
             includeAttachments: false,
             // Устанавливаем пагинацию динамически
             page: page || 1,
@@ -377,25 +381,16 @@ function getCurrentPageSize() {
    const selector = document.getElementById('itemsPerPageSelect');
    return selector ? parseInt(selector.value) : 10;
 }
-export function initProjectsPage() {
-    // Загружаем проекты
-    loadProjectsPage();
-    
-    // Инициализируем компоненты
+export async function initProjectsPage() {
     setupProjectsPageListeners();
-    setupProjectsPageFilters();
     setupExpandableFilters();
     setupViewToggle();
     setupItemsPerPageSelector();
     setupClearFilters();
-    
-    // Обновляем счетчик фильтров
+    const grid = document.getElementById('projectsGrid');
+    if (grid) grid.dataset.setupDone = 'true';
+    await loadProjectsPage();
     updateFilterCounter();
-    
-    // Вешаем обработчики на изменение фильтров
-    document.querySelectorAll('#filtersPanel input, #filtersPanel select').forEach(el => {
-        el.addEventListener('change', updateFilterCounter);
-    });
 }
 function normalizeProjectsResponse(response) {
     if (!response) return [];
@@ -417,9 +412,13 @@ function normalizeProjectsResponse(response) {
 }
 
 function setupProjectsPageListeners() {
-    document.getElementById('newProjectBtn')?.addEventListener('click', () => {
-        window.location.hash = 'project-form';
-    });
+    const newProjectBtn = document.getElementById('newProjectBtn');
+    if (newProjectBtn && newProjectBtn.dataset.bound !== 'true') {
+        newProjectBtn.dataset.bound = 'true';
+        newProjectBtn.addEventListener('click', () => {
+            window.location.hash = 'project-form';
+        });
+    }
 }
 
 function renderDashboardProjects(projects) {
@@ -428,15 +427,15 @@ function renderDashboardProjects(projects) {
     
     container.innerHTML = projects.map(project => `
         <div class="bg-white rounded-lg shadow p-4 flex flex-col h-full">
-            <div class="flex justify-between">
-                <h4 class="font-medium truncate">${project.title}</h4>
+            <div class="project-card-header">
+                <h4 class="project-title project-title-dashboard font-medium">${project.title || t('Untitled Project')}</h4>
                 <span class="status-badge ${getStatusClass(project.status)}">
                     ${getStatusText(project.status)}
                 </span>
             </div>
             
             <div class="mt-3 flex-1">
-                <div class="text-xs text-gray-500 mb-1">Progress</div>
+                <div class="text-xs text-gray-500 mb-1">${t('Progress')}</div>
                 <div class="w-full bg-gray-200 rounded-full h-1.5 mb-3">
                     <div class="${calculateProjectProgress(project) === 100 ? 'bg-green-500' : 'bg-blue-600'} h-1.5 rounded-full" 
                          style="width: ${calculateProjectProgress(project)}%"></div>
@@ -449,7 +448,7 @@ function renderDashboardProjects(projects) {
                     ${getDaysLeft(project.expiresAt)}
                 </span>
                 <button class="text-blue-600 view-details-btn" data-id="${project.id}">
-                    Details
+                    ${t('Details')}
                 </button>
             </div>
         </div>
@@ -496,7 +495,7 @@ function renderProjectsGrid(projects) {
     if (projects.length === 0) {
         projectsGrid.innerHTML = `
             <div class="col-span-full text-center py-8">
-                <p class="text-gray-600">No projects found</p>
+                <p class="text-gray-600">${t('No projects found')}</p>
             </div>
         `;
         return;
@@ -511,13 +510,13 @@ function renderProjectsGrid(projects) {
                     </div>
                     <!-- ... other elements ... -->
                 </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">${project.title || 'Untitled Project'}</h3>
-                <p class="text-sm text-gray-500 mb-4 truncate">${project.description || 'No description'}</p>
+                <h3 class="project-title project-title-grid text-lg font-semibold text-gray-900 mb-2">${project.title || t('Untitled Project')}</h3>
+                <p class="text-sm text-gray-500 mb-4 truncate">${project.description || t('No description')}</p>
                 
                 <!-- Progress bar -->
                 <div class="mb-4">
                     <div class="flex justify-between text-xs text-gray-500 mb-1">
-                        <span>Progress</span>
+                        <span>${t('Progress')}</span>
                         <span>${calculateProjectProgress(project)}%</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2">
@@ -534,7 +533,7 @@ function renderProjectsGrid(projects) {
                     ${getDaysLeft(project.expiresAt)}
                 </div>
                 <button class="view-details-btn text-xs text-blue-600 hover:text-blue-800 font-medium">
-                    View Details <i class="fas fa-chevron-right ml-1"></i>
+                    ${t('View Details')} <i class="fas fa-chevron-right ml-1"></i>
                 </button>
             </div>
         </div>
@@ -621,6 +620,8 @@ function renderProjectsTable(projects) {
     const tableBody = document.getElementById('projectsTableBody');
     const loader = document.getElementById('projectsLoader');
     const noProjectsRow = document.getElementById('noProjectsRow');
+
+    if (!tableBody) return;
     
     if (loader) loader.classList.add('hidden');
     
@@ -852,14 +853,18 @@ export async function loadProjectsPage(page = 1, pageSize = 10, additionalFilter
         }
         
         // Инициализируем компоненты только один раз
-        if (!window.projectsPageSetup) {
+        if (document.getElementById('projectsGrid')?.dataset.setupDone !== 'true') {
             setupProjectsPageListeners();
             setupProjectsPageFilters();
             setupExpandableFilters(); 
             setupViewToggle();
             setupItemsPerPageSelector();
             setupClearFilters();
-            window.projectsPageSetup = true;
+            document.querySelectorAll('#filtersPanel input, #filtersPanel select').forEach(el => {
+                el.addEventListener('change', updateFilterCounter);
+            });
+            const grid = document.getElementById('projectsGrid');
+            if (grid) grid.dataset.setupDone = 'true';
             console.log('Projects page setup completed');
         }
         

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tasks.Domain.Aggregate.Entities;
@@ -162,7 +162,20 @@ namespace Tasks.Domain.Aggregate.Root
 			UpdatedAt = DateTime.UtcNow;
 			AddDomainEvent(new TaskStartedDomainEvent(Id));
 		}
-	
+
+		public void Cancel(string reason)
+		{
+			if (string.IsNullOrWhiteSpace(reason))
+				throw new ArgumentException("Cancellation reason is required.", nameof(reason));
+			if (Status == ProjectTaskStatus.Completed)
+				throw new InvalidOperationException("Completed tasks cannot be cancelled.");
+			if (Status == ProjectTaskStatus.Cancelled)
+				throw new InvalidOperationException("Task is already cancelled.");
+
+			Status = ProjectTaskStatus.Cancelled;
+			UpdatedAt = DateTime.UtcNow;
+			AddDomainEvent(new TaskCanceledDomainEvent(Id, reason.Trim()));
+		}
 
 		public void AddComment(Comment comment)
 		{

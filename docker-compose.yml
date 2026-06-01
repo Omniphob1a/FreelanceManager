@@ -11,27 +11,17 @@ services:
     ports:
       - "5002:80"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__UsersDbContext=Server=users-db;Port=5432;Database=users;User Id=postgres;Password=123;
       - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
-      - Kafka__BootstrapServers=d42dfhmc4cape6v45eh0.any.eu-central-1.mpx.prd.cloud.redpanda.com:9092
-      - Kafka__SecurityProtocol=SaslSsl
-      - Kafka__SaslMechanism=ScramSha256
-      - Kafka__SaslUsername=Vladimir3
-      - Kafka__SaslPassword=Namoembestijemmoulenerouje2424
-      - Kafka__SslCaLocation=/etc/ssl/certs/ca-certificates.crt
-    volumes:
-      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
+      - Kafka__BootstrapServers=kafka:9092
+      - Kafka__SecurityProtocol=Plaintext
     depends_on:
-      users-db:
-        condition: service_healthy
-      hangfire-db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      kafka:
-        condition: service_healthy
+      - users-db
+      - hangfire-db
+      - redis
+      - kafka
 
   # -------------------
   # Projects API
@@ -43,27 +33,17 @@ services:
     ports:
       - "5001:80"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__ProjectsDbContext=Server=projects-db;Port=5432;Database=projects;User Id=postgres;Password=123;
       - Hangfire__Storage__ConnectionString=Server=hangfire-db;Port=5432;Database=hangfire;User Id=postgres;Password=123;
-      - Kafka__BootstrapServers=d42dfhmc4cape6v45eh0.any.eu-central-1.mpx.prd.cloud.redpanda.com:9092
-      - Kafka__SecurityProtocol=SaslSsl
-      - Kafka__SaslMechanism=ScramSha256
-      - Kafka__SaslUsername=Vladimir
-      - Kafka__SaslPassword=nTwiV3sjtEuqzEZd9FQ3qMUhSuhOLJ
-      - Kafka__SslCaLocation=/etc/ssl/certs/ca-certificates.crt
-    volumes:
-      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
+      - Kafka__BootstrapServers=kafka:9092
+      - Kafka__SecurityProtocol=Plaintext
     depends_on:
-      projects-db:
-        condition: service_healthy
-      hangfire-db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      kafka:
-        condition: service_healthy
+      - projects-db
+      - hangfire-db
+      - redis
+      - kafka
 
   # -------------------
   # Tasks API
@@ -75,21 +55,13 @@ services:
     ports:
       - "5003:80"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__ProjectTasksDbContext=Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;
-      - Kafka__BootstrapServers=d42dfhmc4cape6v45eh0.any.eu-central-1.mpx.prd.cloud.redpanda.com:9092
-      - Kafka__SecurityProtocol=SaslSsl
-      - Kafka__SaslMechanism=ScramSha256
-      - Kafka__SaslUsername=Vladimir2
-      - Kafka__SaslPassword=Namoembestijemmoulenerouje2424
-      - Kafka__SslCaLocation=/etc/ssl/certs/ca-certificates.crt
-    volumes:
-      - ${USERPROFILE}/.nuget/packages:/root/.nuget/packages
+      - Kafka__BootstrapServers=kafka:9092
+      - Kafka__SecurityProtocol=Plaintext
     depends_on:
-      tasks-db:
-        condition: service_healthy
-
+      - tasks-db
 
   # -------------------
   # Gateway
@@ -101,20 +73,16 @@ services:
     ports:
       - "5000:8080"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
       - Kafka__BootstrapServers=kafka:9092
+      - Kafka__SecurityProtocol=Plaintext
     depends_on:
-      users-api:
-        condition: service_healthy
-      projects-api:
-        condition: service_healthy
-      tasks-api:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      kafka:
-        condition: service_healthy
+      - users-api
+      - projects-api
+      - tasks-api
+      - redis
+      - kafka
 
   # -------------------
   # Frontend
@@ -128,11 +96,10 @@ services:
     environment:
       - API_URL=http://gateway:8080
     depends_on:
-      gateway:
-        condition: service_healthy
+      - gateway
 
   # -------------------
-  # Hangfire DB
+  # PostgreSQL Databases
   # -------------------
   hangfire-db:
     image: postgres:16
@@ -144,15 +111,7 @@ services:
       - "5434:5432"
     volumes:
       - hangfire_pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d hangfire -h localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
-  # -------------------
-  # Users DB
-  # -------------------
   users-db:
     image: postgres:16
     environment:
@@ -163,15 +122,7 @@ services:
       - "5433:5432"
     volumes:
       - users_pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d users -h localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
-  # -------------------
-  # Projects DB
-  # -------------------
   projects-db:
     image: postgres:16
     environment:
@@ -182,15 +133,7 @@ services:
       - "5432:5432"
     volumes:
       - projects_pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d projects -h localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
-  # -------------------
-  # Tasks DB
-  # -------------------
   tasks-db:
     image: postgres:16
     environment:
@@ -201,15 +144,7 @@ services:
       - "5435:5432"
     volumes:
       - tasks_pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d tasks -h localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
-  # -------------------
-  # Notifications DB
-  # -------------------
   notifications-db:
     image: postgres:16
     environment:
@@ -220,11 +155,6 @@ services:
       - "5436:5432"
     volumes:
       - notifications_pgdata:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d notifications -h localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
 
   # -------------------
   # Redis
@@ -233,95 +163,29 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   # -------------------
-  # RedisInsight (UI)
-  # -------------------
-  redis-insight:
-    image: redislabs/redisinsight:latest
-    container_name: redis-insight
-    restart: unless-stopped
-    ports:
-      - "8001:5540"
-    depends_on:
-      redis:
-        condition: service_healthy
-    volumes:
-      - redisinsight_data:/db
-
-  # -------------------
-  # Zookeeper
+  # Kafka & Zookeeper
   # -------------------
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - "2181:2181"
 
-  # -------------------
-  # Kafka Broker
-  # -------------------
   kafka:
     image: confluentinc/cp-kafka:7.5.0
+    depends_on:
+      - zookeeper
     ports:
       - "9092:9092"
-      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    depends_on:
-      - zookeeper
-    healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server=kafka:9092"]
-      interval: 10s
-      timeout: 10s
-      retries: 10
-
-  # -------------------
-  # Kafka UI
-  # -------------------
-  kafka-ui:
-    image: provectuslabs/kafka-ui:latest
-    container_name: kafka-ui
-    ports:
-      - "8081:8080"
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
-    depends_on:
-      kafka:
-        condition: service_healthy
-
-  prometheus:
-    image: prom/prometheus:latest
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    depends_on:
-      - users-api
-      - projects-api
-      - tasks-api
-
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - "3000:3000"
-    depends_on:
-      - prometheus
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_CREATE_TOPICS: "members:1:1,users:1:1,projects:1:1,object-confirm-responses:1:1,projects.confirm-requested:1:1"
 
 volumes:
   projects_pgdata:

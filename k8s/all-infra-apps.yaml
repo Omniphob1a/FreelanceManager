@@ -1,0 +1,673 @@
+# apps-main.yaml
+# Namespace lab
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab
+---
+# --------------------------
+# Redis
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: lab
+  labels: {app: redis}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: redis}
+  template:
+    metadata:
+      labels: {app: redis}
+    spec:
+      containers:
+        - name: redis
+          image: redis:7
+          ports: [{containerPort: 6379}]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: lab
+spec:
+  selector: {app: redis}
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+# --------------------------
+# Temporary Postgres DBs (users, projects, tasks, hangfire)
+# --------------------------
+# Users DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-db
+  namespace: lab
+  labels: {app: users-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: users-db}
+  template:
+    metadata:
+      labels: {app: users-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "users"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-db
+  namespace: lab
+spec:
+  selector: {app: users-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Projects DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projects-db
+  namespace: lab
+  labels: {app: projects-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: projects-db}
+  template:
+    metadata:
+      labels: {app: projects-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "projects"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projects-db
+  namespace: lab
+spec:
+  selector: {app: projects-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Tasks DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-db
+  namespace: lab
+  labels: {app: tasks-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: tasks-db}
+  template:
+    metadata:
+      labels: {app: tasks-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "tasks"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-db
+  namespace: lab
+spec:
+  selector: {app: tasks-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Hangfire DB
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hangfire-db
+  namespace: lab
+  labels: {app: hangfire-db}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: hangfire-db}
+  template:
+    metadata:
+      labels: {app: hangfire-db}
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "123"
+          - name: POSTGRES_DB
+            value: "hangfire"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: pgdata
+            mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hangfire-db
+  namespace: lab
+spec:
+  selector: {app: hangfire-db}
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# --------------------------
+# Prometheus (very basic)
+# --------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: lab
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+
+    scrape_configs:
+      - job_name: 'gateways'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets:
+            - 'gateway:8080'
+
+      - job_name: 'apis'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets:
+            - 'users-api:80'
+            - 'tasks-low:8080'
+            - 'tasks-mid:8080'
+            - 'tasks-ultra:8080'
+            - 'projects-api:80'
+
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: lab
+  labels: {app: prometheus}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: prometheus}
+  template:
+    metadata:
+      labels: {app: prometheus}
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:latest
+          imagePullPolicy: IfNotPresent
+          args: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=1h"]
+          volumeMounts:
+            - name: config
+              mountPath: /etc/prometheus
+          ports:
+            - containerPort: 9090
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: lab
+spec:
+  selector: {app: prometheus}
+  type: NodePort
+  ports:
+    - port: 9090
+      nodePort: 31969
+---
+# --------------------------
+# Grafana (basic)
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: lab
+  labels: {app: grafana}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: grafana}
+  template:
+    metadata:
+      labels: {app: grafana}
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: "admin"
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: lab
+spec:
+  selector: {app: grafana}
+  type: NodePort
+  ports:
+    - port: 3000
+      nodePort: 30000
+---
+# --------------------------
+# Gateway (YARP) — single instance now (was mid/slow/ultra)
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: lab
+  labels: {app: gateway}
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: gateway}
+  template:
+    metadata:
+      labels: {app: gateway}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scheme: "http"
+    spec:
+      containers:
+        - name: gateway
+          image: fm-gateway:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ASPNETCORE_URLS
+              value: "http://*:8080"
+            - name: Kafka__BootstrapServers
+              value: "kafka:9092"
+            - name: Kafka__SecurityProtocol
+              value: "Plaintext"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+  namespace: lab
+spec:
+  selector: {app: gateway}
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32386
+---
+# --------------------------
+# Frontend
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: lab
+  labels: {app: frontend}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: frontend}
+  template:
+    metadata:
+      labels: {app: frontend}
+    spec:
+      containers:
+        - name: frontend
+          image: fm-frontend:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: API_URL
+              value: "http://gateway:8080"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: lab
+spec:
+  selector: {app: frontend}
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30902
+---
+# --------------------------
+# Apps: users, tasks (now low/mid/ultra), projects (single instance each)
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-api
+  namespace: lab
+  labels: {app: users-api}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: users-api}
+  template:
+    metadata:
+      labels: {app: users-api}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "80"
+        prometheus.io/scheme: "http"
+    spec:
+      containers:
+        - name: users-api
+          image: fm-users-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__UsersDbContext
+              value: "Server=users-db;Port=5432;Database=users;User Id=postgres;Password=123;"
+            - name: Kafka__BootstrapServers
+              value: "kafka:9092"
+            - name: Kafka__SecurityProtocol
+              value: "Plaintext"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-api
+  namespace: lab
+spec:
+  selector: {app: users-api}
+  ports:
+    - port: 80
+      targetPort: 80
+---
+# tasks variations to simulate unbalanced backend capacity / latency
+# tasks-low (slowest, few replicas)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-low
+  namespace: lab
+  labels: {app: tasks-api, tier: low}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: tasks-api, tier: low}
+  template:
+    metadata:
+      labels: {app: tasks-api, tier: low}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scheme: "http"
+    spec:
+      containers:
+        - name: tasks-api
+          image: fm-tasks-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__ProjectTasksDbContext
+              value: "Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;"
+            - name: TASK_SIMULATE_DELAY_MS
+              value: "500"
+            - name: Kafka__BootstrapServers
+              value: "kafka:9092"
+            - name: Kafka__SecurityProtocol
+              value: "Plaintext"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-low
+  namespace: lab
+spec:
+  selector: {app: tasks-api, tier: low}
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+# tasks-mid (medium latency)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-mid
+  namespace: lab
+  labels: {app: tasks-api, tier: mid}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: tasks-api, tier: mid}
+  template:
+    metadata:
+      labels: {app: tasks-api, tier: mid}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scheme: "http"
+    spec:
+      containers:
+        - name: tasks-api
+          image: fm-tasks-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__ProjectTasksDbContext
+              value: "Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;"
+            - name: TASK_SIMULATE_DELAY_MS
+              value: "200"
+            - name: Kafka__BootstrapServers
+              value: "kafka:9092"
+            - name: Kafka__SecurityProtocol
+              value: "Plaintext"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-mid
+  namespace: lab
+spec:
+  selector: {app: tasks-api, tier: mid}
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+# tasks-ultra (fast, more capacity)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-ultra
+  namespace: lab
+  labels: {app: tasks-api, tier: ultra}
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: tasks-api, tier: ultra}
+  template:
+    metadata:
+      labels: {app: tasks-api, tier: ultra}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "8080"
+        prometheus.io/scheme: "http"
+    spec:
+      containers:
+        - name: tasks-api
+          image: fm-tasks-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__ProjectTasksDbContext
+              value: "Server=tasks-db;Port=5432;Database=tasks;User Id=postgres;Password=123;"
+            - name: TASK_SIMULATE_DELAY_MS
+              value: "10"
+            - name: Kafka__BootstrapServers
+              value: "kafka:9092"
+            - name: Kafka__SecurityProtocol
+              value: "Plaintext"
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-ultra
+  namespace: lab
+spec:
+  selector: {app: tasks-api, tier: ultra}
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+# --------------------------
+# Projects API
+# --------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projects-api
+  namespace: lab
+  labels: {app: projects-api}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: projects-api}
+  template:
+    metadata:
+      labels: {app: projects-api}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "80"
+        prometheus.io/scheme: "http"
+    spec:
+      containers:
+        - name: projects-api
+          image: fm-projects-api:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+            - name: ConnectionStrings__ProjectsDbContext
+              value: "Server=projects-db;Port=5432;Database=projects;User Id=postgres;Password=123;"
+            - name: Kafka__BootstrapServers
+              value: "kafka:9092"
+            - name: Kafka__SecurityProtocol
+              value: "Plaintext"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projects-api
+  namespace: lab
+spec:
+  selector: {app: projects-api}
+  ports:
+    - port: 80
+      targetPort: 80

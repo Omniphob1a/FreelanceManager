@@ -1,4 +1,4 @@
-﻿// Projects.Application/Common/Behaviors/CachingBehavior.cs
+// Projects.Application/Common/Behaviors/CachingBehavior.cs
 using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
@@ -73,16 +73,34 @@ namespace Tasks.Application.Common.Behaviors
 			var response = await next();
 
 			string toCache;
-			if (response is IResultBase && response.GetType().GetGenericTypeDefinition() == typeof(Result<>))
+			if (response is IResultBase && response.GetType().IsGenericType && response.GetType().GetGenericTypeDefinition() == typeof(Result<>))
 			{
+				var isSuccessProp = response.GetType().GetProperty(nameof(Result.IsSuccess));
+				var isSuccess = isSuccessProp is not null && (bool)(isSuccessProp.GetValue(response) ?? false);
+				if (!isSuccess)
+				{
+					_log.LogInformation("  → SKIP CACHE {Key} (failed result)", key);
+					return response;
+				}
+
 				var payload = response.GetType()
 					.GetProperty(nameof(Result<object>.Value))!
 					.GetValue(response);
+				if (payload is null)
+				{
+					_log.LogInformation("  → SKIP CACHE {Key} (empty payload)", key);
+					return response;
+				}
 
 				toCache = JsonSerializer.Serialize(payload, _opts);
 			}
 			else
 			{
+				if (response is null)
+				{
+					_log.LogInformation("  → SKIP CACHE {Key} (null response)", key);
+					return response;
+				}
 				toCache = JsonSerializer.Serialize(response, _opts);
 			}
 

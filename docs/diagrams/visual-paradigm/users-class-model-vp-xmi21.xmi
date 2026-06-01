@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML">
+  <uml:Model xmi:id="model_UsersServiceClassModel" name="UsersServiceClassModel">
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_PrimitiveTypes" name="PrimitiveTypes">
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Guid" name="Guid"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_String" name="String"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Boolean" name="Boolean"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Int32" name="Int32"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Decimal" name="Decimal"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_DateTime" name="DateTime"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_TimeSpan" name="TimeSpan"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Stream" name="Stream"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Object" name="Object"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Void" name="Void"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_API" name="API">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_AuthController" name="AuthController">
+        <ownedOperation xmi:id="class_AuthController_op_0_op_Register" name="Register" visibility="public"/>
+        <ownedOperation xmi:id="class_AuthController_op_1_op_Login" name="Login" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UsersController" name="UsersController">
+        <ownedOperation xmi:id="class_UsersController_op_0_op_GetUserById" name="GetUserById" visibility="public"/>
+        <ownedOperation xmi:id="class_UsersController_op_1_op_GetMyProfile" name="GetMyProfile" visibility="public"/>
+        <ownedOperation xmi:id="class_UsersController_op_2_op_UpdateUser" name="UpdateUser" visibility="public"/>
+        <ownedOperation xmi:id="class_UsersController_op_3_op_DeleteUser" name="DeleteUser" visibility="public"/>
+        <ownedOperation xmi:id="class_UsersController_op_4_op_RestoreUser" name="RestoreUser" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RolesController" name="RolesController">
+        <ownedOperation xmi:id="class_RolesController_op_0_op_CreateRole" name="CreateRole" visibility="public"/>
+        <ownedOperation xmi:id="class_RolesController_op_1_op_ListRoles" name="ListRoles" visibility="public"/>
+        <ownedOperation xmi:id="class_RolesController_op_2_op_AddPermission" name="AddPermission" visibility="public"/>
+        <ownedOperation xmi:id="class_RolesController_op_3_op_RemovePermission" name="RemovePermission" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Application" name="Application">
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IMediator" name="IMediator">
+        <ownedOperation xmi:id="interface_IMediator_op_0_op_Send" name="Send" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RegisterUserCommand" name="RegisterUserCommand">
+        <ownedAttribute xmi:id="class_RegisterUserCommand_attr_0_a_Login" name="Login" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_RegisterUserCommand_attr_1_a_Password" name="Password" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_RegisterUserCommand_attr_2_a_Name" name="Name" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_RegisterUserCommand_attr_3_a_Email" name="Email" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UpdateUserCommand" name="UpdateUserCommand">
+        <ownedAttribute xmi:id="class_UpdateUserCommand_attr_0_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_UpdateUserCommand_attr_1_a_Name" name="Name" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_UpdateUserCommand_attr_2_a_Email" name="Email" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ChangeUserPasswordCommand" name="ChangeUserPasswordCommand">
+        <ownedAttribute xmi:id="class_ChangeUserPasswordCommand_attr_0_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_ChangeUserPasswordCommand_attr_1_a_NewPassword" name="NewPassword" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_DeleteUserCommand" name="DeleteUserCommand">
+        <ownedAttribute xmi:id="class_DeleteUserCommand_attr_0_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RestoreUserCommand" name="RestoreUserCommand">
+        <ownedAttribute xmi:id="class_RestoreUserCommand_attr_0_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_CreateRoleCommand" name="CreateRoleCommand">
+        <ownedAttribute xmi:id="class_CreateRoleCommand_attr_0_a_Name" name="Name" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_AddPermissionToRoleCommand" name="AddPermissionToRoleCommand">
+        <ownedAttribute xmi:id="class_AddPermissionToRoleCommand_attr_0_a_RoleId" name="RoleId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_AddPermissionToRoleCommand_attr_1_a_PermissionId" name="PermissionId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_AuthenticateUserQuery" name="AuthenticateUserQuery">
+        <ownedAttribute xmi:id="class_AuthenticateUserQuery_attr_0_a_Login" name="Login" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_AuthenticateUserQuery_attr_1_a_Password" name="Password" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_GetUserByIdQuery" name="GetUserByIdQuery">
+        <ownedAttribute xmi:id="class_GetUserByIdQuery_attr_0_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_GetAllActiveUsersQuery" name="GetAllActiveUsersQuery">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ListRolesQuery" name="ListRolesQuery">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RegisterUserCommandHandler" name="RegisterUserCommandHandler">
+        <ownedOperation xmi:id="class_RegisterUserCommandHandler_op_0_op_Handle" name="Handle" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_AuthenticateUserQueryHandler" name="AuthenticateUserQueryHandler">
+        <ownedOperation xmi:id="class_AuthenticateUserQueryHandler_op_0_op_Handle" name="Handle" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UpdateUserCommandHandler" name="UpdateUserCommandHandler">
+        <ownedOperation xmi:id="class_UpdateUserCommandHandler_op_0_op_Handle" name="Handle" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RoleCommandHandler" name="RoleCommandHandler">
+        <ownedOperation xmi:id="class_RoleCommandHandler_op_0_op_Handle" name="Handle" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IJwtTokenGenerator" name="IJwtTokenGenerator">
+        <ownedOperation xmi:id="interface_IJwtTokenGenerator_op_0_op_GenerateToken" name="GenerateToken" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IOutboxService" name="IOutboxService">
+        <ownedOperation xmi:id="interface_IOutboxService_op_0_op_Add" name="Add" visibility="public"/>
+        <ownedOperation xmi:id="interface_IOutboxService_op_1_op_AddTombstone" name="AddTombstone" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Domain" name="Domain">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_User" name="User">
+        <ownedAttribute xmi:id="class_User_attr_0_a_Id" name="Id" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_User_attr_1_a_Login" name="Login" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_User_attr_2_a_PasswordHash" name="PasswordHash" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_User_attr_3_a_Name" name="Name" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_User_attr_4_a_Gender" name="Gender" type="prim_Int32" visibility="public"/>
+        <ownedAttribute xmi:id="class_User_attr_5_a_Birthday" name="Birthday" type="prim_DateTime" visibility="public"/>
+        <ownedAttribute xmi:id="class_User_attr_6_a_Admin" name="Admin" type="prim_Boolean" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_0_op_Register" name="Register" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_1_op_UpdateProfile" name="UpdateProfile" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_2_op_ChangeLogin" name="ChangeLogin" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_3_op_ChangePassword" name="ChangePassword" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_4_op_Delete" name="Delete" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_5_op_Restore" name="Restore" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_6_op_AddRole" name="AddRole" visibility="public"/>
+        <ownedOperation xmi:id="class_User_op_7_op_RemoveRole" name="RemoveRole" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_Role" name="Role">
+        <ownedAttribute xmi:id="class_Role_attr_0_a_Id" name="Id" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_Role_attr_1_a_Name" name="Name" type="prim_String" visibility="public"/>
+        <ownedOperation xmi:id="class_Role_op_0_op_TryCreate" name="TryCreate" visibility="public"/>
+        <ownedOperation xmi:id="class_Role_op_1_op_AddPermission" name="AddPermission" visibility="public"/>
+        <ownedOperation xmi:id="class_Role_op_2_op_RemovePermission" name="RemovePermission" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_Permission" name="Permission">
+        <ownedAttribute xmi:id="class_Permission_attr_0_a_Name" name="Name" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_Email" name="Email">
+        <ownedAttribute xmi:id="class_Email_attr_0_a_Value" name="Value" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_DomainEvent" name="DomainEvent">
+        <ownedAttribute xmi:id="class_DomainEvent_attr_0_a_OccurredAt" name="OccurredAt" type="prim_DateTime" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserRegisteredDomainEvent" name="UserRegisteredDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserDeletedDomainEvent" name="UserDeletedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserRoleAddedDomainEvent" name="UserRoleAddedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserProfileUpdatedDomainEvent" name="UserProfileUpdatedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IUserRepository" name="IUserRepository">
+        <ownedOperation xmi:id="interface_IUserRepository_op_0_op_Add" name="Add" visibility="public"/>
+        <ownedOperation xmi:id="interface_IUserRepository_op_1_op_GetById" name="GetById" visibility="public"/>
+        <ownedOperation xmi:id="interface_IUserRepository_op_2_op_GetByLogin" name="GetByLogin" visibility="public"/>
+        <ownedOperation xmi:id="interface_IUserRepository_op_3_op_GetByEmail" name="GetByEmail" visibility="public"/>
+        <ownedOperation xmi:id="interface_IUserRepository_op_4_op_ListActive" name="ListActive" visibility="public"/>
+        <ownedOperation xmi:id="interface_IUserRepository_op_5_op_Update" name="Update" visibility="public"/>
+        <ownedOperation xmi:id="interface_IUserRepository_op_6_op_Delete" name="Delete" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IRoleRepository" name="IRoleRepository">
+        <ownedOperation xmi:id="interface_IRoleRepository_op_0_op_Add" name="Add" visibility="public"/>
+        <ownedOperation xmi:id="interface_IRoleRepository_op_1_op_GetById" name="GetById" visibility="public"/>
+        <ownedOperation xmi:id="interface_IRoleRepository_op_2_op_GetByName" name="GetByName" visibility="public"/>
+        <ownedOperation xmi:id="interface_IRoleRepository_op_3_op_ListAll" name="ListAll" visibility="public"/>
+        <ownedOperation xmi:id="interface_IRoleRepository_op_4_op_Update" name="Update" visibility="public"/>
+        <ownedOperation xmi:id="interface_IRoleRepository_op_5_op_Delete" name="Delete" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IPermissionRepository" name="IPermissionRepository">
+        <ownedOperation xmi:id="interface_IPermissionRepository_op_0_op_GetAll" name="GetAll" visibility="public"/>
+        <ownedOperation xmi:id="interface_IPermissionRepository_op_1_op_GetById" name="GetById" visibility="public"/>
+        <ownedOperation xmi:id="interface_IPermissionRepository_op_2_op_Add" name="Add" visibility="public"/>
+        <ownedOperation xmi:id="interface_IPermissionRepository_op_3_op_Update" name="Update" visibility="public"/>
+        <ownedOperation xmi:id="interface_IPermissionRepository_op_4_op_Delete" name="Delete" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IUnitOfWork" name="IUnitOfWork">
+        <ownedOperation xmi:id="interface_IUnitOfWork_op_0_op_SaveChangesAsync" name="SaveChangesAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IDomainEventDispatcher" name="IDomainEventDispatcher">
+        <ownedOperation xmi:id="interface_IDomainEventDispatcher_op_0_op_Dispatch" name="Dispatch" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Persistence" name="Persistence">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UsersDbContext" name="UsersDbContext">
+        <ownedAttribute xmi:id="class_UsersDbContext_attr_0_a_Users" name="Users" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_UsersDbContext_attr_1_a_Roles" name="Roles" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_UsersDbContext_attr_2_a_Permissions" name="Permissions" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_UsersDbContext_attr_3_a_OutboxMessages" name="OutboxMessages" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserRepository" name="UserRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RoleRepository" name="RoleRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_PermissionRepository" name="PermissionRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserData" name="UserData">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RoleEntity" name="RoleEntity">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_PermissionEntity" name="PermissionEntity">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_OutboxMessage" name="OutboxMessage">
+        <ownedAttribute xmi:id="class_OutboxMessage_attr_0_a_EventType" name="EventType" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_OutboxMessage_attr_1_a_Topic" name="Topic" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_OutboxMessage_attr_2_a_Payload" name="Payload" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_OutboxMessage_attr_3_a_Processed" name="Processed" type="prim_Boolean" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Infrastructure" name="Infrastructure">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_JwtTokenGenerator" name="JwtTokenGenerator">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_OutboxService" name="OutboxService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_OutboxPublisherHostedService" name="OutboxPublisherHostedService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_DomainEventDispatcher" name="DomainEventDispatcher">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ConfluentKafkaProducer" name="ConfluentKafkaProducer">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UsersConfirmConsumerHostedService" name="UsersConfirmConsumerHostedService">
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_1" name="uses" client="class_AuthController" supplier="interface_IMediator"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_2" name="uses" client="class_UsersController" supplier="interface_IMediator"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_3" name="uses" client="class_RolesController" supplier="interface_IMediator"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_4" name="uses" client="interface_IMediator" supplier="class_RegisterUserCommand"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_5" name="uses" client="interface_IMediator" supplier="class_AuthenticateUserQuery"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_6" name="uses" client="interface_IMediator" supplier="class_UpdateUserCommand"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_7" name="uses" client="interface_IMediator" supplier="class_CreateRoleCommand"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_8" name="uses" client="class_RegisterUserCommand" supplier="class_RegisterUserCommandHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_9" name="uses" client="class_AuthenticateUserQuery" supplier="class_AuthenticateUserQueryHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_10" name="uses" client="class_UpdateUserCommand" supplier="class_UpdateUserCommandHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_11" name="uses" client="class_CreateRoleCommand" supplier="class_RoleCommandHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_12" name="uses" client="class_RegisterUserCommandHandler" supplier="interface_IUserRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_13" name="uses" client="class_RegisterUserCommandHandler" supplier="interface_IOutboxService"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_14" name="uses" client="class_AuthenticateUserQueryHandler" supplier="interface_IUserRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_15" name="uses" client="class_AuthenticateUserQueryHandler" supplier="interface_IJwtTokenGenerator"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_16" name="uses" client="class_UpdateUserCommandHandler" supplier="interface_IUserRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_17" name="uses" client="class_RoleCommandHandler" supplier="interface_IRoleRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_18" name="uses" client="class_RoleCommandHandler" supplier="interface_IPermissionRepository"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_19" name="email" memberEnd="assoc_19_sourceEnd assoc_19_targetEnd">
+      <ownedEnd xmi:id="assoc_19_sourceEnd" name="user" type="class_User" association="assoc_19" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_19_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_19_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_19_targetEnd" name="email" type="class_Email" association="assoc_19">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_19_targetEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_19_targetEnd_upper" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_20" name="roles" memberEnd="assoc_20_sourceEnd assoc_20_targetEnd">
+      <ownedEnd xmi:id="assoc_20_sourceEnd" name="user" type="class_User" association="assoc_20" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_20_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_20_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_20_targetEnd" name="role" type="class_Role" association="assoc_20">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_20_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_20_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_21" name="permissions" memberEnd="assoc_21_sourceEnd assoc_21_targetEnd">
+      <ownedEnd xmi:id="assoc_21_sourceEnd" name="role" type="class_Role" association="assoc_21" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_21_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_21_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_21_targetEnd" name="permission" type="class_Permission" association="assoc_21">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_21_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_21_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_22" name="raises" memberEnd="assoc_22_sourceEnd assoc_22_targetEnd">
+      <ownedEnd xmi:id="assoc_22_sourceEnd" name="user" type="class_User" association="assoc_22" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_22_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_22_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_22_targetEnd" name="domainevent" type="class_DomainEvent" association="assoc_22">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_22_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_22_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_23" name="implements" client="class_UserRepository" supplier="interface_IUserRepository" contract="interface_IUserRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_24" name="implements" client="class_RoleRepository" supplier="interface_IRoleRepository" contract="interface_IRoleRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_25" name="implements" client="class_PermissionRepository" supplier="interface_IPermissionRepository" contract="interface_IPermissionRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_26" name="implements" client="class_JwtTokenGenerator" supplier="interface_IJwtTokenGenerator" contract="interface_IJwtTokenGenerator"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_27" name="implements" client="class_OutboxService" supplier="interface_IOutboxService" contract="interface_IOutboxService"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_28" name="implements" client="class_DomainEventDispatcher" supplier="interface_IDomainEventDispatcher" contract="interface_IDomainEventDispatcher"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_29" name="uses" client="class_UserRepository" supplier="class_UsersDbContext"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_30" name="uses" client="class_RoleRepository" supplier="class_UsersDbContext"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_31" name="uses" client="class_PermissionRepository" supplier="class_UsersDbContext"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_32" name="stores" memberEnd="assoc_32_sourceEnd assoc_32_targetEnd">
+      <ownedEnd xmi:id="assoc_32_sourceEnd" name="usersdbcontext" type="class_UsersDbContext" association="assoc_32" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_32_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_32_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_32_targetEnd" name="outboxmessage" type="class_OutboxMessage" association="assoc_32">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_32_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_32_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_33" name="uses" client="class_OutboxPublisherHostedService" supplier="class_OutboxMessage"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_34" name="uses" client="class_OutboxPublisherHostedService" supplier="class_ConfluentKafkaProducer"/>
+  </uml:Model>
+</xmi:XMI>

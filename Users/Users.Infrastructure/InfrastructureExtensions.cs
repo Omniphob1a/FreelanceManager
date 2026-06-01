@@ -6,15 +6,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Projects.Infrastructure.Persistence;
+using Projects.Persistence.Data.Repositories;
 using System.Text;
 using Tasks.Infrastructure.Events;
+using Users.Application.Events;
 using Users.Application.Interfaces;
 using Users.Application.Mappings;
 using Users.Domain.Interfaces.Repositories;
 using Users.Infrastructure.Auth;
 using Users.Infrastructure.Data;
+using Users.Infrastructure.HostedServices;
 using Users.Infrastructure.Kafka;
 using Users.Infrastructure.Outbox;
+using Users.Infrastructure.Processors;
 using Users.Infrastructure.Repositories;
 using Users.Persistence.Common;
 
@@ -24,7 +29,6 @@ public static class InfrastructureExtensions
 		this IServiceCollection services,
 		IConfiguration configuration)
 	{
-
 		services.AddDbContext<UsersDbContext>(opts =>
 			opts.UseNpgsql(
 				configuration.GetConnectionString(nameof(UsersDbContext)),
@@ -55,11 +59,20 @@ public static class InfrastructureExtensions
 			return new Mapper(cfg);
 		});
 
+		services.AddScoped<IIncomingEventStore, IncomingEventStore>();
+		services.AddScoped<IIncomingEventRepository, IncomingEventRepository>();
 		services.AddHostedService<OutboxPublisherHostedService>();
+
+		services.AddHostedService<UsersConfirmConsumerHostedService>();
+
 		var kafkaSection = configuration.GetSection("Kafka");
+		var kafkaSettings = kafkaSection.Get<KafkaSettings>() ?? new KafkaSettings();
+		services.AddSingleton(kafkaSettings);
 		services.Configure<KafkaSettings>(kafkaSection);
-		var settings = kafkaSection.Get<KafkaSettings>();
-		services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(settings));
+		services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(kafkaSettings));
+
+		services.AddHostedService<IncomingEventsProcessorHostedService>();
+		services.AddTransient<IIncomingEventProcessor, ConfirmRequestProcessor>();
 
 		services.AddScoped<IOutboxService, OutboxService>();
 

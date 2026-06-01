@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML">
+  <uml:Model xmi:id="model_TasksServiceClassModel" name="TasksServiceClassModel">
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_PrimitiveTypes" name="PrimitiveTypes">
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Guid" name="Guid"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_String" name="String"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Boolean" name="Boolean"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Int32" name="Int32"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Decimal" name="Decimal"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_DateTime" name="DateTime"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_TimeSpan" name="TimeSpan"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Stream" name="Stream"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Object" name="Object"/>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="prim_Void" name="Void"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_API" name="API">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTasksController" name="ProjectTasksController">
+        <ownedOperation xmi:id="class_ProjectTasksController_op_0_op_CreateTask" name="CreateTask" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_1_op_GetTasks" name="GetTasks" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_2_op_GetTaskById" name="GetTaskById" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_3_op_UpdateTask" name="UpdateTask" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_4_op_DeleteTask" name="DeleteTask" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_5_op_AssignTask" name="AssignTask" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_6_op_StartTask" name="StartTask" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_7_op_CompleteTask" name="CompleteTask" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_8_op_CancelTask" name="CancelTask" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_9_op_AddComment" name="AddComment" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTasksController_op_10_op_AddTimeEntry" name="AddTimeEntry" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Application" name="Application">
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IMediator" name="IMediator">
+        <ownedOperation xmi:id="interface_IMediator_op_0_op_Send" name="Send" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_CreateProjectTaskCommand" name="CreateProjectTaskCommand">
+        <ownedAttribute xmi:id="class_CreateProjectTaskCommand_attr_0_a_ProjectId" name="ProjectId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_CreateProjectTaskCommand_attr_1_a_Title" name="Title" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_CreateProjectTaskCommand_attr_2_a_ReporterId" name="ReporterId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UpdateProjectTaskCommand" name="UpdateProjectTaskCommand">
+        <ownedAttribute xmi:id="class_UpdateProjectTaskCommand_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_AssignProjectTaskCommand" name="AssignProjectTaskCommand">
+        <ownedAttribute xmi:id="class_AssignProjectTaskCommand_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_AssignProjectTaskCommand_attr_1_a_AssigneeId" name="AssigneeId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_StartProjectTaskCommand" name="StartProjectTaskCommand">
+        <ownedAttribute xmi:id="class_StartProjectTaskCommand_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_CompleteProjectTaskCommand" name="CompleteProjectTaskCommand">
+        <ownedAttribute xmi:id="class_CompleteProjectTaskCommand_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_CancelProjectTaskCommand" name="CancelProjectTaskCommand">
+        <ownedAttribute xmi:id="class_CancelProjectTaskCommand_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_CancelProjectTaskCommand_attr_1_a_Reason" name="Reason" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_AddCommentCommand" name="AddCommentCommand">
+        <ownedAttribute xmi:id="class_AddCommentCommand_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_AddCommentCommand_attr_1_a_AuthorId" name="AuthorId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_AddCommentCommand_attr_2_a_Text" name="Text" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_LogTimeCommand" name="LogTimeCommand">
+        <ownedAttribute xmi:id="class_LogTimeCommand_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_LogTimeCommand_attr_1_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_GetProjectTasksQuery" name="GetProjectTasksQuery">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_GetProjectTaskByIdQuery" name="GetProjectTaskByIdQuery">
+        <ownedAttribute xmi:id="class_GetProjectTaskByIdQuery_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_GetCommentsByTaskIdQuery" name="GetCommentsByTaskIdQuery">
+        <ownedAttribute xmi:id="class_GetCommentsByTaskIdQuery_attr_0_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_GetProjectMembersQuery" name="GetProjectMembersQuery">
+        <ownedAttribute xmi:id="class_GetProjectMembersQuery_attr_0_a_ProjectId" name="ProjectId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTaskCommandHandler" name="ProjectTaskCommandHandler">
+        <ownedOperation xmi:id="class_ProjectTaskCommandHandler_op_0_op_Handle" name="Handle" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTaskQueryHandler" name="ProjectTaskQueryHandler">
+        <ownedOperation xmi:id="class_ProjectTaskQueryHandler_op_0_op_Handle" name="Handle" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_ICommentReadRepository" name="ICommentReadRepository">
+        <ownedOperation xmi:id="interface_ICommentReadRepository_op_0_op_GetCommentsByTaskIdAsync" name="GetCommentsByTaskIdAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IMemberReadRepository" name="IMemberReadRepository">
+        <ownedOperation xmi:id="interface_IMemberReadRepository_op_0_op_GetByProjectAsync" name="GetByProjectAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_IMemberReadRepository_op_1_op_ExistsAsync" name="ExistsAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IProjectReadRepository" name="IProjectReadRepository">
+        <ownedOperation xmi:id="interface_IProjectReadRepository_op_0_op_ExistsAsync" name="ExistsAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_IProjectReadRepository_op_1_op_GetByIdAsync" name="GetByIdAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IUserReadRepository" name="IUserReadRepository">
+        <ownedOperation xmi:id="interface_IUserReadRepository_op_0_op_GetByIdAsync" name="GetByIdAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_IUserReadRepository_op_1_op_GetAllAsync" name="GetAllAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IIncomingEventRepository" name="IIncomingEventRepository">
+        <ownedOperation xmi:id="interface_IIncomingEventRepository_op_0_op_GetPendingAsync" name="GetPendingAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_IIncomingEventRepository_op_1_op_MarkProcessedAsync" name="MarkProcessedAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IIncomingEventStore" name="IIncomingEventStore">
+        <ownedOperation xmi:id="interface_IIncomingEventStore_op_0_op_SaveAsync" name="SaveAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_ICacheService" name="ICacheService">
+        <ownedOperation xmi:id="interface_ICacheService_op_0_op_GetAsync" name="GetAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_ICacheService_op_1_op_SetAsync" name="SetAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_ICacheService_op_2_op_RemoveAsync" name="RemoveAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IAuthorizationService" name="IAuthorizationService">
+        <ownedOperation xmi:id="interface_IAuthorizationService_op_0_op_GetAccessToken" name="GetAccessToken" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Domain" name="Domain">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTask" name="ProjectTask">
+        <ownedAttribute xmi:id="class_ProjectTask_attr_0_a_Id" name="Id" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTask_attr_1_a_ProjectId" name="ProjectId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTask_attr_2_a_Title" name="Title" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTask_attr_3_a_AssigneeId" name="AssigneeId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTask_attr_4_a_ReporterId" name="ReporterId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTask_attr_5_a_Status" name="Status" type="enum_ProjectTaskStatus" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTask_attr_6_a_Priority" name="Priority" type="enum_TaskPriority" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTask_attr_7_a_DueDate" name="DueDate" type="prim_DateTime" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_0_op_CreateDraft" name="CreateDraft" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_1_op_UpdateDetails" name="UpdateDetails" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_2_op_Assign" name="Assign" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_3_op_Unassign" name="Unassign" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_4_op_MarkInProgress" name="MarkInProgress" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_5_op_MarkCompleted" name="MarkCompleted" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_6_op_Cancel" name="Cancel" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_7_op_AddComment" name="AddComment" visibility="public"/>
+        <ownedOperation xmi:id="class_ProjectTask_op_8_op_AddTimeEntry" name="AddTimeEntry" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_Comment" name="Comment">
+        <ownedAttribute xmi:id="class_Comment_attr_0_a_Id" name="Id" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_Comment_attr_1_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_Comment_attr_2_a_AuthorId" name="AuthorId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_Comment_attr_3_a_Text" name="Text" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_Comment_attr_4_a_CreatedAt" name="CreatedAt" type="prim_DateTime" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TimeEntry" name="TimeEntry">
+        <ownedAttribute xmi:id="class_TimeEntry_attr_0_a_Id" name="Id" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_TimeEntry_attr_1_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_TimeEntry_attr_2_a_TaskId" name="TaskId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_TimeEntry_attr_3_a_Period" name="Period" type="class_TimeRange" visibility="public"/>
+        <ownedAttribute xmi:id="class_TimeEntry_attr_4_a_Duration" name="Duration" type="prim_TimeSpan" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TimeRange" name="TimeRange">
+        <ownedAttribute xmi:id="class_TimeRange_attr_0_a_Start" name="Start" type="prim_DateTime" visibility="public"/>
+        <ownedAttribute xmi:id="class_TimeRange_attr_1_a_End" name="End" type="prim_DateTime" visibility="public"/>
+        <ownedAttribute xmi:id="class_TimeRange_attr_2_a_Duration" name="Duration" type="prim_TimeSpan" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_Money" name="Money">
+        <ownedAttribute xmi:id="class_Money_attr_0_a_Amount" name="Amount" type="prim_Decimal" visibility="public"/>
+        <ownedAttribute xmi:id="class_Money_attr_1_a_CurrencyCode" name="CurrencyCode" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Enumeration" xmi:id="enum_ProjectTaskStatus" name="ProjectTaskStatus">
+        <ownedLiteral xmi:id="enum_ProjectTaskStatus_lit_0" name="ToDo"/>
+        <ownedLiteral xmi:id="enum_ProjectTaskStatus_lit_1" name="InProgress"/>
+        <ownedLiteral xmi:id="enum_ProjectTaskStatus_lit_2" name="Completed"/>
+        <ownedLiteral xmi:id="enum_ProjectTaskStatus_lit_3" name="Cancelled"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Enumeration" xmi:id="enum_TaskPriority" name="TaskPriority">
+        <ownedLiteral xmi:id="enum_TaskPriority_lit_0" name="Low"/>
+        <ownedLiteral xmi:id="enum_TaskPriority_lit_1" name="Medium"/>
+        <ownedLiteral xmi:id="enum_TaskPriority_lit_2" name="High"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TaskDomainEvent" name="TaskDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TaskCreatedDomainEvent" name="TaskCreatedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TaskAssignedDomainEvent" name="TaskAssignedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TaskCompletedDomainEvent" name="TaskCompletedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_CommentAddedDomainEvent" name="CommentAddedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TimeEntryAddedDomainEvent" name="TimeEntryAddedDomainEvent">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IProjectTaskRepository" name="IProjectTaskRepository">
+        <ownedOperation xmi:id="interface_IProjectTaskRepository_op_0_op_GetByIdAsync" name="GetByIdAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_IProjectTaskRepository_op_1_op_AddAsync" name="AddAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_IProjectTaskRepository_op_2_op_UpdateAsync" name="UpdateAsync" visibility="public"/>
+        <ownedOperation xmi:id="interface_IProjectTaskRepository_op_3_op_DeleteAsync" name="DeleteAsync" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="interface_IUnitOfWork" name="IUnitOfWork">
+        <ownedOperation xmi:id="interface_IUnitOfWork_op_0_op_SaveChangesAsync" name="SaveChangesAsync" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Persistence" name="Persistence">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTasksDbContext" name="ProjectTasksDbContext">
+        <ownedAttribute xmi:id="class_ProjectTasksDbContext_attr_0_a_ProjectTasks" name="ProjectTasks" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTasksDbContext_attr_1_a_Comments" name="Comments" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTasksDbContext_attr_2_a_TimeEntries" name="TimeEntries" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTasksDbContext_attr_3_a_ReadModels" name="ReadModels" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTasksDbContext_attr_4_a_IncomingEvents" name="IncomingEvents" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectTasksDbContext_attr_5_a_OutboxMessages" name="OutboxMessages" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTaskRepository" name="ProjectTaskRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTaskQueryService" name="ProjectTaskQueryService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_CommentReadRepository" name="CommentReadRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_MemberReadRepository" name="MemberReadRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectReadRepository" name="ProjectReadRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserReadRepository" name="UserReadRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_IncomingEventRepository" name="IncomingEventRepository">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_IncomingEventStore" name="IncomingEventStore">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectTaskEntity" name="ProjectTaskEntity">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_CommentEntity" name="CommentEntity">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_TimeEntryEntity" name="TimeEntryEntity">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserReadModel" name="UserReadModel">
+        <ownedAttribute xmi:id="class_UserReadModel_attr_0_a_Id" name="Id" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_UserReadModel_attr_1_a_Login" name="Login" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_UserReadModel_attr_2_a_Name" name="Name" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectReadModel" name="ProjectReadModel">
+        <ownedAttribute xmi:id="class_ProjectReadModel_attr_0_a_Id" name="Id" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectReadModel_attr_1_a_Title" name="Title" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_ProjectReadModel_attr_2_a_OwnerId" name="OwnerId" type="prim_Guid" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_MemberReadModel" name="MemberReadModel">
+        <ownedAttribute xmi:id="class_MemberReadModel_attr_0_a_UserId" name="UserId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_MemberReadModel_attr_1_a_ProjectId" name="ProjectId" type="prim_Guid" visibility="public"/>
+        <ownedAttribute xmi:id="class_MemberReadModel_attr_2_a_Role" name="Role" type="prim_String" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_IncomingEvent" name="IncomingEvent">
+        <ownedAttribute xmi:id="class_IncomingEvent_attr_0_a_Topic" name="Topic" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_IncomingEvent_attr_1_a_Payload" name="Payload" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_IncomingEvent_attr_2_a_Processed" name="Processed" type="prim_Boolean" visibility="public"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_OutboxMessage" name="OutboxMessage">
+        <ownedAttribute xmi:id="class_OutboxMessage_attr_0_a_Topic" name="Topic" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_OutboxMessage_attr_1_a_Payload" name="Payload" type="prim_String" visibility="public"/>
+        <ownedAttribute xmi:id="class_OutboxMessage_attr_2_a_Processed" name="Processed" type="prim_Boolean" visibility="public"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="pkg_Infrastructure" name="Infrastructure">
+      <packagedElement xmi:type="uml:Class" xmi:id="class_RedisCacheService" name="RedisCacheService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UsersConsumerHostedService" name="UsersConsumerHostedService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectsConsumerHostedService" name="ProjectsConsumerHostedService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_MembersConsumerHostedService" name="MembersConsumerHostedService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_IncomingEventsProcessorHostedService" name="IncomingEventsProcessorHostedService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_UserEventProcessor" name="UserEventProcessor">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ProjectEventProcessor" name="ProjectEventProcessor">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_MemberEventProcessor" name="MemberEventProcessor">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_OutboxPublisherHostedService" name="OutboxPublisherHostedService">
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="class_ConfluentKafkaProducer" name="ConfluentKafkaProducer">
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_1" name="uses" client="class_ProjectTasksController" supplier="interface_IMediator"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_2" name="uses" client="interface_IMediator" supplier="class_CreateProjectTaskCommand"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_3" name="uses" client="interface_IMediator" supplier="class_AssignProjectTaskCommand"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_4" name="uses" client="interface_IMediator" supplier="class_AddCommentCommand"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_5" name="uses" client="interface_IMediator" supplier="class_GetProjectTasksQuery"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_6" name="uses" client="interface_IMediator" supplier="class_GetCommentsByTaskIdQuery"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_7" name="uses" client="class_CreateProjectTaskCommand" supplier="class_ProjectTaskCommandHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_8" name="uses" client="class_AssignProjectTaskCommand" supplier="class_ProjectTaskCommandHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_9" name="uses" client="class_AddCommentCommand" supplier="class_ProjectTaskCommandHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_10" name="uses" client="class_LogTimeCommand" supplier="class_ProjectTaskCommandHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_11" name="uses" client="class_GetProjectTasksQuery" supplier="class_ProjectTaskQueryHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_12" name="uses" client="class_GetCommentsByTaskIdQuery" supplier="class_ProjectTaskQueryHandler"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_13" name="uses" client="class_ProjectTaskCommandHandler" supplier="interface_IProjectTaskRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_14" name="uses" client="class_ProjectTaskCommandHandler" supplier="interface_IProjectReadRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_15" name="uses" client="class_ProjectTaskCommandHandler" supplier="interface_IMemberReadRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_16" name="uses" client="class_ProjectTaskCommandHandler" supplier="interface_IAuthorizationService"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_17" name="uses" client="class_ProjectTaskQueryHandler" supplier="interface_IProjectTaskRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_18" name="uses" client="class_ProjectTaskQueryHandler" supplier="interface_ICommentReadRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_19" name="uses" client="class_ProjectTaskQueryHandler" supplier="interface_ICacheService"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_20" name="comments" memberEnd="assoc_20_sourceEnd assoc_20_targetEnd">
+      <ownedEnd xmi:id="assoc_20_sourceEnd" name="projecttask" type="class_ProjectTask" association="assoc_20" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_20_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_20_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_20_targetEnd" name="comment" type="class_Comment" association="assoc_20">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_20_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_20_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_21" name="timeEntries" memberEnd="assoc_21_sourceEnd assoc_21_targetEnd">
+      <ownedEnd xmi:id="assoc_21_sourceEnd" name="projecttask" type="class_ProjectTask" association="assoc_21" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_21_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_21_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_21_targetEnd" name="timeentry" type="class_TimeEntry" association="assoc_21">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_21_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_21_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_22" name="period" memberEnd="assoc_22_sourceEnd assoc_22_targetEnd">
+      <ownedEnd xmi:id="assoc_22_sourceEnd" name="timeentry" type="class_TimeEntry" association="assoc_22" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_22_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_22_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_22_targetEnd" name="timerange" type="class_TimeRange" association="assoc_22">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_22_targetEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_22_targetEnd_upper" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_23" name="hourlyRateSnapshot" memberEnd="assoc_23_sourceEnd assoc_23_targetEnd">
+      <ownedEnd xmi:id="assoc_23_sourceEnd" name="timeentry" type="class_TimeEntry" association="assoc_23" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_23_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_23_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_23_targetEnd" name="money" type="class_Money" association="assoc_23">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_23_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_23_targetEnd_upper" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_24" name="status" memberEnd="assoc_24_sourceEnd assoc_24_targetEnd">
+      <ownedEnd xmi:id="assoc_24_sourceEnd" name="projecttask" type="class_ProjectTask" association="assoc_24" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_24_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_24_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_24_targetEnd" name="projecttaskstatus" type="enum_ProjectTaskStatus" association="assoc_24">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_24_targetEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_24_targetEnd_upper" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_25" name="priority" memberEnd="assoc_25_sourceEnd assoc_25_targetEnd">
+      <ownedEnd xmi:id="assoc_25_sourceEnd" name="projecttask" type="class_ProjectTask" association="assoc_25" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_25_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_25_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_25_targetEnd" name="taskpriority" type="enum_TaskPriority" association="assoc_25">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_25_targetEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_25_targetEnd_upper" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_26" name="raises" memberEnd="assoc_26_sourceEnd assoc_26_targetEnd">
+      <ownedEnd xmi:id="assoc_26_sourceEnd" name="projecttask" type="class_ProjectTask" association="assoc_26" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_26_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_26_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_26_targetEnd" name="taskdomainevent" type="class_TaskDomainEvent" association="assoc_26">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_26_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_26_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_27" name="implements" client="class_ProjectTaskRepository" supplier="interface_IProjectTaskRepository" contract="interface_IProjectTaskRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_28" name="implements" client="class_CommentReadRepository" supplier="interface_ICommentReadRepository" contract="interface_ICommentReadRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_29" name="implements" client="class_MemberReadRepository" supplier="interface_IMemberReadRepository" contract="interface_IMemberReadRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_30" name="implements" client="class_ProjectReadRepository" supplier="interface_IProjectReadRepository" contract="interface_IProjectReadRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_31" name="implements" client="class_UserReadRepository" supplier="interface_IUserReadRepository" contract="interface_IUserReadRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_32" name="implements" client="class_IncomingEventRepository" supplier="interface_IIncomingEventRepository" contract="interface_IIncomingEventRepository"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_33" name="implements" client="class_IncomingEventStore" supplier="interface_IIncomingEventStore" contract="interface_IIncomingEventStore"/>
+    <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="real_34" name="implements" client="class_RedisCacheService" supplier="interface_ICacheService" contract="interface_ICacheService"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_35" name="uses" client="class_ProjectTaskRepository" supplier="class_ProjectTasksDbContext"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_36" name="uses" client="class_ProjectTaskQueryService" supplier="class_ProjectTasksDbContext"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_37" name="uses" client="class_CommentReadRepository" supplier="class_ProjectTasksDbContext"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_38" name="uses" client="class_MemberReadRepository" supplier="class_ProjectTasksDbContext"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_39" name="uses" client="class_ProjectReadRepository" supplier="class_ProjectTasksDbContext"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_40" name="uses" client="class_UserReadRepository" supplier="class_ProjectTasksDbContext"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_41" name="stores" memberEnd="assoc_41_sourceEnd assoc_41_targetEnd">
+      <ownedEnd xmi:id="assoc_41_sourceEnd" name="projecttasksdbcontext" type="class_ProjectTasksDbContext" association="assoc_41" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_41_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_41_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_41_targetEnd" name="userreadmodel" type="class_UserReadModel" association="assoc_41">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_41_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_41_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_42" name="stores" memberEnd="assoc_42_sourceEnd assoc_42_targetEnd">
+      <ownedEnd xmi:id="assoc_42_sourceEnd" name="projecttasksdbcontext" type="class_ProjectTasksDbContext" association="assoc_42" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_42_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_42_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_42_targetEnd" name="projectreadmodel" type="class_ProjectReadModel" association="assoc_42">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_42_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_42_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_43" name="stores" memberEnd="assoc_43_sourceEnd assoc_43_targetEnd">
+      <ownedEnd xmi:id="assoc_43_sourceEnd" name="projecttasksdbcontext" type="class_ProjectTasksDbContext" association="assoc_43" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_43_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_43_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_43_targetEnd" name="memberreadmodel" type="class_MemberReadModel" association="assoc_43">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_43_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_43_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_44" name="stores" memberEnd="assoc_44_sourceEnd assoc_44_targetEnd">
+      <ownedEnd xmi:id="assoc_44_sourceEnd" name="projecttasksdbcontext" type="class_ProjectTasksDbContext" association="assoc_44" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_44_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_44_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_44_targetEnd" name="incomingevent" type="class_IncomingEvent" association="assoc_44">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_44_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_44_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_45" name="stores" memberEnd="assoc_45_sourceEnd assoc_45_targetEnd">
+      <ownedEnd xmi:id="assoc_45_sourceEnd" name="projecttasksdbcontext" type="class_ProjectTasksDbContext" association="assoc_45" aggregation="none">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_45_sourceEnd_lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_45_sourceEnd_upper" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="assoc_45_targetEnd" name="outboxmessage" type="class_OutboxMessage" association="assoc_45">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="assoc_45_targetEnd_lower" value="0"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="assoc_45_targetEnd_upper" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_46" name="uses" client="class_UsersConsumerHostedService" supplier="class_IncomingEvent"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_47" name="uses" client="class_ProjectsConsumerHostedService" supplier="class_IncomingEvent"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_48" name="uses" client="class_MembersConsumerHostedService" supplier="class_IncomingEvent"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_49" name="uses" client="class_IncomingEventsProcessorHostedService" supplier="interface_IIncomingEventRepository"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_50" name="uses" client="class_IncomingEventsProcessorHostedService" supplier="class_UserEventProcessor"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_51" name="uses" client="class_IncomingEventsProcessorHostedService" supplier="class_ProjectEventProcessor"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_52" name="uses" client="class_IncomingEventsProcessorHostedService" supplier="class_MemberEventProcessor"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_53" name="uses" client="class_UserEventProcessor" supplier="class_UserReadModel"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_54" name="uses" client="class_ProjectEventProcessor" supplier="class_ProjectReadModel"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_55" name="uses" client="class_MemberEventProcessor" supplier="class_MemberReadModel"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_56" name="uses" client="class_OutboxPublisherHostedService" supplier="class_OutboxMessage"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="dep_57" name="uses" client="class_OutboxPublisherHostedService" supplier="class_ConfluentKafkaProducer"/>
+  </uml:Model>
+</xmi:XMI>

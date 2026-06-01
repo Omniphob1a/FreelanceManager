@@ -14,7 +14,17 @@ namespace Projects.Application.Projects.Commands.PublishProject
 			RuleFor(x => x.ProjectId)
 				.NotEmpty();
 			RuleFor(x => x.ExpiresAt)
-				.Must(x => x > DateTime.UtcNow).WithMessage("Expiration date must be in the future.");
+				.Must(x =>
+				{
+					var expiresAtUtc = x.Kind switch
+					{
+						DateTimeKind.Utc => x,
+						DateTimeKind.Local => x.ToUniversalTime(),
+						_ => DateTime.SpecifyKind(x, DateTimeKind.Utc)
+					};
+
+					return expiresAtUtc > DateTime.UtcNow;
+				}).WithMessage("Expiration date must be in the future.");
 		}	
 	}
 }

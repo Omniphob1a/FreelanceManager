@@ -1,0 +1,5 @@
+minikube service grafana -n lab --url
+
+kubectl -n lab create configmap gateway-config --from-file=appsettings.json -o yaml --dry-run=client | kubectl apply -f -
+
+kubectl -n lab rollout restart deployment gateway

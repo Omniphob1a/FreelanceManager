@@ -1,0 +1,27 @@
+# kafka-topics-job.yaml (KRaft Image + 60s wait)
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-kafka-topics
+  namespace: lab
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: create-topics
+        image: docker.io/bitnamilegacy/kafka:3.9.0 # ГАРАНТИРОВАННО РАБОЧИЙ ОБРАЗ
+        command:
+        - /bin/bash
+        - -c
+        - |
+          # Ждем 60 секунд, чтобы Kafka гарантированно стартовала в режиме KRaft
+          echo "Waiting 60 seconds for Kafka (KRaft) to stabilize..."
+          sleep 60 
+          # Используем команду Bitnami для создания топиков
+          kafka-topics.sh --bootstrap-server kafka:9092 --create --topic members --partitions 1 --replication-factor 1
+          kafka-topics.sh --bootstrap-server kafka:9092 --create --topic users --partitions 1 --replication-factor 1
+          kafka-topics.sh --bootstrap-server kafka:9092 --create --topic projects --partitions 1 --replication-factor 1
+          kafka-topics.sh --bootstrap-server kafka:9092 --create --topic object-confirm-responses --partitions 1 --replication-factor 1
+          kafka-topics.sh --bootstrap-server kafka:9092 --create --topic user-confirm-requests --partitions 1 --replication-factor 1
+          kafka-topics.sh --bootstrap-server kafka:9092 --list

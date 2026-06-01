@@ -34,6 +34,12 @@ public class PublishProjectCommandHandler : IRequestHandler<PublishProjectComman
 	public async Task<Result> Handle(PublishProjectCommand request, CancellationToken ct)
 	{
 		_logger.LogDebug("Handling PublishProjectCommand for ProjectId: {ProjectId}", request.ProjectId);
+		var expiresAtUtc = request.ExpiresAt.Kind switch
+		{
+			DateTimeKind.Utc => request.ExpiresAt,
+			DateTimeKind.Local => request.ExpiresAt.ToUniversalTime(),
+			_ => DateTime.SpecifyKind(request.ExpiresAt, DateTimeKind.Utc)
+		};
 
 		try
 		{
@@ -50,7 +56,7 @@ public class PublishProjectCommandHandler : IRequestHandler<PublishProjectComman
 				return Result.Ok(); 
 			}
 
-			project.Publish(request.ExpiresAt);
+			project.Publish(expiresAtUtc);
 			await _projectRepository.UpdateAsync(project, ct);
 			_unitOfWork.TrackEntity(project);
 			await _unitOfWork.SaveChangesAsync(ct);

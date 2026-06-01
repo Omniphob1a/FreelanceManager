@@ -351,7 +351,11 @@ public class ProjectsController : ControllerBase
 	{
 		_logger.LogInformation("Received request to add member to project with ID: {ProjectId}", projectId);
 
-		var result = await _mediator.Send(new AddMemberCommand(projectId, request.Login, request.Role), ct);
+		var login = !string.IsNullOrWhiteSpace(request.Login)
+			? request.Login
+			: request.Email;
+
+		var result = await _mediator.Send(new AddMemberCommand(projectId, login ?? string.Empty, request.Role), ct);
 
 		if (result.IsFailed)
 		{

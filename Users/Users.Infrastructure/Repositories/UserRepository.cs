@@ -103,20 +103,85 @@ namespace Users.Infrastructure.Repositories
 			}
 		}
 
-		public async Task Update(User user, CancellationToken cancellationToken)
+		public async Task<User?> GetByName(string name, CancellationToken cancellationToken)
 		{
 			var userData = await _context.Users
+				.AsNoTracking()
 				.Include(u => u.UserRoles)
-				.FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
+				.FirstOrDefaultAsync(u => u.Name == name, cancellationToken);
 
 			if (userData == null)
-			{
-				throw new InvalidOperationException("User not found");
-			}
-			
-			_mapper.Map(user, userData);
+				return null;
 
+			try
+			{
+				return _mapper.Map<User>(userData);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Mapping error for user with name {Name}", name);
+				return null;
+			}
 		}
+
+		public async Task Update(User user, CancellationToken cancellationToken)
+		{
+			if (user == null)
+			{
+				_logger.LogWarning("Trying to update null user");
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			try
+			{
+				_logger.LogDebug("Updating user with ID {UserId}", user.Id);
+
+				var existing = await _context.Users
+					.Include(u => u.UserRoles)
+					.FirstOrDefaultAsync(u => u.Id == user.Id, cancellationToken);
+
+				if (existing == null)
+				{
+					_logger.LogWarning("User with ID {UserId} not found for update", user.Id);
+					throw new KeyNotFoundException($"User with ID {user.Id} not found.");
+				}
+
+				_mapper.Map(user, existing);
+
+				_logger.LogInformation("User with ID {UserId} mapped into persistence entity (patched)", user.Id);
+
+				// Диагностика: какие сущности помечены как изменённые перед SaveChanges
+				var entries = _context.ChangeTracker.Entries()
+					.Where(e => e.State != EntityState.Unchanged)
+					.ToList();
+
+				if (!entries.Any())
+				{
+					_logger.LogWarning("No tracked changes detected before SaveChanges for user {UserId}", user.Id);
+				}
+				else
+				{
+					foreach (var entry in entries)
+					{
+						var entityType = entry.Entity.GetType().Name;
+						var state = entry.State;
+						var idProperty = entry.Properties.FirstOrDefault(p => p.Metadata.IsPrimaryKey());
+						var idValue = idProperty?.CurrentValue?.ToString() ?? "N/A";
+
+						_logger.LogInformation("Tracked entity: {EntityType}, ID: {Id}, State: {State}",
+							entityType, idValue, state);
+					}
+				}
+
+			}
+			catch (OperationCanceledException) { throw; }
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Failed to update user with ID {UserId}", user.Id);
+				throw;
+			}
+		}
+
 
 		public async Task Delete(Guid id, CancellationToken cancellationToken)
 		{

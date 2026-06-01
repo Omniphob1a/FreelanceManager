@@ -16,9 +16,11 @@ using Projects.Infrastructure.Caching;
 using Projects.Infrastructure.Events;
 using Projects.Infrastructure.FileStorage;
 using Projects.Infrastructure.Hangfire;
+using Projects.Infrastructure.HostedServices;
 using Projects.Infrastructure.Kafka;
 using Projects.Infrastructure.Options;
 using Projects.Infrastructure.Outbox;
+using Projects.Infrastructure.Processors;
 using Projects.Infrastructure.Services;
 using StackExchange.Redis;
 using System;
@@ -27,6 +29,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Tasks.Application.Events;
 using Tasks.Infrastructure.Services;
 
 namespace Projects.Infrastructure
@@ -80,12 +83,24 @@ namespace Projects.Infrastructure
 
 			services.AddScoped<IAuthorizationService, AuthorizationService>();
 			services.AddScoped<ICurrentUserService, CurrentUserService>();
-			services.AddHangfireServer();
+			services.AddHangfireServer(options =>
+			{
+				options.WorkerCount = 1;
+				options.SchedulePollingInterval = TimeSpan.FromSeconds(30);
+			});
 			services.AddScoped<IBackgroundJobManager, BackgroundJobManager>();
 			services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
 			services.AddScoped<IFileStorage, S3FileStorage>();
 
-			//services.AddHostedService<UsersConsumerHostedService>();
+			services.AddTransient<IIncomingEventProcessor, ConfirmResponseProcessor>();
+			services.AddTransient<IIncomingEventProcessor, UserEventsProcessor>();
+
+			services.AddHostedService<IncomingEventsProcessorHostedService>();
+
+			services.AddHostedService<ProjectsConfirmConsumerHostedService>();
+
+			services.AddHostedService<UsersConsumerHostedService>();
+
 
 			services.AddHostedService<OutboxPublisherHostedService>();
 			var kafkaSection = configuration.GetSection("Kafka");
@@ -94,10 +109,7 @@ namespace Projects.Infrastructure
 
 			services.AddSingleton<IKafkaProducer>(new ConfluentKafkaProducer(kafkaSettings));
 
-
 			services.AddScoped<IOutboxService, OutboxService>();
-
-			services.AddDistributedMemoryCache();
 			return services;
 		}
 	}

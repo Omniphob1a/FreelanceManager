@@ -46,6 +46,12 @@ namespace Tasks.Application.ProjectTasks.Queries.GetProjectTaskById
 
 			ProjectTask task = await _projectTaskQueryService.GetProjectTaskWithCollectionsById(request.TaskId, request.Includes, cancellationToken);
 
+			if (task is null)
+			{
+				_logger.LogWarning("Task {TaskId} was not found", request.TaskId);
+				return Result.Fail($"Task '{request.TaskId}' was not found.");
+			}
+
 			try
 			{
 				var dto = _mapper.Map<ProjectTaskDto>(task);

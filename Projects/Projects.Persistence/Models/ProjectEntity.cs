@@ -23,5 +23,8 @@ namespace Projects.Persistence.Models
 		public List<ProjectAttachmentEntity> Attachments { get; set; } = new();
 		public List<ProjectMemberEntity> Members { get; set; } = new();
 		public string Tags { get; set; } = default!;
+		public Guid? ConfirmedByUserId { get; set; }
+		public DateTime? ConfirmedAt { get; set; }
+		public string? ConfirmationInfo { get; set; } = default!;
 	}
 }

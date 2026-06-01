@@ -22,6 +22,61 @@ namespace Users.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Tasks.Persistence.Models.ReadModels.IncomingEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("AggregateId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AggregateType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("EventId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsTombstone")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastError")
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset>("NextAttemptAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("OccurredAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Payload")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Processed")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("ProcessedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("RetryCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IncomingEvents");
+                });
+
             modelBuilder.Entity("Users.Infrastructure.Models.OutboxMessage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -240,6 +295,9 @@ namespace Users.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("RegisteredObjects")
+                        .HasColumnType("integer");
+
                     b.Property<string>("RevokedBy")
                         .HasColumnType("text");
 
@@ -262,7 +320,8 @@ namespace Users.Infrastructure.Migrations
                             Gender = 1,
                             Login = "administrator",
                             Name = "Administrator",
-                            PasswordHash = "eQ9I47pR4tB2Ln1KdNQHamLPs01E49+8Q3mP6f85lgI="
+                            PasswordHash = "eQ9I47pR4tB2Ln1KdNQHamLPs01E49+8Q3mP6f85lgI=",
+                            RegisteredObjects = 0
                         });
                 });
 

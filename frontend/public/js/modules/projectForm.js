@@ -27,10 +27,10 @@ export async function initProjectForm(queryString = '') {
     const ownerIdInput = document.getElementById('ownerId');
     if (ownerIdInput) {
         try {
-            const user = await getCurrentUser();
-            ownerIdInput.value = user.id;
+            const user = getCurrentUser();
+            if (user?.id) ownerIdInput.value = user.id;
         } catch (error) {
-            showToast('You must be logged in to create projects', 'error');
+            showToast('Для создания проекта нужно выполнить вход', 'error');
             window.location.hash = 'login';
             return;
         }
@@ -43,8 +43,8 @@ export async function initProjectForm(queryString = '') {
     }
     
     if (projectId) {
-        document.getElementById('projectFormTitle').textContent = 'Edit Project';
-        document.getElementById('submitButtonText').textContent = 'Update Project';
+        document.getElementById('projectFormTitle').textContent = 'Редактировать проект';
+        document.getElementById('submitButtonText').textContent = 'Сохранить изменения';
         await loadProjectForEditing(projectId);
     }
     
@@ -61,37 +61,39 @@ async function handleProjectSubmit(e) {
     
     try {
         if (!form.title.value.trim()) {
-            throw new Error('Project title is required');
+            throw new Error('Название проекта обязательно');
         }
         
         if (!form.category.value) {
-            throw new Error('Category is required');
+            throw new Error('Категория обязательна');
         }
         
         const budgetMin = parseFloat(form.budgetMin.value) || 0;
         const budgetMax = parseFloat(form.budgetMax.value) || 0;
         
         if (budgetMin !== null && budgetMax !== null && budgetMin > budgetMax) {
-            throw new Error('Max budget should be greater than min budget');
+            throw new Error('Максимальный бюджет должен быть больше минимального');
         }
 
         const projectData = {
             title: form.title.value.trim(),
             description: form.description.value.trim(),
-            ownerId: form.ownerId.value,
             budgetMin,
             budgetMax,
             currencyCode: form.currency.value, // ИЗМЕНЕНО: currency -> currencyCode
             category: form.category.value,
             tags: JSON.parse(form.tags.value || '[]')
         };
+        if (form.ownerId?.value) {
+            projectData.ownerId = form.ownerId.value;
+        }
         
         if (projectId) {
             await ProjectAPI.updateProject(projectId, projectData);
-            showToast('Project updated successfully');
+            showToast('Проект обновлен');
         } else {
             await ProjectAPI.createProject(projectData);
-            showToast('Project created successfully');
+            showToast('Проект создан');
         }
         
         // Обновляем UI без перезагрузки страницы
@@ -113,7 +115,7 @@ async function loadProjectForEditing(projectId) {
         fillProjectForm(project);
     } catch (error) {
         console.error('Failed to load project for editing:', error);
-        showToast('Failed to load project details', 'error');
+        showToast('Не удалось загрузить детали проекта', 'error');
         window.location.hash = 'projects';
     }
 }

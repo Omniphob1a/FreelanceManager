@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using Tasks.Persistence.Models.ReadModels;
 using Users.Domain.ValueObjects;
 using Users.Infrastructure.Models;
 
@@ -16,6 +17,8 @@ namespace Users.Infrastructure.Data
 		public DbSet<UserRoleEntity> UserRoles { get; set; } = null!;
 		public DbSet<RolePermissionEntity> RolePermissions { get; set; } = null!;
 		public DbSet<OutboxMessage> OutboxMessages { get; set; } = null!;
+		public DbSet<IncomingEvent> IncomingEvents { get; set; } = null!;
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

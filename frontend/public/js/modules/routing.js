@@ -1,14 +1,36 @@
-// modules/routing.js
-import { checkAuth, getCurrentUser, login, register } from './auth.js';
-import { loadProjects, loadProjectsPage, initProjectsPage } from './projects.js';
+import { checkAuth, register } from './auth.js';
+import { initProjectsPage } from './projects.js';
 import { initProjectForm } from './projectForm.js';
 import { initTasksPage } from './tasks.js';
-import { initNotificationsPage } from './notifications.js';
 import { initProfilePage } from './profile.js';
 import { showToast } from './ui.js';
 import { initDashboard } from './dashboard.js';
+import { applyLocalization } from './localization.js';
 
-const protectedPages = ['dashboard', 'projects', 'project-form', 'tasks', 'notifications', 'profile'];
+const protectedPages = ['dashboard', 'projects', 'project-form', 'tasks', 'profile'];
+
+const pageTitles = {
+    dashboard: 'Панель',
+    projects: 'Проекты',
+    'project-form': 'Проект',
+    tasks: 'Задачи',
+    profile: 'Профиль',
+    login: 'Вход',
+    register: 'Регистрация'
+};
+
+function htmlToContentFragment(html) {
+    const trimmed = html.trim();
+    const lower = trimmed.slice(0, 400).toLowerCase();
+    if (!lower.includes('<!doctype') && !lower.includes('<html')) {
+        return html;
+    }
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    doc.querySelectorAll('script').forEach((s) => s.remove());
+    return doc.body ? doc.body.innerHTML : html;
+}
+
+let loadPageSeq = 0;
 
 export async function initRouting() {
     window.addEventListener('hashchange', handleHashChange);
@@ -18,93 +40,96 @@ export async function initRouting() {
 async function handleHashChange() {
     let pageName = window.location.hash.substring(1) || 'dashboard';
     const [basePage, query] = pageName.split('?');
-    
+
     if (protectedPages.includes(basePage) && !(await checkAuth())) {
         pageName = 'login';
         window.location.hash = 'login';
     }
-    
+
     await loadPage(basePage, query);
 }
 
 export async function loadPage(pageName, queryString = '') {
+    const seq = ++loadPageSeq;
     try {
         const basePage = pageName.split('?')[0];
         const response = await fetch(`partials/${basePage}.html`);
-        if (!response.ok) throw new Error(`Failed to load ${pageName}.html: ${response.status}`);
-        
+        if (!response.ok) throw new Error(`Не удалось загрузить ${basePage}.html (${response.status})`);
+
         const content = await response.text();
-        document.getElementById('content').innerHTML = content;
-        
-        document.getElementById('pageTitle').textContent = 
-            basePage.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-            
-        document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('bg-blue-600', 'text-white');
-        item.classList.add('text-gray-700', 'hover:bg-gray-100');
-    });
-    
-    const activeNavItem = document.querySelector(`.nav-item[data-page="${basePage}"]`);
-    if (activeNavItem) {
-        activeNavItem.classList.add('bg-blue-600', 'text-white');
-        activeNavItem.classList.remove('text-gray-700', 'hover:bg-gray-100');
-    }
+        if (seq !== loadPageSeq) return;
+
+        document.getElementById('content').innerHTML = htmlToContentFragment(content);
+        applyLocalization(document.getElementById('content'));
+        if (seq !== loadPageSeq) return;
+
+        document.getElementById('pageTitle').textContent = pageTitles[basePage] || 'Страница';
+
+        document.querySelectorAll('.nav-item').forEach((item) => {
+            item.classList.remove('bg-blue-600', 'text-white');
+            item.classList.add('text-gray-700', 'hover:bg-gray-100');
+        });
+
+        const activeNavItem = document.querySelector(`.nav-item[data-page="${basePage}"]`);
+        if (activeNavItem) {
+            activeNavItem.classList.add('bg-blue-600', 'text-white');
+            activeNavItem.classList.remove('text-gray-700', 'hover:bg-gray-100');
+        }
+
         switch (basePage) {
-            case 'dashboard': 
+            case 'dashboard':
                 await initDashboard();
                 break;
-            case 'projects': 
-                await loadProjectsPage();
-                initProjectsPage();
+            case 'projects':
+                window.projectsPageSetup = false;
+                await initProjectsPage();
                 break;
-            case 'project-form': 
+            case 'project-form':
                 await initProjectForm(queryString);
                 break;
-            case 'login': 
+            case 'login':
                 initLoginPage();
                 break;
-            case 'register': 
+            case 'register':
                 initRegisterPage();
                 break;
-            case 'tasks': 
+            case 'tasks':
                 await initTasksPage();
                 break;
-            case 'notifications': 
-                await initNotificationsPage();
-                break;
-            case 'profile': 
+            case 'profile':
                 await initProfilePage();
                 break;
             default:
-                throw new Error(`Unknown page: ${pageName}`);
+                throw new Error(`Неизвестная страница: ${basePage}`);
         }
     } catch (error) {
-        console.error('Error loading page:', error);
+        if (seq !== loadPageSeq) return;
+        console.error('Ошибка маршрутизации:', error);
         document.getElementById('content').innerHTML = `
             <div class="bg-white rounded-lg shadow p-6 text-center">
-                <h2 class="text-xl font-semibold text-red-600 mb-4">Error Loading Content</h2>
+                <h2 class="text-xl font-semibold text-red-600 mb-4">Ошибка загрузки</h2>
                 <p class="text-gray-600 mb-4">${error.message}</p>
                 <button onclick="window.location.hash='dashboard'" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                    Go to Dashboard
+                    На панель
                 </button>
             </div>`;
+        applyLocalization(document.getElementById('content'));
     }
 }
 
 function initLoginPage() {
-    const form = document.getElementById('loginForm');
-    if (form) {
-        form.addEventListener('submit', async (e) => {
+    const registerLink = document.querySelector('[data-page="register"]');
+    if (registerLink) {
+        registerLink.addEventListener('click', (e) => {
             e.preventDefault();
-            try {
-                const success = await login(form.email.value, form.password.value);
-                if (success) window.location.hash = 'dashboard';
-                else showToast('Login failed. Please check your credentials.', 'error');
-            } catch (error) {
-                showToast('Login error: ' + error.message, 'error');
-            }
+            window.location.hash = 'register';
         });
     }
+}
+
+function loginFromText(text) {
+    const local = String(text || 'user').replace(/[^A-Za-z0-9]/g, '');
+    return local.length ? local : 'user';
 }
 
 function initRegisterPage() {
@@ -112,27 +137,43 @@ function initRegisterPage() {
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             if (form.password.value !== form.confirmPassword.value) {
-                showToast('Passwords do not match', 'error');
+                showToast('Пароли не совпадают', 'error');
                 return;
             }
-            
+
+            const email = form.email.value.trim();
+            const birthday = form.birthday.value
+                ? new Date(`${form.birthday.value}T12:00:00`).toISOString()
+                : new Date('1990-01-01T00:00:00Z').toISOString();
+
             const userData = {
-                name: form.fullName.value,
-                login: form.email.value,
+                login: loginFromText(form.fullName.value),
                 password: form.password.value,
-                email: form.email.value,
-                isAdmin: false
+                name: form.fullName.value.trim(),
+                gender: parseInt(form.gender.value, 10),
+                birthday,
+                email,
+                isAdmin: false,
+                createdBy: 'self-registration'
             };
-            
+
             try {
                 const success = await register(userData);
                 if (success) window.location.hash = 'dashboard';
-                else showToast('Registration failed. Please try again.', 'error');
+                else showToast('Не удалось зарегистрироваться', 'error');
             } catch (error) {
-                showToast('Registration error: ' + error.message, 'error');
+                showToast(`Ошибка регистрации: ${error.message}`, 'error');
             }
+        });
+    }
+
+    const loginLink = document.querySelector('[data-page="login"]');
+    if (loginLink) {
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.hash = 'login';
         });
     }
 }

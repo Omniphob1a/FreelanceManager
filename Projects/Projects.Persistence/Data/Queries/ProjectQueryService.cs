@@ -39,10 +39,13 @@ public class ProjectQueryService : IProjectQueryService
 			var totalSpec = new ProjectsByFilterSpec(filter, includePaging: false);
 
 			var total = await _context.Projects
+				.AsNoTracking()
 				.WithSpecification(totalSpec)
 				.CountAsync(ct);
 
 			var entities = await _context.Projects
+				.AsNoTracking()
+				.AsSplitQuery()
 				.WithSpecification(spec)
 				.ToListAsync(ct);
 
@@ -83,6 +86,38 @@ public class ProjectQueryService : IProjectQueryService
 		catch (Exception ex)
 		{
 			_logger.LogError(ex, "Failed to get all projects");
+			return new List<Project>();
+		}
+	}
+
+	public async Task<List<Project>> GetProjectsWithOutOfDateMilestonesAsync(DateTime thresholdDate, int take, CancellationToken ct)
+	{
+		_logger.LogDebug("Getting projects with out-of-date milestones before {ThresholdDate}", thresholdDate);
+
+		try
+		{
+			var entities = await _context.Projects
+				.AsNoTracking()
+				.AsSplitQuery()
+				.Include(p => p.Milestones)
+				.Where(p => p.Milestones.Any(m =>
+					!m.IsCompleted &&
+					!m.IsEscalated &&
+					m.DueDate < thresholdDate))
+				.OrderBy(p => p.CreatedAt)
+				.Take(take)
+				.ToListAsync(ct);
+
+			if (entities.Count == 0)
+			{
+				return new List<Project>();
+			}
+
+			return _mapper.Map<List<Project>>(entities) ?? new List<Project>();
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Failed to get projects with out-of-date milestones");
 			return new List<Project>();
 		}
 	}

@@ -26,6 +26,7 @@ namespace Users.Domain.Entities
 
 		private readonly List<Guid> _roleIds = new();
 		public IReadOnlyCollection<Guid> RoleIds => _roleIds.AsReadOnly();
+		public int RegisteredObjects { get; set; } = 0;
 
 		private User(
 			Guid id,
@@ -97,7 +98,7 @@ namespace Users.Domain.Entities
 			ModifiedBy = modifiedBy;
 			ModifiedOn = DateTime.UtcNow;
 
-			AddDomainEvent(new UserProfileUpdatedDomainEvent(Id));
+			AddDomainEvent(new UserProfileUpdatedDomainEvent(Id, name, gender, birthday, email.ToString()));
 		}
 
 		public void ChangeLogin(string newLogin, string modifiedBy)
@@ -209,6 +210,17 @@ namespace Users.Domain.Entities
 				user._roleIds.AddRange(roleIds);
 
 			return user;
+		}
+
+		public void ConfirmProject(Guid projectId)
+		{
+			RegisteredObjects += 1;
+			AddDomainEvent(new ProjectConfirmedDomainEvent(
+				projectId,
+				Id,
+				DateTime.UtcNow,
+				RegisteredObjects
+			));
 		}
 	}
 }

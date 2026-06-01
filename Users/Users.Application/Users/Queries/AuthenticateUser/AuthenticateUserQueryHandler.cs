@@ -25,7 +25,16 @@ public class AuthenticateUserQueryHandler
 		AuthenticateUserQuery cmd,
 		CancellationToken ct)
 	{
-		var user = await _userRepo.GetByLogin(cmd.Login, ct);
+		var login = cmd.Login?.Trim();
+		if (string.IsNullOrWhiteSpace(login))
+			return Result.Fail("Invalid credentials");
+
+		var user = await _userRepo.GetByLogin(login, ct);
+		if (user is null && login.Contains('@'))
+			user = await _userRepo.GetByEmail(login, ct);
+		if (user is null)
+			user = await _userRepo.GetByName(login, ct);
+
 		if (user is null || user.RevokedOn.HasValue)
 			return Result.Fail("Invalid credentials or user revoked");
 

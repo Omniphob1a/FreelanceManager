@@ -82,6 +82,11 @@ namespace Projects.Application.Projects.Commands.UpdateProject
 				_logger.LogWarning(ex, "Domain error while updating project {ProjectId}", request.ProjectId);
 				return Result.Fail(ex.Message);
 			}
+			catch (InvalidOperationException ex)
+			{
+				_logger.LogWarning(ex, "Project state does not allow update for {ProjectId}", request.ProjectId);
+				return Result.Fail(ex.Message);
+			}
 
 			try
 			{

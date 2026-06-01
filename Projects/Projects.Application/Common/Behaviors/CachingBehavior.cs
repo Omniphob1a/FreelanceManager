@@ -1,4 +1,4 @@
-﻿// Projects.Application/Common/Behaviors/CachingBehavior.cs
+// Projects.Application/Common/Behaviors/CachingBehavior.cs
 using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;

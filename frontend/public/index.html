@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreelanceHub - Project Management</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">	
+    <title>FreelanceHub - Управление проектами</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%232563eb' width='32' height='32' rx='6'/%3E%3Ctext x='16' y='22' fill='white' font-size='14' font-family='system-ui' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
 </head>
@@ -26,14 +24,12 @@
             <span class="logo-text ml-3 text-xl font-semibold text-gray-800">FreelanceHub</span>
         </div>
 
-        <!-- User Profile -->
+        <!-- Сводка пользователя (без фото — буква на цветном фоне, текст после входа) -->
         <div class="p-4 border-b border-gray-200 flex items-center">
-            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden ring-2 ring-transparent hover:ring-blue-500 transition-all duration-200">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-full h-full object-cover">
-            </div>
-            <div class="ml-3">
-                <div class="text-sm font-medium text-gray-800">Sarah Johnson</div>
-                <div class="text-xs text-gray-500">Freelancer</div>
+            <div id="sidebarUserBadge" class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-sm ring-2 ring-transparent hover:ring-blue-500 transition-all"><i class="fas fa-user" aria-hidden="true"></i></div>
+            <div class="ml-3 min-w-0">
+                <div class="text-sm font-medium text-gray-800 truncate" id="sidebarUserName">—</div>
+                <div class="text-xs text-gray-500 truncate" id="sidebarUserSubtitle">Не выполнен вход</div>
             </div>
         </div>
 
@@ -43,34 +39,33 @@
                 <div class="space-y-1">
                     <a href="#dashboard" data-page="dashboard" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-blue-600 shadow-sm hover:shadow-md transition-all duration-200">
                         <i class="fas fa-home text-white"></i>
-                        <span class="sidebar-text ml-3">Dashboard</span>
+                        <span class="sidebar-text ml-3">Панель</span>
                     </a>
                     <a href="#projects" data-page="projects" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
                         <i class="fas fa-project-diagram text-gray-500"></i>
-                        <span class="sidebar-text ml-3">Projects</span>
+                        <span class="sidebar-text ml-3">Проекты</span>
                     </a>
                     <a href="#tasks" data-page="tasks" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
                         <i class="fas fa-tasks text-gray-500"></i>
-                        <span class="sidebar-text ml-3">Tasks</span>
-                    </a>
-                    <a href="#notifications" data-page="notifications" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
-                        <i class="fas fa-bell text-gray-500"></i>
-                        <span class="sidebar-text ml-3">Notifications</span>
-                        <span id="sidebarNotificationBadge" class="ml-auto inline-block py-0.5 px-2 text-xs font-medium bg-red-100 text-red-800 rounded-full hidden">3</span>
+                        <span class="sidebar-text ml-3">Задачи</span>
                     </a>
                     <a href="#profile" data-page="profile" class="nav-item flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-all duration-200">
                         <i class="fas fa-user text-gray-500"></i>
-                        <span class="sidebar-text ml-3">My Profile</span>
+                        <span class="sidebar-text ml-3">Профиль</span>
                     </a>
                 </div>
             </nav>
         </div>
 
-        <!-- Collapse Button -->
-        <div class="p-4 border-t border-gray-200 flex justify-end">
-            <button class="text-gray-500 hover:text-gray-700 transition-all duration-200 hover:scale-110">
-                <i class="fas fa-chevron-left"></i>
+        <div class="p-4 border-t border-gray-200 space-y-2">
+            <button type="button" id="appLogoutBtn" class="w-full text-left px-2 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md transition-colors hidden">
+                <i class="fas fa-sign-out-alt mr-2"></i>Выйти
             </button>
+            <div class="flex justify-end">
+                <button type="button" class="text-gray-500 hover:text-gray-700 transition-all duration-200 hover:scale-110" aria-label="Collapse sidebar">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -79,18 +74,19 @@
         <!-- Header -->
         <header class="bg-white shadow-sm sticky top-0 z-40 transition-all duration-300">
             <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                <h1 id="pageTitle" class="text-lg font-semibold text-gray-900">Dashboard</h1>
+                <h1 id="pageTitle" class="text-lg font-semibold text-gray-900">Панель</h1>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
-                        <button id="notificationButton" class="p-2 rounded-full text-gray-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 relative">
-                            <i class="fas fa-bell"></i>
-                            <span id="notificationBadge" class="absolute top-0 right-0 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center hidden">3</span>
-                        </button>
+                        <label for="appLanguageSwitcher" class="sr-only">Язык</label>
+                        <select id="appLanguageSwitcher" class="text-sm border border-gray-300 rounded-md px-2 py-1 bg-white">
+                            <option value="ru">RU</option>
+                            <option value="en">EN</option>
+                        </select>
                     </div>
                     <div class="relative">
-                        <button id="userMenuButton" class="flex items-center text-sm rounded-full focus:outline-none transition-all duration-200 hover:scale-105">
-                            <span class="sr-only">Open user menu</span>
-                            <img class="h-8 w-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition-all duration-200" src="https://randomuser.me/api/portraits/women/44.jpg" alt="User photo">
+                        <button type="button" id="userMenuButton" class="flex items-center text-sm rounded-full focus:outline-none transition-all duration-200 hover:scale-105" aria-label="Профиль">
+                            <span class="sr-only">Профиль</span>
+                            <div id="headerUserBadge" class="h-8 w-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs ring-2 ring-transparent hover:ring-blue-500 transition-all"><i class="fas fa-user" aria-hidden="true"></i></div>
                         </button>
                     </div>
                 </div>
@@ -109,13 +105,6 @@
     <!-- Скрипты -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <!-- runtime env support -->
-    <script>
-        window._env_ = window._env_ || {};
-        // Например, можно задать для локального dev
-        // window._env_.VITE_API_URL = 'https://freelancemanager-gateway.onrender.com';
-    </script>
 
     <!-- App entry -->
     <script type="module" src="/js/app.js"></script>

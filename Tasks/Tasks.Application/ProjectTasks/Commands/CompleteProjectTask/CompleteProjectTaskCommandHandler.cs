@@ -1,4 +1,4 @@
-﻿using FluentResults;
+using FluentResults;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
@@ -55,6 +55,11 @@ namespace Tasks.Application.ProjectTasks.Commands.CompleteProjectTask
 			{
 				_logger.LogWarning(dex, "Domain error while completing task {TaskId}", request.TaskId);
 				return Result.Fail<Unit>(dex.Message);
+			}
+			catch (InvalidOperationException iex)
+			{
+				_logger.LogWarning(iex, "Cannot complete task {TaskId}", request.TaskId);
+				return Result.Fail<Unit>(iex.Message);
 			}
 
 			try

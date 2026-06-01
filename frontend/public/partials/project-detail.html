@@ -1,7 +1,7 @@
 <!-- partials/project-detail.html -->
-<div class="project-detail bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-full max-w-4xl max-h-[90vh]">
+<div class="project-detail bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col w-full max-w-6xl max-h-[99vh]">
     <!-- Header -->
-    <div class="bg-white text-gray-900 p-6 flex flex-col gap-4 border-b border-gray-100">
+    <div class="bg-white text-gray-900 p-4 lg:p-5 flex flex-col gap-3 border-b border-gray-100">
         <div class="flex items-start justify-between gap-4">
             <div class="flex items-start gap-4 w-full">
                 <!-- Accent strip -->
@@ -10,14 +10,14 @@
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-4">
                         <div class="min-w-0">
-                            <h2 id="projectTitle" class="text-2xl font-bold truncate">Loading...</h2>
+                            <h2 id="projectTitle" class="text-2xl font-bold truncate">Загрузка...</h2>
                             <div class="flex items-center gap-3 mt-2 text-sm text-gray-500">
                                 <span id="projectStatus" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200">
-                                    Loading...
+                                    Загрузка...
                                 </span>
                             </div>
                         </div>
-                        <button class="close-btn text-gray-600 p-2 rounded-full hover:bg-gray-100 transition" aria-label="Close">
+                        <button class="close-btn text-gray-600 p-2 rounded-full hover:bg-gray-100 transition" aria-label="Закрыть">
                             <i class="fas fa-times text-xl"></i>
                         </button>
                     </div>
@@ -28,7 +28,7 @@
         <!-- Progress -->
         <div class="flex flex-col gap-2">
             <div class="flex items-center justify-between gap-4">
-                <div class="text-xs text-gray-600">Progress</div>
+                <div class="text-xs text-gray-600">Прогресс</div>
                 <div class="text-xs text-gray-500" id="projectProgressText">0%</div>
             </div>
             <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden" role="progressbar">
@@ -38,70 +38,70 @@
     </div>
 
     <!-- Compact Tabs -->
-    <div class="tabs flex border-b border-gray-200 bg-gray-50 px-4">
-        <button class="tab-btn active px-4 py-3 font-medium text-gray-900 border-b-2 border-blue-600 text-sm flex items-center" data-tab="overview">
-            <i class="fas fa-info-circle mr-2"></i> Overview
+    <div class="tabs flex border-b border-gray-200 bg-gray-50 px-3 lg:px-4">
+        <button class="tab-btn active px-3 py-2.5 font-medium text-gray-900 border-b-2 border-blue-600 text-sm flex items-center" data-tab="overview">
+            <i class="fas fa-info-circle mr-2"></i> Обзор
         </button>
-        <button class="tab-btn px-4 py-3 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="milestones">
-            <i class="fas fa-flag-checkered mr-2"></i> Milestones
+        <button class="tab-btn px-3 py-2.5 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="milestones">
+            <i class="fas fa-flag-checkered mr-2"></i> Вехи
         </button>
-        <button class="tab-btn px-4 py-3 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="team">
-            <i class="fas fa-users mr-2"></i> Team
+        <button class="tab-btn px-3 py-2.5 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="team">
+            <i class="fas fa-users mr-2"></i> Команда
         </button>
-        <button class="tab-btn px-4 py-3 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="attachments">
-            <i class="fas fa-paperclip mr-2"></i> Files
+        <button class="tab-btn px-3 py-2.5 font-medium text-gray-500 hover:text-gray-700 text-sm flex items-center" data-tab="attachments">
+            <i class="fas fa-paperclip mr-2"></i> Файлы
         </button>
     </div>
 
     <!-- Content -->
     <div class="flex-grow overflow-y-auto">
         <!-- Overview Tab -->
-        <div id="overviewTab" class="tab-content active p-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div id="overviewTab" class="tab-content active p-4 lg:p-5">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5">
                 <!-- Main Content -->
-                <div class="lg:col-span-2 space-y-6">
+                <div class="lg:col-span-2 space-y-4">
                     <!-- Description Card -->
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+                    <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-lg font-semibold text-gray-800">Description</h3>
+                            <h3 class="text-lg font-semibold text-gray-800">Описание</h3>
                             <button id="editDescriptionBtn" class="text-blue-600 hover:text-blue-800 text-sm">
-                                <i class="fas fa-edit mr-1"></i> Edit
+                                <i class="fas fa-edit mr-1"></i> Изменить
                             </button>
                         </div>
-                        <p id="projectDescription" class="text-gray-600 mt-2">No description provided</p>
+                        <p id="projectDescription" class="text-gray-600 mt-2">Описание отсутствует</p>
                         <div id="descriptionEditor" class="hidden mt-3">
-                            <textarea class="w-full h-32 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Project description"></textarea>
+                            <textarea class="w-full h-32 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Описание проекта"></textarea>
                             <div class="flex justify-end space-x-2 mt-2">
-                                <button id="cancelEditDesc" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Cancel</button>
-                                <button id="saveDescriptionBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">Save</button>
+                                <button id="cancelEditDesc" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Отмена</button>
+                                <button id="saveDescriptionBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">Сохранить</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Details Card -->
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Project Details</h3>
+                    <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Детали проекта</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1">
-                                <p class="text-xs text-gray-500">Status</p>
+                                <p class="text-xs text-gray-500">Статус</p>
                                 <span id="projectStatusBadge" class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
-                                    Loading...
+                                    Загрузка...
                                 </span>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-xs text-gray-500">Category</p>
+                                <p class="text-xs text-gray-500">Категория</p>
                                 <p id="projectCategory" class="font-medium text-gray-800">-</p>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-xs text-gray-500">Budget</p>
+                                <p class="text-xs text-gray-500">Бюджет</p>
                                 <p id="projectBudget" class="font-medium text-gray-800">-</p>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-xs text-gray-500">Created</p>
+                                <p class="text-xs text-gray-500">Создан</p>
                                 <p id="projectCreated" class="font-medium text-gray-800">-</p>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-xs text-gray-500">Expires</p>
+                                <p class="text-xs text-gray-500">Срок действия</p>
                                 <p id="projectExpires" class="font-medium text-gray-800">-</p>
                             </div>
                         </div>
@@ -109,30 +109,30 @@
                 </div>
 
                 <!-- Sidebar -->
-                <div class="space-y-6">
+                <div class="space-y-4">
                     <!-- Actions Card -->
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Actions</h3>
+                    <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Действия</h3>
                         <div class="space-y-3">
                             <!-- Publish Section -->
                             <div class="publish-section">
                                 <button id="publishProjectBtn" class="w-full flex items-center justify-center px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition">
-                                    <i class="fas fa-paper-plane mr-2"></i> Publish Project
+                                    <i class="fas fa-paper-plane mr-2"></i> Опубликовать проект
                                 </button>
                                 
                                 <!-- Publish Form -->
                                 <div id="publishFormContainer" class="mt-3 p-4 bg-blue-50 rounded-lg border border-blue-200 hidden">
                                     <div class="space-y-3">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Expiration Date</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Дата истечения</label>
                                             <input type="text" id="publishDateInput" 
                                                    class="compact-date-input w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                                                   placeholder="Select date">
+                                                   placeholder="Выберите дату">
                                         </div>
                                         <div class="flex justify-end space-x-2">
-                                            <button id="cancelPublishBtn" class="px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Cancel</button>
+                                            <button id="cancelPublishBtn" class="px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Отмена</button>
                                             <button id="confirmPublishBtn" class="px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700">
-                                                <span class="button-text">Publish</span>
+                                                <span class="button-text">Опубликовать</span>
                                                 <i class="fas fa-spinner fa-spin ml-2 hidden"></i>
                                             </button>
                                         </div>
@@ -141,44 +141,44 @@
                             </div>
 
                             <button id="completeProjectBtn" class="w-full flex items-center justify-center px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl text-sm font-medium transition">
-                                <i class="fas fa-check-circle mr-2"></i> Complete
+                                <i class="fas fa-check-circle mr-2"></i> Завершить
                             </button>
                             
-                            <div class="grid grid-cols-2 gap-2">
-                                <button id="editProjectBtn" class="flex items-center justify-center px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg text-sm font-medium transition">
-                                    <i class="fas fa-edit mr-2"></i> Edit
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <button id="editProjectBtn" class="flex items-center justify-center gap-1 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg text-sm font-medium transition whitespace-nowrap">
+                                    <i class="fas fa-edit"></i> Изменить
                                 </button>
-                                <button id="archiveProjectBtn" class="flex items-center justify-center px-3 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm font-medium transition">
-                                    <i class="fas fa-archive mr-2"></i> Archive
+                                <button id="archiveProjectBtn" class="flex items-center justify-center gap-1 px-2.5 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs sm:text-sm font-medium transition whitespace-nowrap">
+                                    <i class="fas fa-archive"></i> Архивировать
                                 </button>
                             </div>
                             
                             <button id="deleteProjectBtn" class="w-full flex items-center justify-center px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-medium transition">
-                                <i class="fas fa-trash-alt mr-2"></i> Delete
+                                <i class="fas fa-trash-alt mr-2"></i> Удалить
                             </button>
                         </div>
                         
                         <p class="text-xs text-gray-500 mt-4 italic" id="statusHint">
-                            <i class="fas fa-info-circle mr-1"></i> Loading project status...
+                            <i class="fas fa-info-circle mr-1"></i> Загрузка статуса проекта...
                         </p>
                     </div>
 
                     <!-- Tags Card -->
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+                    <div class="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-lg font-semibold text-gray-800">Tags</h3>
+                            <h3 class="text-lg font-semibold text-gray-800">Теги</h3>
                             <span class="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
-                                <span id="tagsCount">0</span> tags
+                                <span id="tagsCount">0</span> тегов
                             </span>
                         </div>
                         <div id="projectTags" class="flex flex-wrap gap-2 mb-4 min-h-[20px]">
-                            <div class="text-sm text-gray-500">No tags added</div>
+                            <div class="text-sm text-gray-500">Теги не добавлены</div>
                         </div>
-                        <div class="flex">
-                            <input type="text" id="newTagInput" placeholder="Add tag" 
-                                class="flex-grow px-3 py-2 text-sm border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <button id="addTagBtn" class="px-3 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 transition text-sm font-medium">
-                                Add
+                        <div class="flex flex-wrap sm:flex-nowrap gap-2">
+                            <input type="text" id="newTagInput" placeholder="Добавить тег" 
+                                class="min-w-0 flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg sm:rounded-r-none focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <button id="addTagBtn" class="shrink-0 whitespace-nowrap px-3 py-2 bg-blue-600 text-white rounded-lg sm:rounded-l-none hover:bg-blue-700 transition text-sm font-medium">
+                                Добавить
                             </button>
                         </div>
                     </div>
@@ -189,28 +189,28 @@
         <!-- Milestones Tab -->
         <div id="milestonesTab" class="tab-content hidden p-6">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-semibold text-gray-800">Milestones</h3>
+                <h3 class="text-xl font-semibold text-gray-800">Вехи</h3>
                 <button id="addMilestoneBtn" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">
-                    <i class="fas fa-plus mr-2"></i> Add Milestone
+                    <i class="fas fa-plus mr-2"></i> Добавить веху
                 </button>
             </div>
 
             <!-- Milestone Form -->
             <div id="milestoneFormContainer" class="hidden bg-white rounded-xl p-5 mb-6 border border-gray-200">
-                <h4 class="font-semibold text-gray-800 mb-4">New Milestone</h4>
+                <h4 class="font-semibold text-gray-800 mb-4">Новая веха</h4>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Title</label>
-                        <input type="text" id="milestoneTitleInput" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg" placeholder="Milestone name">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Название</label>
+                        <input type="text" id="milestoneTitleInput" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg" placeholder="Название вехи">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Due Date</label>
-                        <input type="text" id="milestoneDueDateInput" class="compact-date-input w-full px-3 py-2 text-sm border border-gray-300 rounded-lg" placeholder="Select date">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Срок</label>
+                        <input type="text" id="milestoneDueDateInput" class="compact-date-input w-full px-3 py-2 text-sm border border-gray-300 rounded-lg" placeholder="Выберите дату">
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 mt-4">
-                    <button id="cancelMilestoneBtn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Cancel</button>
-                    <button id="saveMilestoneBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm">Save</button>
+                    <button id="cancelMilestoneBtn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Отмена</button>
+                    <button id="saveMilestoneBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm">Сохранить</button>
                 </div>
             </div>
 
@@ -218,7 +218,7 @@
             <div class="space-y-3" id="milestonesContainer">
                 <div class="text-center py-8 text-gray-500">
                     <i class="fas fa-flag-checkered text-3xl mb-3 text-gray-300"></i>
-                    <p>No milestones yet</p>
+                    <p>Пока нет вех</p>
                 </div>
             </div>
         </div>
@@ -226,32 +226,32 @@
         <!-- Team Tab -->
         <div id="teamTab" class="tab-content hidden p-6">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-semibold text-gray-800">Team Members</h3>
+                <h3 class="text-xl font-semibold text-gray-800">Участники команды</h3>
                 <button id="addTeamMemberBtn" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">
-                    <i class="fas fa-plus mr-2"></i> Add Member
+                    <i class="fas fa-plus mr-2"></i> Добавить участника
                 </button>
             </div>
 
             <!-- Add Member Form -->
             <div id="addMemberForm" class="hidden bg-white rounded-xl p-5 mb-6 border border-gray-200">
-                <h4 class="font-semibold text-gray-800 mb-4">Add Team Member</h4>
+                <h4 class="font-semibold text-gray-800 mb-4">Добавить участника</h4>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">User Login</label>
-                        <input type="text" id="memberLoginInput" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg" placeholder="Enter user login">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Логин пользователя</label>
+                        <input type="text" id="memberLoginInput" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg" placeholder="Введите логин пользователя">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Роль</label>
                         <select id="memberRoleInput" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg">
-                            <option value="member">Member</option>
-                            <option value="admin">Admin</option>
-                            <option value="viewer">Viewer</option>
+                            <option value="member">Участник</option>
+                            <option value="admin">Администратор</option>
+                            <option value="viewer">Наблюдатель</option>
                         </select>
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 mt-4">
-                    <button id="cancelAddMemberBtn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Cancel</button>
-                    <button id="saveMemberBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm">Add Member</button>
+                    <button id="cancelAddMemberBtn" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm">Отмена</button>
+                    <button id="saveMemberBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm">Добавить участника</button>
                 </div>
             </div>
 
@@ -259,7 +259,7 @@
             <div class="space-y-3" id="teamMembersContainer">
                 <div class="text-center py-8 text-gray-500">
                     <i class="fas fa-users text-3xl mb-3 text-gray-300"></i>
-                    <p>No team members added</p>
+                    <p>Участники не добавлены</p>
                 </div>
             </div>
         </div>
@@ -267,11 +267,11 @@
         <!-- Attachments Tab -->
         <div id="attachmentsTab" class="tab-content hidden p-6">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-semibold text-gray-800">Files & Attachments</h3>
+                <h3 class="text-xl font-semibold text-gray-800">Файлы и вложения</h3>
                 <div>
                     <input type="file" id="attachmentFile" class="hidden" multiple>
                     <button id="addAttachmentBtn" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">
-                        <i class="fas fa-plus mr-2"></i> Add File
+                        <i class="fas fa-plus mr-2"></i> Добавить файл
                     </button>
                 </div>
             </div>
@@ -279,7 +279,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="attachmentsContainer">
                 <div class="text-center py-8 text-gray-500 col-span-full">
                     <i class="fas fa-paperclip text-3xl mb-3 text-gray-300"></i>
-                    <p>No attachments yet</p>
+                    <p>Пока нет вложений</p>
                 </div>
             </div>
         </div>
@@ -288,7 +288,7 @@
     <!-- Footer -->
     <div class="bg-white border-t border-gray-100 px-6 py-4 flex justify-end">
         <button class="close-modal-btn px-5 py-2.5 text-gray-700 hover:bg-gray-100 rounded-lg font-medium text-sm">
-            <i class="fas fa-times mr-2"></i> Close
+            <i class="fas fa-times mr-2"></i> Закрыть
         </button>
     </div>
 </div>

@@ -68,8 +68,13 @@ namespace Users.Application.Users.Commands.RegisterUser
 					user.AddRole(Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), cmd.CreatedBy);
 				}
 
+				var userRole = await _roleRepo.GetByName("User", ct);
+				if (userRole == null)
+				{
+					throw new ArgumentNullException(nameof(userRole));
+				}
 				// базовая роль для всех
-				user.AddRole(Guid.Parse("5eb8aa01-9c0f-412b-97fa-64c0de9a67d6"), cmd.CreatedBy);
+				user.AddRole(userRole.Id, cmd.CreatedBy);
 			}
 			catch (Exception ex)
 			{

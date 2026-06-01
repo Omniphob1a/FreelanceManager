@@ -16,13 +16,13 @@ namespace Projects.Infrastructure.Hangfire
 			jobManager.AddOrUpdateRecurring<ArchiveOutOfDateProjectsJob>(
 				recurringJobId: "archive-out-of-date-projects",
 				methodCall: job => job.ExecuteAsync(),
-				cronExpression: "*/5 * * * *" 
+				cronExpression: "0 * * * *" 
 			);
 
 			jobManager.AddOrUpdateRecurring<EscalateOutOfDateMilestonesJob>(
 				recurringJobId: "escalate-out-of-date-milestones",
 				methodCall: job => job.ExecuteAsync(),
-				cronExpression: "*/5 * * * *"
+				cronExpression: "15 * * * *"
 			);
 		}
 	}

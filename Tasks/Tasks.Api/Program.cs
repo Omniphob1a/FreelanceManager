@@ -1,4 +1,5 @@
-// Файл: Tasks.Api/Program.cs
+// : Tasks.Api/Program.cs
+using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Diagnostics;
@@ -21,7 +22,11 @@ using Tasks.Api.GraphQL.DataLoaders;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(o =>
+{
+	o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+	o.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+});
 
 // Swagger / OpenAPI
 builder.Services.AddOpenApi();
@@ -57,7 +62,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Синхронная миграция БД
+//   
 using (var scope = app.Services.CreateScope())
 {
 	try
