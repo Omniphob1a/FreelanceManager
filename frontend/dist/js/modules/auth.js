@@ -7,6 +7,11 @@ let currentUser = null;
 let __submitDelegationAttached = false;
 let __mutationObserver = null;
 
+function loginFromEmail(email) {
+    const local = (email.split('@')[0] || 'user').replace(/[^A-Za-z0-9]/g, '');
+    return local.length ? local : 'user';
+}
+
 /**
  * Инициализация: проверяем токен и вешаем обработчики.
  * Вызывать после импорта (можно несколько раз — безопасно).
@@ -137,10 +142,28 @@ function updateUI() {
 
 export async function login(username, password) {
     try {
-        const response = await AuthAPI.login({
-            Login: username,
-            Password: password,
-        });
+        const normalizedLogin = username.trim();
+        const loginCandidates = [normalizedLogin];
+        if (normalizedLogin.includes('@')) {
+            const generatedLogin = loginFromEmail(normalizedLogin);
+            if (!loginCandidates.includes(generatedLogin)) loginCandidates.push(generatedLogin);
+        }
+
+        let response = null;
+        let lastError = null;
+        for (const loginCandidate of loginCandidates) {
+            try {
+                response = await AuthAPI.login({
+                    Login: loginCandidate,
+                    Password: password,
+                });
+                break;
+            } catch (error) {
+                lastError = error;
+            }
+        }
+
+        if (!response && lastError) throw lastError;
 
         if (!response || !response.token) {
             throw new Error('Token not found in response');
@@ -160,7 +183,7 @@ export async function login(username, password) {
 export async function register(userData) {
     try {
         await AuthAPI.register(userData);
-        return login(userData.username || userData.email, userData.password);
+        return login(userData.login || userData.email, userData.password);
     } catch (error) {
         console.error('Registration failed:', error);
         showToast('Registration failed. Please try again.', 'error');

@@ -92,19 +92,18 @@ export async function loadPage(pageName, queryString = '') {
 }
 
 function initLoginPage() {
-    const form = document.getElementById('loginForm');
-    if (form) {
-        form.addEventListener('submit', async (e) => {
+    const registerLink = document.querySelector('[data-page="register"]');
+    if (registerLink) {
+        registerLink.addEventListener('click', (e) => {
             e.preventDefault();
-            try {
-                const success = await login(form.email.value, form.password.value);
-                if (success) window.location.hash = 'dashboard';
-                else showToast('Login failed. Please check your credentials.', 'error');
-            } catch (error) {
-                showToast('Login error: ' + error.message, 'error');
-            }
+            window.location.hash = 'register';
         });
     }
+}
+
+function loginFromText(text) {
+    const local = String(text || 'user').replace(/[^A-Za-z0-9]/g, '');
+    return local.length ? local : 'user';
 }
 
 function initRegisterPage() {
@@ -117,13 +116,21 @@ function initRegisterPage() {
                 showToast('Passwords do not match', 'error');
                 return;
             }
+
+            const email = form.email.value.trim();
+            const birthday = form.birthday.value
+                ? new Date(`${form.birthday.value}T12:00:00`).toISOString()
+                : new Date('1990-01-01T00:00:00Z').toISOString();
             
             const userData = {
-                name: form.fullName.value,
-                login: form.email.value,
+                login: loginFromText(form.fullName.value),
                 password: form.password.value,
-                email: form.email.value,
-                isAdmin: false
+                name: form.fullName.value.trim(),
+                gender: parseInt(form.gender.value, 10),
+                birthday,
+                email,
+                isAdmin: false,
+                createdBy: 'self-registration'
             };
             
             try {

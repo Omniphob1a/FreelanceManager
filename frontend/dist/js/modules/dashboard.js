@@ -1,87 +1,44 @@
-// modules/dashboard.js
-import { ActivityAPI } from '../api.js';
-import { formatDate, formatActivityTime } from './ui.js';
+import { TaskAPI } from '../api.js';
 import { loadProjects } from './projects.js';
 import { initCharts } from './charts.js';
 import { setupDashboardFilters } from './dashboardFilters.js';
 import { updateDashboardStats } from './dashboardStats.js';
 
+let dashboardProjects = [];
+let dashboardTasks = [];
+let chartFilters = { statusRange: '30', deadlineRange: '30' };
+
+function normalizeTasksResponse(response) {
+    if (!response) return [];
+    if (Array.isArray(response)) return response;
+    if (Array.isArray(response.items)) return response.items;
+    return [];
+}
+
+function renderCharts() {
+    initCharts(dashboardProjects, dashboardTasks, chartFilters);
+}
+
 export async function initDashboard() {
-    await loadActivities();
-     const projectsResult = await loadProjects({ 
-        page: 1, 
-        pageSize: 6 
-    });
-    const projects = projectsResult.items ? projectsResult.items : projectsResult;
+    const projectsPromise = loadProjects({ page: 1, pageSize: 6, includeMilestones: false });
+    const tasksPromise = TaskAPI.getTasks({ actualPage: 1, ItemsPerPage: 50 });
 
-    updateDashboardStats(projects);
-    initCharts(projects);
-}
+    const projectsResult = await projectsPromise;
+    dashboardProjects = projectsResult.items ? projectsResult.items : projectsResult;
 
-async function loadActivities() {
-    const container = document.getElementById('activityList');
-    if (!container) return;
-    
     try {
-        const activities = await ActivityAPI.getRecentActivities();
-        renderActivities(activities);
+        const tasksResult = await tasksPromise;
+        dashboardTasks = normalizeTasksResponse(tasksResult);
     } catch (error) {
-        console.error('Failed to load activities:', error);
-        container.innerHTML = '<div class="p-4 text-center text-gray-500">Failed to load activities</div>';
+        console.warn('Не удалось загрузить задачи для графика сроков:', error);
+        dashboardTasks = [];
     }
-}
 
-function renderActivities(activities) {
-    const container = document.getElementById('activityList');
-    if (!container) return;
-    
-    if (activities.length === 0) {
-        container.innerHTML = '<div class="p-4 text-center text-gray-500">No recent activity</div>';
-        return;
-    }
-    
-    container.innerHTML = activities.map(activity => {
-        let content = '';
-        const timeAgo = formatActivityTime(activity.timestamp);
-        
-        switch(activity.type) {
-            case 'completed':
-                content = `
-                    <p class="text-sm font-medium text-gray-900">Project completed</p>
-                    <p class="text-sm text-gray-500">You marked "${activity.project}" as completed</p>
-                `;
-                break;
-            case 'comment':
-                content = `
-                    <p class="text-sm font-medium text-gray-900">New comment</p>
-                    <p class="text-sm text-gray-500">${activity.user} commented on "${activity.project}"</p>
-                `;
-                break;
-            default:
-                content = `
-                    <p class="text-sm font-medium text-gray-900">New activity</p>
-                    <p class="text-sm text-gray-500">${activity.description}</p>
-                `;
-        }
-        
-        return `
-            <div class="p-4 hover:bg-gray-50">
-                <div class="flex items-start">
-                    <div class="flex-shrink-0">
-                        <div class="w-10 h-10 rounded-full ${
-                            activity.type === 'completed' ? 'bg-green-100' : 'bg-blue-100'
-                        } flex items-center justify-center">
-                            <i class="fas ${
-                                activity.type === 'completed' ? 'fa-check text-green-600' : 'fa-comment text-blue-600'
-                            }"></i>
-                        </div>
-                    </div>
-                    <div class="ml-4">
-                        ${content}
-                        <p class="text-xs text-gray-400 mt-1">${timeAgo}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
+    updateDashboardStats(dashboardProjects);
+    renderCharts();
+
+    setupDashboardFilters((nextFilters) => {
+        chartFilters = nextFilters;
+        renderCharts();
+    });
 }
